@@ -60,46 +60,31 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
           : "border-b border-slate-200 bg-white/95 backdrop-blur-sm shadow-sm"
       }`}
     >
-      <Container className="flex h-16 items-center justify-between gap-4">
+      <Container className="flex h-14 sm:h-16 items-center justify-between gap-2 sm:gap-4">
         <Link
           href="/"
-          className="flex-shrink-0 text-lg font-black tracking-wider text-[#1a1a2e] select-none"
+          className="flex-shrink-0 text-base sm:text-lg font-black tracking-wider text-[#1a1a2e] select-none"
           aria-label="홈으로 이동"
         >
           AD<span className="text-[#1e40af]">GRIT</span>
         </Link>
 
-        {/* 모바일: 4개 메뉴 가운데~오른쪽 나열 (간격 넓게) */}
-        <nav className="flex md:hidden items-center justify-center flex-1 gap-4 sm:gap-6 min-w-0 overflow-x-auto">
-          <a
-            href="#about"
-            className="flex-shrink-0 text-xs sm:text-sm font-bold text-slate-600 hover:text-[#1e40af] whitespace-nowrap py-2"
-          >
-            About Us
-          </a>
-          <a
-            href="#services"
-            className="flex-shrink-0 text-xs sm:text-sm font-bold text-slate-600 hover:text-[#1e40af] whitespace-nowrap py-2"
-          >
-            Business
-          </a>
-          <a
-            href="#services"
-            className="flex-shrink-0 text-xs sm:text-sm font-bold text-slate-600 hover:text-[#1e40af] whitespace-nowrap py-2"
-          >
-            Service
-          </a>
-          <a
-            href="#insights"
-            className="flex-shrink-0 text-xs sm:text-sm font-bold text-slate-600 hover:text-[#1e40af] whitespace-nowrap py-2"
-          >
-            Grit View
-          </a>
+        {/* 모바일: 4개 메뉴 단순 링크 */}
+        <nav className="flex md:hidden items-center justify-center flex-1 min-w-0 gap-4 sm:gap-6 overflow-x-auto">
+          {navItems.map((item) => (
+            <a
+              key={item.label}
+              href={item.children[0]?.href ?? "#"}
+              className="flex-shrink-0 text-xs sm:text-sm font-bold text-slate-600 hover:text-[#1e40af] whitespace-nowrap py-2"
+            >
+              {item.label}
+            </a>
+          ))}
         </nav>
 
-        {/* 데스크톱: 메가 메뉴 */}
+        {/* 데스크톱: 메가 메뉴 - 가운데 살짝 왼쪽, 넓게 포진 */}
         <nav
-          className="hidden md:flex items-center justify-center gap-8 relative flex-1"
+          className="hidden md:flex items-center justify-center gap-6 lg:gap-10 xl:gap-12 relative flex-1 min-w-0 -translate-x-8 lg:-translate-x-16"
           onMouseEnter={() => setIsMegaOpen(true)}
           onMouseLeave={() => {
             setIsMegaOpen(false);
@@ -182,13 +167,6 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
             )}
           </AnimatePresence>
         </nav>
-
-        <a
-          href="#contact"
-          className="hidden md:inline-flex flex-shrink-0 items-center justify-center rounded-full bg-[#1e40af] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#1e3a8a] transition-colors shadow-sm"
-        >
-          1시간 컨설팅하기
-        </a>
       </Container>
     </header>
   );
