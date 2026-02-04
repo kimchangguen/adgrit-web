@@ -2,7 +2,7 @@
 
 const actions = [
   {
-    label: "전화하기",
+    label: "전화문의",
     href: "tel:1661-0646",
     icon: (
       <svg
@@ -36,7 +36,7 @@ const actions = [
     className: "bg-[#FEE500] hover:bg-[#F9DF4A] text-[#191919]",
   },
   {
-    label: "제안서 받기",
+    label: "제안서다운",
     href: "#contact",
     icon: (
       <svg
@@ -69,11 +69,18 @@ export function FloatingActions() {
           href={action.href}
           target={action.href.startsWith("http") ? "_blank" : undefined}
           rel={action.href.startsWith("http") ? "noopener noreferrer" : undefined}
-          className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg transition-all hover:scale-110 ${action.className}`}
+          className="group relative flex items-center justify-end"
           title={action.label}
           aria-label={action.label}
         >
-          {action.icon}
+          <span className="absolute right-full top-1/2 -translate-y-1/2 mr-2 opacity-0 group-hover:opacity-100 whitespace-nowrap rounded-lg bg-slate-800 px-3 py-2 text-sm font-medium text-white shadow-lg transition-opacity duration-200 pointer-events-none">
+            {action.label}
+          </span>
+          <span
+            className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg transition-all group-hover:scale-110 flex-shrink-0 ${action.className}`}
+          >
+            {action.icon}
+          </span>
         </a>
       ))}
     </div>
