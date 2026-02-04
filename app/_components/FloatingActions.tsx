@@ -22,7 +22,7 @@ const actions = [
   },
   {
     label: "카카오톡",
-    href: "https://open.kakao.com/o/sBHO7Qei",
+    href: "https://open.kakao.com/o/s2RtMSei",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
