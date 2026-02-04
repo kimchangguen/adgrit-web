@@ -7,8 +7,7 @@ import { Container } from "./Container";
 
 const navItems: Array<{
   label: string;
-  href?: string;
-  children?: Array<{ href: string; label: string }>;
+  children: Array<{ href: string; label: string }>;
 }> = [
   {
     label: "About Us",
@@ -40,87 +39,114 @@ const navItems: Array<{
   },
   {
     label: "Grit View",
-    href: "#insights",
-  },
-  {
-    label: "Contact",
-    href: "#contact",
+    children: [{ href: "#insights", label: "블로그" }],
   },
 ];
 
 export function SiteHeader() {
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [isMegaOpen, setIsMegaOpen] = useState(false);
+  const [hoveredColumn, setHoveredColumn] = useState<string | null>(null);
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-sm shadow-sm">
-      <Container className="flex h-16 items-center justify-between">
+      <Container className="flex h-16 items-center justify-between gap-8">
         <Link
           href="/"
+          className="flex-shrink-0"
           className="text-lg font-black tracking-wider text-[#1a1a2e] select-none"
           aria-label="홈으로 이동"
         >
           AD<span className="text-[#1e40af]">GRIT</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav
+          className="hidden md:flex items-center justify-center gap-8 relative flex-1"
+          onMouseEnter={() => setIsMegaOpen(true)}
+          onMouseLeave={() => {
+            setIsMegaOpen(false);
+            setHoveredColumn(null);
+          }}
+        >
           {navItems.map((item) => (
             <div
               key={item.label}
               className="relative"
-              onMouseEnter={() =>
-                item.children ? setOpenMenu(item.label) : setOpenMenu(null)
-              }
-              onMouseLeave={() => setOpenMenu(null)}
+              onMouseEnter={() => setHoveredColumn(item.label)}
             >
-              {item.href ? (
-                <a
-                  href={item.href}
-                  className="block px-2 py-2 text-base font-bold text-slate-600 hover:text-[#1a1a2e] transition-colors tracking-wide"
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <button
-                  className="block px-2 py-2 text-base font-bold text-slate-600 hover:text-[#1a1a2e] transition-colors tracking-wide text-left w-full"
-                  aria-expanded={openMenu === item.label}
-                  aria-haspopup="true"
-                >
-                  {item.label}
-                </button>
-              )}
-              {item.children && (
-                <AnimatePresence>
-                  {openMenu === item.label && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute left-0 top-full pt-1 min-w-[200px]"
+              <button
+                className={`block px-2 py-2 text-base font-bold transition-colors tracking-wide text-left w-full ${
+                  hoveredColumn === item.label && isMegaOpen
+                    ? "text-[#1e40af]"
+                    : "text-slate-600 hover:text-[#1a1a2e]"
+                }`}
+                aria-expanded={isMegaOpen}
+                aria-haspopup="true"
+              >
+                {item.label}
+              </button>
+            </div>
+          ))}
+
+          {/* 메가 메뉴 - 전체가 한번에 열림 */}
+          <AnimatePresence>
+            {isMegaOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+                className="absolute left-0 right-0 top-full pt-1"
+              >
+                <div className="rounded-lg border border-slate-200 bg-white shadow-lg overflow-hidden flex">
+                  {navItems.map((item) => (
+                    <div
+                      key={item.label}
+                      className={`flex-1 min-w-[180px] py-4 transition-colors ${
+                        hoveredColumn === item.label
+                          ? "bg-[#1e40af] text-white"
+                          : "bg-white"
+                      }`}
+                      onMouseEnter={() => setHoveredColumn(item.label)}
                     >
-                      <div className="rounded-lg border border-slate-200 bg-white py-2 shadow-lg">
+                      <div
+                        className={`px-5 font-bold text-base mb-3 ${
+                          hoveredColumn === item.label
+                            ? "text-white"
+                            : "text-[#1a1a2e]"
+                        }`}
+                      >
+                        {item.label}
+                      </div>
+                      <div className="space-y-1">
                         {item.children.map((child) => (
                           <a
                             key={child.label}
                             href={child.href}
-                            className="block px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-[#1e40af] transition-colors"
-                            onClick={() => setOpenMenu(null)}
+                            className={`block px-5 py-2 text-sm transition-colors ${
+                              hoveredColumn === item.label
+                                ? "text-white/90 hover:text-white hover:bg-white/10"
+                                : "text-slate-600 hover:bg-slate-50 hover:text-[#1e40af]"
+                            }`}
+                            onClick={() => {
+                              setIsMegaOpen(false);
+                              setHoveredColumn(null);
+                            }}
                           >
                             {child.label}
                           </a>
                         ))}
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              )}
-            </div>
-          ))}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </nav>
 
         <a
           href="#contact"
-          className="inline-flex items-center justify-center rounded-full bg-[#1e40af] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#1e3a8a] transition-colors shadow-sm"
+          className="flex-shrink-0 inline-flex items-center justify-center rounded-full bg-[#1e40af] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#1e3a8a] transition-colors shadow-sm"
         >
           1시간 컨설팅하기
         </a>
