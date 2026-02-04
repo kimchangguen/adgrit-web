@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 import { Container } from "./Container";
@@ -70,22 +71,30 @@ export function SiteHeader() {
                 {item.label}
                 <span className="text-xs text-slate-400">▼</span>
               </button>
-              {openMenu === item.label && (
-                <div className="absolute left-0 top-full pt-1 min-w-[180px]">
-                  <div className="rounded-lg border border-slate-200 bg-white py-2 shadow-lg">
-                    {item.children.map((child) => (
-                      <a
-                        key={child.label}
-                        href={child.href}
-                        className="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-[#1e40af] transition-colors"
-                        onClick={() => setOpenMenu(null)}
-                      >
-                        {child.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
+              <AnimatePresence>
+                {openMenu === item.label && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute left-0 top-full pt-1 min-w-[180px]"
+                  >
+                    <div className="rounded-lg border border-slate-200 bg-white py-2 shadow-lg">
+                      {item.children.map((child) => (
+                        <a
+                          key={child.label}
+                          href={child.href}
+                          className="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-[#1e40af] transition-colors"
+                          onClick={() => setOpenMenu(null)}
+                        >
+                          {child.label}
+                        </a>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </nav>
