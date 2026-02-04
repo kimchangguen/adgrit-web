@@ -269,16 +269,6 @@ function SiteChrome({
                   엔진으로 통합 설계합니다.
                 </p>
               </AnimatedHeroItem>
-              <AnimatedHeroItem>
-                <div className="mt-8">
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center justify-center rounded-full bg-[#1e40af] px-8 py-3.5 text-sm font-semibold text-white hover:bg-[#1e3a8a] transition-colors shadow-md"
-                  >
-                    컨설팅 문의
-                  </a>
-                </div>
-              </AnimatedHeroItem>
             </AnimatedHero>
             </div>
           </Container>
