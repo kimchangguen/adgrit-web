@@ -43,12 +43,23 @@ const navItems: Array<{
   },
 ];
 
-export function SiteHeader() {
+type SiteHeaderProps = {
+  /** Hero 영역용 - 배경 투명 (같은 배경 노출) */
+  transparent?: boolean;
+};
+
+export function SiteHeader({ transparent = false }: SiteHeaderProps) {
   const [isMegaOpen, setIsMegaOpen] = useState(false);
   const [hoveredColumn, setHoveredColumn] = useState<string | null>(null);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-sm shadow-sm">
+    <header
+      className={`sticky top-0 z-50 ${
+        transparent
+          ? "border-b border-white/30 bg-transparent backdrop-blur-[2px]"
+          : "border-b border-slate-200 bg-white/95 backdrop-blur-sm shadow-sm"
+      }`}
+    >
       <Container className="flex h-16 items-center justify-between gap-8">
         <Link
           href="/"

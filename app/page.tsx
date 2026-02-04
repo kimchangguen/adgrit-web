@@ -226,23 +226,27 @@ function SiteChrome({
   error: string | null;
   stripHTML: (html: string) => string;
 }) {
+  const heroBgImage =
+    "url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1920&q=80')";
+
   return (
     <>
-      <SiteHeader />
-
-      {/* 첫번째 섹션 - Hero */}
-      <section className="relative overflow-hidden">
-        {/* 배경 이미지 - 밝은 파란색 계열 (Unsplash, 무료) */}
+      {/* 헤더 + 첫번째 섹션: 같은 배경, 1920x1080 전체 화면 */}
+      <div className="min-h-screen w-full relative flex flex-col">
+        {/* 배경 이미지 - 헤더·첫섹션 공통 (밝은 파란색 계열) */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1920&q=80')`,
-          }}
+          style={{ backgroundImage: heroBgImage }}
         />
-        {/* 흰색 오버레이 - 가독성 및 밝은 톤 유지 */}
+        {/* 흰색 오버레이 */}
         <div className="absolute inset-0 bg-white/70" />
-        <Container className="relative py-16 sm:py-24 lg:py-28">
-          <div className="max-w-3xl mx-auto text-center">
+
+        <SiteHeader transparent />
+
+        {/* 첫번째 섹션 - Hero */}
+        <section className="relative flex-1 flex items-center justify-center">
+          <Container className="relative w-full py-12">
+            <div className="max-w-3xl mx-auto text-center">
             <AnimatedHero>
               <AnimatedHeroItem>
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#1e40af]/30 bg-white px-4 py-2 text-xs font-semibold text-[#1e40af] shadow-sm">
@@ -276,9 +280,10 @@ function SiteChrome({
                 </div>
               </AnimatedHeroItem>
             </AnimatedHero>
-          </div>
-        </Container>
-      </section>
+            </div>
+          </Container>
+        </section>
+      </div>
 
       {/* Vision */}
       <section id="about" className="border-t border-slate-100 bg-white py-16 sm:py-20">
