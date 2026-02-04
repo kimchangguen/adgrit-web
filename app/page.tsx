@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AnimatedCard } from "./_components/AnimatedCard";
+import { HeroWithScrollEffect } from "./_components/HeroWithScrollEffect";
 import { AnimatedFAQ } from "./_components/AnimatedFAQ";
 import {
   AnimatedHero,
@@ -240,22 +241,10 @@ function SiteChrome({
 
   return (
     <>
-      {/* 헤더 + 첫번째 섹션: 같은 배경, 1920x1080 전체 화면 */}
-      <div className="min-h-screen w-full relative flex flex-col">
-        {/* 배경 이미지 - 헤더·첫섹션 공통 (밝은 파란색 계열) */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: heroBgImage }}
-        />
-        {/* 흰색 오버레이 */}
-        <div className="absolute inset-0 bg-white/70" />
-
-        <SiteHeader transparent />
-
-        {/* 첫번째 섹션 - Hero */}
-        <section className="relative flex-1 flex items-center justify-center">
-          <Container className="relative w-full py-12">
-            <div className="max-w-3xl mx-auto text-center">
+      {/* 헤더 + 첫번째 섹션: 스크롤 시 헤더 변경, 아래 섹션 위로 올라오는 효과 */}
+      <HeroWithScrollEffect backgroundImage={heroBgImage}>
+        <Container className="relative w-full py-12">
+          <div className="max-w-3xl mx-auto text-center">
             <AnimatedHero>
               <AnimatedHeroItem>
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#1e40af]/30 bg-white px-4 py-2 text-xs font-semibold text-[#1e40af] shadow-sm">
@@ -279,13 +268,15 @@ function SiteChrome({
                 </p>
               </AnimatedHeroItem>
             </AnimatedHero>
-            </div>
-          </Container>
-        </section>
-      </div>
+          </div>
+        </Container>
+      </HeroWithScrollEffect>
 
-      {/* Vision */}
-      <section id="about" className="border-t border-slate-100 bg-white py-16 sm:py-20">
+      {/* Vision - 곡선으로 위로 올라오는 섹션 */}
+      <section
+        id="about"
+        className="relative z-10 -mt-16 rounded-t-[2.5rem] bg-white pt-20 pb-16 sm:pt-24 sm:pb-20 shadow-[0_-4px_30px_rgba(0,0,0,0.08)]"
+      >
         <Container>
           <SectionKicker>Vision</SectionKicker>
           <SectionTitle className="mt-3">
@@ -310,7 +301,7 @@ function SiteChrome({
       </section>
 
       {/* Results */}
-      <section className="border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
+      <section className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <Container>
           <SectionKicker>Results</SectionKicker>
           <SectionTitle className="mt-3">
@@ -335,7 +326,7 @@ function SiteChrome({
       </section>
 
       {/* Services */}
-      <section id="services" className="border-t border-slate-100 bg-white py-16 sm:py-20">
+      <section id="services" className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
         <Container>
           <SectionKicker>Services</SectionKicker>
           <SectionTitle className="mt-3">
@@ -374,7 +365,7 @@ function SiteChrome({
       </section>
 
       {/* Solutions */}
-      <section className="border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
+      <section className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <Container>
           <SectionKicker>Solutions</SectionKicker>
           <SectionTitle className="mt-3">
@@ -404,7 +395,7 @@ function SiteChrome({
       </section>
 
       {/* Process */}
-      <section className="border-t border-slate-100 bg-white py-16 sm:py-20">
+      <section className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
         <Container>
           <SectionKicker>Services</SectionKicker>
           <SectionTitle className="mt-3">
@@ -428,7 +419,7 @@ function SiteChrome({
       </section>
 
       {/* Testimonials */}
-      <section className="border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
+      <section className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <Container>
           <SectionKicker>Testimonials</SectionKicker>
           <SectionTitle className="mt-3">
@@ -455,7 +446,7 @@ function SiteChrome({
       </section>
 
       {/* Experience */}
-      <section className="border-t border-slate-100 bg-white py-16 sm:py-20">
+      <section className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
         <Container>
           <SectionKicker>Experience</SectionKicker>
           <SectionTitle className="mt-3">
@@ -491,7 +482,7 @@ function SiteChrome({
       </section>
 
       {/* Blogs */}
-      <section id="insights" className="border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
+      <section id="insights" className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <Container>
           <SectionKicker>Blogs</SectionKicker>
           <SectionTitle className="mt-3">
@@ -534,7 +525,7 @@ function SiteChrome({
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="border-t border-slate-100 bg-white py-16 sm:py-20">
+      <section id="faq" className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
         <Container>
           <SectionKicker>FAQ</SectionKicker>
           <SectionTitle className="mt-3">자주 묻는 질문</SectionTitle>
@@ -561,7 +552,7 @@ function SiteChrome({
       </section>
 
       {/* CTA */}
-      <section id="contact" className="border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
+      <section id="contact" className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <Container>
           <AnimatedSection>
             <FadeInItem>
@@ -585,7 +576,9 @@ function SiteChrome({
         </Container>
       </section>
 
-      <Footer />
+      <div className="relative z-10">
+        <Footer />
+      </div>
     </>
   );
 }

@@ -56,7 +56,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
     <header
       className={`sticky top-0 z-50 ${
         transparent
-          ? "border-b border-white/30 bg-transparent backdrop-blur-[2px]"
+          ? "bg-transparent backdrop-blur-[2px]"
           : "border-b border-slate-200 bg-white/95 backdrop-blur-sm shadow-sm"
       }`}
     >
