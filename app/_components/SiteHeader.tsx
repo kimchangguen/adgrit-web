@@ -52,8 +52,7 @@ export function SiteHeader() {
       <Container className="flex h-16 items-center justify-between gap-8">
         <Link
           href="/"
-          className="flex-shrink-0"
-          className="text-lg font-black tracking-wider text-[#1a1a2e] select-none"
+          className="flex-shrink-0 text-lg font-black tracking-wider text-[#1a1a2e] select-none"
           aria-label="홈으로 이동"
         >
           AD<span className="text-[#1e40af]">GRIT</span>

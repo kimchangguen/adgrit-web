@@ -49,7 +49,7 @@ export default async function Home() {
 
   try {
     posts = await getRecentPosts();
-  } catch (e) {
+  } catch {
     error = "최근 게시글을 불러올 수 없습니다.";
   }
 
