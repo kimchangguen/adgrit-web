@@ -231,7 +231,16 @@ function SiteChrome({
       <SiteHeader />
 
       {/* 첫번째 섹션 - Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-[#1e40af]/5">
+      <section className="relative overflow-hidden">
+        {/* 배경 이미지 - 밝은 파란색 계열 (Unsplash, 무료) */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1920&q=80')`,
+          }}
+        />
+        {/* 흰색 오버레이 - 가독성 및 밝은 톤 유지 */}
+        <div className="absolute inset-0 bg-white/70" />
         <Container className="relative py-16 sm:py-24 lg:py-28">
           <div className="max-w-3xl mx-auto text-center">
             <AnimatedHero>
