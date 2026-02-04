@@ -91,18 +91,27 @@ function ServiceCard({
   title,
   desc,
   href = "#",
+  imageUrl,
 }: {
   eyebrow: string;
   title: string;
   desc: string;
   href?: string;
+  imageUrl?: string;
 }) {
   return (
     <Link
       href={href}
       className="group flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-[#1e40af]/30 transition-all"
     >
-      <div className="h-40 w-full bg-gradient-to-br from-[#1e40af]/10 to-[#1e3a5f]/5" />
+      <div
+        className="h-40 w-full bg-cover bg-center bg-no-repeat"
+        style={
+          imageUrl
+            ? { backgroundImage: `url('${imageUrl}')` }
+            : { background: "linear-gradient(to bottom right, rgb(30 64 175 / 0.1), rgb(30 58 95 / 0.05))" }
+        }
+      />
       <div className="flex-1 p-6">
         <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1e40af]">
           {eyebrow}
@@ -227,7 +236,7 @@ function SiteChrome({
   stripHTML: (html: string) => string;
 }) {
   const heroBgImage =
-    "url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1920&q=80')";
+    "url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80')";
 
   return (
     <>
@@ -337,12 +346,27 @@ function SiteChrome({
 
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {[
-              { eyebrow: "Google Ads", title: "구글 애즈", desc: "AI 스마트 입찰과 정밀 타겟팅으로 광고 효율을 극대화합니다. 성장을 이끄는 광고 전략을 체계적으로 설계합니다." },
-              { eyebrow: "SEO & GEO", title: "SEO & GEO", desc: "키워드 중심을 넘어, AI 검색에서 답변되는 브랜드로 설계합니다. 데이터 기반 인사이트로 의사결정을 지원합니다." },
-              { eyebrow: "WordPress", title: "워드프레스 & 전환 최적화", desc: "전환 중심 UX/UI로 랜딩과 퍼널을 최적화합니다. 수익성과 안정성을 높이는 전문가 중심 솔루션을 제공합니다." },
+              {
+                eyebrow: "Google Ads",
+                title: "구글 애즈",
+                desc: "AI 스마트 입찰과 정밀 타겟팅으로 광고 효율을 극대화합니다. 성장을 이끄는 광고 전략을 체계적으로 설계합니다.",
+                imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+              },
+              {
+                eyebrow: "SEO & GEO",
+                title: "SEO & GEO",
+                desc: "키워드 중심을 넘어, AI 검색에서 답변되는 브랜드로 설계합니다. 데이터 기반 인사이트로 의사결정을 지원합니다.",
+                imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+              },
+              {
+                eyebrow: "WordPress",
+                title: "워드프레스 & 전환 최적화",
+                desc: "전환 중심 UX/UI로 랜딩과 퍼널을 최적화합니다. 수익성과 안정성을 높이는 전문가 중심 솔루션을 제공합니다.",
+                imageUrl: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
+              },
             ].map((s, i) => (
               <AnimatedCard key={s.title} index={i}>
-                <ServiceCard eyebrow={s.eyebrow} title={s.title} desc={s.desc} />
+                <ServiceCard eyebrow={s.eyebrow} title={s.title} desc={s.desc} imageUrl={s.imageUrl} />
               </AnimatedCard>
             ))}
           </div>

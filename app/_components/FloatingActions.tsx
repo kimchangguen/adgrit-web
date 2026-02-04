@@ -9,7 +9,7 @@ const actions = [
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
-        className="w-5 h-5"
+        className="w-8 h-8"
       >
         <path
           fillRule="evenodd"
@@ -28,7 +28,7 @@ const actions = [
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
-        className="w-5 h-5"
+        className="w-8 h-8"
       >
         <path d="M12 3c5.799 0 10.5 3.664 10.5 8.185 0 4.52-4.701 8.184-10.5 8.184a13.5 13.5 0 0 1-1.727-.11l-4.408 2.883c-.501.265-.678.236-.472-.413l.892-3.678c-2.88-1.46-4.785-3.99-4.785-6.866C1.5 6.665 6.201 3 12 3Z" />
       </svg>
@@ -36,14 +36,14 @@ const actions = [
     className: "bg-[#FEE500] hover:bg-[#F9DF4A] text-[#191919]",
   },
   {
-    label: "제안서다운",
+    label: "제안서",
     href: "#contact",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
-        className="w-5 h-5"
+        className="w-8 h-8"
       >
         <path
           fillRule="evenodd"
@@ -60,7 +60,7 @@ const actions = [
 export function FloatingActions() {
   return (
     <div
-      className="fixed bottom-6 right-6 z-50 flex flex-col gap-3"
+      className="fixed bottom-16 right-6 z-50 flex flex-col gap-3"
       aria-label="고객 상담 바로가기"
     >
       {actions.map((action) => (
@@ -77,7 +77,7 @@ export function FloatingActions() {
             {action.label}
           </span>
           <span
-            className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg transition-all group-hover:scale-110 flex-shrink-0 ${action.className}`}
+            className={`flex items-center justify-center w-[72px] h-[72px] rounded-full shadow-lg transition-all group-hover:scale-110 flex-shrink-0 ${action.className}`}
           >
             {action.icon}
           </span>
