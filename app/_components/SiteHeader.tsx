@@ -70,21 +70,21 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
         </Link>
 
         {/* 모바일: 4개 메뉴 단순 링크 */}
-        <nav className="flex md:hidden items-center justify-center flex-1 min-w-0 gap-4 sm:gap-6 overflow-x-auto">
+        <nav className="flex md:hidden items-center justify-start flex-1 min-w-0 gap-5 sm:gap-8 overflow-x-auto ml-4">
           {navItems.map((item) => (
             <a
               key={item.label}
               href={item.children[0]?.href ?? "#"}
-              className="flex-shrink-0 text-xs sm:text-sm font-bold text-slate-600 hover:text-[#1e40af] whitespace-nowrap py-2"
+              className="flex-shrink-0 text-sm sm:text-base font-bold text-slate-600 hover:text-[#1e40af] whitespace-nowrap py-2"
             >
               {item.label}
             </a>
           ))}
         </nav>
 
-        {/* 데스크톱: 메가 메뉴 - 가운데 살짝 왼쪽, 넓게 포진 */}
+        {/* 데스크톱: 메가 메뉴 - 왼쪽 정렬, 넓은 간격 */}
         <nav
-          className="hidden md:flex items-center justify-center gap-6 lg:gap-10 xl:gap-12 relative flex-1 min-w-0 -translate-x-8 lg:-translate-x-16"
+          className="hidden md:flex items-center justify-start gap-10 lg:gap-14 xl:gap-16 ml-8 lg:ml-12 relative flex-1 min-w-0"
           onMouseEnter={() => setIsMegaOpen(true)}
           onMouseLeave={() => {
             setIsMegaOpen(false);
@@ -98,7 +98,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
               onMouseEnter={() => setHoveredColumn(item.label)}
             >
               <button
-                className={`block px-2 py-2 text-base font-bold transition-colors tracking-wide text-left w-full ${
+                className={`block px-2 py-2 text-lg lg:text-xl font-bold transition-colors tracking-wide text-left w-full ${
                   hoveredColumn === item.label && isMegaOpen
                     ? "text-[#1e40af]"
                     : "text-slate-600 hover:text-[#1a1a2e]"
