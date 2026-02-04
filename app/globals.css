@@ -2,19 +2,20 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1a1a2e;
+  --muted: #64748b;
+  --muted-foreground: #94a3b8;
+  --primary: #1e40af;
+  --primary-foreground: #ffffff;
+  --card: #f8fafc;
+  --card-hover: #f1f5f9;
+  --border: #e2e8f0;
+  --accent: #1e3a5f;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 html {

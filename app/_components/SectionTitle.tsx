@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export function SectionKicker({ children }: { children: ReactNode }) {
   return (
-    <p className="text-xs font-semibold tracking-[0.25em] text-zinc-400">
+    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1e40af]">
       {children}
     </p>
   );
@@ -17,7 +17,7 @@ export function SectionTitle({
 }) {
   return (
     <h2
-      className={`text-3xl sm:text-4xl font-extrabold tracking-tight text-white ${className}`.trim()}
+      className={`text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#1a1a2e] ${className}`.trim()}
     >
       {children}
     </h2>
@@ -26,9 +26,8 @@ export function SectionTitle({
 
 export function SectionLead({ children }: { children: ReactNode }) {
   return (
-    <p className="mt-4 text-base sm:text-lg leading-relaxed text-zinc-300">
+    <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-600">
       {children}
     </p>
   );
 }
-

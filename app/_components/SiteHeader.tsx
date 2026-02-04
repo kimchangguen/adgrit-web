@@ -44,14 +44,14 @@ export function SiteHeader() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur-sm shadow-sm">
       <Container className="flex h-16 items-center justify-between">
         <Link
           href="/"
-          className="text-lg font-black tracking-wider text-white select-none"
+          className="text-lg font-black tracking-wider text-[#1a1a2e] select-none"
           aria-label="홈으로 이동"
         >
-          AD<span className="text-indigo-400">GRIT</span>
+          AD<span className="text-[#1e40af]">GRIT</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">
@@ -63,21 +63,21 @@ export function SiteHeader() {
               onMouseLeave={() => setOpenMenu(null)}
             >
               <button
-                className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-zinc-200 hover:text-white transition-colors"
+                className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-slate-600 hover:text-[#1a1a2e] transition-colors"
                 aria-expanded={openMenu === item.label}
                 aria-haspopup="true"
               >
                 {item.label}
-                <span className="text-xs">▼</span>
+                <span className="text-xs text-slate-400">▼</span>
               </button>
               {openMenu === item.label && (
                 <div className="absolute left-0 top-full pt-1 min-w-[180px]">
-                  <div className="rounded-lg border border-white/10 bg-black/95 py-2 shadow-xl backdrop-blur">
+                  <div className="rounded-lg border border-slate-200 bg-white py-2 shadow-lg">
                     {item.children.map((child) => (
                       <a
                         key={child.label}
                         href={child.href}
-                        className="block px-4 py-2 text-sm text-zinc-200 hover:bg-white/5 hover:text-white transition-colors"
+                        className="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-[#1e40af] transition-colors"
                         onClick={() => setOpenMenu(null)}
                       >
                         {child.label}
@@ -92,7 +92,7 @@ export function SiteHeader() {
 
         <a
           href="#contact"
-          className="inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-zinc-200 transition-colors"
+          className="inline-flex items-center justify-center rounded-full bg-[#1e40af] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#1e3a8a] transition-colors shadow-sm"
         >
           무료 상담 시작하기
         </a>

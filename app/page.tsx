@@ -47,7 +47,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-white text-[#1a1a2e]">
       <SiteChrome posts={posts} error={error} stripHTML={stripHTML} />
     </div>
   );
@@ -55,11 +55,11 @@ export default async function Home() {
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center">
-      <div className="text-4xl font-extrabold tracking-tight text-white">
+    <div className="rounded-xl border border-slate-200 bg-white p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+      <div className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1e40af]">
         {value}
       </div>
-      <div className="mt-2 text-sm text-zinc-300">{label}</div>
+      <div className="mt-2 text-sm text-slate-600">{label}</div>
     </div>
   );
 }
@@ -72,9 +72,9 @@ function VisionCard({
   desc: string;
 }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/6 to-white/2 p-6 hover:border-white/20 transition-colors">
-      <h3 className="text-lg font-bold text-white">{title}</h3>
-      <p className="mt-4 text-sm leading-relaxed text-zinc-300">{desc}</p>
+    <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md hover:border-[#1e40af]/30 transition-all">
+      <h3 className="text-lg font-bold text-[#1a1a2e]">{title}</h3>
+      <p className="mt-4 text-sm leading-relaxed text-slate-600">{desc}</p>
     </div>
   );
 }
@@ -93,19 +93,19 @@ function ServiceCard({
   return (
     <Link
       href={href}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 hover:bg-white/7 transition-colors"
+      className="group flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-[#1e40af]/30 transition-all"
     >
-      <div className="h-40 w-full bg-gradient-to-br from-indigo-500/20 to-fuchsia-500/10" />
+      <div className="h-40 w-full bg-gradient-to-br from-[#1e40af]/10 to-[#1e3a5f]/5" />
       <div className="flex-1 p-6">
-        <div className="text-xs font-semibold tracking-[0.25em] text-zinc-400">
+        <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1e40af]">
           {eyebrow}
         </div>
-        <div className="mt-3 text-xl font-extrabold text-white group-hover:text-indigo-300 transition-colors">
+        <div className="mt-3 text-xl font-bold text-[#1a1a2e] group-hover:text-[#1e40af] transition-colors">
           {title}
         </div>
-        <p className="mt-3 text-sm leading-relaxed text-zinc-300">{desc}</p>
-        <span className="mt-4 inline-block text-sm font-semibold text-indigo-300">
-          자세히 보기
+        <p className="mt-3 text-sm leading-relaxed text-slate-600">{desc}</p>
+        <span className="mt-4 inline-block text-sm font-semibold text-[#1e40af]">
+          자세히 보기 →
         </span>
       </div>
     </Link>
@@ -122,16 +122,16 @@ function ProcessStep({
   desc: string;
 }) {
   return (
-    <div className="flex gap-6 rounded-2xl border border-white/10 bg-white/5 p-6">
-      <div className="flex-shrink-0 h-24 w-24 rounded-2xl bg-gradient-to-br from-indigo-500/30 to-fuchsia-500/20 flex items-center justify-center">
+    <div className="flex gap-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+      <div className="flex-shrink-0 h-20 w-20 rounded-xl bg-[#1e40af] flex items-center justify-center">
         <span className="text-2xl font-black text-white">{step}</span>
       </div>
       <div>
-        <div className="text-xs font-semibold tracking-[0.25em] text-zinc-400">
+        <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1e40af]">
           {step} 단계
         </div>
-        <div className="mt-2 text-lg font-extrabold text-white">{title}</div>
-        <p className="mt-3 text-sm leading-relaxed text-zinc-300">{desc}</p>
+        <div className="mt-2 text-lg font-bold text-[#1a1a2e]">{title}</div>
+        <p className="mt-3 text-sm leading-relaxed text-slate-600">{desc}</p>
       </div>
     </div>
   );
@@ -147,11 +147,11 @@ function TestimonialCard({
   role: string;
 }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-      <p className="text-sm leading-relaxed text-zinc-300">&ldquo;{quote}&rdquo;</p>
+    <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+      <p className="text-sm leading-relaxed text-slate-600">&ldquo;{quote}&rdquo;</p>
       <div className="mt-4">
-        <div className="font-semibold text-white">{name}</div>
-        <div className="text-xs text-zinc-400">{role}</div>
+        <div className="font-semibold text-[#1a1a2e]">{name}</div>
+        <div className="text-xs text-slate-500">{role}</div>
       </div>
     </div>
   );
@@ -159,14 +159,14 @@ function TestimonialCard({
 
 function FAQItem({ q, a }: { q: string; a: string }) {
   return (
-    <details className="group rounded-2xl border border-white/10 bg-white/5 px-6 py-5">
-      <summary className="cursor-pointer list-none text-base font-semibold text-white flex items-start justify-between gap-6">
+    <details className="group rounded-xl border border-slate-200 bg-white px-6 py-5 shadow-sm">
+      <summary className="cursor-pointer list-none text-base font-semibold text-[#1a1a2e] flex items-start justify-between gap-6">
         <span>{q}</span>
-        <span className="mt-1 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-white/10 text-zinc-300 group-open:rotate-45 transition-transform">
+        <span className="mt-1 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-slate-300 text-slate-500 group-open:rotate-45 transition-transform">
           +
         </span>
       </summary>
-      <p className="mt-4 text-sm leading-relaxed text-zinc-300">{a}</p>
+      <p className="mt-4 text-sm leading-relaxed text-slate-600">{a}</p>
     </details>
   );
 }
@@ -191,33 +191,33 @@ function InsightCard({
   return (
     <Link
       href={`/posts/${id}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 hover:bg-white/7 transition-colors"
+      className="group flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-[#1e40af]/30 transition-all"
     >
       {thumbnail ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={thumbnail}
           alt={alt}
-          className="h-44 w-full object-cover bg-white/5"
+          className="h-44 w-full object-cover"
           loading="lazy"
         />
       ) : (
-        <div className="h-44 w-full bg-gradient-to-br from-white/8 to-white/2" />
+        <div className="h-44 w-full bg-gradient-to-br from-[#1e40af]/10 to-slate-100" />
       )}
       <div className="flex-1 p-6">
-        <div className="flex items-center gap-2 text-xs text-zinc-400">
+        <div className="flex items-center gap-2 text-xs text-slate-500">
           <span>{type}</span>
           {date && <span>{date}</span>}
         </div>
-        <div className="mt-3 text-sm font-semibold text-white group-hover:text-indigo-300 transition-colors line-clamp-2">
+        <div className="mt-3 text-sm font-semibold text-[#1a1a2e] group-hover:text-[#1e40af] transition-colors line-clamp-2">
           {title}
         </div>
         <div
-          className="mt-3 text-sm leading-relaxed text-zinc-300 line-clamp-3"
+          className="mt-3 text-sm leading-relaxed text-slate-600 line-clamp-3"
           dangerouslySetInnerHTML={{ __html: excerptHtml || "" }}
         />
-        <span className="mt-3 inline-block text-sm font-semibold text-indigo-300">
-          자세히 보기
+        <span className="mt-3 inline-block text-sm font-semibold text-[#1e40af]">
+          자세히 보기 →
         </span>
       </div>
     </Link>
@@ -237,61 +237,63 @@ function SiteChrome({
     <>
       <SiteHeader />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-white/10">
-        <div className="pointer-events-none absolute inset-0 opacity-80">
-          <div className="absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-indigo-500/30 blur-3xl" />
-          <div className="absolute -bottom-40 right-[-120px] h-[520px] w-[520px] rounded-full bg-fuchsia-500/20 blur-3xl" />
-        </div>
-        <Container className="relative py-20 sm:py-28">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-zinc-200">
-              컨설팅 문의
-              <span className="h-1 w-1 rounded-full bg-zinc-400" />
-              4.9/5 고객 만족도
-            </div>
-            <h1 className="mt-6 text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.05]">
-              신뢰와 전문성으로 이끄는
-              <br />
-              <span className="text-indigo-300">기업 성장의 파트너</span>
-            </h1>
-            <p className="mt-6 text-base sm:text-lg leading-relaxed text-zinc-300">
-              성과 중심의 마케팅 컨설팅으로 기업의 지속 가능한 성장을 지원합니다.
-              Google Ads, SEO & GEO, 워드프레스, 퍼포먼스 마케팅을 하나의 유기적인 성장
-              엔진으로 통합 설계합니다.
-            </p>
-
-            <div className="mt-8">
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-black hover:bg-zinc-200 transition-colors"
-              >
-                컨설팅 문의
-              </a>
-            </div>
-
-            <div className="mt-12">
-              <div className="text-xs font-semibold tracking-[0.25em] text-zinc-400">
-                국내외 다양한 기업들과 함께합니다
+      {/* Hero - 2단 구성: 왼쪽 텍스트, 오른쪽 비주얼 */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-[#1e40af]/5">
+        <Container className="relative py-16 sm:py-24 lg:py-28">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#1e40af]/30 bg-white px-4 py-2 text-xs font-semibold text-[#1e40af] shadow-sm">
+                <span>4.9/5</span>
+                <span className="text-slate-400">|</span>
+                <span>고객 만족도</span>
               </div>
-              <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-6">
-                {["Samsung", "LG", "SK", "Hyundai", "Google", "Naver"].map((x) => (
-                  <div
-                    key={x}
-                    className="rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-center text-xs font-semibold text-zinc-200"
-                  >
-                    {x}
-                  </div>
-                ))}
+              <h1 className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1a1a2e] leading-[1.2]">
+                신뢰와 전문성으로 이끄는
+                <br />
+                <span className="text-[#1e40af]">기업 성장의 파트너</span>
+              </h1>
+              <p className="mt-6 text-base sm:text-lg leading-relaxed text-slate-600">
+                성과 중심의 마케팅 컨설팅으로 기업의 지속 가능한 성장을 지원합니다.
+                Google Ads, SEO & GEO, 워드프레스, 퍼포먼스 마케팅을 하나의 유기적인 성장
+                엔진으로 통합 설계합니다.
+              </p>
+
+              <div className="mt-8">
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center rounded-full bg-[#1e40af] px-8 py-3.5 text-sm font-semibold text-white hover:bg-[#1e3a8a] transition-colors shadow-md"
+                >
+                  컨설팅 문의
+                </a>
               </div>
+
+              <div className="mt-12">
+                <div className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-500">
+                  국내외 다양한 기업들과 함께합니다
+                </div>
+                <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-6">
+                  {["Samsung", "LG", "SK", "Hyundai", "Google", "Naver"].map((x) => (
+                    <div
+                      key={x}
+                      className="rounded-lg border border-slate-200 bg-white px-3 py-3 text-center text-xs font-semibold text-slate-500 shadow-sm"
+                    >
+                      {x}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="hidden lg:block">
+              <div className="aspect-square max-w-md rounded-2xl bg-gradient-to-br from-[#1e40af]/20 to-[#1e3a5f]/10 border border-slate-200/50" />
             </div>
           </div>
         </Container>
       </section>
 
       {/* Vision */}
-      <section id="about" className="border-b border-white/10 bg-black">
-        <Container className="py-16 sm:py-20">
+      <section id="about" className="border-t border-slate-100 bg-white py-16 sm:py-20">
+        <Container>
           <SectionKicker>Vision</SectionKicker>
           <SectionTitle className="mt-3">
             귀사의 목표 달성을 위한 최고의
@@ -321,8 +323,8 @@ function SiteChrome({
       </section>
 
       {/* Results */}
-      <section className="border-b border-white/10 bg-gradient-to-b from-black to-zinc-950">
-        <Container className="py-16 sm:py-20">
+      <section className="border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
+        <Container>
           <SectionKicker>Results</SectionKicker>
           <SectionTitle className="mt-3">
             수치로 입증된
@@ -340,8 +342,8 @@ function SiteChrome({
       </section>
 
       {/* Services */}
-      <section id="services" className="border-b border-white/10 bg-black">
-        <Container className="py-16 sm:py-20">
+      <section id="services" className="border-t border-slate-100 bg-white py-16 sm:py-20">
+        <Container>
           <SectionKicker>Services</SectionKicker>
           <SectionTitle className="mt-3">
             지속 가능한 성과를 위한 맞춤형
@@ -370,8 +372,8 @@ function SiteChrome({
       </section>
 
       {/* Solutions */}
-      <section className="border-b border-white/10 bg-zinc-950">
-        <Container className="py-16 sm:py-20">
+      <section className="border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
+        <Container>
           <SectionKicker>Solutions</SectionKicker>
           <SectionTitle className="mt-3">
             탁월한 성과를 위한
@@ -390,10 +392,10 @@ function SiteChrome({
             ].map((item) => (
               <div
                 key={item}
-                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-5 py-4"
+                className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-5 py-4 shadow-sm"
               >
-                <span className="h-2 w-2 flex-shrink-0 rounded-full bg-indigo-400" />
-                <span className="text-sm text-zinc-200">{item}</span>
+                <span className="h-2 w-2 flex-shrink-0 rounded-full bg-[#1e40af]" />
+                <span className="text-sm text-slate-700">{item}</span>
               </div>
             ))}
           </div>
@@ -401,8 +403,8 @@ function SiteChrome({
       </section>
 
       {/* Process */}
-      <section className="border-b border-white/10 bg-black">
-        <Container className="py-16 sm:py-20">
+      <section className="border-t border-slate-100 bg-white py-16 sm:py-20">
+        <Container>
           <SectionKicker>Services</SectionKicker>
           <SectionTitle className="mt-3">
             단 세 단계로 완성하는
@@ -431,8 +433,8 @@ function SiteChrome({
       </section>
 
       {/* Testimonials */}
-      <section className="border-b border-white/10 bg-zinc-950">
-        <Container className="py-16 sm:py-20">
+      <section className="border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
+        <Container>
           <SectionKicker>Testimonials</SectionKicker>
           <SectionTitle className="mt-3">
             고객이 증명한
@@ -476,8 +478,8 @@ function SiteChrome({
       </section>
 
       {/* Experience */}
-      <section className="border-b border-white/10 bg-black">
-        <Container className="py-16 sm:py-20">
+      <section className="border-t border-slate-100 bg-white py-16 sm:py-20">
+        <Container>
           <SectionKicker>Experience</SectionKicker>
           <SectionTitle className="mt-3">
             성과를 이끄는 컨설팅
@@ -486,21 +488,21 @@ function SiteChrome({
           </SectionTitle>
 
           <div className="mt-10 flex flex-wrap gap-6">
-            <div className="flex-1 min-w-[200px] rounded-2xl border border-white/10 bg-white/5 px-8 py-6 text-center">
-              <div className="text-2xl font-extrabold text-indigo-300">신뢰도</div>
-              <p className="mt-2 text-sm text-zinc-300">
+            <div className="flex-1 min-w-[200px] rounded-xl border border-slate-200 bg-white px-8 py-6 text-center shadow-sm hover:shadow-md transition-shadow">
+              <div className="text-xl font-bold text-[#1e40af]">신뢰도</div>
+              <p className="mt-2 text-sm text-slate-600">
                 검증된 성과로 쌓아온 신뢰
               </p>
             </div>
-            <div className="flex-1 min-w-[200px] rounded-2xl border border-white/10 bg-white/5 px-8 py-6 text-center">
-              <div className="text-2xl font-extrabold text-indigo-300">실행력</div>
-              <p className="mt-2 text-sm text-zinc-300">
+            <div className="flex-1 min-w-[200px] rounded-xl border border-slate-200 bg-white px-8 py-6 text-center shadow-sm hover:shadow-md transition-shadow">
+              <div className="text-xl font-bold text-[#1e40af]">실행력</div>
+              <p className="mt-2 text-sm text-slate-600">
                 목표를 현실로 만드는 실행
               </p>
             </div>
-            <div className="flex-1 min-w-[200px] rounded-2xl border border-white/10 bg-white/5 px-8 py-6 text-center">
-              <div className="text-2xl font-extrabold text-indigo-300">전문성</div>
-              <p className="mt-2 text-sm text-zinc-300">
+            <div className="flex-1 min-w-[200px] rounded-xl border border-slate-200 bg-white px-8 py-6 text-center shadow-sm hover:shadow-md transition-shadow">
+              <div className="text-xl font-bold text-[#1e40af]">전문성</div>
+              <p className="mt-2 text-sm text-slate-600">
                 데이터 기반의 전문 인사이트
               </p>
             </div>
@@ -509,7 +511,7 @@ function SiteChrome({
           <div className="mt-8 text-center">
             <a
               href="#contact"
-              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-black hover:bg-zinc-200 transition-colors"
+              className="inline-flex items-center justify-center rounded-full bg-[#1e40af] px-8 py-3.5 text-sm font-semibold text-white hover:bg-[#1e3a8a] transition-colors shadow-md"
             >
               컨설팅 문의하기
             </a>
@@ -518,8 +520,8 @@ function SiteChrome({
       </section>
 
       {/* Blogs */}
-      <section id="insights" className="border-b border-white/10 bg-zinc-950">
-        <Container className="py-16 sm:py-20">
+      <section id="insights" className="border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
+        <Container>
           <SectionKicker>Blogs</SectionKicker>
           <SectionTitle className="mt-3">
             비즈니스 인사이트의 모든 것,
@@ -529,7 +531,7 @@ function SiteChrome({
 
           <div className="mt-10">
             {error ? (
-              <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-6 text-red-200">
+              <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-red-700">
                 {error}
               </div>
             ) : (
@@ -560,8 +562,8 @@ function SiteChrome({
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="border-b border-white/10 bg-black">
-        <Container className="py-16 sm:py-20">
+      <section id="faq" className="border-t border-slate-100 bg-white py-16 sm:py-20">
+        <Container>
           <SectionKicker>FAQ</SectionKicker>
           <SectionTitle className="mt-3">자주 묻는 질문</SectionTitle>
 
@@ -587,9 +589,9 @@ function SiteChrome({
       </section>
 
       {/* CTA */}
-      <section id="contact" className="bg-zinc-950">
-        <Container className="py-16 sm:py-20">
-          <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/4 p-10 sm:p-12 text-center">
+      <section id="contact" className="border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
+        <Container>
+          <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-[#1e40af]/10 to-white p-10 sm:p-12 text-center shadow-sm">
             <SectionTitle>
               지금, 애드그릿 전문가와 함께
               <br />
@@ -598,7 +600,7 @@ function SiteChrome({
             <div className="mt-8">
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-sm font-semibold text-black hover:bg-zinc-200 transition-colors"
+                className="inline-flex items-center justify-center rounded-full bg-[#1e40af] px-10 py-3.5 text-sm font-semibold text-white hover:bg-[#1e3a8a] transition-colors shadow-md"
               >
                 문의하기
               </a>
