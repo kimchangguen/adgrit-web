@@ -51,6 +51,7 @@ type SiteHeaderProps = {
 export function SiteHeader({ transparent = false }: SiteHeaderProps) {
   const [isMegaOpen, setIsMegaOpen] = useState(false);
   const [hoveredColumn, setHoveredColumn] = useState<string | null>(null);
+  const [openMobileMenu, setOpenMobileMenu] = useState<string | null>(null);
 
   return (
     <header
@@ -69,18 +70,67 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
           AD<span className="text-[#1e40af]">GRIT</span>
         </Link>
 
-        {/* 모바일: 4개 메뉴 단순 링크 */}
-        <nav className="flex md:hidden items-center justify-end flex-1 min-w-0 gap-5 sm:gap-8 overflow-x-auto mr-4">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.children[0]?.href ?? "#"}
-              className="flex-shrink-0 text-sm sm:text-base font-bold text-slate-600 hover:text-[#1e40af] whitespace-nowrap py-2"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+        {/* 모바일: 메인 메뉴 + 탭 시 서브메뉴 드롭다운 */}
+        <div className="flex md:hidden flex-1 flex-col min-w-0 mr-4 relative">
+          <nav className="flex items-center justify-end gap-4 sm:gap-6 overflow-x-auto">
+            {navItems.map((item) => (
+              <button
+                key={item.label}
+                type="button"
+                onClick={() =>
+                  setOpenMobileMenu((prev) => (prev === item.label ? null : item.label))
+                }
+                className={`flex-shrink-0 text-sm sm:text-base font-bold whitespace-nowrap py-2 ${
+                  openMobileMenu === item.label
+                    ? "text-[#1e40af]"
+                    : "text-slate-600 hover:text-[#1e40af]"
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+          {/* 모바일: 드롭다운 바깥 클릭 시 닫기 */}
+          {openMobileMenu && (
+            <button
+              type="button"
+              aria-label="메뉴 닫기"
+              className="fixed inset-0 z-40"
+              onClick={() => setOpenMobileMenu(null)}
+            />
+          )}
+          {/* 모바일 서브메뉴 드롭다운 */}
+          <AnimatePresence initial={false}>
+            {openMobileMenu && (
+              <motion.div
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+                className="absolute right-0 left-0 top-full pt-2 z-50"
+              >
+                <div className="rounded-lg border border-slate-200 bg-white py-3 shadow-lg">
+                  {navItems
+                    .filter((item) => item.label === openMobileMenu)
+                    .map((item) => (
+                      <div key={item.label} className="flex flex-col">
+                        {item.children.map((child) => (
+                          <a
+                            key={child.label}
+                            href={child.href}
+                            className="px-5 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1e40af]"
+                            onClick={() => setOpenMobileMenu(null)}
+                          >
+                            {child.label}
+                          </a>
+                        ))}
+                      </div>
+                    ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
 
         {/* 데스크톱: 메가 메뉴 - 오른쪽 정렬, 넓은 간격 */}
         <nav
@@ -111,7 +161,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
             </div>
           ))}
 
-          {/* 메가 메뉴 - 전체가 한번에 열림 */}
+          {/* 메가 메뉴 - 메인 메뉴와 같은 오른쪽 정렬 */}
           <AnimatePresence>
             {isMegaOpen && (
               <motion.div
@@ -119,9 +169,9 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="absolute left-0 right-0 top-full pt-1"
+                className="absolute right-0 left-auto top-full pt-1 w-[min(720px,100vw)]"
               >
-                <div className="rounded-lg border border-slate-200 bg-white shadow-lg overflow-hidden flex">
+                <div className="rounded-lg border border-slate-200 bg-white shadow-lg overflow-hidden flex ml-auto">
                   {navItems.map((item) => (
                     <div
                       key={item.label}
