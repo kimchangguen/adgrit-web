@@ -161,7 +161,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
             </div>
           ))}
 
-          {/* 메가 메뉴 - 메인 메뉴와 같은 오른쪽 정렬 */}
+          {/* 메가 메뉴 - 메인 메뉴와 동일한 gap/정렬로 컬럼 위치 맞춤 */}
           <AnimatePresence>
             {isMegaOpen && (
               <motion.div
@@ -169,49 +169,51 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="absolute right-0 left-auto top-full pt-1 w-[min(720px,100vw)]"
+                className="absolute right-0 left-0 top-full pt-1"
               >
-                <div className="rounded-lg border border-slate-200 bg-white shadow-lg overflow-hidden flex ml-auto">
-                  {navItems.map((item) => (
-                    <div
-                      key={item.label}
-                      className={`flex-1 min-w-[180px] py-4 transition-colors ${
-                        hoveredColumn === item.label
-                          ? "bg-[#1e40af] text-white"
-                          : "bg-white"
-                      }`}
-                      onMouseEnter={() => setHoveredColumn(item.label)}
-                    >
+                <div className="flex justify-end gap-10 lg:gap-14 xl:gap-16 mr-8 lg:mr-12">
+                  <div className="flex rounded-lg border border-slate-200 bg-white shadow-lg overflow-hidden gap-10 lg:gap-14 xl:gap-16 py-4">
+                    {navItems.map((item) => (
                       <div
-                        className={`px-5 font-bold text-base mb-3 ${
+                        key={item.label}
+                        className={`min-w-[140px] px-2 transition-colors ${
                           hoveredColumn === item.label
-                            ? "text-white"
-                            : "text-[#1a1a2e]"
+                            ? "bg-[#1e40af] text-white rounded"
+                            : "bg-white"
                         }`}
+                        onMouseEnter={() => setHoveredColumn(item.label)}
                       >
-                        {item.label}
+                        <div
+                          className={`font-bold text-base mb-3 ${
+                            hoveredColumn === item.label
+                              ? "text-white"
+                              : "text-[#1a1a2e]"
+                          }`}
+                        >
+                          {item.label}
+                        </div>
+                        <div className="space-y-1">
+                          {item.children.map((child) => (
+                            <a
+                              key={child.label}
+                              href={child.href}
+                              className={`block py-2 px-0 text-sm transition-colors ${
+                                hoveredColumn === item.label
+                                  ? "text-white/90 hover:text-white hover:bg-white/10 rounded"
+                                  : "text-slate-600 hover:bg-slate-50 hover:text-[#1e40af]"
+                              }`}
+                              onClick={() => {
+                                setIsMegaOpen(false);
+                                setHoveredColumn(null);
+                              }}
+                            >
+                              {child.label}
+                            </a>
+                          ))}
+                        </div>
                       </div>
-                      <div className="space-y-1">
-                        {item.children.map((child) => (
-                          <a
-                            key={child.label}
-                            href={child.href}
-                            className={`block px-5 py-2 text-sm transition-colors ${
-                              hoveredColumn === item.label
-                                ? "text-white/90 hover:text-white hover:bg-white/10"
-                                : "text-slate-600 hover:bg-slate-50 hover:text-[#1e40af]"
-                            }`}
-                            onClick={() => {
-                              setIsMegaOpen(false);
-                              setHoveredColumn(null);
-                            }}
-                          >
-                            {child.label}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             )}
