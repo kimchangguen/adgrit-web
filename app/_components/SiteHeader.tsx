@@ -70,7 +70,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
         </Link>
 
         {/* 모바일: 4개 메뉴 단순 링크 */}
-        <nav className="flex md:hidden items-center justify-start flex-1 min-w-0 gap-5 sm:gap-8 overflow-x-auto ml-4">
+        <nav className="flex md:hidden items-center justify-end flex-1 min-w-0 gap-5 sm:gap-8 overflow-x-auto mr-4">
           {navItems.map((item) => (
             <a
               key={item.label}
@@ -82,9 +82,9 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
           ))}
         </nav>
 
-        {/* 데스크톱: 메가 메뉴 - 왼쪽 정렬, 넓은 간격 */}
+        {/* 데스크톱: 메가 메뉴 - 오른쪽 정렬, 넓은 간격 */}
         <nav
-          className="hidden md:flex items-center justify-start gap-10 lg:gap-14 xl:gap-16 ml-8 lg:ml-12 relative flex-1 min-w-0"
+          className="hidden md:flex items-center justify-end gap-10 lg:gap-14 xl:gap-16 mr-8 lg:mr-12 relative flex-1 min-w-0"
           onMouseEnter={() => setIsMegaOpen(true)}
           onMouseLeave={() => {
             setIsMegaOpen(false);
