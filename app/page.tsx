@@ -304,7 +304,7 @@ function SiteChrome({
   stripHTML: (html: string) => string;
 }) {
   const heroBg =
-    "linear-gradient(160deg, #0f172a 0%, #1e3a8a 20%, #1e40af 45%, #2563eb 70%, #3b82f6 95%)";
+    "linear-gradient(165deg, #0c1929 0%, #0f2847 12%, #1e3a5f 25%, #1e40af 42%, #2563eb 58%, #3b82f6 75%, #60a5fa 90%, #0ea5e9 100%)";
 
   return (
     <>
