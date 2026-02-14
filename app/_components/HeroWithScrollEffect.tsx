@@ -5,12 +5,16 @@ import { SiteHeader } from "./SiteHeader";
 
 type HeroWithScrollEffectProps = {
   children: React.ReactNode;
-  backgroundImage: string;
+  /** CSS background-image (url(...) 또는 linear-gradient(...)) */
+  backgroundImage?: string;
+  /** 배경이 그라데이션일 때 오버레이 조정 (기본: 어두운 배경용) */
+  darkOverlay?: boolean;
 };
 
 export function HeroWithScrollEffect({
   children,
   backgroundImage,
+  darkOverlay = false,
 }: HeroWithScrollEffectProps) {
   const [scrolled, setScrolled] = useState(false);
 
@@ -28,12 +32,15 @@ export function HeroWithScrollEffect({
       {/* 고정 배경 - 스크롤해도 움직이지 않음 */}
       <div
         className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage }}
+        style={backgroundImage ? { backgroundImage } : undefined}
         aria-hidden
       />
-      <div className="fixed inset-0 z-0 bg-white/70" aria-hidden />
+      <div
+        className={`fixed inset-0 z-0 ${darkOverlay ? "bg-slate-900/25" : "bg-white/70"}`}
+        aria-hidden
+      />
 
-      <SiteHeader transparent={!scrolled} />
+      <SiteHeader transparent={!scrolled} lightText={darkOverlay} />
 
       {/* 고정된 첫번째 섹션 폰트/콘텐츠 - 스크롤해도 움직이지 않음 */}
       <div className="fixed inset-0 z-[5] pointer-events-none flex flex-col items-center justify-center">
@@ -44,11 +51,17 @@ export function HeroWithScrollEffect({
           {/* SCROLL 표시 - 첫번째 섹션 맨 아래 */}
           <a
             href="#about"
-            className="pointer-events-auto flex flex-col items-center gap-2 pb-8 text-slate-500 hover:text-slate-700 transition-colors animate-bounce"
+            className={`pointer-events-auto flex flex-col items-center gap-2 pb-8 transition-colors animate-bounce ${
+              darkOverlay ? "text-white/80 hover:text-white" : "text-slate-500 hover:text-slate-700"
+            }`}
             aria-label="아래로 스크롤"
           >
             <span className="text-xs font-medium tracking-widest">SCROLL</span>
-            <span className="w-8 h-8 rounded-full border-2 border-slate-400 flex items-center justify-center">
+            <span
+              className={`w-8 h-8 rounded-full border-2 flex items-center justify-center ${
+                darkOverlay ? "border-white/60" : "border-slate-400"
+              }`}
+            >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>

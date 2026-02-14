@@ -46,9 +46,11 @@ const navItems: Array<{
 type SiteHeaderProps = {
   /** Hero 영역용 - 배경 투명 (같은 배경 노출) */
   transparent?: boolean;
+  /** 어두운 배경 시 라이트 텍스트 */
+  lightText?: boolean;
 };
 
-export function SiteHeader({ transparent = false }: SiteHeaderProps) {
+export function SiteHeader({ transparent = false, lightText = false }: SiteHeaderProps) {
   const [isMegaOpen, setIsMegaOpen] = useState(false);
   const [hoveredColumn, setHoveredColumn] = useState<string | null>(null);
   const [openMobileMenu, setOpenMobileMenu] = useState<string | null>(null);
@@ -64,10 +66,12 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
       <Container className="flex h-14 sm:h-16 items-center justify-between gap-2 sm:gap-4">
         <Link
           href="/"
-          className="flex-shrink-0 text-base sm:text-lg font-black tracking-wider text-[#1a1a2e] select-none"
+          className={`flex-shrink-0 text-base sm:text-lg font-black tracking-wider select-none ${
+            lightText ? "text-white" : "text-[#1a1a2e]"
+          }`}
           aria-label="홈으로 이동"
         >
-          AD<span className="text-[#1e40af]">GRIT</span>
+          AD<span className={lightText ? "text-blue-300" : "text-[#1e40af]"}>GRIT</span>
         </Link>
 
         {/* 모바일: 메인 메뉴 + 탭 시 서브메뉴 드롭다운 */}
@@ -82,8 +86,8 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                 }
                 className={`flex-shrink-0 text-sm sm:text-base font-bold whitespace-nowrap py-2 ${
                   openMobileMenu === item.label
-                    ? "text-[#1e40af]"
-                    : "text-slate-600 hover:text-[#1e40af]"
+                    ? lightText ? "text-blue-300" : "text-[#1e40af]"
+                    : lightText ? "text-white/90 hover:text-white" : "text-slate-600 hover:text-[#1e40af]"
                 }`}
               >
                 {item.label}
@@ -150,8 +154,8 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
               <button
                 className={`block px-2 py-2 text-lg lg:text-xl font-bold transition-colors tracking-wide text-left w-full ${
                   hoveredColumn === item.label && isMegaOpen
-                    ? "text-[#1e40af]"
-                    : "text-slate-600 hover:text-[#1a1a2e]"
+                    ? lightText ? "text-blue-300" : "text-[#1e40af]"
+                    : lightText ? "text-white/90 hover:text-white" : "text-slate-600 hover:text-[#1a1a2e]"
                 }`}
                 aria-expanded={isMegaOpen}
                 aria-haspopup="true"

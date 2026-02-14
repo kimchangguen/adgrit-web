@@ -236,36 +236,50 @@ function SiteChrome({
   error: string | null;
   stripHTML: (html: string) => string;
 }) {
-  const heroBgImage =
-    "url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80')";
+  const heroBg =
+    "linear-gradient(160deg, #0f172a 0%, #1e3a8a 20%, #1e40af 45%, #2563eb 70%, #3b82f6 95%)";
 
   return (
     <>
       {/* 헤더 + 첫번째 섹션: 스크롤 시 헤더 변경, 아래 섹션 위로 올라오는 효과 */}
-      <HeroWithScrollEffect backgroundImage={heroBgImage}>
+      <HeroWithScrollEffect backgroundImage={heroBg} darkOverlay>
         <Container className="relative w-full py-12">
           <div className="max-w-3xl mx-auto text-center">
             <AnimatedHero>
               <AnimatedHeroItem>
-                <div className="inline-flex items-center gap-2 rounded-full border border-[#1e40af]/30 bg-white px-4 py-2 text-xs font-semibold text-[#1e40af] shadow-sm">
-                  <span>4.9/5</span>
-                  <span className="text-slate-400">|</span>
-                  <span>고객 만족도</span>
-                </div>
-              </AnimatedHeroItem>
-              <AnimatedHeroItem>
-                <h1 className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1a1a2e] leading-[1.2]">
-                  신뢰와 전문성으로 이끄는
-                  <br />
-                  <span className="text-[#1e40af]">기업 성장의 파트너</span>
-                </h1>
-              </AnimatedHeroItem>
-              <AnimatedHeroItem>
-                <p className="mt-6 text-base sm:text-lg leading-relaxed text-slate-600">
-                  성과 중심의 마케팅 컨설팅으로 기업의 지속 가능한 성장을 지원합니다.
-                  Google Ads, SEO & GEO, 워드프레스, 퍼포먼스 마케팅을 하나의 유기적인 성장
-                  엔진으로 통합 설계합니다.
+                <p className="text-base sm:text-lg lg:text-xl text-slate-200 leading-relaxed">
+                  성공한 사장님들은 마케팅을 &apos;비용&apos;이라 부르지 않습니다.
                 </p>
+              </AnimatedHeroItem>
+              <AnimatedHeroItem>
+                <p className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.15] drop-shadow-lg">
+                  그들은 &apos;연료&apos;라고 부릅니다.
+                </p>
+              </AnimatedHeroItem>
+              <AnimatedHeroItem>
+                <p className="mt-8 text-base sm:text-lg lg:text-xl text-slate-200 leading-relaxed">
+                  실패했던 건 사장님 탓이 아닙니다.
+                  <br />
+                  &apos;방법&apos;이 틀렸고 파트너를 잘못 만나서 입니다.
+                </p>
+              </AnimatedHeroItem>
+              <AnimatedHeroItem>
+                <p className="mt-8 text-lg sm:text-xl lg:text-2xl font-semibold text-white/95">
+                  이제는 개발실행사와 직접 제대로된 AI CORE Marketing 하세요
+                </p>
+              </AnimatedHeroItem>
+              <AnimatedHeroItem>
+                <p className="mt-4 text-base sm:text-lg text-slate-300 italic">
+                  상담버튼 클릭으로 부터 그 역사가 시작 됩니다.
+                </p>
+              </AnimatedHeroItem>
+              <AnimatedHeroItem>
+                <a
+                  href="tel:1661-0646"
+                  className="mt-10 inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-bold text-[#1e40af] shadow-xl hover:bg-slate-100 transition-colors"
+                >
+                  상담하기
+                </a>
               </AnimatedHeroItem>
             </AnimatedHero>
           </div>
