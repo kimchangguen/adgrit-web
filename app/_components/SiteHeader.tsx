@@ -63,10 +63,10 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
           : "border-b border-slate-200 bg-white/95 backdrop-blur-sm shadow-sm"
       }`}
     >
-      <Container className="flex h-14 sm:h-16 items-center justify-between gap-2 sm:gap-4">
+      <Container className="relative grid h-14 sm:h-16 grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4">
         <Link
           href="/"
-          className={`flex-shrink-0 text-base sm:text-lg font-black tracking-wider select-none ${
+          className={`flex-shrink-0 justify-self-start text-base sm:text-lg font-black tracking-wider select-none ${
             lightText ? "text-white" : "text-[#1a1a2e]"
           }`}
           aria-label="홈으로 이동"
@@ -75,8 +75,8 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
         </Link>
 
         {/* 모바일: 메인 메뉴 + 탭 시 서브메뉴 드롭다운 */}
-        <div className="flex md:hidden flex-1 flex-col min-w-0 mr-4 relative">
-          <nav className="flex items-center justify-end gap-4 sm:gap-6 overflow-x-auto">
+        <div className="flex md:hidden col-start-2 flex-col min-w-0 relative justify-self-center">
+          <nav className="flex items-center justify-center gap-4 sm:gap-6 overflow-x-auto">
             {navItems.map((item) => (
               <button
                 key={item.label}
@@ -136,9 +136,9 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
           </AnimatePresence>
         </div>
 
-        {/* 데스크톱: 메가 메뉴 - 오른쪽 정렬, 넓은 간격 */}
+        {/* 데스크톱: 메가 메뉴 - 센터 정렬 */}
         <nav
-          className="hidden md:flex items-center justify-end gap-10 lg:gap-14 xl:gap-16 mr-8 lg:mr-12 relative flex-1 min-w-0"
+          className="hidden md:flex col-start-2 col-end-3 justify-center items-center gap-10 lg:gap-14 xl:gap-16 relative justify-self-center"
           onMouseEnter={() => setIsMegaOpen(true)}
           onMouseLeave={() => {
             setIsMegaOpen(false);
@@ -165,7 +165,7 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
             </div>
           ))}
 
-          {/* 메가 메뉴 - 메인 메뉴와 동일한 gap/정렬로 컬럼 위치 맞춤 */}
+          {/* 메가 메뉴 - 메인 메뉴와 동일한 gap/센터 정렬 */}
           <AnimatePresence>
             {isMegaOpen && (
               <motion.div
@@ -173,11 +173,10 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="absolute right-0 left-0 top-full pt-1"
+                className="absolute left-1/2 -translate-x-1/2 top-full pt-1"
               >
-                <div className="flex justify-end gap-10 lg:gap-14 xl:gap-16 mr-8 lg:mr-12">
-                  <div className="flex rounded-lg border border-slate-200 bg-white shadow-lg overflow-hidden gap-10 lg:gap-14 xl:gap-16 py-4">
-                    {navItems.map((item) => (
+                <div className="flex rounded-lg border border-slate-200 bg-white shadow-lg overflow-hidden gap-10 lg:gap-14 xl:gap-16 py-4 px-4">
+                  {navItems.map((item) => (
                       <div
                         key={item.label}
                         className={`min-w-[140px] px-2 transition-colors ${
@@ -216,8 +215,7 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                           ))}
                         </div>
                       </div>
-                    ))}
-                  </div>
+                  ))}
                 </div>
               </motion.div>
             )}
