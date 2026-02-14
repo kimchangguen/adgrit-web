@@ -302,7 +302,6 @@ function SiteChrome({
 
       {/* 사장님 고민 - 두번째 섹션 */}
       <section
-        id="about"
         className="relative z-10 mt-12 rounded-t-[2.5rem] bg-white pt-20 pb-16 sm:pt-24 sm:pb-20 shadow-[0_-4px_30px_rgba(0,0,0,0.08)]"
       >
         <Container>
@@ -345,7 +344,35 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* Results */}
+      {/* Vision - 세번째 섹션 */}
+      <section
+        id="about"
+        className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20"
+      >
+        <Container>
+          <SectionKicker>Vision</SectionKicker>
+          <SectionTitle className="mt-3">
+            귀사의 목표 달성을 위한 최고의
+            <br />
+            마케팅 컨설팅을 제공하겠습니다
+          </SectionTitle>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              { title: "맞춤형 전략 수립", desc: "귀사의 비즈니스를 분석하여 목표와 상황에 최적화된 마케팅 전략을 정교하게 설계해드립니다." },
+              { title: "전문가 인사이트 제공", desc: "데이터 기반 분석을 통해 보다 전문적이고 신뢰할 수 있는 컨설팅을 제공합니다." },
+              { title: "현장 밀착형 컨설팅 체계", desc: "솔루션 제공에서 끝나지 않고, 현장 밀착형 컨설팅으로 실질적인 문제 해결에 끝까지 함께합니다." },
+              { title: "실행 중심 솔루션", desc: "성과가 검증된 실행 전략으로 지속 가능하고 구체적인 결과를 끝까지 이끌어냅니다." },
+            ].map((v, i) => (
+              <AnimatedCard key={v.title} index={i}>
+                <VisionCard title={v.title} desc={v.desc} />
+              </AnimatedCard>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Results - 네번째 섹션 */}
       <section className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <Container>
           <SectionKicker>Results</SectionKicker>
