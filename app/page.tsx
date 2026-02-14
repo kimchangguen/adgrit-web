@@ -344,7 +344,18 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* Vision - 세번째 섹션 */}
+      {/* 슬로건 - 세번째 섹션 (이미지 영역 추후 추가) */}
+      <section className="relative z-10 border-t border-slate-100 bg-white py-20 sm:py-28">
+        <Container>
+          <p className="font-tech text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-relaxed tracking-tight text-[#1a1a2e]">
+            이제 마케팅이라는 어려운 이야기는 집어 치우고
+            <br />
+            광고의 &ldquo;양&rdquo; 으로 승부 하세요
+          </p>
+        </Container>
+      </section>
+
+      {/* Vision - 네번째 섹션 */}
       <section
         id="about"
         className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20"
@@ -372,7 +383,7 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* Results - 네번째 섹션 */}
+      {/* Results - 다섯번째 섹션 */}
       <section className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <Container>
           <SectionKicker>Results</SectionKicker>
@@ -397,7 +408,7 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* Services */}
+      {/* Services - 여섯번째 섹션 */}
       <section id="services" className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
         <Container>
           <SectionKicker>Services</SectionKicker>
