@@ -8,21 +8,26 @@ export function SloganWithEffects() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <motion.div
-      ref={ref}
-      className="overflow-hidden"
-      initial={{ clipPath: "inset(0 100% 0 0)" }}
-      animate={
-        isInView
-          ? { clipPath: "inset(0 0% 0 0)" }
-          : { clipPath: "inset(0 100% 0 0)" }
-      }
-      transition={{
-        duration: 1.2,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-    >
-      <p className="font-tech text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-relaxed tracking-tight text-[#1a1a2e]">
+    <div ref={ref} className="relative mx-auto inline-block max-w-full text-center">
+      {/* 형광펜 하이라이트 - 왼쪽에서 오른쪽으로 휩쓸기 */}
+      <motion.span
+        className="absolute inset-0 left-0 top-0 h-full rounded-sm bg-[#fef08a]/70"
+        style={{ transformOrigin: "left" }}
+        initial={{ scaleX: 0 }}
+        animate={
+          isInView
+            ? {
+                scaleX: 1,
+                transition: {
+                  duration: 1.4,
+                  delay: 0.3,
+                  ease: [0.22, 1, 0.36, 1],
+                },
+              }
+            : { scaleX: 0 }
+        }
+      />
+      <p className="relative z-10 font-tech text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-relaxed tracking-tight text-[#1a1a2e]">
         이제{" "}
         <motion.span
           className="inline-block origin-center"
@@ -65,6 +70,6 @@ export function SloganWithEffects() {
         </motion.span>
         &rdquo; 으로 승부 하세요
       </p>
-    </motion.div>
+    </div>
   );
 }
