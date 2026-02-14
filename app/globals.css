@@ -22,6 +22,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* 고정 헤더 높이만큼 앵커 링크 스크롤 여백 */
+[id] {
+  scroll-margin-top: 5rem;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
