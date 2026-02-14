@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Container } from "./Container";
 
 export function Footer() {
@@ -14,12 +15,12 @@ export function Footer() {
               <br />
               검증된 성공과 성장
             </p>
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               className="mt-4 inline-flex items-center justify-center rounded-full border border-slate-500 px-5 py-2 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
             >
               문의하기
-            </a>
+            </Link>
           </div>
 
           <div className="grid gap-8 sm:grid-cols-2">
@@ -46,24 +47,24 @@ export function Footer() {
                 <div className="text-sm font-semibold text-white">빠른 링크</div>
                 <ul className="mt-3 flex flex-wrap gap-4 text-sm text-slate-400">
                   <li>
-                    <a className="hover:text-white transition-colors" href="#about">
+                    <Link className="hover:text-white transition-colors" href="/about">
                       About
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="hover:text-white transition-colors" href="#services">
+                    <Link className="hover:text-white transition-colors" href="/service/marketing">
                       Services
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="hover:text-white transition-colors" href="#insights">
+                    <Link className="hover:text-white transition-colors" href="/blog">
                       Blogs
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="hover:text-white transition-colors" href="#contact">
+                    <Link className="hover:text-white transition-colors" href="/contact">
                       Contact us
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>

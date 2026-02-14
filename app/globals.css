@@ -1,3 +1,4 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 @import "tailwindcss";
 
 :root {
@@ -36,4 +37,59 @@ body {
 
 .font-tech {
   font-family: var(--font-ibm-plex-kr), "Noto Sans KR", sans-serif;
+}
+
+/* 사장님 고민 섹션 타이포그래피 - 좌우 통일 */
+.font-worry {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+.font-worry-tag {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #4050ff;
+}
+.font-worry-headline {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 900;
+  color: #252525;
+  letter-spacing: -0.03em;
+  font-size: 2.25rem;
+  line-height: 1.2;
+}
+@media (min-width: 1024px) {
+  .font-worry-headline {
+    font-size: 3rem;
+  }
+}
+.font-worry-title {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 900;
+  color: #252525;
+  letter-spacing: -0.02em;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+@media (min-width: 640px) {
+  .font-worry-title {
+    font-size: 1.5rem;
+  }
+}
+.font-worry-desc {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #666666;
+  line-height: 1.6;
+}
+.font-worry-num {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #94a3b8;
+}
+.font-worry-num-cute {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }

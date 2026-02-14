@@ -45,7 +45,7 @@ export default async function PostDetail({ params }: { params: Promise<{ id: str
         <Container>
           <article className="max-w-3xl mx-auto">
             <Link
-              href="/#insights"
+              href="/blog"
               className="inline-block mb-8 text-slate-600 hover:text-[#1e40af] transition-colors"
             >
               ← 목록으로 돌아가기

@@ -12,34 +12,34 @@ const navItems: Array<{
   {
     label: "About Us",
     children: [
-      { href: "#about", label: "회사소개" },
-      { href: "#about", label: "회사연혁" },
-      { href: "#about", label: "조직도" },
-      { href: "#contact", label: "오시는길" },
+      { href: "/about", label: "회사소개" },
+      { href: "/history", label: "회사연혁" },
+      { href: "/organization", label: "조직도" },
+      { href: "/contact", label: "오시는길" },
     ],
   },
   {
     label: "Business",
     children: [
-      { href: "#services", label: "Automation" },
-      { href: "#services", label: "Consulting" },
-      { href: "#services", label: "Development" },
+      { href: "/business/automation", label: "Automation" },
+      { href: "/business/consulting", label: "Consulting" },
+      { href: "/business/development", label: "Development" },
     ],
   },
   {
     label: "Service",
     children: [
-      { href: "#services", label: "마케팅전략" },
-      { href: "#services", label: "구글노출" },
-      { href: "#services", label: "SNS채널관리" },
-      { href: "#services", label: "퍼포먼스" },
-      { href: "#services", label: "콘텐츠제작" },
-      { href: "#services", label: "통합솔루션" },
+      { href: "/service/marketing", label: "마케팅전략" },
+      { href: "/service/google", label: "구글노출" },
+      { href: "/service/sns", label: "SNS채널관리" },
+      { href: "/service/performance", label: "퍼포먼스" },
+      { href: "/service/content", label: "콘텐츠제작" },
+      { href: "/service/integrated", label: "통합솔루션" },
     ],
   },
   {
     label: "Grit View",
-    children: [{ href: "#insights", label: "블로그" }],
+    children: [{ href: "/blog", label: "블로그" }],
   },
 ];
 
@@ -119,14 +119,14 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                     .map((item) => (
                       <div key={item.label} className="flex flex-col">
                         {item.children.map((child) => (
-                          <a
+                          <Link
                             key={child.label}
                             href={child.href}
-                            className="px-5 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1e40af]"
+                            className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1e40af]"
                             onClick={() => setOpenMobileMenu(null)}
                           >
                             {child.label}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     ))}
@@ -197,7 +197,7 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                         </div>
                         <div className="space-y-1">
                           {item.children.map((child) => (
-                            <a
+                            <Link
                               key={child.label}
                               href={child.href}
                               className={`block py-2 px-0 text-sm transition-colors ${
@@ -211,7 +211,7 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                               }}
                             >
                               {child.label}
-                            </a>
+                            </Link>
                           ))}
                         </div>
                       </div>
