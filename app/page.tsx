@@ -15,6 +15,7 @@ import {
   SectionLead,
   SectionTitle,
 } from "./_components/SectionTitle";
+import { SloganWithEffects } from "./_components/SloganWithEffects";
 
 const WP_REST_ENDPOINT =
   "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2/posts?_embed&per_page=5";
@@ -347,11 +348,7 @@ function SiteChrome({
       {/* 슬로건 - 세번째 섹션 (이미지 영역 추후 추가) */}
       <section className="relative z-10 border-t border-slate-100 bg-white py-20 sm:py-28">
         <Container>
-          <p className="font-tech text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-relaxed tracking-tight text-[#1a1a2e]">
-            이제 마케팅이라는 어려운 이야기는 집어 치우고
-            <br />
-            광고의 &ldquo;양&rdquo; 으로 승부 하세요
-          </p>
+          <SloganWithEffects />
         </Container>
       </section>
 
