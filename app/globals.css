@@ -28,3 +28,7 @@ body {
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
 }
+
+.font-tech {
+  font-family: var(--font-ibm-plex-kr), "Noto Sans KR", sans-serif;
+}

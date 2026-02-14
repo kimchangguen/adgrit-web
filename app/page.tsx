@@ -306,7 +306,7 @@ function SiteChrome({
         className="relative z-10 mt-12 rounded-t-[2.5rem] bg-white pt-20 pb-16 sm:pt-24 sm:pb-20 shadow-[0_-4px_30px_rgba(0,0,0,0.08)]"
       >
         <Container>
-          <h2 className="text-center text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1a1a2e]">
+          <h2 className="font-tech text-center text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1a1a2e]">
             사장님들이 겪는 대표적 고민
           </h2>
 
