@@ -40,7 +40,7 @@ export function HeroWithScrollEffect({
         aria-hidden
       />
 
-      <SiteHeader transparent={!scrolled} lightText={darkOverlay} />
+      <SiteHeader transparent={!scrolled} lightText={darkOverlay && !scrolled} />
 
       {/* 고정된 첫번째 섹션 폰트/콘텐츠 - 스크롤해도 움직이지 않음 */}
       <div className="fixed inset-0 z-[5] pointer-events-none flex flex-col items-center justify-center">

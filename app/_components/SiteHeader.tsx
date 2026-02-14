@@ -67,11 +67,11 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
         <Link
           href="/"
           className={`flex-shrink-0 justify-self-start text-base sm:text-lg font-black tracking-wider select-none ${
-            lightText ? "text-white" : "text-[#1a1a2e]"
+            lightText ? "text-white" : "text-[#1e3a8a]"
           }`}
           aria-label="홈으로 이동"
         >
-          AD<span className={lightText ? "text-blue-300" : "text-[#1e40af]"}>GRIT</span>
+          AD<span className={lightText ? "text-blue-300" : "text-[#1e3a8a]"}>GRIT</span>
         </Link>
 
         {/* 모바일: 메인 메뉴 + 탭 시 서브메뉴 드롭다운 */}
@@ -86,8 +86,8 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                 }
                 className={`flex-shrink-0 text-sm sm:text-base font-bold whitespace-nowrap py-2 ${
                   openMobileMenu === item.label
-                    ? lightText ? "text-blue-300" : "text-[#1e40af]"
-                    : lightText ? "text-white/90 hover:text-white" : "text-slate-600 hover:text-[#1e40af]"
+                    ? lightText ? "text-blue-300" : "text-[#1e3a8a]"
+                    : lightText ? "text-white/90 hover:text-white" : "text-[#1e3a8a] hover:text-[#1e40af]"
                 }`}
               >
                 {item.label}
@@ -154,8 +154,8 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
               <button
                 className={`block px-2 py-2 text-lg lg:text-xl font-bold transition-colors tracking-wide text-left w-full ${
                   hoveredColumn === item.label && isMegaOpen
-                    ? lightText ? "text-blue-300" : "text-[#1e40af]"
-                    : lightText ? "text-white/90 hover:text-white" : "text-slate-600 hover:text-[#1a1a2e]"
+                    ? lightText ? "text-blue-300" : "text-[#1e3a8a]"
+                    : lightText ? "text-white/90 hover:text-white" : "text-[#1e3a8a] hover:text-[#1e40af]"
                 }`}
                 aria-expanded={isMegaOpen}
                 aria-haspopup="true"

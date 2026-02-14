@@ -87,6 +87,20 @@ function VisionCard({
   );
 }
 
+function WorryBlock({ text, imageUrl }: { text: string; imageUrl: string }) {
+  return (
+    <div className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-lg hover:border-[#1e40af]/30 transition-all">
+      <div
+        className="h-44 w-full bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-105"
+        style={{ backgroundImage: `url('${imageUrl}')` }}
+      />
+      <div className="p-6">
+        <p className="text-base leading-relaxed text-slate-700">&ldquo;{text}&rdquo;</p>
+      </div>
+    </div>
+  );
+}
+
 function ServiceCard({
   eyebrow,
   title,
@@ -286,28 +300,45 @@ function SiteChrome({
         </Container>
       </HeroWithScrollEffect>
 
-      {/* Vision - 곡선으로 위로 올라오는 섹션 */}
+      {/* 사장님 고민 - 두번째 섹션 */}
       <section
         id="about"
-        className="relative z-10 -mt-16 rounded-t-[2.5rem] bg-white pt-20 pb-16 sm:pt-24 sm:pb-20 shadow-[0_-4px_30px_rgba(0,0,0,0.08)]"
+        className="relative z-10 mt-12 rounded-t-[2.5rem] bg-white pt-20 pb-16 sm:pt-24 sm:pb-20 shadow-[0_-4px_30px_rgba(0,0,0,0.08)]"
       >
         <Container>
-          <SectionKicker>Vision</SectionKicker>
-          <SectionTitle className="mt-3">
-            귀사의 목표 달성을 위한 최고의
-            <br />
-            마케팅 컨설팅을 제공하겠습니다
-          </SectionTitle>
+          <h2 className="text-center text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1a1a2e]">
+            사장님들이 겪는 대표적 고민
+          </h2>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid gap-8 sm:gap-10 md:grid-cols-2 lg:grid-cols-3">
             {[
-              { title: "맞춤형 전략 수립", desc: "귀사의 비즈니스를 분석하여 목표와 상황에 최적화된 마케팅 전략을 정교하게 설계해드립니다." },
-              { title: "전문가 인사이트 제공", desc: "데이터 기반 분석을 통해 보다 전문적이고 신뢰할 수 있는 컨설팅을 제공합니다." },
-              { title: "현장 밀착형 컨설팅 체계", desc: "솔루션 제공에서 끝나지 않고, 현장 밀착형 컨설팅으로 실질적인 문제 해결에 끝까지 함께합니다." },
-              { title: "실행 중심 솔루션", desc: "성과가 검증된 실행 전략으로 지속 가능하고 구체적인 결과를 끝까지 이끌어냅니다." },
-            ].map((v, i) => (
-              <AnimatedCard key={v.title} index={i}>
-                <VisionCard title={v.title} desc={v.desc} />
+              {
+                text: "어느 순간부터 매출이 딱 멈췄습니다. 밤새 고민해봐도 이 벽을 넘을 방법이 보이지 않습니다.",
+                imageUrl: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80",
+              },
+              {
+                text: "네이버 | 인스타 | 구글 로직이 바뀌면 내 매출도 출렁입니다. 내 사업의 운전대를 남에게 맡긴 불안한 상태.",
+                imageUrl: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80",
+              },
+              {
+                text: "큰맘 먹고 직원을 뽑았지만 성과는 없고, 교육시키다 보니 내가 더 바빠지는 아이러니.",
+                imageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
+              },
+              {
+                text: "이게 좋다, 저게 좋다 말은 많은데 정작 우리 가게엔 뭐부터 해야 할지 몰라 아무것도 못 하는 상태.",
+                imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80",
+              },
+              {
+                text: "장사 준비하기도 바쁜데 영상 편집에 글쓰기까지? 사장님의 24시간을 갈아 넣어야 돌아가는 구조.",
+                imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+              },
+              {
+                text: "한번 온 손님을 다시 오게 만드는 시스템이 없습니다. 밑 빠진 독처럼 계속 신규 고객만 찾아 헤매는 중.",
+                imageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+              },
+            ].map((item, i) => (
+              <AnimatedCard key={i} index={i}>
+                <WorryBlock text={item.text} imageUrl={item.imageUrl} />
               </AnimatedCard>
             ))}
           </div>
