@@ -398,16 +398,14 @@ function SiteChrome({
       </section>
 
       {/* 슬로건 - 세번째 섹션 1920 x 1080 */}
-      <section className="relative z-10 flex min-h-[1080px] w-full items-center justify-center border-t border-slate-100 bg-white">
-        <Container>
-          <SloganWithEffects />
-        </Container>
+      <section className="relative z-10 flex min-h-[1080px] w-full items-center justify-center border-t border-slate-100 bg-white overflow-hidden">
+        <SloganWithEffects />
       </section>
 
-      {/* Vision - 네번째 섹션 (1920x1080) */}
+      {/* Vision - 네번째 섹션 */}
       <section
         id="about"
-        className="relative z-10 flex min-h-[1080px] w-full max-w-[1920px] mx-auto items-center border-t border-slate-100 bg-slate-50 px-6 py-12 sm:px-10"
+        className="relative z-10 flex w-full max-w-[1920px] mx-auto items-center border-t border-slate-100 bg-slate-50 px-6 py-8 sm:px-10 sm:py-10"
       >
         <div className="mx-auto w-full max-w-[1920px]">
           <VisionCarousel

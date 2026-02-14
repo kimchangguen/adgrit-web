@@ -66,12 +66,12 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
       <Container className="relative grid h-14 sm:h-16 grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4">
         <Link
           href="/"
-          className={`flex-shrink-0 justify-self-start text-base sm:text-lg font-black tracking-wider select-none ${
+          className={`flex-shrink-0 justify-self-start text-lg sm:text-xl font-black tracking-wider select-none ${
             lightText ? "text-white" : "text-[#1e3a8a]"
           }`}
           aria-label="홈으로 이동"
         >
-          AD<span className={lightText ? "text-blue-300" : "text-[#1e3a8a]"}>GRIT</span>
+          AD<span className={`font-black ${lightText ? "text-blue-300" : "text-[#1e3a8a]"}`}>GRIT</span>
         </Link>
 
         {/* 모바일: 메인 메뉴 + 탭 시 서브메뉴 드롭다운 */}
