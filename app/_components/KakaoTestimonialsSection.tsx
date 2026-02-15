@@ -8,6 +8,7 @@ const KAKAO_IMAGES = Array.from({ length: 15 }, (_, i) => `/kakao-screens/kakao-
 
 const CARD_WIDTH = 320;
 const GAP = 24;
+const AUTO_PLAY_INTERVAL = 1000; // 1초마다
 
 export function KakaoTestimonialsSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -16,17 +17,23 @@ export function KakaoTestimonialsSection() {
   const startX = useRef(0);
   const scrollLeftStart = useRef(0);
   const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const isProgrammaticScrollRef = useRef(false);
 
   const maxIndex = KAKAO_IMAGES.length - 1;
+
+  const scrollToIndex = useCallback((idx: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    isProgrammaticScrollRef.current = true;
+    el.scrollTo({ left: idx * (CARD_WIDTH + GAP), behavior: "smooth" });
+    setTimeout(() => { isProgrammaticScrollRef.current = false; }, 400);
+  }, []);
 
   const goTo = useCallback((index: number) => {
     const idx = Math.max(0, Math.min(index, maxIndex));
     setCurrentIndex(idx);
-    const el = scrollRef.current;
-    if (el) {
-      el.scrollTo({ left: idx * (CARD_WIDTH + GAP), behavior: "smooth" });
-    }
-  }, [maxIndex]);
+    scrollToIndex(idx);
+  }, [maxIndex, scrollToIndex]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!scrollRef.current) return;
@@ -53,10 +60,10 @@ export function KakaoTestimonialsSection() {
     const idx = Math.round(scrollLeft / (CARD_WIDTH + GAP));
     const clamped = Math.max(0, Math.min(idx, maxIndex));
     setCurrentIndex(clamped);
-    scrollRef.current.scrollTo({ left: clamped * (CARD_WIDTH + GAP), behavior: "smooth" });
+    scrollToIndex(clamped);
     autoPlayRef.current = setInterval(() => {
       setCurrentIndex((i) => (i + 1) % KAKAO_IMAGES.length);
-    }, 4000);
+    }, AUTO_PLAY_INTERVAL);
   };
 
   const handleMouseLeave = () => {
@@ -66,22 +73,22 @@ export function KakaoTestimonialsSection() {
   useEffect(() => {
     autoPlayRef.current = setInterval(() => {
       setCurrentIndex((i) => (i + 1) % KAKAO_IMAGES.length);
-    }, 4000);
+    }, AUTO_PLAY_INTERVAL);
     return () => {
       if (autoPlayRef.current) clearInterval(autoPlayRef.current);
     };
   }, []);
 
   useEffect(() => {
-    const el = scrollRef.current;
-    if (!el || isDragging) return;
-    el.scrollTo({ left: currentIndex * (CARD_WIDTH + GAP), behavior: "smooth" });
-  }, [currentIndex, isDragging]);
+    if (!scrollRef.current || isDragging) return;
+    scrollToIndex(currentIndex);
+  }, [currentIndex, isDragging, scrollToIndex]);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
     const onScroll = () => {
+      if (isProgrammaticScrollRef.current) return;
       const idx = Math.round(el.scrollLeft / (CARD_WIDTH + GAP));
       setCurrentIndex(Math.max(0, Math.min(idx, maxIndex)));
     };
