@@ -19,6 +19,7 @@ import {
 import { SloganWithEffects } from "./_components/SloganWithEffects";
 import { VisionCarousel } from "./_components/VisionCarousel";
 import { ResultsWithGraph } from "./_components/ResultsWithGraph";
+import { WithoutAdgritSection } from "./_components/WithoutAdgritSection";
 
 const WP_REST_ENDPOINT =
   "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2/posts?_embed&per_page=5";
@@ -425,7 +426,10 @@ function SiteChrome({
       {/* Results - 다섯번째 섹션 */}
       <ResultsWithGraph />
 
-      {/* Services - 여섯번째 섹션 */}
+      {/* 애드그릿과 하지 않는다면 - 여섯번째 섹션 */}
+      <WithoutAdgritSection />
+
+      {/* Services - 일곱번째 섹션 */}
       <section id="services" className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
         <Container>
           <SectionKicker>Services</SectionKicker>
@@ -464,7 +468,7 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* Solutions */}
+      {/* Solutions - 여덟번째 섹션 */}
       <section className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <Container>
           <SectionKicker>Solutions</SectionKicker>
@@ -494,7 +498,7 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* Process */}
+      {/* Process - 아홉번째 섹션 */}
       <section className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
         <Container>
           <SectionKicker>Services</SectionKicker>
@@ -518,7 +522,7 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* Testimonials */}
+      {/* Testimonials - 열번째 섹션 */}
       <section className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <Container>
           <SectionKicker>Testimonials</SectionKicker>
@@ -545,7 +549,7 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* Experience */}
+      {/* Experience - 열한번째 섹션 */}
       <section className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
         <Container>
           <SectionKicker>Experience</SectionKicker>
@@ -581,7 +585,7 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* Blogs */}
+      {/* Blogs - 열두번째 섹션 */}
       <section id="insights" className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <Container>
           <SectionKicker>Blogs</SectionKicker>
@@ -634,7 +638,7 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* FAQ */}
+      {/* FAQ - 열세번째 섹션 */}
       <section id="faq" className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
         <Container>
           <SectionKicker>FAQ</SectionKicker>
@@ -661,7 +665,7 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* CTA */}
+      {/* CTA - 열네번째 섹션 */}
       <section id="contact" className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <Container>
           <AnimatedSection>
