@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { AnimatedCard } from "./_components/AnimatedCard";
 import { HeroWithScrollEffect } from "./_components/HeroWithScrollEffect";
-import { AnimatedFAQ } from "./_components/AnimatedFAQ";
 import {
   AnimatedHero,
   AnimatedHeroItem,
@@ -13,13 +12,14 @@ import { Footer } from "./_components/Footer";
 import { SiteHeader } from "./_components/SiteHeader";
 import {
   SectionKicker,
-  SectionLead,
   SectionTitle,
 } from "./_components/SectionTitle";
 import { SloganWithEffects } from "./_components/SloganWithEffects";
 import { VisionCarousel } from "./_components/VisionCarousel";
 import { ResultsWithGraph } from "./_components/ResultsWithGraph";
 import { WithoutAdgritSection } from "./_components/WithoutAdgritSection";
+import { KakaoTestimonialsSection } from "./_components/KakaoTestimonialsSection";
+import { MarketingProductsSection } from "./_components/MarketingProductsSection";
 
 const WP_REST_ENDPOINT =
   "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2/posts?_embed&per_page=5";
@@ -155,48 +155,6 @@ function WorryBlock({
   );
 }
 
-function ServiceCard({
-  eyebrow,
-  title,
-  desc,
-  href = "#",
-  imageUrl,
-}: {
-  eyebrow: string;
-  title: string;
-  desc: string;
-  href?: string;
-  imageUrl?: string;
-}) {
-  return (
-    <Link
-      href={href}
-      className="group flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-[#1e40af]/30 transition-all"
-    >
-      <div
-        className="h-40 w-full bg-cover bg-center bg-no-repeat"
-        style={
-          imageUrl
-            ? { backgroundImage: `url('${imageUrl}')` }
-            : { background: "linear-gradient(to bottom right, rgb(30 64 175 / 0.1), rgb(30 58 95 / 0.05))" }
-        }
-      />
-      <div className="flex-1 p-6">
-        <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1e40af]">
-          {eyebrow}
-        </div>
-        <div className="mt-3 text-xl font-bold text-[#1a1a2e] group-hover:text-[#1e40af] transition-colors">
-          {title}
-        </div>
-        <p className="mt-3 text-sm leading-relaxed text-slate-600">{desc}</p>
-        <span className="mt-4 inline-block text-sm font-semibold text-[#1e40af]">
-          자세히 보기 →
-        </span>
-      </div>
-    </Link>
-  );
-}
-
 function ProcessStep({
   step,
   title,
@@ -217,26 +175,6 @@ function ProcessStep({
         </div>
         <div className="mt-2 text-lg font-bold text-[#1a1a2e]">{title}</div>
         <p className="mt-3 text-sm leading-relaxed text-slate-600">{desc}</p>
-      </div>
-    </div>
-  );
-}
-
-function TestimonialCard({
-  quote,
-  name,
-  role,
-}: {
-  quote: string;
-  name: string;
-  role: string;
-}) {
-  return (
-    <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-      <p className="text-sm leading-relaxed text-slate-600">&ldquo;{quote}&rdquo;</p>
-      <div className="mt-4">
-        <div className="font-semibold text-[#1a1a2e]">{name}</div>
-        <div className="text-xs text-slate-500">{role}</div>
       </div>
     </div>
   );
@@ -429,74 +367,11 @@ function SiteChrome({
       {/* 애드그릿과 하지 않는다면 - 여섯번째 섹션 */}
       <WithoutAdgritSection />
 
-      {/* Services - 일곱번째 섹션 */}
-      <section id="services" className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
-        <Container>
-          <SectionKicker>Services</SectionKicker>
-          <SectionTitle className="mt-3">
-            지속 가능한 성과를 위한 맞춤형
-            <br />
-            마케팅 서비스
-          </SectionTitle>
+      {/* 클라이언트 만족후기 (카카오톡) - 일곱번째 섹션 */}
+      <KakaoTestimonialsSection />
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {[
-              {
-                eyebrow: "Google Ads",
-                title: "구글 애즈",
-                desc: "AI 스마트 입찰과 정밀 타겟팅으로 광고 효율을 극대화합니다. 성장을 이끄는 광고 전략을 체계적으로 설계합니다.",
-                imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-              },
-              {
-                eyebrow: "SEO & GEO",
-                title: "SEO & GEO",
-                desc: "키워드 중심을 넘어, AI 검색에서 답변되는 브랜드로 설계합니다. 데이터 기반 인사이트로 의사결정을 지원합니다.",
-                imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-              },
-              {
-                eyebrow: "WordPress",
-                title: "워드프레스 & 전환 최적화",
-                desc: "전환 중심 UX/UI로 랜딩과 퍼널을 최적화합니다. 수익성과 안정성을 높이는 전문가 중심 솔루션을 제공합니다.",
-                imageUrl: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
-              },
-            ].map((s, i) => (
-              <AnimatedCard key={s.title} index={i}>
-                <ServiceCard eyebrow={s.eyebrow} title={s.title} desc={s.desc} imageUrl={s.imageUrl} />
-              </AnimatedCard>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Solutions - 여덟번째 섹션 */}
-      <section className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
-        <Container>
-          <SectionKicker>Solutions</SectionKicker>
-          <SectionTitle className="mt-3">
-            탁월한 성과를 위한
-            <br />
-            당신의 비즈니스 파트너
-          </SectionTitle>
-          <SectionLead>전체 서비스</SectionLead>
-
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              "명확한 실행 계획으로 목표를 실현합니다.",
-              "성장 기회를 발굴하고 연결합니다.",
-              "효율성을 높이고 비용을 절감합니다.",
-              "성과 중심의 조직 역량을 강화합니다.",
-              "지속 가능한 성공을 위한 솔루션을 제공합니다.",
-            ].map((item, i) => (
-              <AnimatedCard key={item} index={i}>
-                <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-5 py-4 shadow-sm">
-                  <span className="h-2 w-2 flex-shrink-0 rounded-full bg-[#1e40af]" />
-                  <span className="text-sm text-slate-700">{item}</span>
-                </div>
-              </AnimatedCard>
-            ))}
-          </div>
-        </Container>
-      </section>
+      {/* 애드그릿의 다양한 마케팅 상품 - 여덟번째 섹션 */}
+      <MarketingProductsSection />
 
       {/* Process - 아홉번째 섹션 */}
       <section className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
@@ -522,70 +397,7 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* Testimonials - 열번째 섹션 */}
-      <section className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
-        <Container>
-          <SectionKicker>Testimonials</SectionKicker>
-          <SectionTitle className="mt-3">
-            고객이 증명한
-            <br />
-            컨설팅 성과 사례
-          </SectionTitle>
-
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              { quote: "체계적인 서비스와 명확한 커뮤니케이션 덕분에 기대 이상의 결과를 얻을 수 있었어요.", name: "김다은", role: "콘텐츠 크리에이터" },
-              { quote: "전문성과 효율성 모두 갖춘 결과 중심의 접근 방식이 정말 인상 깊었습니다. 최고의 파트너예요.", name: "이서진", role: "마케팅 팀장" },
-              { quote: "빠르고 효과적인 가이드 덕분에 정해진 기간 내에 목표를 달성할 수 있었습니다.", name: "정우진", role: "중소기업 대표" },
-              { quote: "우리 비즈니스에 꼭 맞는 전략을 새롭게 설계해주셔서 꾸준한 성장을 이어갈 수 있었어요.", name: "박주영", role: "브랜드 기획자" },
-              { quote: "컨설팅을 통해 우리 팀에 큰 변화가 생겼습니다. 진심으로 추천드려요.", name: "윤소연", role: "스타트업 창업자" },
-              { quote: "믿고 의지할 수 있는 조언과 깊이 있는 지원 덕분에 우리의 목표를 현실로 만들 수 있었습니다.", name: "최민석", role: "PM" },
-            ].map((t, i) => (
-              <AnimatedCard key={t.name} index={i}>
-                <TestimonialCard quote={t.quote} name={t.name} role={t.role} />
-              </AnimatedCard>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Experience - 열한번째 섹션 */}
-      <section className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
-        <Container>
-          <SectionKicker>Experience</SectionKicker>
-          <SectionTitle className="mt-3">
-            성과를 이끄는 컨설팅
-            <br />
-            솔루션의 정수를 담다
-          </SectionTitle>
-
-          <div className="mt-10 flex flex-wrap gap-6">
-            {[
-              { label: "신뢰도", desc: "검증된 성과로 쌓아온 신뢰" },
-              { label: "실행력", desc: "목표를 현실로 만드는 실행" },
-              { label: "전문성", desc: "데이터 기반의 전문 인사이트" },
-            ].map((e, i) => (
-              <AnimatedCard key={e.label} index={i} className="flex-1 min-w-[200px]">
-                <div className="rounded-xl border border-slate-200 bg-white px-8 py-6 text-center shadow-sm">
-                  <div className="text-xl font-bold text-[#1e40af]">{e.label}</div>
-                  <p className="mt-2 text-sm text-slate-600">{e.desc}</p>
-                </div>
-              </AnimatedCard>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center rounded-full bg-[#1e40af] px-8 py-3.5 text-sm font-semibold text-white hover:bg-[#1e3a8a] transition-colors shadow-md"
-            >
-              컨설팅 문의하기
-            </a>
-          </div>
-        </Container>
-      </section>
-
-      {/* Blogs - 열두번째 섹션 */}
+      {/* Blogs - 열번째 섹션 */}
       <section id="insights" className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <Container>
           <SectionKicker>Blogs</SectionKicker>
@@ -638,34 +450,7 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* FAQ - 열세번째 섹션 */}
-      <section id="faq" className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
-        <Container>
-          <SectionKicker>FAQ</SectionKicker>
-          <SectionTitle className="mt-3">자주 묻는 질문</SectionTitle>
-
-          <div className="mt-10 grid gap-4">
-            <AnimatedFAQ
-              q="어떤 기업이 애드그릿의 컨설팅을 받을 수 있나요?"
-              a="B2B, B2C, 스타트업, 중소기업 등 다양한 업종의 고객사와 함께하고 있습니다. 마케팅 성과 개선이 필요한 모든 기업을 환영합니다."
-            />
-            <AnimatedFAQ
-              q="컨설팅 프로젝트는 얼마나 걸리나요?"
-              a="프로젝트 규모와 목표에 따라 2주~3개월 정도 소요됩니다. 무료 상담에서 구체적인 일정을 안내해 드립니다."
-            />
-            <AnimatedFAQ
-              q="애드그릿는 어떻게 성과를 보장하나요?"
-              a="데이터 기반의 전략 수립과 지속적인 모니터링으로 성과를 추적합니다. 단계별 미팅을 통해 진행 상황을 투명하게 공유합니다."
-            />
-            <AnimatedFAQ
-              q="차별점은 무엇인가요?"
-              a="광고 운영만이 아니라, SEO/GEO/사이트 전환까지 한 구조로 통합 설계해 성과가 나는 시스템을 만듭니다."
-            />
-          </div>
-        </Container>
-      </section>
-
-      {/* CTA - 열네번째 섹션 */}
+      {/* CTA - 열한번째 섹션 */}
       <section id="contact" className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <Container>
           <AnimatedSection>
