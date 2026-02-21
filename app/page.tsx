@@ -459,7 +459,7 @@ function SiteChrome({
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80')`,
+            backgroundImage: `url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1920&q=80')`,
           }}
         />
         {/* 어두운 오버레이 */}
