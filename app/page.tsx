@@ -455,11 +455,11 @@ function SiteChrome({
         id="contact"
         className="relative z-10 overflow-hidden border-t border-slate-200 py-20 sm:py-28"
       >
-        {/* 배경 이미지: 미래지향적 테크/디지털 분위기 */}
+        {/* 배경 이미지: 여러 명이 사무실에서 일하는 모습 */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1920&q=80')`,
+            backgroundImage: `url('https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1920&q=80')`,
           }}
         />
         {/* 어두운 오버레이 */}
