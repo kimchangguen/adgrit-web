@@ -141,3 +141,43 @@ body {
   mix-blend-mode: overlay;
   background-size: 90px 90px;
 }
+
+/* 스크롤 인디케이터 - 캡슐 스타일 + 바운스 */
+.scroll-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+
+  color: #fff;
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  animation: scroll-bounce 1.2s infinite;
+}
+.scroll-indicator:hover {
+  background: rgba(0, 0, 0, 0.58);
+  transform: translateX(-50%) translateY(-2px);
+}
+.scroll-indicator__text {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  opacity: 0.9;
+}
+.scroll-indicator__icon {
+  opacity: 0.95;
+}
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-8px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-indicator { animation: none; }
+}

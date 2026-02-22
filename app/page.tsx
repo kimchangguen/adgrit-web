@@ -294,6 +294,7 @@ function SiteChrome({
 
       {/* 사장님 고민 - 두번째 섹션: 왼쪽 스티키, 오른쪽 스크롤 */}
       <section
+        id="section2"
         className="relative z-10 mt-12 rounded-t-[2.5rem] bg-white pt-20 pb-16 sm:pt-24 sm:pb-20 shadow-[0_-4px_30px_rgba(0,0,0,0.08)]"
       >
         <Container>

@@ -30,15 +30,20 @@ export function HeroWithScrollEffect({
   const useSolidDark = darkOverlay && !backgroundImage;
 
   return (
-    <div className="min-h-screen w-full relative">
-      {/* 고정 배경: 단색 다크 네이비 또는 이미지 */}
+    <div className="hero min-h-[80vh] min-h-screen w-full relative">
+      {/* 고정 배경: 실사 이미지 (cover, center) */}
       <div
-        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        className="fixed inset-0 z-0 bg-no-repeat"
         style={
           useSolidDark
             ? undefined
             : backgroundImage
-              ? { backgroundImage }
+              ? {
+                  backgroundImage: backgroundImage,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  minHeight: "80vh",
+                }
               : undefined
         }
         aria-hidden
@@ -46,10 +51,15 @@ export function HeroWithScrollEffect({
       {useSolidDark && (
         <div className="fixed inset-0 z-0 bg-[#0f172a]" aria-hidden />
       )}
-      {/* 이미지 배경 시 어두운 오버레이로 가독성 확보 (그라데이션/노이즈 없음) */}
+      {/* 이미지 배경 시 다크 오버레이 rgba(0,0,0,0.45) */}
       {backgroundImage && (
         <div
-          className={`fixed inset-0 z-0 ${darkOverlay ? "bg-slate-900/55" : "bg-white/70"}`}
+          className="fixed inset-0 z-0"
+          style={
+            darkOverlay
+              ? { backgroundColor: "rgba(0,0,0,0.45)" }
+              : { backgroundColor: "rgba(255,255,255,0.7)" }
+          }
           aria-hidden
         />
       )}
@@ -58,29 +68,35 @@ export function HeroWithScrollEffect({
 
       {/* 고정된 첫번째 섹션 - 왼쪽 정렬, 여백 강화 */}
       <div className="fixed inset-0 z-[5] pointer-events-none flex flex-col items-start justify-center">
-        <div className="pointer-events-auto w-full flex-1 flex flex-col items-start justify-between min-h-screen pt-16">
+        <div className="relative pointer-events-auto w-full flex-1 flex flex-col items-start justify-between min-h-screen pt-16">
           <div className="flex-1 flex items-center justify-start w-full px-6 sm:px-10 lg:px-12">
             {children}
           </div>
-          {/* SCROLL 표시 - 보더 라디우스 축소 */}
-          <a
-            href="#about"
-            className={`pointer-events-auto flex flex-col items-center gap-2 pb-10 pl-6 sm:pl-10 lg:pl-12 transition-colors ${
-              useSolidDark || darkOverlay ? "text-white/80 hover:text-white" : "text-slate-500 hover:text-slate-700"
-            }`}
-            aria-label="아래로 스크롤"
+          {/* SCROLL 인디케이터 - absolute 기준을 위해 부모에 relative */}
+          <button
+            type="button"
+            onClick={() => document.getElementById("section2")?.scrollIntoView({ behavior: "smooth" })}
+            className="scroll-indicator absolute left-1/2 bottom-7 -translate-x-1/2 z-10 pointer-events-auto transition-colors"
+            aria-label="다음 섹션으로 스크롤"
           >
-            <span className="text-xs font-medium tracking-widest">SCROLL</span>
-            <span
-              className={`w-8 h-8 rounded border flex items-center justify-center ${
-                useSolidDark || darkOverlay ? "border-white/60" : "border-slate-400"
-              }`}
+            <span className="scroll-indicator__text text-xs font-medium tracking-widest">SCROLL</span>
+            <svg
+              className="scroll-indicator__icon w-5 h-5"
+              width={20}
+              height={20}
+              viewBox="0 0 24 24"
+              aria-hidden
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
-            </span>
-          </a>
+              <path
+                d="M6 9l6 6 6-6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
         </div>
       </div>
 
