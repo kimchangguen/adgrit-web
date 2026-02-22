@@ -39,6 +39,14 @@ body {
   font-family: var(--font-ibm-plex-kr), "Noto Sans KR", sans-serif;
 }
 
+/* 헤더 네비 링크 타이포 */
+header nav a {
+  font-family: "Pretendard", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: -0.025em;
+}
+
 /* 사장님 고민 섹션 타이포그래피 - 좌우 통일 */
 .font-worry {
   font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
