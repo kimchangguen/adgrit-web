@@ -245,10 +245,7 @@ function SiteChrome({
   return (
     <>
       {/* 헤더 + 첫번째 섹션: 전문 배경 이미지, 왼쪽 정렬, 곡선 디바이더 */}
-      <HeroWithScrollEffect
-        backgroundImage="url('https://images.unsplash.com/photo-1542744173-8e7e53415bb6?w=1920&q=85')"
-        darkOverlay
-      >
+      <HeroWithScrollEffect>
         <Container className="relative w-full py-20 sm:py-24 lg:py-28">
           <div className="max-w-2xl text-left font-worry">
             <AnimatedHero>
