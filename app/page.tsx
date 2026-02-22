@@ -292,10 +292,11 @@ function SiteChrome({
       {/* 사장님 고민 - 두번째 섹션: 왼쪽 스티키, 오른쪽 스크롤 */}
       <section
         id="section2"
-        className="relative z-10 mt-12 rounded-t-[2.5rem] bg-white pt-20 pb-16 sm:pt-24 sm:pb-20 shadow-[0_-4px_30px_rgba(0,0,0,0.08)]"
+        className="section2 section-two relative z-10 mt-12 rounded-t-[2.5rem] bg-white py-20 shadow-[0_-4px_30px_rgba(0,0,0,0.08)]"
       >
-        <Container>
-          <div className="flex flex-col lg:flex-row lg:items-start gap-12 lg:gap-16">
+        <div className="wave-top" aria-hidden="true" />
+        <div className="mx-auto w-full max-w-[1080px] px-6">
+          <div className="flex flex-col lg:flex-row lg:items-start gap-10">
             {/* 왼쪽: 스티키 타이틀 - 스크롤 시 따라감 */}
             <div className="lg:sticky lg:top-24 lg:w-[38%] lg:flex-shrink-0 text-left space-y-8">
               {/* 영문 태그 */}
@@ -316,7 +317,7 @@ function SiteChrome({
             </div>
 
             {/* 오른쪽: 블록들 - 스크롤 시 내려감 */}
-            <div className="flex-1 flex flex-col gap-12 sm:gap-16">
+            <div className="flex-1 flex flex-col gap-10">
               {[
                 { num: "01", title: "구조적 성장의 한계", subtitle: "Structural Growth Stagnation", desc: "어느 순간부터 매출이 딱 멈췄습니다. 밤새 고민해봐도 이 벽을 넘을 방법이 보이지 않습니다.", iconId: 1 },
                 { num: "02", title: "자생력 없는 마케팅", subtitle: "Lack of Owned Media", desc: "네이버 | 인스타 | 구글 로직이 바뀌면 내 매출도 출렁입니다. 내 사업의 운전대를 남에게 맡긴 불안한 상태.", iconId: 2 },
@@ -331,7 +332,7 @@ function SiteChrome({
               ))}
             </div>
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* 슬로건 - 세번째 섹션 1920 x 1080 */}
