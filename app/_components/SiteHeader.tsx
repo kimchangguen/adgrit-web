@@ -66,7 +66,7 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
       <Container className="relative grid h-14 sm:h-16 grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4">
         <Link
           href="/"
-          className={`flex-shrink-0 justify-self-start text-lg sm:text-xl font-black tracking-wider select-none ${
+          className={`logo flex-shrink-0 justify-self-start select-none ${
             lightText ? "text-white" : "text-[#1e3a8a]"
           }`}
           aria-label="홈으로 이동"
