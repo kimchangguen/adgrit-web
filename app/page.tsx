@@ -242,47 +242,47 @@ function SiteChrome({
   error: string | null;
   stripHTML: (html: string) => string;
 }) {
-  const heroBg =
-    "linear-gradient(165deg, #0c1929 0%, #0f2847 12%, #1e3a5f 25%, #1e40af 42%, #2563eb 58%, #3b82f6 75%, #60a5fa 90%, #0ea5e9 100%)";
-
   return (
     <>
-      {/* 헤더 + 첫번째 섹션: 스크롤 시 헤더 변경, 아래 섹션 위로 올라오는 효과 */}
-      <HeroWithScrollEffect backgroundImage={heroBg} darkOverlay>
-        <Container className="relative w-full py-12">
-          <div className="max-w-3xl mx-auto text-center">
+      {/* 헤더 + 첫번째 섹션: 전문 배경 이미지, 왼쪽 정렬, 곡선 디바이더 */}
+      <HeroWithScrollEffect
+        backgroundImage="url('https://images.unsplash.com/photo-1542744173-8e7e53415bb6?w=1920&q=85')"
+        darkOverlay
+      >
+        <Container className="relative w-full py-20 sm:py-24 lg:py-28">
+          <div className="max-w-2xl text-left font-worry">
             <AnimatedHero>
               <AnimatedHeroItem>
-                <p className="text-base sm:text-lg lg:text-xl text-slate-200 leading-relaxed">
+                <p className="text-sm sm:text-base tracking-wide text-slate-300 leading-relaxed uppercase">
                   성공한 사장님들은 마케팅을 &apos;비용&apos;이라 부르지 않습니다.
                 </p>
               </AnimatedHeroItem>
               <AnimatedHeroItem>
-                <p className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.15] drop-shadow-lg">
+                <p className="mt-8 sm:mt-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.2]">
                   그들은 &apos;연료&apos;라고 부릅니다.
                 </p>
               </AnimatedHeroItem>
               <AnimatedHeroItem>
-                <p className="mt-8 text-base sm:text-lg lg:text-xl text-slate-200 leading-relaxed">
+                <p className="mt-10 sm:mt-12 text-base sm:text-lg text-slate-300 leading-relaxed">
                   실패했던 건 사장님 탓이 아닙니다.
                   <br />
                   &apos;방법&apos;이 틀렸고 파트너를 잘못 만나서 입니다.
                 </p>
               </AnimatedHeroItem>
               <AnimatedHeroItem>
-                <p className="mt-8 text-lg sm:text-xl lg:text-2xl font-semibold text-white/95">
+                <p className="mt-10 sm:mt-12 text-lg sm:text-xl font-semibold text-white">
                   이제는 개발실행사와 직접 제대로된 AI CORE Marketing 하세요
                 </p>
               </AnimatedHeroItem>
               <AnimatedHeroItem>
-                <p className="mt-4 text-base sm:text-lg text-slate-300 italic">
+                <p className="mt-4 text-sm sm:text-base text-slate-400">
                   상담버튼 클릭으로 부터 그 역사가 시작 됩니다.
                 </p>
               </AnimatedHeroItem>
               <AnimatedHeroItem>
                 <a
                   href="tel:1661-0646"
-                  className="mt-10 inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-bold text-[#1e40af] shadow-xl hover:bg-slate-100 transition-colors"
+                  className="mt-14 sm:mt-16 inline-flex items-center justify-center rounded-md bg-[#1e40af] px-8 py-3.5 text-sm font-semibold text-white hover:bg-[#1d4ed8] transition-colors"
                 >
                   상담하기
                 </a>
