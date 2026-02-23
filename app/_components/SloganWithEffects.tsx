@@ -203,7 +203,7 @@ export function SloganWithEffects() {
 
             {/* 슬로건 텍스트 - 3줄 */}
             <div className="relative mx-auto inline-block max-w-full text-center">
-              <p className="relative z-10 font-[family-name:var(--font-ibm-plex-kr)] text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.2] tracking-tight text-[#111111]">
+              <p className="relative z-10 text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.2] tracking-tight text-[#111111]">
                 이제 마케팅
                 <br />
                 집어 치우고
