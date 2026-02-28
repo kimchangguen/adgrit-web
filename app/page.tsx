@@ -293,7 +293,7 @@ function SiteChrome({
         <div className="mx-auto w-full max-w-[1080px] px-6">
           <div className="flex flex-col lg:flex-row lg:items-start gap-12 lg:gap-16">
             {/* 왼쪽: 타이틀 + 설명 */}
-            <div className="lg:sticky lg:top-24 lg:w-[47%] lg:flex-shrink-0 text-left">
+            <div className="lg:sticky lg:top-24 lg:w-[54%] lg:flex-shrink-0 text-left">
               <p className="text-white text-sm font-normal tracking-wide">The Cost of Inefficiency</p>
               <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-white">
                 사장님들이 겪는
