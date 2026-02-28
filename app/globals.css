@@ -75,6 +75,15 @@ body {
   font-family: "Pretendard", sans-serif;
 }
 
+/* 섹션2 카드 영역 스크롤바 숨김 (휠 스크롤은 유지) */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* 헤더 로고 */
 header .logo {
   font-family: "Pretendard", sans-serif;
