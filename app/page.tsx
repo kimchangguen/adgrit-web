@@ -20,6 +20,7 @@ import { ResultsWithGraph } from "./_components/ResultsWithGraph";
 import { WithoutAdgritSection } from "./_components/WithoutAdgritSection";
 import { KakaoTestimonialsSection } from "./_components/KakaoTestimonialsSection";
 import { MarketingProductsSection } from "./_components/MarketingProductsSection";
+import { Section2CardList } from "./_components/Section2CardList";
 
 const WP_REST_ENDPOINT =
   "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2/posts?_embed&per_page=5";
@@ -309,8 +310,8 @@ function SiteChrome({
               </p>
             </div>
 
-            {/* 오른쪽: 흰색 카드 - 2개만 보이고 나머지는 휠로 스크롤 */}
-            <div className="flex-1 w-[76%] max-w-[76%] max-h-[520px] overflow-y-auto overflow-x-hidden scroll-smooth">
+            {/* 오른쪽: 흰색 카드 - 2개만 보이고 나머지는 휠로 스크롤, 점 인디케이터 */}
+            <Section2CardList>
               <div className="flex flex-col gap-6 pr-1">
               {[
                 { num: "01", title: "구조적 성장의 한계", subtitle: "Structural Growth Stagnation", desc: "어느 순간부터 매출이 딱 멈춰서 밤새 고민해봐도\n이 벽을 넘을 방법이 보이지 않을 때", showArrow: false },
@@ -325,7 +326,7 @@ function SiteChrome({
                 </AnimatedCard>
               ))}
               </div>
-            </div>
+            </Section2CardList>
           </div>
         </div>
       </section>
