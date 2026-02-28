@@ -295,14 +295,17 @@ function SiteChrome({
             {/* 왼쪽: 타이틀 + 설명 */}
             <div className="lg:sticky lg:top-24 lg:w-[54%] lg:flex-shrink-0 text-left">
               <p className="text-white text-sm font-normal tracking-wide">The Cost of Inefficiency</p>
-              <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-white">
+              <h2 className="mt-4 text-[2rem] sm:text-[2.375rem] lg:text-[3.125rem] font-bold leading-tight text-white">
                 사장님들이 겪는
                 <br />
                 <span style={{ color: ACCENT_ORANGE }}>대표적 고민</span>
               </h2>
               <p className="mt-6 text-white/95 text-base leading-relaxed">
-                매달 광고비는 지출되는데, 실제 순수익은 제자리걸음이다? 이건 노출 부족이 아니라,
-                고객을 구매로 전환시키지 못하는 &apos;마케팅 누수&apos;가 발생하고 있다는 신호입니다.
+                매달 광고비는 지출되는데, 실제 순수익은 제자리걸음이다?
+                <br />
+                이건 노출 부족이 아니라, 고객을 구매로 전환시키지 못하는
+                <br />
+                &apos;마케팅 누수&apos;가 발생하고 있다는 신호입니다.
               </p>
             </div>
 
