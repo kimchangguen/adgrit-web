@@ -92,65 +92,36 @@ function VisionCard({
   );
 }
 
-const WORRY_ICONS: Record<number, ReactNode> = {
-  1: (
-    <svg className="w-12 h-12 sm:w-14 sm:h-14 text-[#1e40af]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-    </svg>
-  ),
-  2: (
-    <svg className="w-12 h-12 sm:w-14 sm:h-14 text-[#1e40af]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-    </svg>
-  ),
-  3: (
-    <svg className="w-12 h-12 sm:w-14 sm:h-14 text-[#1e40af]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-    </svg>
-  ),
-  4: (
-    <svg className="w-12 h-12 sm:w-14 sm:h-14 text-[#1e40af]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-    </svg>
-  ),
-  5: (
-    <svg className="w-12 h-12 sm:w-14 sm:h-14 text-[#1e40af]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-  ),
-  6: (
-    <svg className="w-12 h-12 sm:w-14 sm:h-14 text-[#1e40af]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-    </svg>
-  ),
-};
+const ACCENT_ORANGE = "#FFBD4F";
 
-function WorryBlock({
+function WorryCard({
   num,
   title,
   subtitle,
   desc,
-  iconId,
+  showArrow,
 }: {
   num: string;
   title: string;
   subtitle: string;
   desc: string;
-  iconId: number;
+  showArrow?: boolean;
 }) {
   return (
-    <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-start">
-      <div className="flex-1 min-w-0">
-        <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#1e40af]/20 text-sm font-black tabular-nums text-[#1e40af] font-worry-num-cute shadow-sm">
-          {num}
-        </span>
-        <h3 className="font-worry-title mt-3">{title}</h3>
-        <p className="font-worry-tag mt-1">{subtitle}</p>
-        <p className="font-worry-desc mt-4">&ldquo;{desc}&rdquo;</p>
-      </div>
-      <div className="relative flex-shrink-0 w-full sm:w-36 sm:h-36 rounded-xl bg-gradient-to-br from-blue-50 to-slate-100 flex items-center justify-center shadow-sm border border-slate-100">
-        {WORRY_ICONS[iconId]}
-      </div>
+    <div className="relative rounded-[24px] bg-white p-6 sm:p-8 shadow-sm">
+      <span className="text-lg font-bold tabular-nums" style={{ color: ACCENT_ORANGE }}>
+        {num}
+      </span>
+      <h3 className="mt-2 text-xl font-bold text-[#111827]">{title}</h3>
+      <p className="mt-1 text-sm text-slate-500">{subtitle}</p>
+      <p className="mt-4 text-[15px] leading-relaxed text-[#374151]">{desc}</p>
+      {showArrow && (
+        <div className="absolute bottom-5 right-5" style={{ color: ACCENT_ORANGE }} aria-hidden>
+          <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+        </div>
+      )}
     </div>
   );
 }
@@ -309,45 +280,39 @@ function SiteChrome({
         </Container>
       </HeroWithScrollEffect>
 
-      {/* 사장님 고민 - 두번째 섹션: 왼쪽 스티키, 오른쪽 스크롤 */}
+      {/* 사장님 고민 - 두번째 섹션: 네이비 배경, 좌 텍스트 / 우 흰색 카드 */}
       <section
         id="section2"
-        className="section2 section-two relative z-10 mt-12 rounded-t-[2.5rem] bg-white py-20 shadow-[0_-4px_30px_rgba(0,0,0,0.08)]"
+        className="section2 section-two relative z-10 mt-12 bg-[#1e3a5f] py-16 sm:py-20 lg:py-24"
       >
         <div className="wave-top" aria-hidden="true" />
         <div className="mx-auto w-full max-w-[1080px] px-6">
-          <div className="flex flex-col lg:flex-row lg:items-start gap-10">
-            {/* 왼쪽: 스티키 타이틀 - 스크롤 시 따라감 */}
-            <div className="lg:sticky lg:top-24 lg:w-[38%] lg:flex-shrink-0 text-left space-y-8">
-              {/* 영문 태그 */}
-              <p className="font-worry-tag">The Cost of Inefficiency</p>
-
-              {/* 메인 카피 */}
-              <h2 className="font-worry-headline">
-                사장님들이 겪는
-                <br />
-                <span className="text-[#4050ff]">대표적 고민</span>
+          <div className="flex flex-col lg:flex-row lg:items-start gap-12 lg:gap-16">
+            {/* 왼쪽: 타이틀 + 설명 */}
+            <div className="lg:sticky lg:top-24 lg:w-[42%] lg:flex-shrink-0 text-left">
+              <p className="text-white text-sm font-normal tracking-wide">The Cost of Inefficiency</p>
+              <h2 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight text-white">
+                사장님들이 겪는{" "}
+                <span style={{ color: ACCENT_ORANGE }}>대표적 고민</span>
               </h2>
-
-              {/* 설명글 */}
-              <p className="font-worry-desc mt-2">
-                매달 광고비는 지출되는데, 실제 순수익은 제자리걸음입니다. 이는 단순한 노출 부족이 아니라,
+              <p className="mt-6 text-white/95 text-base leading-relaxed">
+                매달 광고비는 지출되는데, 실제 순수익은 제자리걸음이다? 이건 노출 부족이 아니라,
                 고객을 구매로 전환시키지 못하는 &apos;마케팅 누수&apos;가 발생하고 있다는 신호입니다.
               </p>
             </div>
 
-            {/* 오른쪽: 블록들 - 스크롤 시 내려감 */}
-            <div className="flex-1 flex flex-col gap-10">
+            {/* 오른쪽: 흰색 카드 2열 (이미지처럼 2개 노출, 나머지 동일 스타일) */}
+            <div className="flex-1 flex flex-col gap-6">
               {[
-                { num: "01", title: "구조적 성장의 한계", subtitle: "Structural Growth Stagnation", desc: "어느 순간부터 매출이 딱 멈췄습니다. 밤새 고민해봐도 이 벽을 넘을 방법이 보이지 않습니다.", iconId: 1 },
-                { num: "02", title: "자생력 없는 마케팅", subtitle: "Lack of Owned Media", desc: "네이버 | 인스타 | 구글 로직이 바뀌면 내 매출도 출렁입니다. 내 사업의 운전대를 남에게 맡긴 불안한 상태.", iconId: 2 },
-                { num: "03", title: "위임 실패의 딜레마", subtitle: "The Delegation Dilemma", desc: "큰맘 먹고 직원을 뽑았지만 성과는 없고, 교육시키다 보니 내가 더 바빠지는 아이러니.", iconId: 3 },
-                { num: "04", title: "실행 없는 분석의 늪", subtitle: "Analysis Paralysis", desc: "이게 좋다, 저게 좋다 말은 많은데 정작 우리 가게엔 뭐부터 해야 할지 몰라 아무것도 못 하는 상태.", iconId: 4 },
-                { num: "05", title: "절대적 시간 빈곤", subtitle: "Operational Time Poverty", desc: "장사 준비하기도 바쁜데 영상 편집에 글쓰기까지? 사장님의 24시간을 갈아 넣어야 돌아가는 구조.", iconId: 5 },
-                { num: "06", title: "노동 집약적 마케팅", subtitle: "Labor-Intensive Marketing", desc: "한번 온 손님을 다시 오게 만드는 시스템이 없습니다. 밑 빠진 독처럼 계속 신규 고객만 찾아 헤매는 중.", iconId: 6 },
+                { num: "01", title: "구조적 성장의 한계", subtitle: "Structural Growth Stagnation", desc: "어느 순간부터 매출이 딱 멈춰서 밤새 고민해봐도 이 벽을 넘을 방법이 보이지 않을 때", showArrow: true },
+                { num: "02", title: "자생력 없는 마케팅", subtitle: "Lack of Owned Media", desc: "네이버 | 인스타 | 구글 로직이 바뀌면 내 매출도 출렁입니다. 내 사업의 운전대를 남에게 맡긴 불안한 상태.", showArrow: false },
+                { num: "03", title: "위임 실패의 딜레마", subtitle: "The Delegation Dilemma", desc: "큰맘 먹고 직원을 뽑았지만 성과는 없고, 교육시키다 보니 내가 더 바빠지는 아이러니.", showArrow: false },
+                { num: "04", title: "실행 없는 분석의 늪", subtitle: "Analysis Paralysis", desc: "이게 좋다, 저게 좋다 말은 많은데 정작 우리 가게엔 뭐부터 해야 할지 몰라 아무것도 못 하는 상태.", showArrow: false },
+                { num: "05", title: "절대적 시간 빈곤", subtitle: "Operational Time Poverty", desc: "장사 준비하기도 바쁜데 영상 편집에 글쓰기까지? 사장님의 24시간을 갈아 넣어야 돌아가는 구조.", showArrow: false },
+                { num: "06", title: "노동 집약적 마케팅", subtitle: "Labor-Intensive Marketing", desc: "한번 온 손님을 다시 오게 만드는 시스템이 없습니다. 밑 빠진 독처럼 계속 신규 고객만 찾아 헤매는 중.", showArrow: false },
               ].map((item, i) => (
                 <AnimatedCard key={item.num} index={i}>
-                  <WorryBlock num={item.num} title={item.title} subtitle={item.subtitle} desc={item.desc} iconId={item.iconId} />
+                  <WorryCard num={item.num} title={item.title} subtitle={item.subtitle} desc={item.desc} showArrow={item.showArrow} />
                 </AnimatedCard>
               ))}
             </div>
