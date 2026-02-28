@@ -30,7 +30,7 @@ export function HeroWithScrollEffect({
   return (
     <div className="hero min-h-screen w-full">
       <div className="hero__inner">
-        <SiteHeader transparent={!scrolled} lightText={!scrolled} />
+        <SiteHeader transparent={!scrolled} lightText={false} />
 
         {/* 고정된 첫번째 섹션 - 왼쪽 정렬, 여백 강화 */}
         <div className="fixed inset-0 z-[5] pointer-events-none flex flex-col items-start justify-center">

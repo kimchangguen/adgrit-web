@@ -195,21 +195,11 @@ header nav a {
   background-size: 90px 90px;
 }
 
-/* 히어로 섹션 - 배경 이미지 + ::before 오버레이 */
+/* 히어로 섹션 - 흰 배경 (이미지 레이아웃용) */
 .hero {
   position: relative;
   min-height: 80vh;
-  background-image: url("https://images.unsplash.com/photo-1556761175-129418cb2dfe?auto=format&fit=crop&w=2400&q=80");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(10, 18, 32, 0.55);
-  z-index: 0;
+  background: #ffffff;
 }
 .hero > * {
   position: relative;

@@ -244,47 +244,67 @@ function SiteChrome({
 }) {
   return (
     <>
-      {/* 헤더 + 첫번째 섹션: 전문 배경 이미지, 왼쪽 정렬, 곡선 디바이더 */}
+      {/* 헤더 + 첫번째 섹션: 흰 배경, 좌우 2단(텍스트+CTA / 2x2 그리드) */}
       <HeroWithScrollEffect>
-        <Container className="relative w-full py-20 sm:py-24 lg:py-28">
-          <div className="max-w-2xl text-left font-worry">
-            <AnimatedHero>
-              <AnimatedHeroItem>
-                <p className="text-sm sm:text-base tracking-wide text-slate-300 leading-relaxed uppercase">
-                  성공한 사장님들은 마케팅을 &apos;비용&apos;이라 부르지 않습니다.
-                </p>
-              </AnimatedHeroItem>
-              <AnimatedHeroItem>
-                <p className="mt-8 sm:mt-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.2]">
-                  그들은 &apos;연료&apos;라고 부릅니다.
-                </p>
-              </AnimatedHeroItem>
-              <AnimatedHeroItem>
-                <p className="mt-10 sm:mt-12 text-base sm:text-lg text-slate-300 leading-relaxed">
-                  실패했던 건 사장님 탓이 아닙니다.
-                  <br />
-                  &apos;방법&apos;이 틀렸고 파트너를 잘못 만나서 입니다.
-                </p>
-              </AnimatedHeroItem>
-              <AnimatedHeroItem>
-                <p className="mt-10 sm:mt-12 text-lg sm:text-xl font-semibold text-white">
-                  이제는 개발실행사와 직접 제대로된 AI CORE Marketing 하세요
-                </p>
-              </AnimatedHeroItem>
-              <AnimatedHeroItem>
-                <p className="mt-4 text-sm sm:text-base text-slate-400">
-                  상담버튼 클릭으로 부터 그 역사가 시작 됩니다.
-                </p>
-              </AnimatedHeroItem>
-              <AnimatedHeroItem>
-                <a
-                  href="tel:1661-0646"
-                  className="mt-14 sm:mt-16 inline-flex items-center justify-center rounded-md bg-[#1e40af] px-8 py-3.5 text-sm font-semibold text-white hover:bg-[#1d4ed8] transition-colors"
-                >
-                  상담하기
-                </a>
-              </AnimatedHeroItem>
-            </AnimatedHero>
+        <Container className="relative w-full py-16 sm:py-20 lg:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center max-w-6xl mx-auto">
+            {/* 왼쪽: 카피 + CTA */}
+            <div className="text-left font-worry order-2 lg:order-1">
+              <AnimatedHero>
+                <AnimatedHeroItem>
+                  <p className="text-base text-[#374151] leading-relaxed">
+                    성공한 사장님들은 마케팅을 &apos;비용&apos;이라 부르지 않습니다.
+                  </p>
+                </AnimatedHeroItem>
+                <AnimatedHeroItem>
+                  <p className="mt-6 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#111827] leading-[1.25]">
+                    그들은 <span className="text-[#FF7F00]">&apos;연료&apos;</span>라고 부릅니다.
+                  </p>
+                </AnimatedHeroItem>
+                <AnimatedHeroItem>
+                  <p className="mt-6 text-base text-[#374151] leading-relaxed">
+                    실패했던 건 사장님 탓이 아닙니다.
+                    <br />
+                    &apos;방법&apos;이 틀렸고 파트너를 잘못 만나서 입니다.
+                  </p>
+                </AnimatedHeroItem>
+                <AnimatedHeroItem>
+                  <p className="mt-6 text-base text-[#374151] leading-relaxed">
+                    이제는 개발실행사와 직접 제대로된 <span className="font-semibold">AI CORE Marketing</span> 하세요
+                  </p>
+                </AnimatedHeroItem>
+                <AnimatedHeroItem>
+                  <a
+                    href="tel:1661-0646"
+                    className="mt-10 inline-flex items-center justify-center rounded-full bg-[#1A237E] px-10 py-4 text-base font-semibold text-white hover:bg-[#283593] transition-colors"
+                  >
+                    상담하기
+                  </a>
+                </AnimatedHeroItem>
+              </AnimatedHero>
+            </div>
+
+            {/* 오른쪽: 2x2 이미지 그리드 */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 order-1 lg:order-2">
+              <div className="rounded-2xl overflow-hidden bg-[#1e3a5f] flex items-center justify-center min-h-[140px] sm:min-h-[180px] aspect-square max-h-[200px] sm:max-h-[240px]">
+                <div className="text-center px-4">
+                  <p className="text-white font-bold text-lg sm:text-xl tracking-wider">ADGRIT</p>
+                  <p className="text-white/90 text-xs sm:text-sm tracking-widest mt-1">DEVELOPMENT & MARKETING</p>
+                </div>
+              </div>
+              <div className="rounded-2xl overflow-hidden aspect-square min-h-[140px] sm:min-h-[180px] max-h-[200px] sm:max-h-[240px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80" alt="" className="w-full h-full object-cover" />
+              </div>
+              <div className="rounded-2xl overflow-hidden aspect-square min-h-[140px] sm:min-h-[180px] max-h-[200px] sm:max-h-[240px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&q=80" alt="" className="w-full h-full object-cover" />
+              </div>
+              <div className="rounded-2xl overflow-hidden aspect-square min-h-[140px] sm:min-h-[180px] max-h-[200px] sm:max-h-[240px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=600&q=80" alt="" className="w-full h-full object-cover" />
+              </div>
+            </div>
           </div>
         </Container>
       </HeroWithScrollEffect>
