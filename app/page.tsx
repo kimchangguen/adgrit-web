@@ -108,13 +108,17 @@ function WorryCard({
   showArrow?: boolean;
 }) {
   return (
-    <div className="relative rounded-[24px] bg-white p-6 sm:p-8 shadow-sm">
+    <div className="relative rounded-[24px] bg-white px-6 sm:px-8 py-7 sm:py-10 shadow-sm">
       <span className="text-lg font-bold tabular-nums" style={{ color: ACCENT_ORANGE }}>
         {num}
       </span>
       <h3 className="mt-2 text-xl font-bold text-[#111827]">{title}</h3>
       <p className="mt-1 text-sm text-slate-500">{subtitle}</p>
-      <p className="mt-4 text-[15px] leading-relaxed text-[#374151]">{desc}</p>
+      <p className="mt-4 text-[15px] leading-relaxed text-[#374151]">
+        {desc.split("\n").map((line, i) => (
+          <span key={i}>{i > 0 && <br />}{line}</span>
+        ))}
+      </p>
       {showArrow && (
         <div className="absolute bottom-5 right-5" style={{ color: ACCENT_ORANGE }} aria-hidden>
           <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -283,7 +287,7 @@ function SiteChrome({
       {/* 사장님 고민 - 두번째 섹션: 네이비 배경, 좌 텍스트 / 우 흰색 카드 */}
       <section
         id="section2"
-        className="section2 section-two relative z-10 mt-12 bg-[#1e3a5f] py-16 sm:py-20 lg:py-24"
+        className="section2 section-two relative z-10 mt-12 bg-[#1e3a5f] py-20 sm:py-24 lg:py-28"
       >
         <div className="wave-top" aria-hidden="true" />
         <div className="mx-auto w-full max-w-[1080px] px-6">
@@ -291,8 +295,9 @@ function SiteChrome({
             {/* 왼쪽: 타이틀 + 설명 */}
             <div className="lg:sticky lg:top-24 lg:w-[42%] lg:flex-shrink-0 text-left">
               <p className="text-white text-sm font-normal tracking-wide">The Cost of Inefficiency</p>
-              <h2 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight text-white">
-                사장님들이 겪는{" "}
+              <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-white">
+                사장님들이 겪는
+                <br />
                 <span style={{ color: ACCENT_ORANGE }}>대표적 고민</span>
               </h2>
               <p className="mt-6 text-white/95 text-base leading-relaxed">
@@ -301,15 +306,15 @@ function SiteChrome({
               </p>
             </div>
 
-            {/* 오른쪽: 흰색 카드 2열 (이미지처럼 2개 노출, 나머지 동일 스타일) */}
-            <div className="flex-1 flex flex-col gap-6">
+            {/* 오른쪽: 흰색 카드 (가로 90%) */}
+            <div className="flex-1 flex flex-col gap-6 w-[90%] max-w-[90%]">
               {[
-                { num: "01", title: "구조적 성장의 한계", subtitle: "Structural Growth Stagnation", desc: "어느 순간부터 매출이 딱 멈춰서 밤새 고민해봐도 이 벽을 넘을 방법이 보이지 않을 때", showArrow: true },
-                { num: "02", title: "자생력 없는 마케팅", subtitle: "Lack of Owned Media", desc: "네이버 | 인스타 | 구글 로직이 바뀌면 내 매출도 출렁입니다. 내 사업의 운전대를 남에게 맡긴 불안한 상태.", showArrow: false },
-                { num: "03", title: "위임 실패의 딜레마", subtitle: "The Delegation Dilemma", desc: "큰맘 먹고 직원을 뽑았지만 성과는 없고, 교육시키다 보니 내가 더 바빠지는 아이러니.", showArrow: false },
-                { num: "04", title: "실행 없는 분석의 늪", subtitle: "Analysis Paralysis", desc: "이게 좋다, 저게 좋다 말은 많은데 정작 우리 가게엔 뭐부터 해야 할지 몰라 아무것도 못 하는 상태.", showArrow: false },
-                { num: "05", title: "절대적 시간 빈곤", subtitle: "Operational Time Poverty", desc: "장사 준비하기도 바쁜데 영상 편집에 글쓰기까지? 사장님의 24시간을 갈아 넣어야 돌아가는 구조.", showArrow: false },
-                { num: "06", title: "노동 집약적 마케팅", subtitle: "Labor-Intensive Marketing", desc: "한번 온 손님을 다시 오게 만드는 시스템이 없습니다. 밑 빠진 독처럼 계속 신규 고객만 찾아 헤매는 중.", showArrow: false },
+                { num: "01", title: "구조적 성장의 한계", subtitle: "Structural Growth Stagnation", desc: "어느 순간부터 매출이 딱 멈춰서 밤새 고민해봐도\n이 벽을 넘을 방법이 보이지 않을 때", showArrow: false },
+                { num: "02", title: "자생력 없는 마케팅", subtitle: "Lack of Owned Media", desc: "네이버 | 인스타 | 구글 로직이 바뀌면 내 매출도 출렁입니다.\n내 사업의 운전대를 남에게 맡긴 불안한 상태.", showArrow: false },
+                { num: "03", title: "위임 실패의 딜레마", subtitle: "The Delegation Dilemma", desc: "큰맘 먹고 직원을 뽑았지만 성과는 없고,\n교육시키다 보니 내가 더 바빠지는 아이러니.", showArrow: false },
+                { num: "04", title: "실행 없는 분석의 늪", subtitle: "Analysis Paralysis", desc: "이게 좋다, 저게 좋다 말은 많은데 정작 우리 가게엔\n뭐부터 해야 할지 몰라 아무것도 못 하는 상태.", showArrow: false },
+                { num: "05", title: "절대적 시간 빈곤", subtitle: "Operational Time Poverty", desc: "장사 준비하기도 바쁜데 영상 편집에 글쓰기까지?\n사장님의 24시간을 갈아 넣어야 돌아가는 구조.", showArrow: false },
+                { num: "06", title: "노동 집약적 마케팅", subtitle: "Labor-Intensive Marketing", desc: "한번 온 손님을 다시 오게 만드는 시스템이 없습니다.\n밑 빠진 독처럼 계속 신규 고객만 찾아 헤매는 중.", showArrow: false },
               ].map((item, i) => (
                 <AnimatedCard key={item.num} index={i}>
                   <WorryCard num={item.num} title={item.title} subtitle={item.subtitle} desc={item.desc} showArrow={item.showArrow} />
