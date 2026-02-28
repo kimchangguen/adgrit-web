@@ -3,11 +3,13 @@
 import { useRef, useState, useEffect, type ReactNode } from "react";
 
 const CARD_COUNT = 6;
+const AUTO_SCROLL_INTERVAL_MS = 4000;
 
 export function Section2CardList({ children }: { children: ReactNode }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // 스크롤 위치에 따라 activeIndex 동기화
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
@@ -31,6 +33,27 @@ export function Section2CardList({ children }: { children: ReactNode }) {
     el.addEventListener("scroll", onScroll, { passive: true });
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
+
+  // 4초마다 다음으로 자동 스크롤 (마지막이면 처음으로)
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const tick = () => {
+      const { scrollHeight, clientHeight } = el;
+      const maxScroll = scrollHeight - clientHeight;
+      if (maxScroll <= 0) return;
+
+      const nextIndex = (activeIndex + 1) % CARD_COUNT;
+      const targetTop =
+        nextIndex === 0 ? 0 : (maxScroll * nextIndex) / (CARD_COUNT - 1);
+
+      el.scrollTo({ top: targetTop, behavior: "smooth" });
+    };
+
+    const id = setInterval(tick, AUTO_SCROLL_INTERVAL_MS);
+    return () => clearInterval(id);
+  }, [activeIndex]);
 
   return (
     <div className="flex-1 w-[76%] max-w-[76%] flex flex-col">
