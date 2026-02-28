@@ -309,8 +309,9 @@ function SiteChrome({
               </p>
             </div>
 
-            {/* 오른쪽: 흰색 카드 (가로 90%) */}
-            <div className="flex-1 flex flex-col gap-6 w-[76%] max-w-[76%]">
+            {/* 오른쪽: 흰색 카드 - 2개만 보이고 나머지는 휠로 스크롤 */}
+            <div className="flex-1 w-[76%] max-w-[76%] max-h-[520px] overflow-y-auto overflow-x-hidden scroll-smooth">
+              <div className="flex flex-col gap-6 pr-1">
               {[
                 { num: "01", title: "구조적 성장의 한계", subtitle: "Structural Growth Stagnation", desc: "어느 순간부터 매출이 딱 멈춰서 밤새 고민해봐도\n이 벽을 넘을 방법이 보이지 않을 때", showArrow: false },
                 { num: "02", title: "자생력 없는 마케팅", subtitle: "Lack of Owned Media", desc: "네이버 | 인스타 | 구글 로직이 바뀌면 내 매출도 출렁입니다.\n내 사업의 운전대를 남에게 맡긴 불안한 상태.", showArrow: false },
@@ -323,6 +324,7 @@ function SiteChrome({
                   <WorryCard num={item.num} title={item.title} subtitle={item.subtitle} desc={item.desc} showArrow={item.showArrow} />
                 </AnimatedCard>
               ))}
+              </div>
             </div>
           </div>
         </div>
