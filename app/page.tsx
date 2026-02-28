@@ -293,7 +293,7 @@ function SiteChrome({
         <div className="mx-auto w-full max-w-[1080px] px-6">
           <div className="flex flex-col lg:flex-row lg:items-start gap-12 lg:gap-16">
             {/* 왼쪽: 타이틀 + 설명 */}
-            <div className="lg:sticky lg:top-24 lg:w-[42%] lg:flex-shrink-0 text-left">
+            <div className="lg:sticky lg:top-24 lg:w-[47%] lg:flex-shrink-0 text-left">
               <p className="text-white text-sm font-normal tracking-wide">The Cost of Inefficiency</p>
               <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-white">
                 사장님들이 겪는
@@ -307,7 +307,7 @@ function SiteChrome({
             </div>
 
             {/* 오른쪽: 흰색 카드 (가로 90%) */}
-            <div className="flex-1 flex flex-col gap-6 w-[90%] max-w-[90%]">
+            <div className="flex-1 flex flex-col gap-6 w-[76%] max-w-[76%]">
               {[
                 { num: "01", title: "구조적 성장의 한계", subtitle: "Structural Growth Stagnation", desc: "어느 순간부터 매출이 딱 멈춰서 밤새 고민해봐도\n이 벽을 넘을 방법이 보이지 않을 때", showArrow: false },
                 { num: "02", title: "자생력 없는 마케팅", subtitle: "Lack of Owned Media", desc: "네이버 | 인스타 | 구글 로직이 바뀌면 내 매출도 출렁입니다.\n내 사업의 운전대를 남에게 맡긴 불안한 상태.", showArrow: false },
