@@ -331,13 +331,10 @@ function SiteChrome({
         </div>
       </section>
 
-      {/* 슬로건 - 세번째 섹션: 네이비 그라데이션 + 좌 슬로건 / 우 2x2 그리드 */}
+      {/* 슬로건 - 세번째 섹션: 다크 히어로 + 좌 슬로건/버튼, 우 노트북(광고 그리드) */}
       <section
         id="section3"
-        className="relative z-10 flex min-h-[1080px] w-full items-center justify-center overflow-hidden"
-        style={{
-          background: "linear-gradient(135deg, #1a2d47 0%, #1e3a5f 40%, #254a75 100%)",
-        }}
+        className="relative z-10 flex min-h-[1080px] w-full items-center justify-center overflow-hidden bg-black"
       >
         <SloganWithEffects />
       </section>
