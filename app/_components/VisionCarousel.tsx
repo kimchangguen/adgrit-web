@@ -109,7 +109,7 @@ export function VisionCarousel({
     <div className="flex flex-col gap-8 sm:gap-10">
       {/* 상단: 2줄 제목 가운데 정렬, 이전/다음만 (POINT 라벨 없음) */}
       <div className="flex flex-col items-center gap-3 text-center">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-black leading-tight">
+        <h2 className="text-[1.725rem] sm:text-[2.16rem] lg:text-[2.59rem] font-bold tracking-tight text-black leading-tight">
           {line1}
           {line2 != null && (
             <>
