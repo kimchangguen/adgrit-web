@@ -1,12 +1,11 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import Link from "next/link";
 import { useRef } from "react";
 import { Container } from "./Container";
 
-const BG_IMAGE =
-  "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=80";
+const LAPTOP_IMAGE =
+  "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&q=80";
 
 export function SloganWithEffects() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -15,29 +14,17 @@ export function SloganWithEffects() {
   return (
     <div
       ref={sectionRef}
-      className="relative w-full flex items-center justify-center min-h-[1080px] py-24 overflow-hidden"
+      className="relative w-full flex items-center justify-center min-h-[918px] py-20 overflow-hidden"
     >
       {/* 다크 네이비 베이스 */}
       <div
         className="absolute inset-0 bg-[#0f1729]"
         aria-hidden
       />
-      {/* 블러 배경 이미지 (오른쪽·중앙) */}
-      <div className="absolute inset-0" aria-hidden>
-        <img
-          src={BG_IMAGE}
-          alt=""
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-[70%] max-w-[900px] h-[140%] min-h-[100%] object-cover object-left opacity-50 blur-[2px] sm:blur-[4px]"
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-[#0f1729] via-[#0f1729]/95 to-transparent"
-          aria-hidden
-        />
-      </div>
-
-      <Container className="relative z-10">
+      <Container className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10 lg:gap-12">
+        {/* 왼쪽: 텍스트 */}
         <div className="max-w-2xl">
-          {/* 메인 헤드라인 - 3줄, 큰 볼드, 넉넉한 행간 */}
+          {/* 메인 헤드라인 - 3줄 */}
           <motion.h2
             className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl font-bold leading-[1.35] tracking-tight text-left"
             initial={{ opacity: 0, y: 20 }}
@@ -51,7 +38,7 @@ export function SloganWithEffects() {
             광고 양으로 승부 하세요
           </motion.h2>
 
-          {/* 서브 텍스트 - 작은 크기 */}
+          {/* 서브 텍스트 */}
           <motion.p
             className="mt-6 text-white/80 text-base sm:text-lg font-normal tracking-wide text-left"
             initial={{ opacity: 0, y: 12 }}
@@ -60,23 +47,21 @@ export function SloganWithEffects() {
           >
             광고비 부담 없이, 양으로 승부하는 시대.
           </motion.p>
-
-          {/* CTA: 흰색 아웃라인 버튼 + 화살표 */}
-          <motion.div
-            className="mt-8 sm:mt-10"
-            initial={{ opacity: 0, y: 12 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.2 }}
-          >
-            <Link
-              href="tel:1661-0646"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-white text-white font-medium px-6 py-3.5 text-sm sm:text-base hover:bg-white/10 transition-colors"
-            >
-              문의하기
-              <span className="text-white" aria-hidden>→</span>
-            </Link>
-          </motion.div>
         </div>
+
+        {/* 오른쪽: 마케팅 노트북 이미지 */}
+        <motion.div
+          className="flex-shrink-0 w-full max-w-[480px] lg:max-w-[520px]"
+          initial={{ opacity: 0, x: 24 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.15 }}
+        >
+          <img
+            src={LAPTOP_IMAGE}
+            alt=""
+            className="w-full h-auto rounded-lg shadow-2xl object-cover"
+          />
+        </motion.div>
       </Container>
 
       {/* 하단 스크롤 인디케이터 */}

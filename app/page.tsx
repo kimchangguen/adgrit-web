@@ -359,7 +359,7 @@ function SiteChrome({
       {/* 슬로건 - 세번째 섹션: 다크 히어로 + 좌 슬로건/버튼, 우 노트북(광고 그리드) */}
       <section
         id="section3"
-        className="relative z-10 flex min-h-[1080px] w-full items-center justify-center overflow-hidden bg-black"
+        className="relative z-10 flex min-h-[918px] w-full items-center justify-center overflow-hidden bg-black"
       >
         <SloganWithEffects />
       </section>
