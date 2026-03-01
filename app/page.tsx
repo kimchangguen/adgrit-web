@@ -340,7 +340,6 @@ function SiteChrome({
       >
         <div className="mx-auto w-full max-w-[1920px]">
           <VisionCarousel
-            sectionKicker="POINT"
             titleLine1="애드그릿과 함께"
             titleLine2="낮은 견적 · 빠르고 정확한 계획"
             title="낮은 견적 · 빠르고 정확한 계획"

@@ -24,10 +24,10 @@ function VisionCard({
 }) {
   return (
     <div className="flex w-full flex-shrink-0 flex-col overflow-hidden rounded-xl bg-white border border-slate-100 shadow-sm">
-      {/* 이미지: 그레이스케일 + 연한 파란 오버레이 */}
+      {/* 이미지: 컬러 + 연한 파란 오버레이 */}
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-xl">
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat grayscale"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url('${imageUrl}')` }}
         />
         <div
@@ -102,17 +102,13 @@ export function VisionCarousel({
     };
   }, [maxPageIndex]);
 
-  const kicker = sectionKicker ?? "POINT";
   const line1 = titleLine1 ?? sectionTitle ?? title;
   const line2 = titleLine2;
 
   return (
     <div className="flex flex-col gap-8 sm:gap-10">
-      {/* 상단: 파란 라벨 + 2줄 제목 가운데 정렬, 페이지번호 없이 이전/다음만 */}
+      {/* 상단: 2줄 제목 가운데 정렬, 이전/다음만 (POINT 라벨 없음) */}
       <div className="flex flex-col items-center gap-3 text-center">
-        <span className="text-xs font-semibold uppercase tracking-[0.25em] text-[#1e40af]">
-          {kicker}
-        </span>
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-black leading-tight">
           {line1}
           {line2 != null && (
@@ -146,8 +142,9 @@ export function VisionCarousel({
         </div>
       </div>
 
-      {/* 3장 가로 슬라이드 (내용·슬라이드 효과·3초 유지) */}
-      <div className="w-full overflow-hidden">
+      {/* 3장 가로 슬라이드 - 박스 30% 축소, 배경 너비 유지 */}
+      <div className="w-full overflow-hidden flex justify-center">
+        <div className="w-[70%] min-w-0 overflow-hidden">
         <div
           ref={trackRef}
           className="flex transition-transform duration-500 ease-out"
@@ -177,6 +174,7 @@ export function VisionCarousel({
                 ))}
             </div>
           ))}
+        </div>
         </div>
       </div>
     </div>
