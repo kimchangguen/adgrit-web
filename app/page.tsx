@@ -136,23 +136,54 @@ function ProcessStep({
   step,
   title,
   desc,
+  buttonText,
+  icon,
 }: {
   step: string;
   title: string;
   desc: string;
+  buttonText?: string;
+  icon?: "bell" | "circle" | "star";
 }) {
-  return (
-    <div className="flex gap-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
-      <div className="flex-shrink-0 h-20 w-20 rounded-xl bg-[#1e40af] flex items-center justify-center">
-        <span className="text-2xl font-black text-white">{step}</span>
-      </div>
-      <div>
-        <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1e40af]">
-          {step} 단계
+  const IconEl = () => {
+    const i = icon ?? "star";
+    if (i === "bell") {
+      return (
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-teal-100 text-teal-600">
+          <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+            <path d="M12 2a2 2 0 012 2v1.09A6 6 0 0118 11v1h2a1 1 0 010 2H4a1 1 0 010-2h2v-1a6 6 0 014-5.91V4a2 2 0 012-2zm0 2v.09A6 6 0 006 11v1h12v-1a6 6 0 00-6-5.91V4zM8 15a1 1 0 011 1v2a3 3 0 106 0v-2a1 1 0 011-1 1 1 0 10-2 0v2a1 1 0 01-2 0v-2a1 1 0 10-2 0z" />
+          </svg>
         </div>
-        <div className="mt-2 text-lg font-bold text-[#1a1a2e]">{title}</div>
-        <p className="mt-3 text-sm leading-relaxed text-slate-600">{desc}</p>
+      );
+    }
+    if (i === "circle") {
+      return (
+        <div className="mx-auto h-10 w-10 rounded-full bg-[#1e40af]/20 border-2 border-[#1e40af]" aria-hidden />
+      );
+    }
+    return (
+      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-teal-100 text-teal-600">
+        <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
       </div>
+    );
+  };
+  return (
+    <div className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+      <span className="text-sm font-bold text-[#1e40af]">STEP {step}</span>
+      <div className="mt-4">
+        <IconEl />
+      </div>
+      <h3 className="mt-4 text-lg font-bold text-black">{title}</h3>
+      <p className="mt-3 flex-1 text-left text-sm leading-relaxed text-slate-700">{desc}</p>
+      {buttonText && (
+        <div className="mt-6">
+          <span className="inline-block w-full rounded-lg bg-blue-100 py-3 text-center text-sm font-semibold text-[#1e40af]">
+            {buttonText}
+          </span>
+        </div>
+      )}
     </div>
   );
 }
@@ -367,24 +398,26 @@ function SiteChrome({
       {/* 애드그릿의 다양한 마케팅 상품 - 여덟번째 섹션 */}
       <MarketingProductsSection />
 
-      {/* Process - 아홉번째 섹션 */}
+      {/* Process - 아홉번째 섹션 (참고 이미지 레이아웃, 내용 유지) */}
       <section className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
         <Container>
-          <SectionKicker>Services</SectionKicker>
-          <SectionTitle className="mt-3">
-            단 세 단계로 완성하는
-            <br />
-            성공적인 컨설팅 프로세스
-          </SectionTitle>
+          <div className="text-center">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-black">
+              프로세스
+            </h2>
+            <p className="mt-3 text-base text-slate-600">
+              단 세 단계로 완성하는 성공적인 컨설팅 프로세스
+            </p>
+          </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
+          <div className="mt-10 grid gap-6 md:grid-cols-3 md:items-stretch">
             {[
-              { step: "01", title: "Discovery 진단단계", desc: "고객사의 비즈니스 환경과 과제를 깊이 이해하는 것에서 시작됩니다. 맞춤형 상담을 통해 목표, 문제점, 기회 요소를 면밀히 파악합니다." },
-              { step: "02", title: "Development 전략단계", desc: "수집된 인사이트를 바탕으로 맞춤형 전략을 수립합니다. 데이터 기반으로 목표에 최적화된 실행 계획을 설계합니다." },
-              { step: "03", title: "Implementation 실행단계", desc: "설계된 전략을 현장에 적용하고 지속적으로 모니터링합니다. 빠른 실험과 개선으로 성과를 극대화합니다." },
+              { step: "01", title: "Discovery 진단단계", desc: "고객사의 비즈니스 환경과 과제를 깊이 이해하는 것에서 시작됩니다. 맞춤형 상담을 통해 목표, 문제점, 기회 요소를 면밀히 파악합니다.", buttonText: "상담 접수 24시간 내", icon: "bell" as const },
+              { step: "02", title: "Development 전략단계", desc: "수집된 인사이트를 바탕으로 맞춤형 전략을 수립합니다. 데이터 기반으로 목표에 최적화된 실행 계획을 설계합니다.", buttonText: "Day 1-2", icon: "circle" as const },
+              { step: "03", title: "Implementation 실행단계", desc: "설계된 전략을 현장에 적용하고 지속적으로 모니터링합니다. 빠른 실험과 개선으로 성과를 극대화합니다.", buttonText: "Day 3", icon: "star" as const },
             ].map((p, i) => (
               <AnimatedCard key={p.step} index={i}>
-                <ProcessStep step={p.step} title={p.title} desc={p.desc} />
+                <ProcessStep step={p.step} title={p.title} desc={p.desc} buttonText={p.buttonText} icon={p.icon} />
               </AnimatedCard>
             ))}
           </div>
