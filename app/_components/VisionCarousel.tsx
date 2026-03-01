@@ -23,9 +23,9 @@ function VisionCard({
   desc: string;
 }) {
   return (
-    <div className="flex w-full flex-shrink-0 flex-col overflow-hidden rounded-xl bg-white border border-slate-100 shadow-sm">
-      {/* 이미지: 컬러 + 연한 파란 오버레이 */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-xl">
+    <div className="flex h-full w-full flex-shrink-0 flex-col overflow-hidden rounded-xl bg-white border border-slate-100 shadow-sm">
+      {/* 이미지: 컬러 + 연한 파란 오버레이 (비율 고정) */}
+      <div className="relative aspect-[4/3] w-full flex-shrink-0 overflow-hidden rounded-t-xl">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url('${imageUrl}')` }}
@@ -39,8 +39,8 @@ function VisionCard({
           aria-hidden
         />
       </div>
-      {/* 텍스트: 이미지 아래, 왼쪽 정렬 */}
-      <div className="flex flex-1 flex-col p-4 sm:p-5 text-left">
+      {/* 텍스트: 이미지 아래, 왼쪽 정렬, 최소 높이로 박스 크기 통일 */}
+      <div className="flex min-h-[88px] flex-1 flex-col justify-start p-4 sm:p-5 text-left">
         <h3 className="text-base sm:text-lg font-bold text-black leading-snug">
           {titleEn}
         </h3>
@@ -156,7 +156,7 @@ export function VisionCarousel({
           {Array.from({ length: totalPages }).map((_, page) => (
             <div
               key={page}
-              className="flex flex-shrink-0 gap-4 sm:gap-6"
+              className="flex flex-shrink-0 gap-4 sm:gap-6 items-stretch"
               style={{
                 width: `${100 / totalPages}%`,
               }}
@@ -164,7 +164,7 @@ export function VisionCarousel({
               {items
                 .slice(page * CARDS_PER_VIEW, page * CARDS_PER_VIEW + CARDS_PER_VIEW)
                 .map((item) => (
-                  <div key={item.titleEn} className="flex-1 min-w-0">
+                  <div key={item.titleEn} className="flex-1 min-w-0 flex">
                     <VisionCard
                       imageUrl={item.imageUrl}
                       titleEn={item.titleEn}
