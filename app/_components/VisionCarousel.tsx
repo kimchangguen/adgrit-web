@@ -2,8 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const ACCENT_ORANGE = "#ea580c";
-
 export type VisionItem = {
   iconKey: string;
   titleEn: string;
@@ -11,9 +9,8 @@ export type VisionItem = {
   imageUrl: string;
 };
 
-const CARD_WIDTH = 380;
-const CARDS_PER_VIEW = 2;
-const GAP_VERTICAL = 20;
+const CARDS_PER_VIEW = 3;
+const CARD_GAP = 24;
 
 function VisionCard({
   imageUrl,
@@ -25,14 +22,22 @@ function VisionCard({
   desc: string;
 }) {
   return (
-    <div className="flex w-full flex-shrink-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-lg hover:border-slate-300 transition-all">
+    <div className="relative flex w-full flex-shrink-0 flex-col overflow-hidden rounded-xl">
       <div
-        className="h-40 sm:h-44 w-full flex-shrink-0 bg-cover bg-center bg-no-repeat"
+        className="aspect-[4/3] w-full bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url('${imageUrl}')` }}
       />
-      <div className="flex flex-1 flex-col p-4 sm:p-5">
-        <h3 className="text-sm sm:text-base font-black uppercase tracking-wider text-slate-800">{titleEn}</h3>
-        <p className="mt-2 text-[14px] sm:text-[15px] font-bold leading-relaxed text-slate-700">{desc}</p>
+      <div
+        className="absolute inset-x-0 bottom-0 flex flex-col justify-end bg-gradient-to-t from-black/75 via-black/40 to-transparent p-4 sm:p-5 min-h-[72px]"
+        aria-hidden
+      />
+      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 text-center">
+        <p className="text-white text-sm sm:text-base font-bold leading-snug">
+          {titleEn}
+        </p>
+        <p className="text-white/95 text-xs sm:text-sm font-medium leading-snug mt-0.5 line-clamp-2">
+          {desc}
+        </p>
       </div>
     </div>
   );
@@ -41,11 +46,13 @@ function VisionCard({
 export function VisionCarousel({
   items,
   title,
+  sectionTitle,
   subtitle,
   accentLine,
 }: {
   items: VisionItem[];
   title: string;
+  sectionTitle?: string;
   subtitle?: string;
   accentLine?: string;
 }) {
@@ -83,27 +90,16 @@ export function VisionCarousel({
   const pageNum = (currentPage + 1).toString().padStart(2, "0");
   const totalNum = totalPages.toString().padStart(2, "0");
 
-  const line1 = subtitle ?? "Vision";
-  const line2 = title;
-  const line3 = accentLine ?? title;
+  const heading = sectionTitle ?? title;
 
   return (
-    <div className="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-14">
-      {/* 왼쪽: 참고 이미지 레이아웃 - 3줄 (작은 회색 / 큰 볼드 / 가장 큰 오렌지) */}
-      <div className="shrink-0 lg:w-[58%] xl:w-[60%] flex flex-col justify-center">
-        <p className="text-slate-500 text-sm sm:text-base font-normal tracking-wide">
-          {line1}
-        </p>
-        <h2 className="mt-2 text-xl sm:text-2xl lg:text-[1.75rem] font-bold tracking-tight text-slate-800">
-          {line2}
+    <div className="flex flex-col gap-8 sm:gap-10">
+      {/* 상단: Why? 스타일 제목 + 네비 (참고 이미지 레이아웃) */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-black">
+          {heading}
         </h2>
-        <p
-          className="mt-2 text-2xl sm:text-3xl lg:text-[2rem] xl:text-[2.25rem] font-bold tracking-tight"
-          style={{ color: ACCENT_ORANGE }}
-        >
-          {line3}
-        </p>
-        <div className="mt-8 flex items-center gap-3 text-slate-600">
+        <div className="flex items-center gap-3 text-slate-600">
           <button
             type="button"
             onClick={prev}
@@ -130,36 +126,35 @@ export function VisionCarousel({
         </div>
       </div>
 
-      {/* 오른쪽: 2장 세로로 쌓인 슬라이드 (슬라이드·자동재생·이전/다음 동일) */}
-      <div
-        className="min-w-0 flex-1 overflow-hidden"
-        style={{ maxWidth: CARD_WIDTH }}
-      >
+      {/* 3장 가로 배치 슬라이드 (내용·슬라이드 효과 동일) */}
+      <div className="w-full overflow-hidden">
         <div
           ref={trackRef}
           className="flex transition-transform duration-500 ease-out"
           style={{
-            transform: `translateX(-${currentPage * 100}%)`,
+            width: `${totalPages * 100}%`,
+            transform: `translateX(-${(currentPage * 100) / totalPages}%)`,
           }}
         >
           {Array.from({ length: totalPages }).map((_, page) => (
             <div
               key={page}
-              className="flex flex-shrink-0 flex-col gap-4 sm:gap-5"
-              style={{ width: CARD_WIDTH }}
+              className="flex flex-shrink-0 gap-4 sm:gap-6"
+              style={{
+                width: `${100 / totalPages}%`,
+              }}
             >
-              <VisionCard
-                imageUrl={items[page * 2].imageUrl}
-                titleEn={items[page * 2].titleEn}
-                desc={items[page * 2].desc}
-              />
-              {items[page * 2 + 1] && (
-                <VisionCard
-                  imageUrl={items[page * 2 + 1].imageUrl}
-                  titleEn={items[page * 2 + 1].titleEn}
-                  desc={items[page * 2 + 1].desc}
-                />
-              )}
+              {items
+                .slice(page * CARDS_PER_VIEW, page * CARDS_PER_VIEW + CARDS_PER_VIEW)
+                .map((item) => (
+                  <div key={item.titleEn} className="flex-1 min-w-0">
+                    <VisionCard
+                      imageUrl={item.imageUrl}
+                      titleEn={item.titleEn}
+                      desc={item.desc}
+                    />
+                  </div>
+                ))}
             </div>
           ))}
         </div>
