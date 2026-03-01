@@ -21,6 +21,7 @@ import { WithoutAdgritSection } from "./_components/WithoutAdgritSection";
 import { KakaoTestimonialsSection } from "./_components/KakaoTestimonialsSection";
 import { MarketingProductsSection } from "./_components/MarketingProductsSection";
 import { Section2CardList } from "./_components/Section2CardList";
+import { Section2Wrapper } from "./_components/Section2Wrapper";
 
 const WP_REST_ENDPOINT =
   "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2/posts?_embed&per_page=5";
@@ -285,51 +286,44 @@ function SiteChrome({
         </Container>
       </HeroWithScrollEffect>
 
-      {/* 사장님 고민 - 두번째 섹션: 네이비 배경, 좌 텍스트 / 우 흰색 카드 */}
-      <section
-        id="section2"
-        className="section2 section-two relative z-10 mt-12 bg-[#1e3a5f] py-20 sm:py-24 lg:py-28"
-      >
-        <div className="wave-top" aria-hidden="true" />
-        <div className="mx-auto w-full max-w-[1080px] px-6">
-          <div className="flex flex-col lg:flex-row lg:items-start gap-12 lg:gap-16">
-            {/* 왼쪽: 타이틀 + 설명 */}
-            <div className="lg:sticky lg:top-24 lg:w-[54%] lg:flex-shrink-0 text-left">
-              <p className="text-white text-sm font-normal tracking-wide">The Cost of Inefficiency</p>
-              <h2 className="mt-4 text-[2rem] sm:text-[2.375rem] lg:text-[3.125rem] font-bold leading-tight text-white">
-                사장님들이 겪는
-                <br />
-                <span style={{ color: ACCENT_ORANGE }}>대표적 고민</span>
-              </h2>
-              <p className="mt-6 text-white/95 text-base leading-relaxed">
-                매달 광고비는 지출되는데, 실제 순수익은 제자리걸음이다?
-                <br />
-                이건 노출 부족이 아니라, 고객을 구매로 전환시키지 못하는
-                <br />
-                &apos;마케팅 누수&apos;가 발생하고 있다는 신호입니다.
-              </p>
+      {/* 사장님 고민 - 두번째 섹션: 네이비 배경, 좌 텍스트(스크롤 따라오는 애니메이션) / 우 흰색 카드 */}
+      <Section2Wrapper
+        leftContent={
+          <>
+            <p className="text-white text-sm font-normal tracking-wide">The Cost of Inefficiency</p>
+            <h2 className="mt-4 text-[2rem] sm:text-[2.375rem] lg:text-[3.125rem] font-bold leading-tight text-white">
+              사장님들이 겪는
+              <br />
+              <span style={{ color: ACCENT_ORANGE }}>대표적 고민</span>
+            </h2>
+            <p className="mt-6 text-white/95 text-base leading-relaxed">
+              매달 광고비는 지출되는데, 실제 순수익은 제자리걸음이다?
+              <br />
+              이건 노출 부족이 아니라, 고객을 구매로 전환시키지 못하는
+              <br />
+              &apos;마케팅 누수&apos;가 발생하고 있다는 신호입니다.
+            </p>
+          </>
+        }
+        rightContent={
+          <Section2CardList>
+            <div className="flex flex-col gap-6 pr-1">
+            {[
+              { num: "01", title: "구조적 성장의 한계", subtitle: "Structural Growth Stagnation", desc: "어느 순간부터 매출이 딱 멈춰서 밤새 고민해봐도\n이 벽을 넘을 방법이 보이지 않을 때", showArrow: false },
+              { num: "02", title: "자생력 없는 마케팅", subtitle: "Lack of Owned Media", desc: "네이버 | 인스타 | 구글 로직이 바뀌면 내 매출도 출렁입니다.\n내 사업의 운전대를 남에게 맡긴 불안한 상태.", showArrow: false },
+              { num: "03", title: "위임 실패의 딜레마", subtitle: "The Delegation Dilemma", desc: "큰맘 먹고 직원을 뽑았지만 성과는 없고,\n교육시키다 보니 내가 더 바빠지는 아이러니.", showArrow: false },
+              { num: "04", title: "실행 없는 분석의 늪", subtitle: "Analysis Paralysis", desc: "이게 좋다, 저게 좋다 말은 많은데 정작 우리 가게엔\n뭐부터 해야 할지 몰라 아무것도 못 하는 상태.", showArrow: false },
+              { num: "05", title: "절대적 시간 빈곤", subtitle: "Operational Time Poverty", desc: "장사 준비하기도 바쁜데 영상 편집에 글쓰기까지?\n사장님의 24시간을 갈아 넣어야 돌아가는 구조.", showArrow: false },
+              { num: "06", title: "노동 집약적 마케팅", subtitle: "Labor-Intensive Marketing", desc: "한번 온 손님을 다시 오게 만드는 시스템이 없습니다.\n밑 빠진 독처럼 계속 신규 고객만 찾아 헤매는 중.", showArrow: false },
+            ].map((item, i) => (
+              <AnimatedCard key={item.num} index={i}>
+                <WorryCard num={item.num} title={item.title} subtitle={item.subtitle} desc={item.desc} showArrow={item.showArrow} />
+              </AnimatedCard>
+            ))}
             </div>
-
-            {/* 오른쪽: 흰색 카드 - 2개만 보이고 나머지는 휠로 스크롤, 점 인디케이터 */}
-            <Section2CardList>
-              <div className="flex flex-col gap-6 pr-1">
-              {[
-                { num: "01", title: "구조적 성장의 한계", subtitle: "Structural Growth Stagnation", desc: "어느 순간부터 매출이 딱 멈춰서 밤새 고민해봐도\n이 벽을 넘을 방법이 보이지 않을 때", showArrow: false },
-                { num: "02", title: "자생력 없는 마케팅", subtitle: "Lack of Owned Media", desc: "네이버 | 인스타 | 구글 로직이 바뀌면 내 매출도 출렁입니다.\n내 사업의 운전대를 남에게 맡긴 불안한 상태.", showArrow: false },
-                { num: "03", title: "위임 실패의 딜레마", subtitle: "The Delegation Dilemma", desc: "큰맘 먹고 직원을 뽑았지만 성과는 없고,\n교육시키다 보니 내가 더 바빠지는 아이러니.", showArrow: false },
-                { num: "04", title: "실행 없는 분석의 늪", subtitle: "Analysis Paralysis", desc: "이게 좋다, 저게 좋다 말은 많은데 정작 우리 가게엔\n뭐부터 해야 할지 몰라 아무것도 못 하는 상태.", showArrow: false },
-                { num: "05", title: "절대적 시간 빈곤", subtitle: "Operational Time Poverty", desc: "장사 준비하기도 바쁜데 영상 편집에 글쓰기까지?\n사장님의 24시간을 갈아 넣어야 돌아가는 구조.", showArrow: false },
-                { num: "06", title: "노동 집약적 마케팅", subtitle: "Labor-Intensive Marketing", desc: "한번 온 손님을 다시 오게 만드는 시스템이 없습니다.\n밑 빠진 독처럼 계속 신규 고객만 찾아 헤매는 중.", showArrow: false },
-              ].map((item, i) => (
-                <AnimatedCard key={item.num} index={i}>
-                  <WorryCard num={item.num} title={item.title} subtitle={item.subtitle} desc={item.desc} showArrow={item.showArrow} />
-                </AnimatedCard>
-              ))}
-              </div>
-            </Section2CardList>
-          </div>
-        </div>
-      </section>
+          </Section2CardList>
+        }
+      />
 
       {/* 슬로건 - 세번째 섹션: 다크 히어로 + 좌 슬로건/버튼, 우 노트북(광고 그리드) */}
       <section
