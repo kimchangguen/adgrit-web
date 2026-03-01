@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
+const ACCENT_ORANGE = "#ea580c";
+
 export type VisionItem = {
   iconKey: string;
   titleEn: string;
@@ -9,10 +11,9 @@ export type VisionItem = {
   imageUrl: string;
 };
 
-const CARD_WIDTH = 300;
-const GAP = 24;
+const CARD_WIDTH = 380;
 const CARDS_PER_VIEW = 2;
-const VISIBLE_WIDTH = CARDS_PER_VIEW * CARD_WIDTH + GAP * (CARDS_PER_VIEW - 1);
+const GAP_VERTICAL = 20;
 
 function VisionCard({
   imageUrl,
@@ -24,12 +25,9 @@ function VisionCard({
   desc: string;
 }) {
   return (
-    <div
-      className="flex shrink-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-lg hover:border-slate-300 transition-all"
-      style={{ width: CARD_WIDTH }}
-    >
+    <div className="flex w-full flex-shrink-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-lg hover:border-slate-300 transition-all">
       <div
-        className="h-44 sm:h-52 w-full flex-shrink-0 bg-cover bg-center bg-no-repeat"
+        className="h-40 sm:h-44 w-full flex-shrink-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url('${imageUrl}')` }}
       />
       <div className="flex flex-1 flex-col p-4 sm:p-5">
@@ -43,31 +41,26 @@ function VisionCard({
 export function VisionCarousel({
   items,
   title,
+  subtitle,
+  accentLine,
 }: {
   items: VisionItem[];
   title: string;
+  subtitle?: string;
+  accentLine?: string;
 }) {
-  const scrollRef = useRef<HTMLDivElement>(null);
   const totalPages = Math.ceil(items.length / CARDS_PER_VIEW);
   const maxPageIndex = Math.max(0, totalPages - 1);
   const [currentPage, setCurrentPage] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const startX = useRef(0);
-  const scrollLeftStart = useRef(0);
   const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const scrollStep = CARD_WIDTH * CARDS_PER_VIEW + GAP * (CARDS_PER_VIEW - 1);
+  const trackRef = useRef<HTMLDivElement>(null);
 
   const goToPage = useCallback(
     (pageIndex: number) => {
       const idx = Math.max(0, Math.min(pageIndex, maxPageIndex));
       setCurrentPage(idx);
-      const el = scrollRef.current;
-      if (el) {
-        el.scrollTo({ left: idx * scrollStep, behavior: "smooth" });
-      }
     },
-    [maxPageIndex, scrollStep]
+    [maxPageIndex]
   );
 
   const next = useCallback(() => {
@@ -80,82 +73,36 @@ export function VisionCarousel({
 
   useEffect(() => {
     autoPlayRef.current = setInterval(() => {
-      setCurrentPage((p) => {
-        const nextPage = p >= maxPageIndex ? 0 : p + 1;
-        const el = scrollRef.current;
-        if (el) el.scrollTo({ left: nextPage * scrollStep, behavior: "smooth" });
-        return nextPage;
-      });
+      setCurrentPage((p) => (p >= maxPageIndex ? 0 : p + 1));
     }, 3000);
     return () => {
       if (autoPlayRef.current) clearInterval(autoPlayRef.current);
     };
-  }, [maxPageIndex, scrollStep]);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!scrollRef.current) return;
-    setIsDragging(true);
-    startX.current = e.pageX;
-    scrollLeftStart.current = scrollRef.current.scrollLeft;
-    if (autoPlayRef.current) {
-      clearInterval(autoPlayRef.current);
-      autoPlayRef.current = null;
-    }
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !scrollRef.current) return;
-    e.preventDefault();
-    const walk = e.pageX - startX.current;
-    scrollRef.current.scrollLeft = scrollLeftStart.current - walk;
-  };
-
-  const handleMouseUp = () => {
-    if (!isDragging || !scrollRef.current) return;
-    setIsDragging(false);
-    const el = scrollRef.current;
-    const scrollLeft = el.scrollLeft;
-    const page = Math.round(scrollLeft / scrollStep);
-    const clamped = Math.max(0, Math.min(page, maxPageIndex));
-    setCurrentPage(clamped);
-    el.scrollTo({ left: clamped * scrollStep, behavior: "smooth" });
-
-    autoPlayRef.current = setInterval(() => {
-      setCurrentPage((p) => {
-        const nextPage = p >= maxPageIndex ? 0 : p + 1;
-        const el = scrollRef.current;
-        if (el) el.scrollTo({ left: nextPage * scrollStep, behavior: "smooth" });
-        return nextPage;
-      });
-    }, 3000);
-  };
-
-  const handleMouseLeave = () => {
-    if (isDragging) handleMouseUp();
-  };
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const onScroll = () => {
-      const page = Math.round(el.scrollLeft / scrollStep);
-      setCurrentPage(Math.max(0, Math.min(page, maxPageIndex)));
-    };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
-  }, [maxPageIndex, scrollStep]);
+  }, [maxPageIndex]);
 
   const pageNum = (currentPage + 1).toString().padStart(2, "0");
   const totalNum = totalPages.toString().padStart(2, "0");
 
+  const line1 = subtitle ?? "Vision";
+  const line2 = title;
+  const line3 = accentLine ?? title;
+
   return (
-    <div className="flex flex-col lg:flex-row lg:items-start gap-10 lg:gap-12">
-      {/* 왼쪽 패널: 타이틀 + 네비게이션 (폭 확대 유지) */}
-      <div className="shrink-0 lg:w-[48%] xl:w-[50%]">
-        <SectionKicker>Vision</SectionKicker>
-        <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-slate-800 sm:text-3xl lg:text-[1.75rem] xl:text-[2rem]">
-          {title}
+    <div className="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-14">
+      {/* 왼쪽: 참고 이미지 레이아웃 - 3줄 (작은 회색 / 큰 볼드 / 가장 큰 오렌지) */}
+      <div className="shrink-0 lg:w-[58%] xl:w-[60%] flex flex-col justify-center">
+        <p className="text-slate-500 text-sm sm:text-base font-normal tracking-wide">
+          {line1}
+        </p>
+        <h2 className="mt-2 text-xl sm:text-2xl lg:text-[1.75rem] font-bold tracking-tight text-slate-800">
+          {line2}
         </h2>
+        <p
+          className="mt-2 text-2xl sm:text-3xl lg:text-[2rem] xl:text-[2.25rem] font-bold tracking-tight"
+          style={{ color: ACCENT_ORANGE }}
+        >
+          {line3}
+        </p>
         <div className="mt-8 flex items-center gap-3 text-slate-600">
           <button
             type="button"
@@ -183,38 +130,40 @@ export function VisionCarousel({
         </div>
       </div>
 
-      {/* 오른쪽 패널: 2장씩 보이는 가로 슬라이드 캐러셀 */}
+      {/* 오른쪽: 2장 세로로 쌓인 슬라이드 (슬라이드·자동재생·이전/다음 동일) */}
       <div
-        className="min-w-0 overflow-hidden"
-        style={{ width: "100%", maxWidth: VISIBLE_WIDTH }}
+        className="min-w-0 flex-1 overflow-hidden"
+        style={{ maxWidth: CARD_WIDTH }}
       >
         <div
-          ref={scrollRef}
-          className="flex gap-6 overflow-x-auto scroll-smooth py-2 pb-4 cursor-grab active:cursor-grabbing select-none [&::-webkit-scrollbar]:hidden"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseLeave}
+          ref={trackRef}
+          className="flex transition-transform duration-500 ease-out"
+          style={{
+            transform: `translateX(-${currentPage * 100}%)`,
+          }}
         >
-          {items.map((item) => (
-            <VisionCard
-              key={item.titleEn}
-              imageUrl={item.imageUrl}
-              titleEn={item.titleEn}
-              desc={item.desc}
-            />
+          {Array.from({ length: totalPages }).map((_, page) => (
+            <div
+              key={page}
+              className="flex flex-shrink-0 flex-col gap-4 sm:gap-5"
+              style={{ width: CARD_WIDTH }}
+            >
+              <VisionCard
+                imageUrl={items[page * 2].imageUrl}
+                titleEn={items[page * 2].titleEn}
+                desc={items[page * 2].desc}
+              />
+              {items[page * 2 + 1] && (
+                <VisionCard
+                  imageUrl={items[page * 2 + 1].imageUrl}
+                  titleEn={items[page * 2 + 1].titleEn}
+                  desc={items[page * 2 + 1].desc}
+                />
+              )}
+            </div>
           ))}
         </div>
       </div>
     </div>
-  );
-}
-
-function SectionKicker({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1e40af]">
-      {children}
-    </span>
   );
 }

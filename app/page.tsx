@@ -340,7 +340,9 @@ function SiteChrome({
       >
         <div className="mx-auto w-full max-w-[1920px]">
           <VisionCarousel
-            title="낮은 견적 빠르고 정확하고 신뢰할 만한 계획"
+            subtitle="잘 찾아오셨어요"
+            title="애드그릿과 함께"
+            accentLine="낮은 견적 · 빠르고 정확한 계획"
             items={[
               { iconKey: "badge", titleEn: "No Hidden Fees", desc: "영업사원 수수료 견적에 없습니다. 많은 양의 배포를 할 수 있는 강력한 이점이 있습니다.", imageUrl: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=80" },
               { iconKey: "document", titleEn: "Massive Distribution", desc: "많은 양의 배포를 할 수 있는 강력한 이점이 있습니다.", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" },
