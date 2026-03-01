@@ -59,7 +59,7 @@ export function Section2CardList({ children }: { children: ReactNode }) {
     <div className="flex-1 w-[76%] max-w-[76%] flex flex-col">
       <div
         ref={scrollRef}
-        className="scrollbar-hide max-h-[520px] overflow-y-auto overflow-x-hidden scroll-smooth"
+        className="scrollbar-hide max-h-[780px] overflow-y-auto overflow-x-hidden scroll-smooth"
       >
         {children}
       </div>
