@@ -11,6 +11,7 @@ export type VisionItem = {
 
 const CARDS_PER_VIEW = 3;
 const CARD_GAP = 24;
+const AUTO_PLAY_MS = 3000;
 
 function VisionCard({
   imageUrl,
@@ -22,20 +23,28 @@ function VisionCard({
   desc: string;
 }) {
   return (
-    <div className="relative flex w-full flex-shrink-0 flex-col overflow-hidden rounded-xl">
-      <div
-        className="aspect-[4/3] w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url('${imageUrl}')` }}
-      />
-      <div
-        className="absolute inset-x-0 bottom-0 flex flex-col justify-end bg-gradient-to-t from-black/75 via-black/40 to-transparent p-4 sm:p-5 min-h-[72px]"
-        aria-hidden
-      />
-      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 text-center">
-        <p className="text-white text-sm sm:text-base font-bold leading-snug">
+    <div className="flex w-full flex-shrink-0 flex-col overflow-hidden rounded-xl bg-white border border-slate-100 shadow-sm">
+      {/* 이미지: 그레이스케일 + 연한 파란 오버레이 */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-xl">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat grayscale"
+          style={{ backgroundImage: `url('${imageUrl}')` }}
+        />
+        <div
+          className="absolute top-2 right-2 w-24 h-24 rounded-full bg-blue-400/25 blur-2xl"
+          aria-hidden
+        />
+        <div
+          className="absolute bottom-4 left-4 w-20 h-20 rounded-full bg-blue-300/20 blur-xl"
+          aria-hidden
+        />
+      </div>
+      {/* 텍스트: 이미지 아래, 왼쪽 정렬 */}
+      <div className="flex flex-1 flex-col p-4 sm:p-5 text-left">
+        <h3 className="text-base sm:text-lg font-bold text-black leading-snug">
           {titleEn}
-        </p>
-        <p className="text-white/95 text-xs sm:text-sm font-medium leading-snug mt-0.5 line-clamp-2">
+        </h3>
+        <p className="mt-2 text-sm sm:text-[15px] text-slate-700 leading-relaxed line-clamp-3">
           {desc}
         </p>
       </div>
@@ -47,12 +56,18 @@ export function VisionCarousel({
   items,
   title,
   sectionTitle,
+  sectionKicker,
+  titleLine1,
+  titleLine2,
   subtitle,
   accentLine,
 }: {
   items: VisionItem[];
   title: string;
   sectionTitle?: string;
+  sectionKicker?: string;
+  titleLine1?: string;
+  titleLine2?: string;
   subtitle?: string;
   accentLine?: string;
 }) {
@@ -81,25 +96,33 @@ export function VisionCarousel({
   useEffect(() => {
     autoPlayRef.current = setInterval(() => {
       setCurrentPage((p) => (p >= maxPageIndex ? 0 : p + 1));
-    }, 3000);
+    }, AUTO_PLAY_MS);
     return () => {
       if (autoPlayRef.current) clearInterval(autoPlayRef.current);
     };
   }, [maxPageIndex]);
 
-  const pageNum = (currentPage + 1).toString().padStart(2, "0");
-  const totalNum = totalPages.toString().padStart(2, "0");
-
-  const heading = sectionTitle ?? title;
+  const kicker = sectionKicker ?? "POINT";
+  const line1 = titleLine1 ?? sectionTitle ?? title;
+  const line2 = titleLine2;
 
   return (
     <div className="flex flex-col gap-8 sm:gap-10">
-      {/* 상단: Why? 스타일 제목 + 네비 (참고 이미지 레이아웃) */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-black">
-          {heading}
+      {/* 상단: 파란 라벨 + 2줄 제목 가운데 정렬, 페이지번호 없이 이전/다음만 */}
+      <div className="flex flex-col items-center gap-3 text-center">
+        <span className="text-xs font-semibold uppercase tracking-[0.25em] text-[#1e40af]">
+          {kicker}
+        </span>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-black leading-tight">
+          {line1}
+          {line2 != null && (
+            <>
+              <br />
+              {line2}
+            </>
+          )}
         </h2>
-        <div className="flex items-center gap-3 text-slate-600">
+        <div className="flex items-center gap-3 text-slate-600 mt-2">
           <button
             type="button"
             onClick={prev}
@@ -110,9 +133,6 @@ export function VisionCarousel({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <span className="tabular-nums font-medium">
-            {pageNum} <span className="mx-1 text-slate-300">|</span> {totalNum}
-          </span>
           <button
             type="button"
             onClick={next}
@@ -126,7 +146,7 @@ export function VisionCarousel({
         </div>
       </div>
 
-      {/* 3장 가로 배치 슬라이드 (내용·슬라이드 효과 동일) */}
+      {/* 3장 가로 슬라이드 (내용·슬라이드 효과·3초 유지) */}
       <div className="w-full overflow-hidden">
         <div
           ref={trackRef}
