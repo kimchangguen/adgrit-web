@@ -29,7 +29,7 @@ export function SloganWithEffects() {
             <br />
             집어 치우고
             <br />
-            광고 양으로 승부 하세요
+            <span style={{ color: "#ff8d1c" }}>광고 양</span>으로 승부 하세요
           </motion.h2>
 
           <motion.p
