@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 
 const MILESTONES = [
@@ -38,10 +37,10 @@ export function ResultsWithGraph() {
       id="results"
       className="relative z-10 w-full overflow-hidden bg-white py-20 sm:py-24 lg:py-28"
     >
-      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-14 lg:flex-row lg:items-stretch lg:gap-20">
           {/* 왼쪽: 텍스트 */}
-          <div className="flex-1 max-w-2xl">
+          <div className="flex-shrink-0 lg:w-[38%] max-w-2xl">
             <motion.span
               className="text-[0.8rem] sm:text-sm font-medium uppercase tracking-[0.2em] text-black/70"
               initial={{ opacity: 0, y: 8 }}
@@ -82,9 +81,9 @@ export function ResultsWithGraph() {
             </motion.p>
           </div>
 
-          {/* 오른쪽: 큰 그래프 (막대 + 막대마다 연도·설명 + ROAS 500% 표시) */}
+          {/* 오른쪽: 큰 그래프 (막대 + 막대마다 연도·설명 + ROAS 500% 표시) - 넓게 */}
           <motion.div
-            className="flex-1 min-w-0 rounded-2xl border border-slate-200 bg-slate-50/50 p-7 sm:p-9 lg:p-11"
+            className="flex-1 min-w-0 lg:min-w-[60%] rounded-2xl border border-slate-200 bg-slate-50/50 p-7 sm:p-9 lg:p-11"
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ amount: 0.2, once: true }}
@@ -136,34 +135,8 @@ export function ResultsWithGraph() {
                 </motion.div>
               ))}
             </div>
-
-            <div className="rounded-lg border border-slate-200 bg-white mt-7 py-3 text-center">
-              <span className="text-[1.05rem] font-bold text-slate-800">ROAS</span>
-            </div>
           </motion.div>
         </div>
-
-        {/* 하단: CTA 버튼 */}
-        <motion.div
-          className="mt-14 flex flex-col items-end gap-4 sm:gap-5"
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ amount: 0.2, once: true }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-        >
-          <Link
-            href="/about"
-            className="w-full sm:w-auto rounded-lg bg-black px-7 py-3.5 text-center text-[1.05rem] font-semibold text-white shadow-md transition hover:bg-slate-800"
-          >
-            전체 서비스
-          </Link>
-          <Link
-            href="/contact"
-            className="w-full sm:w-auto rounded-lg bg-black px-7 py-3.5 text-center text-[1.05rem] font-semibold text-white shadow-md transition hover:bg-slate-800"
-          >
-            컨설팅 문의
-          </Link>
-        </motion.div>
       </div>
     </section>
   );
