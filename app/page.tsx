@@ -17,6 +17,7 @@ import {
 import { SloganWithEffects } from "./_components/SloganWithEffects";
 import { VisionCarousel } from "./_components/VisionCarousel";
 import { ResultsWithGraph } from "./_components/ResultsWithGraph";
+import { OurClientsSection } from "./_components/OurClientsSection";
 import { WithoutAdgritSection } from "./_components/WithoutAdgritSection";
 import { KakaoTestimonialsSection } from "./_components/KakaoTestimonialsSection";
 import { MarketingProductsSection } from "./_components/MarketingProductsSection";
@@ -388,6 +389,9 @@ function SiteChrome({
 
       {/* Results - 다섯번째 섹션 */}
       <ResultsWithGraph />
+
+      {/* OUR CLIENTS - 05 섹션 밑 */}
+      <OurClientsSection />
 
       {/* 애드그릿과 하지 않는다면 - 여섯번째 섹션 */}
       <WithoutAdgritSection />
