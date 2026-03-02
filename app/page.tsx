@@ -367,7 +367,7 @@ function SiteChrome({
       {/* Vision - 네번째 섹션 */}
       <section
         id="about"
-        className="relative z-10 flex w-full max-w-[1920px] mx-auto items-center border-t border-slate-100 bg-slate-50 px-6 py-8 sm:px-10 sm:py-10"
+        className="relative z-10 flex w-full max-w-[1920px] mx-auto items-center border-t border-slate-100 bg-white px-6 py-8 sm:px-10 sm:py-10"
       >
         <div className="mx-auto w-full max-w-[1920px]">
           <VisionCarousel
