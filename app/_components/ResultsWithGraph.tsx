@@ -83,7 +83,7 @@ export function ResultsWithGraph() {
 
           {/* 오른쪽: 큰 그래프 (막대 + 막대마다 연도·설명 + ROAS 500% 표시) - 넓게 */}
           <motion.div
-            className="flex-1 min-w-0 lg:min-w-[60%] rounded-2xl border border-slate-200 bg-slate-50/50 p-7 sm:p-9 lg:p-11"
+            className="flex-1 min-w-0 lg:min-w-[60%] p-7 sm:p-9 lg:p-11"
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ amount: 0.2, once: true }}
