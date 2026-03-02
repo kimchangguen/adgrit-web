@@ -35,15 +35,15 @@ export function ResultsWithGraph() {
     <section
       ref={sectionRef}
       id="results"
-      className="relative z-10 w-full overflow-hidden bg-[#0f172a] py-16 sm:py-20 lg:py-24"
+      className="relative z-10 w-full overflow-hidden bg-white py-16 sm:py-20 lg:py-24"
     >
-      {/* 배경: 어두운 파란 그라데이션 + 은은한 곡선 패턴 */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.08]">
+      {/* 배경: 은은한 곡선 패턴 (흰 배경용) */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
         <svg className="h-full w-full" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
           <defs>
             <linearGradient id="results-bg-wave" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#1e3a8a" />
-              <stop offset="100%" stopColor="#0f172a" />
+              <stop offset="0%" stopColor="#64748b" />
+              <stop offset="100%" stopColor="#94a3b8" />
             </linearGradient>
           </defs>
           <path
@@ -64,47 +64,47 @@ export function ResultsWithGraph() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {/* 상단: 2단 - 왼쪽 텍스트, 오른쪽 막대 그래프 + 표 */}
+        {/* 2단: 왼쪽 텍스트, 오른쪽 막대 그래프 + 표 */}
         <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-16">
-          {/* 왼쪽: 텍스트 */}
+          {/* 왼쪽: 텍스트 (검정색) */}
           <div className="flex-1 max-w-xl">
             <motion.span
-              className="text-xs font-medium uppercase tracking-[0.2em] text-white/90"
+              className="text-xs font-medium uppercase tracking-[0.2em] text-black/70"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
               transition={{ duration: 0.4 }}
             >
-              Our goal is success
+              About Us
             </motion.span>
             <motion.h2
-              className="mt-3 text-2xl font-extrabold leading-tight text-white sm:text-3xl lg:text-4xl"
+              className="mt-3 text-2xl font-extrabold leading-tight text-black sm:text-3xl lg:text-4xl"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
               transition={{ duration: 0.4, delay: 0.05 }}
             >
-              100원도 허투로 사용하지 않아요
+              데이터 기반 마케팅,
+              <br />
+              애드그릿이 앞장섭니다.
             </motion.h2>
             <motion.p
-              className="mt-5 text-base leading-relaxed text-white/95 sm:text-lg"
+              className="mt-5 text-base leading-relaxed text-black sm:text-lg"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
               transition={{ duration: 0.4, delay: 0.1 }}
             >
-              유어플랜의 PM은 단순 실행이 아닌{" "}
-              <span className="font-semibold text-sky-300">예산 대비 효율 ROAS</span>의 지속적인 상승을 목표로 설계하고 운영해요
+              산업의 마케팅을 넘어, 데이터 기반 혁신으로 나아갑니다.
             </motion.p>
             <motion.p
-              className="mt-4 flex items-start gap-2 text-sm text-white/85"
+              className="mt-3 text-base leading-relaxed text-black sm:text-lg"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
               transition={{ duration: 0.4, delay: 0.15 }}
             >
-              <span className="mt-0.5 text-slate-900">●</span>
-              <span>모든 사용 예산은 회차 보고서에서 투명하게 확인하실 수 있습니다.</span>
+              첨단 AI 기술과 검증된 전략이 만드는 새로운 성장 패러다임, 애드그릿이 앞장섭니다.
             </motion.p>
           </div>
 
@@ -137,7 +137,7 @@ export function ResultsWithGraph() {
               ))}
             </div>
             <motion.div
-              className="mt-4 rounded-lg bg-white px-6 py-2.5 shadow-lg"
+              className="mt-4 rounded-lg border border-slate-200 bg-slate-50 px-6 py-2.5"
               initial={{ opacity: 0, y: 4 }}
               animate={barAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
               transition={{ duration: 0.4, delay: 0.65 }}
@@ -148,33 +148,33 @@ export function ResultsWithGraph() {
             {/* 표: 연도별 마일스톤 + 광고주 평균 ROAS 500% */}
             <div className="mt-8 w-full max-w-md">
               <table className="w-full border-collapse text-left">
-                <tbody className="text-white/95">
+                <tbody className="text-black">
                   {MILESTONES_TABLE.map((row, i) => (
                     <motion.tr
                       key={row.year}
-                      className="border-b border-white/15"
+                      className="border-b border-slate-200"
                       initial={{ opacity: 0, x: 8 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ amount: 0.3, once: true }}
                       transition={{ duration: 0.35, delay: 0.1 + i * 0.05 }}
                     >
-                      <td className="py-3 pr-4 text-sm font-semibold text-white/80 w-16 sm:w-20">
+                      <td className="py-3 pr-4 text-sm font-semibold text-slate-600 w-16 sm:w-20">
                         {row.year}
                       </td>
-                      <td className="py-3 text-sm">{row.text}</td>
+                      <td className="py-3 text-sm text-slate-800">{row.text}</td>
                     </motion.tr>
                   ))}
                   <motion.tr
-                    className="border-b border-white/15"
+                    className="border-b border-slate-200"
                     initial={{ opacity: 0, x: 8 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ amount: 0.3, once: true }}
                     transition={{ duration: 0.35, delay: 0.35 }}
                   >
-                    <td className="py-3 pr-4 text-sm font-semibold text-sky-300/90">
+                    <td className="py-3 pr-4 text-sm font-semibold text-slate-600">
                       광고주 평균 ROAS
                     </td>
-                    <td className="py-3 text-lg font-bold text-amber-400">500%</td>
+                    <td className="py-3 text-lg font-bold text-slate-900">500%</td>
                   </motion.tr>
                 </tbody>
               </table>
@@ -182,7 +182,7 @@ export function ResultsWithGraph() {
           </motion.div>
         </div>
 
-        {/* 하단 우측: CTA 버튼 2개 */}
+        {/* 하단 우측: CTA 버튼 (검정 배경 + 흰 글씨) */}
         <motion.div
           className="mt-12 flex flex-col items-end gap-3 sm:gap-4"
           initial={{ opacity: 0, y: 8 }}
@@ -192,13 +192,13 @@ export function ResultsWithGraph() {
         >
           <Link
             href="/about"
-            className="w-full sm:w-auto rounded-lg bg-white px-6 py-3 text-center text-sm font-semibold text-slate-800 shadow-lg transition hover:bg-white/95"
+            className="w-full sm:w-auto rounded-lg bg-black px-6 py-3 text-center text-sm font-semibold text-white shadow-md transition hover:bg-slate-800"
           >
             전체 서비스
           </Link>
           <Link
             href="/contact"
-            className="w-full sm:w-auto rounded-lg bg-white px-6 py-3 text-center text-sm font-semibold text-slate-800 shadow-lg transition hover:bg-white/95"
+            className="w-full sm:w-auto rounded-lg bg-black px-6 py-3 text-center text-sm font-semibold text-white shadow-md transition hover:bg-slate-800"
           >
             컨설팅 문의
           </Link>
