@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 
-const MILESTONES = [
+const MILESTONES_TABLE = [
   { year: "2019", text: "디지털 마케팅 전문팀 구성" },
   { year: "2020", text: "데이터 기반 광고 시스템 구축" },
   { year: "2022", text: "AI 마케팅 전략 상용화" },
@@ -12,121 +12,197 @@ const MILESTONES = [
   { year: "2025", text: "글로벌 마케팅 확대" },
 ];
 
-const ACCENT = "#0ea5e9"; // sky-500
+const BAR_HEIGHTS = [0.5, 0.7, 0.85, 1];
+const BAR_COLORS = [
+  "rgb(30, 58, 138)",
+  "rgb(59, 130, 246)",
+  "rgb(96, 165, 250)",
+  "rgb(147, 197, 253)",
+];
 
 export function ResultsWithGraph() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { amount: 0.1, once: true });
+  const isInView = useInView(sectionRef, { amount: 0.15, once: true });
+  const [barAnimated, setBarAnimated] = useState(false);
+
+  useEffect(() => {
+    if (!isInView) return;
+    const t = setTimeout(() => setBarAnimated(true), 200);
+    return () => clearTimeout(t);
+  }, [isInView]);
 
   return (
     <section
       ref={sectionRef}
       id="results"
-      className="relative w-full bg-white py-20 sm:py-24 lg:py-28"
+      className="relative z-10 w-full overflow-hidden bg-[#0f172a] py-16 sm:py-20 lg:py-24"
     >
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1fr,1fr] lg:gap-16 lg:items-start">
+      {/* 배경: 어두운 파란 그라데이션 + 은은한 곡선 패턴 */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.08]">
+        <svg className="h-full w-full" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="results-bg-wave" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#1e3a8a" />
+              <stop offset="100%" stopColor="#0f172a" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M0 200 Q300 100 600 150 T1200 100 L1200 800 L0 800 Z"
+            fill="url(#results-bg-wave)"
+          />
+          <path
+            d="M0 500 Q400 400 800 450 T1200 400 L1200 800 L0 800 Z"
+            fill="url(#results-bg-wave)"
+            opacity="0.6"
+          />
+          <path
+            d="M1200 0 Q900 80 500 50 T0 120 L0 0 Z"
+            fill="url(#results-bg-wave)"
+            opacity="0.5"
+          />
+        </svg>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        {/* 상단: 2단 - 왼쪽 텍스트, 오른쪽 막대 그래프 + 표 */}
+        <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-16">
           {/* 왼쪽: 텍스트 */}
-          <div className="space-y-6">
-            <motion.p
-              className="text-xs font-medium uppercase tracking-widest text-slate-400"
-              initial={{ opacity: 0, y: 6 }}
+          <div className="flex-1 max-w-xl">
+            <motion.span
+              className="text-xs font-medium uppercase tracking-[0.2em] text-white/90"
+              initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ amount: 0.2, once: true }}
               transition={{ duration: 0.4 }}
             >
-              About Us
-            </motion.p>
+              Our goal is success
+            </motion.span>
             <motion.h2
-              className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl lg:text-[1.75rem] lg:leading-tight"
-              initial={{ opacity: 0, y: 6 }}
+              className="mt-3 text-2xl font-extrabold leading-tight text-white sm:text-3xl lg:text-4xl"
+              initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ amount: 0.2, once: true }}
               transition={{ duration: 0.4, delay: 0.05 }}
             >
-              데이터 기반 마케팅,
-              <br />
-              애드그릿이 앞장섭니다.
+              100원도 허투로 사용하지 않아요
             </motion.h2>
             <motion.p
-              className="text-[15px] leading-relaxed text-slate-600"
-              initial={{ opacity: 0, y: 6 }}
+              className="mt-5 text-base leading-relaxed text-white/95 sm:text-lg"
+              initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ amount: 0.2, once: true }}
               transition={{ duration: 0.4, delay: 0.1 }}
             >
-              산업의 마케팅을 넘어, 데이터 기반 혁신으로 나아갑니다.
+              유어플랜의 PM은 단순 실행이 아닌{" "}
+              <span className="font-semibold text-sky-300">예산 대비 효율 ROAS</span>의 지속적인 상승을 목표로 설계하고 운영해요
             </motion.p>
             <motion.p
-              className="text-[15px] leading-relaxed text-slate-600"
-              initial={{ opacity: 0, y: 6 }}
+              className="mt-4 flex items-start gap-2 text-sm text-white/85"
+              initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ amount: 0.2, once: true }}
               transition={{ duration: 0.4, delay: 0.15 }}
             >
-              첨단 AI 기술과 검증된 전략이 만드는 새로운 성장 패러다임, 애드그릿이 앞장섭니다.
+              <span className="mt-0.5 text-slate-900">●</span>
+              <span>모든 사용 예산은 회차 보고서에서 투명하게 확인하실 수 있습니다.</span>
             </motion.p>
-            <motion.div
-              className="flex flex-wrap gap-3 pt-2"
-              initial={{ opacity: 0, y: 6 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-            >
-              <Link
-                href="/about"
-                className="inline-flex items-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
-              >
-                전체 서비스
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-slate-800"
-              >
-                컨설팅 문의
-              </Link>
-            </motion.div>
           </div>
 
-          {/* 오른쪽: 타임라인 + ROAS 카드 */}
+          {/* 오른쪽: 막대 그래프 + ROAS 라벨 + 표 */}
           <motion.div
-            className="rounded-2xl border border-slate-100 bg-slate-50/50 p-6 sm:p-8"
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            className="flex flex-1 flex-col items-center lg:items-end min-w-0"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ amount: 0.2, once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            {/* ROAS 강조 */}
-            <div className="mb-8 flex items-baseline gap-2">
-              <span className="text-sm font-medium text-slate-500">광고주 평균 ROAS</span>
-              <span
-                className="text-3xl font-bold tabular-nums sm:text-4xl"
-                style={{ color: ACCENT }}
-              >
-                500%
-              </span>
-            </div>
-
-            {/* 연도별 마일스톤 - 미니멀 리스트 */}
-            <ul className="space-y-4">
-              {MILESTONES.map((item, i) => (
-                <motion.li
-                  key={item.year}
-                  className="flex gap-4"
-                  initial={{ opacity: 0, x: -8 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.5 }}
-                  transition={{ duration: 0.35, delay: 0.15 + i * 0.05 }}
-                >
-                  <span className="text-sm font-semibold text-slate-400 w-10 shrink-0">
-                    {item.year}
-                  </span>
-                  <span className="text-sm text-slate-700">{item.text}</span>
-                </motion.li>
+            {/* 막대 그래프 */}
+            <div className="flex items-end justify-center gap-4 sm:gap-6 h-44 sm:h-52 w-full max-w-md">
+              {BAR_HEIGHTS.map((ratio, i) => (
+                <motion.div
+                  key={i}
+                  className="flex-1 max-w-[4rem] rounded-t-lg min-h-[8px]"
+                  style={{
+                    backgroundColor: BAR_COLORS[i],
+                    height: barAnimated ? `${ratio * 100}%` : "8px",
+                  }}
+                  initial={{ height: "8px" }}
+                  animate={barAnimated ? { height: `${ratio * 100}%` } : { height: "8px" }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.2 + i * 0.1,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                />
               ))}
-            </ul>
+            </div>
+            <motion.div
+              className="mt-4 rounded-lg bg-white px-6 py-2.5 shadow-lg"
+              initial={{ opacity: 0, y: 4 }}
+              animate={barAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
+              transition={{ duration: 0.4, delay: 0.65 }}
+            >
+              <span className="text-sm font-bold text-slate-800">ROAS</span>
+            </motion.div>
+
+            {/* 표: 연도별 마일스톤 + 광고주 평균 ROAS 500% */}
+            <div className="mt-8 w-full max-w-md">
+              <table className="w-full border-collapse text-left">
+                <tbody className="text-white/95">
+                  {MILESTONES_TABLE.map((row, i) => (
+                    <motion.tr
+                      key={row.year}
+                      className="border-b border-white/15"
+                      initial={{ opacity: 0, x: 8 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ amount: 0.3, once: true }}
+                      transition={{ duration: 0.35, delay: 0.1 + i * 0.05 }}
+                    >
+                      <td className="py-3 pr-4 text-sm font-semibold text-white/80 w-16 sm:w-20">
+                        {row.year}
+                      </td>
+                      <td className="py-3 text-sm">{row.text}</td>
+                    </motion.tr>
+                  ))}
+                  <motion.tr
+                    className="border-b border-white/15"
+                    initial={{ opacity: 0, x: 8 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ amount: 0.3, once: true }}
+                    transition={{ duration: 0.35, delay: 0.35 }}
+                  >
+                    <td className="py-3 pr-4 text-sm font-semibold text-sky-300/90">
+                      광고주 평균 ROAS
+                    </td>
+                    <td className="py-3 text-lg font-bold text-amber-400">500%</td>
+                  </motion.tr>
+                </tbody>
+              </table>
+            </div>
           </motion.div>
         </div>
+
+        {/* 하단 우측: CTA 버튼 2개 */}
+        <motion.div
+          className="mt-12 flex flex-col items-end gap-3 sm:gap-4"
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ amount: 0.2, once: true }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+        >
+          <Link
+            href="/about"
+            className="w-full sm:w-auto rounded-lg bg-white px-6 py-3 text-center text-sm font-semibold text-slate-800 shadow-lg transition hover:bg-white/95"
+          >
+            전체 서비스
+          </Link>
+          <Link
+            href="/contact"
+            className="w-full sm:w-auto rounded-lg bg-white px-6 py-3 text-center text-sm font-semibold text-slate-800 shadow-lg transition hover:bg-white/95"
+          >
+            컨설팅 문의
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
