@@ -260,31 +260,31 @@ function SiteChrome({
             <div className="text-left font-worry order-2 lg:order-1">
               <AnimatedHero>
                 <AnimatedHeroItem>
-                  <p className="text-base text-[#374151] leading-relaxed">
+                  <p className="text-[1.1rem] text-[#374151] leading-relaxed">
                     성공한 사장님들은 마케팅을 &apos;비용&apos;이라 부르지 않습니다.
                   </p>
                 </AnimatedHeroItem>
                 <AnimatedHeroItem>
-                  <p className="mt-6 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#111827] leading-[1.25]">
+                  <p className="mt-6 text-[2.06rem] sm:text-[2.48rem] md:text-[3.3rem] font-bold tracking-tight text-[#111827] leading-[1.25]">
                     그들은 <span className="text-[#FF7F00]">&apos;연료&apos;</span>라고 부릅니다.
                   </p>
                 </AnimatedHeroItem>
                 <AnimatedHeroItem>
-                  <p className="mt-6 text-base text-[#374151] leading-relaxed">
+                  <p className="mt-6 text-[1.1rem] text-[#374151] leading-relaxed">
                     실패했던 건 사장님 탓이 아닙니다.
                     <br />
                     &apos;방법&apos;이 틀렸고 파트너를 잘못 만나서 입니다.
                   </p>
                 </AnimatedHeroItem>
                 <AnimatedHeroItem>
-                  <p className="mt-6 text-base text-[#374151] leading-relaxed">
+                  <p className="mt-6 text-[1.1rem] text-[#374151] leading-relaxed">
                     이제는 개발실행사와 직접 제대로된 <span className="font-semibold">AI CORE Marketing</span> 하세요
                   </p>
                 </AnimatedHeroItem>
                 <AnimatedHeroItem>
                   <a
                     href="tel:1661-0646"
-                    className="mt-10 inline-flex items-center justify-center rounded-full bg-[#1A237E] px-10 py-4 text-base font-semibold text-white hover:bg-[#283593] transition-colors"
+                    className="mt-11 inline-flex items-center justify-center rounded-full bg-[#1A237E] px-11 py-[1.1rem] text-[1.1rem] font-semibold text-white hover:bg-[#283593] transition-colors"
                   >
                     상담하기
                   </a>
