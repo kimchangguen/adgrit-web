@@ -37,9 +37,9 @@ export function WithoutAdgritSection() {
             </p>
           </div>
 
-          {/* 말풍선 - 중앙, 더 크게 */}
-          <div className="mt-10 sm:mt-14 w-full max-w-2xl mx-auto h-[340px] sm:h-[400px] overflow-hidden rounded-xl flex justify-center">
-            <div className="flex flex-col gap-4 animate-bubbles-up w-full max-w-xl mx-auto">
+          {/* 말풍선 - 중앙, 가로 20% 더 넓게 */}
+          <div className="mt-10 sm:mt-14 w-full max-w-[43rem] mx-auto h-[340px] sm:h-[400px] overflow-hidden rounded-xl flex justify-center">
+            <div className="flex flex-col gap-4 animate-bubbles-up w-full max-w-[43rem] mx-auto">
               {[...MESSAGES, ...MESSAGES].map((text, i) => (
                 <div
                   key={`bubble-${i}`}
@@ -58,9 +58,9 @@ export function WithoutAdgritSection() {
           </div>
         </div>
 
-        {/* 하단 큰 글씨 */}
+        {/* 하단 안내 문구 - 글자 얇게, 3pt 작게 */}
         <div className="mt-16 sm:mt-20 pt-12 border-t border-slate-600/50">
-          <p className="text-lg sm:text-xl lg:text-2xl font-bold leading-relaxed text-white text-center max-w-4xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl font-normal leading-relaxed text-white text-center max-w-4xl mx-auto">
             {BOTTOM_MESSAGE}
           </p>
         </div>
