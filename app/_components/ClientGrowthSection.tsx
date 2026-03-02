@@ -33,27 +33,21 @@ export function ClientGrowthSection() {
           클라이언트의 성장이 곧 우리의 성장이자 성공입니다.
         </p>
 
-        {/* 무료 상담 블록 */}
+        {/* CTA 블록 */}
         <div className="mt-14 sm:mt-20">
-          <p className="text-sm font-semibold uppercase tracking-widest text-white/80">
-            무료 상담
-          </p>
-          <p className="mt-4 text-xl sm:text-2xl md:text-3xl font-bold text-white leading-snug">
+          <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white leading-snug">
             지금, 애드그릿 전문가와
             <br />
             함께 컨설팅을 시작해보세요
           </p>
           <p className="mt-2 text-lg sm:text-xl text-white/95">
-            전화 한 통으로 시작하는
-            <br />
-            성장의 첫 걸음
+            전화 한 통으로 시작하는 성장의 첫 걸음
           </p>
           <Link
             href="tel:1661-0646"
-            className="mt-8 inline-flex flex-col items-center gap-1 rounded-full bg-white/15 hover:bg-white/25 border border-white/40 px-8 py-4 text-white font-semibold transition-colors"
+            className="mt-8 inline-flex items-center justify-center rounded-full bg-[#2362ff] hover:bg-[#1d51d9] px-8 py-4 text-white font-semibold transition-colors"
           >
-            <span>전화 상담하기</span>
-            <span className="text-xl sm:text-2xl font-bold tracking-wide">1661-0646</span>
+            전화
           </Link>
         </div>
 
