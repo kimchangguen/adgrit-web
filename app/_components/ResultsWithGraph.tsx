@@ -42,7 +42,7 @@ export function ResultsWithGraph() {
           {/* 왼쪽: 텍스트 */}
           <div className="flex-shrink-0 lg:w-[38%] max-w-2xl">
             <motion.span
-              className="text-[0.92rem] sm:text-[1.06rem] font-medium uppercase tracking-[0.2em] text-black/70"
+              className="text-[0.86rem] sm:text-[0.99rem] font-medium uppercase tracking-[0.2em] text-black/70"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
@@ -51,7 +51,7 @@ export function ResultsWithGraph() {
               About Us
             </motion.span>
             <motion.h2
-              className="mt-5 text-[2rem] font-extrabold leading-tight text-black sm:text-[2.65rem] lg:text-[3.17rem]"
+              className="mt-4 text-[1.86rem] font-extrabold leading-tight text-black sm:text-[2.46rem] lg:text-[2.95rem]"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
@@ -62,7 +62,7 @@ export function ResultsWithGraph() {
               애드그릿이 앞장섭니다.
             </motion.h2>
             <motion.p
-              className="mt-7 text-[1.2rem] leading-relaxed text-black sm:text-[1.32rem]"
+              className="mt-6 text-[1.12rem] leading-relaxed text-black sm:text-[1.23rem]"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
@@ -71,7 +71,7 @@ export function ResultsWithGraph() {
               산업의 마케팅을 넘어, 데이터 기반 혁신으로 나아갑니다.
             </motion.p>
             <motion.p
-              className="mt-5 text-[1.2rem] leading-relaxed text-black sm:text-[1.32rem]"
+              className="mt-4 text-[1.12rem] leading-relaxed text-black sm:text-[1.23rem]"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
