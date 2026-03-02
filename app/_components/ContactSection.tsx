@@ -30,10 +30,9 @@ export function ContactSection() {
                 </svg>
               </span>
               <div>
-                <p className="text-lg font-semibold text-white">왜 전화 번호가 없죠?</p>
+                <p className="text-lg font-semibold text-white">1-2일 내로 연락드리겠습니다.</p>
                 <p className="mt-3 text-sm sm:text-base text-white/85 leading-relaxed">
-                  애드그릿은 클라이언트 확인 및 검증이 완료된 경우에만 상담 및 컨설팅이 가능하기 때문에
-                  내용 기입 후 &apos;상담신청&apos;을 클릭해주시면 영업일 기준 1일 이내로 연락을 드립니다.
+                  클라이언트 확인 및 검증이 완료된 경우에 빠른 상담 및 컨설팅이 가능하기 때문에 내용 기입 후 &apos;상담신청&apos;을 클릭해주시면 영업일 기준 1일 이내로 연락을 드립니다.
                 </p>
               </div>
             </div>

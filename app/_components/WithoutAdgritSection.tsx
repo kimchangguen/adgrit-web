@@ -23,21 +23,31 @@ export function WithoutAdgritSection() {
   return (
     <section
       id="without-adgrit"
-      className="relative z-10 border-t border-slate-800 bg-[#1A253A] py-16 sm:py-20 overflow-hidden"
+      className="relative z-10 border-t border-slate-800 bg-[#1e3a5f] py-16 sm:py-20 overflow-hidden"
     >
       <Container>
-        <div className="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
-          {/* 왼쪽: 파란 말풍선들 - 위로 끊임없이 올라가는 애니메이션 */}
-          <div className="flex-shrink-0 lg:w-[38%] lg:max-w-[420px] h-[320px] sm:h-[380px] overflow-hidden rounded-xl">
-            <div className="flex flex-col gap-4 animate-bubbles-up w-max max-w-full" style={{ width: "100%" }}>
+        <div className="flex flex-col items-center">
+          {/* 상단: 제목 + 부제 - 말풍선 위, 중앙정렬 */}
+          <div className="text-center w-full max-w-3xl">
+            <h2 className="text-[1.73rem] sm:text-[2.3rem] lg:text-[2.76rem] font-bold leading-tight text-white">
+              애드그릿과 하지 않는다면
+            </h2>
+            <p className="mt-5 text-[1.15rem] sm:text-[1.44rem] text-white/95 leading-relaxed">
+              다음의 상태가 당신의 상태가 될 수 있습니다.
+            </p>
+          </div>
+
+          {/* 말풍선 - 중앙, 더 크게 */}
+          <div className="mt-10 sm:mt-14 w-full max-w-2xl mx-auto h-[340px] sm:h-[400px] overflow-hidden rounded-xl flex justify-center">
+            <div className="flex flex-col gap-4 animate-bubbles-up w-full max-w-xl mx-auto">
               {[...MESSAGES, ...MESSAGES].map((text, i) => (
                 <div
                   key={`bubble-${i}`}
-                  className="flex items-center gap-2.5 rounded-full px-5 py-4 w-max max-w-full text-white text-[1.09rem] leading-snug shadow-lg"
+                  className="flex items-center gap-3 rounded-full px-6 py-4 w-max max-w-full text-white text-[1.2rem] leading-snug shadow-lg mx-auto"
                   style={{ backgroundColor: BUBBLE_BLUE }}
                 >
                   <span className="flex-shrink-0 text-white/90" aria-hidden>
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z" />
                     </svg>
                   </span>
@@ -45,16 +55,6 @@ export function WithoutAdgritSection() {
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* 오른쪽: 제목 + 부제 (15% 확대) */}
-          <div className="flex-1 min-w-0 flex flex-col justify-center">
-            <h2 className="text-[1.73rem] sm:text-[2.3rem] lg:text-[2.76rem] font-bold leading-tight text-white text-left">
-              애드그릿과 하지 않는다면
-            </h2>
-            <p className="mt-5 text-[1.15rem] sm:text-[1.44rem] text-white/95 text-left leading-relaxed">
-              다음의 상태가 당신의 상태가 될 수 있습니다.
-            </p>
           </div>
         </div>
 
