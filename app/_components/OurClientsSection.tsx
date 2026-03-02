@@ -4,18 +4,18 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const CLIENTS = [
-  { name: "창조의 아침", desc: "전국 미대입시 전문학원", logo: "창조의아침미술학원" },
-  { name: "법무법인 태림", desc: "교정 변호사", logo: "태림" },
-  { name: "어커버", desc: "스파 의류브랜드", logo: "ACOVER" },
-  { name: "평강프라자", desc: "삼성전자 온라인 공식 파트너", logo: "평강프라자" },
-  { name: "야나두", desc: "영어전문 회화 교육", logo: "야나두" },
-  { name: "롯데홈쇼핑", desc: "홈 커머스", logo: "롯데홈쇼핑" },
-  { name: "네이처뉴트리션", desc: "건강식품 기업", logo: "네이처뉴트리션" },
-  { name: "리드카", desc: "중고차", logo: "리드카" },
-  { name: "고두 피트니스", desc: "피트니스 프랜차이즈", logo: "GOT FITNESS" },
-  { name: "월드오브워쉽", desc: "온라인 게임", logo: "월드오브워쉽" },
-  { name: "청춘농가", desc: "식품(수산물, 해산물 등)", logo: "청춘농가" },
-  { name: "코치", desc: "의류쇼", logo: "COACH" },
+  { name: "아트웨이브", desc: "전국 예체능 입시 전문학원", logo: "아트웨이브스튜디오" },
+  { name: "법무법인 로앤그레이", desc: "형사·기업 전문 로펌", logo: "로앤그레이" },
+  { name: "루미아핏", desc: "애슬레저 의류 브랜드", logo: "LUMIAFIT" },
+  { name: "에이펙스몰", desc: "전자제품 온라인 공식 파트너", logo: "에이펙스몰" },
+  { name: "스피크라운", desc: "성인 영어 회화 교육", logo: "스피크라운" },
+  { name: "넥스트홈쇼핑", desc: "라이브 커머스 플랫폼", logo: "넥스트홈쇼핑" },
+  { name: "바이오헬릭스", desc: "건강기능식품 기업", logo: "바이오헬릭스" },
+  { name: "카브릿지", desc: "프리미엄 중고차 플랫폼", logo: "카브릿지" },
+  { name: "어반코어짐", desc: "피트니스 프랜차이즈", logo: "URBAN CORE GYM" },
+  { name: "리전 아레나", desc: "온라인 전략 게임", logo: "LEGION ARENA" },
+  { name: "해담마켓", desc: "수산물·신선식품 브랜드", logo: "해담마켓" },
+  { name: "메종 벨로르", desc: "컨템포러리 패션 브랜드", logo: "MAISON VELOR" },
 ];
 
 export function OurClientsSection() {
