@@ -19,6 +19,7 @@ import { VisionCarousel } from "./_components/VisionCarousel";
 import { ResultsWithGraph } from "./_components/ResultsWithGraph";
 import { OurClientsSection } from "./_components/OurClientsSection";
 import { ClientGrowthSection } from "./_components/ClientGrowthSection";
+import { ContactSection } from "./_components/ContactSection";
 import { WithoutAdgritSection } from "./_components/WithoutAdgritSection";
 import { KakaoTestimonialsSection } from "./_components/KakaoTestimonialsSection";
 import { MarketingProductsSection } from "./_components/MarketingProductsSection";
@@ -485,87 +486,8 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* CTA - 열한번째 섹션 */}
-      <section
-        id="contact"
-        className="relative z-10 overflow-hidden border-t border-slate-200 py-20 sm:py-28"
-      >
-        {/* 배경 이미지: 여러 명이 사무실에서 일하는 모습 */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1920&q=80')`,
-          }}
-        />
-        {/* 어두운 오버레이 */}
-        <div className="absolute inset-0 bg-slate-900/75" />
-
-        <Container className="relative">
-          <AnimatedSection>
-            <FadeInItem>
-              <div className="flex flex-col items-center gap-12 text-center lg:flex-row lg:justify-center lg:gap-20">
-                {/* 좌측: 메인 텍스트 - 흰색으로 눈에 띄게 */}
-                <div className="flex-1 max-w-2xl">
-                  <p className="text-sm font-bold uppercase tracking-widest text-[#93c5fd]">
-                    무료 상담
-                  </p>
-                  <h2 className="mt-4 text-3xl font-black tracking-tight text-white sm:text-4xl lg:text-5xl drop-shadow-lg">
-                    지금, 애드그릿 전문가와
-                    <br />
-                    함께 컨설팅을 시작해보세요
-                  </h2>
-                  <p className="mt-6 text-lg text-slate-200 sm:text-xl">
-                    전화 한 통으로 시작하는
-                    <br />
-                    성장의 첫 걸음
-                  </p>
-                  <a
-                    href="tel:1661-0646"
-                    className="mt-10 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-base font-bold text-[#1e40af] shadow-xl transition-all hover:bg-slate-100 hover:scale-105 active:scale-100"
-                  >
-                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 01.99-.27 11.36 11.36 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.27 1l-2.2 2.2z" />
-                    </svg>
-                    전화 상담하기
-                  </a>
-                </div>
-
-                {/* 우측: 전화번호가 보이는 폰 모형 */}
-                <div className="flex-shrink-0">
-                  <div className="relative">
-                    <div className="absolute -inset-4 rounded-[3rem] bg-white/10 blur-2xl" />
-                    <div className="relative rounded-[2.5rem] border-[14px] border-slate-700 bg-slate-800 p-3 shadow-2xl">
-                      <div className="overflow-hidden rounded-[1.75rem] bg-gradient-to-b from-slate-700 to-slate-800">
-                        <div className="h-6 w-24 mx-auto rounded-b-2xl bg-slate-800" />
-                        <div className="px-6 pb-8 pt-2 text-center">
-                          <div className="rounded-xl bg-slate-600/50 px-4 py-3">
-                            <p className="text-xs font-medium text-slate-400">애드그릿 상담센터</p>
-                            <a
-                              href="tel:1661-0646"
-                              className="mt-2 block text-2xl font-black tracking-wider text-white transition-opacity hover:text-[#60a5fa]"
-                            >
-                              1661-0646
-                            </a>
-                          </div>
-                          <a
-                            href="tel:1661-0646"
-                            className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#22c55e] py-3.5 font-bold text-white shadow-lg"
-                          >
-                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 01.99-.27 11.36 11.36 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.27 1l-2.2 2.2z" />
-                            </svg>
-                            통화하기
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </FadeInItem>
-          </AnimatedSection>
-        </Container>
-      </section>
+      {/* Contact - 마지막 섹션 */}
+      <ContactSection />
 
       <div className="relative z-10">
         <Footer />
