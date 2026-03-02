@@ -45,9 +45,9 @@ export function ClientGrowthSection() {
           </p>
           <Link
             href="tel:1661-0646"
-            className="mt-8 inline-flex items-center justify-center rounded-full bg-[#2362ff] hover:bg-[#1d51d9] px-8 py-4 text-white font-semibold transition-colors"
+            className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-[#2362ff] hover:bg-[#1d51d9] px-[2.2rem] py-[1.1rem] text-[1.1rem] text-white font-semibold transition-colors"
           >
-            전화
+            전화 1661-0646
           </Link>
         </div>
 
