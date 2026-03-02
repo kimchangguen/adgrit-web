@@ -36,14 +36,14 @@ export function ResultsWithGraph() {
     <section
       ref={sectionRef}
       id="results"
-      className="relative z-10 w-full overflow-hidden bg-white py-16 sm:py-20 lg:py-24"
+      className="relative z-10 w-full overflow-hidden bg-white py-20 sm:py-24 lg:py-28"
     >
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-12 lg:flex-row lg:items-stretch lg:gap-16">
+        <div className="flex flex-col gap-14 lg:flex-row lg:items-stretch lg:gap-20">
           {/* 왼쪽: 텍스트 */}
-          <div className="flex-1 max-w-xl">
+          <div className="flex-1 max-w-2xl">
             <motion.span
-              className="text-xs font-medium uppercase tracking-[0.2em] text-black/70"
+              className="text-[0.8rem] sm:text-sm font-medium uppercase tracking-[0.2em] text-black/70"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
@@ -52,7 +52,7 @@ export function ResultsWithGraph() {
               About Us
             </motion.span>
             <motion.h2
-              className="mt-3 text-2xl font-extrabold leading-tight text-black sm:text-3xl lg:text-4xl"
+              className="mt-4 text-[1.73rem] font-extrabold leading-tight text-black sm:text-[2.3rem] lg:text-[2.76rem]"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
@@ -63,7 +63,7 @@ export function ResultsWithGraph() {
               애드그릿이 앞장섭니다.
             </motion.h2>
             <motion.p
-              className="mt-5 text-base leading-relaxed text-black sm:text-lg"
+              className="mt-6 text-[1.04rem] leading-relaxed text-black sm:text-[1.15rem]"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
@@ -72,7 +72,7 @@ export function ResultsWithGraph() {
               산업의 마케팅을 넘어, 데이터 기반 혁신으로 나아갑니다.
             </motion.p>
             <motion.p
-              className="mt-3 text-base leading-relaxed text-black sm:text-lg"
+              className="mt-4 text-[1.04rem] leading-relaxed text-black sm:text-[1.15rem]"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
@@ -84,16 +84,16 @@ export function ResultsWithGraph() {
 
           {/* 오른쪽: 큰 그래프 (막대 + 막대마다 연도·설명 + ROAS 500% 표시) */}
           <motion.div
-            className="flex-1 min-w-0 rounded-2xl border border-slate-200 bg-slate-50/50 p-6 sm:p-8 lg:p-10"
+            className="flex-1 min-w-0 rounded-2xl border border-slate-200 bg-slate-50/50 p-7 sm:p-9 lg:p-11"
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ amount: 0.2, once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             {/* 그래프 상단: 광고주 평균 ROAS 500% */}
-            <div className="mb-6 flex flex-wrap items-baseline justify-between gap-4">
-              <span className="text-sm font-medium text-slate-600">광고주 평균 ROAS</span>
-              <span className="text-2xl font-bold tabular-nums text-sky-600 sm:text-3xl">
+            <div className="mb-7 flex flex-wrap items-baseline justify-between gap-4">
+              <span className="text-[1.05rem] font-medium text-slate-600">광고주 평균 ROAS</span>
+              <span className="text-[2.3rem] font-bold tabular-nums text-sky-600 sm:text-[3.45rem]">
                 500%
               </span>
             </div>
@@ -110,9 +110,9 @@ export function ResultsWithGraph() {
                   transition={{ duration: 0.4, delay: 0.15 + i * 0.06 }}
                 >
                   {/* 막대 영역: 고정 높이, 막대가 아래에서 올라옴 */}
-                  <div className="flex h-56 sm:h-64 lg:h-72 w-full flex-col justify-end">
+                  <div className="flex h-64 sm:h-72 lg:h-80 w-full flex-col justify-end">
                     <motion.div
-                      className="w-full max-w-[4rem] sm:max-w-[4.5rem] mx-auto rounded-t-lg"
+                      className="w-full max-w-[4.6rem] sm:max-w-[5.2rem] mx-auto rounded-t-lg"
                       style={{ backgroundColor: BAR_COLORS[i] }}
                       initial={{ height: "0%" }}
                       animate={
@@ -127,9 +127,9 @@ export function ResultsWithGraph() {
                       }}
                     />
                   </div>
-                  <div className="mt-4 w-full min-w-0 text-center">
-                    <p className="text-sm font-semibold text-slate-700">{item.year}</p>
-                    <p className="mt-1 text-xs leading-snug text-slate-600 line-clamp-2 sm:line-clamp-3">
+                  <div className="mt-5 w-full min-w-0 text-center">
+                    <p className="text-[1.05rem] font-semibold text-slate-700">{item.year}</p>
+                    <p className="mt-1.5 text-sm leading-snug text-slate-600 line-clamp-2 sm:line-clamp-3">
                       {item.text}
                     </p>
                   </div>
@@ -137,15 +137,15 @@ export function ResultsWithGraph() {
               ))}
             </div>
 
-            <div className="rounded-lg border border-slate-200 bg-white mt-6 py-2.5 text-center">
-              <span className="text-sm font-bold text-slate-800">ROAS</span>
+            <div className="rounded-lg border border-slate-200 bg-white mt-7 py-3 text-center">
+              <span className="text-[1.05rem] font-bold text-slate-800">ROAS</span>
             </div>
           </motion.div>
         </div>
 
         {/* 하단: CTA 버튼 */}
         <motion.div
-          className="mt-12 flex flex-col items-end gap-3 sm:gap-4"
+          className="mt-14 flex flex-col items-end gap-4 sm:gap-5"
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ amount: 0.2, once: true }}
@@ -153,13 +153,13 @@ export function ResultsWithGraph() {
         >
           <Link
             href="/about"
-            className="w-full sm:w-auto rounded-lg bg-black px-6 py-3 text-center text-sm font-semibold text-white shadow-md transition hover:bg-slate-800"
+            className="w-full sm:w-auto rounded-lg bg-black px-7 py-3.5 text-center text-[1.05rem] font-semibold text-white shadow-md transition hover:bg-slate-800"
           >
             전체 서비스
           </Link>
           <Link
             href="/contact"
-            className="w-full sm:w-auto rounded-lg bg-black px-6 py-3 text-center text-sm font-semibold text-white shadow-md transition hover:bg-slate-800"
+            className="w-full sm:w-auto rounded-lg bg-black px-7 py-3.5 text-center text-[1.05rem] font-semibold text-white shadow-md transition hover:bg-slate-800"
           >
             컨설팅 문의
           </Link>
