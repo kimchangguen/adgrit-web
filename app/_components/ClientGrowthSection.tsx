@@ -1,9 +1,14 @@
 "use client";
 
+import Link from "next/link";
+
 export function ClientGrowthSection() {
   return (
-    <section className="relative z-10 w-full min-h-[420px] sm:min-h-[480px] flex items-center justify-center overflow-hidden">
-      {/* 배경 이미지 (오피스/데이터센터 느낌) + 어두운 오버레이 */}
+    <section
+      id="section-10"
+      className="relative z-10 w-full min-h-[520px] sm:min-h-[600px] flex items-center justify-center overflow-hidden"
+    >
+      {/* 배경 이미지 + 어두운 오버레이 */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
@@ -13,7 +18,7 @@ export function ClientGrowthSection() {
       <div className="absolute inset-0 bg-slate-900/80" aria-hidden />
 
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 py-20 text-center">
-        {/* 첫 줄: 오렌지 별 아이콘 + 작은 흰 글씨 */}
+        {/* 첫 줄: 오렌지 별 + 클라이언트 성장 문구 */}
         <p className="flex items-center justify-center gap-2 text-white/95 text-base sm:text-lg">
           <span className="text-[#ff9e14]" aria-hidden>
             <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="currentColor">
@@ -23,10 +28,33 @@ export function ClientGrowthSection() {
           클라이언트의 성장이 곧 우리의 성장이자 성공입니다.
         </p>
 
-        {/* 두 번째 줄: 큰 굵은 흰 글씨 */}
         <h2 className="mt-6 sm:mt-8 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
           우리의 자랑이 되어주시겠습니까?
         </h2>
+
+        {/* 무료 상담 블록 */}
+        <div className="mt-14 sm:mt-20">
+          <p className="text-sm font-semibold uppercase tracking-widest text-white/80">
+            무료 상담
+          </p>
+          <p className="mt-4 text-xl sm:text-2xl md:text-3xl font-bold text-white leading-snug">
+            지금, 애드그릿 전문가와
+            <br />
+            함께 컨설팅을 시작해보세요
+          </p>
+          <p className="mt-2 text-lg sm:text-xl text-white/95">
+            전화 한 통으로 시작하는
+            <br />
+            성장의 첫 걸음
+          </p>
+          <Link
+            href="tel:1661-0646"
+            className="mt-8 inline-flex flex-col items-center gap-1 rounded-full bg-white/15 hover:bg-white/25 border border-white/40 px-8 py-4 text-white font-semibold transition-colors"
+          >
+            <span>전화 상담하기</span>
+            <span className="text-xl sm:text-2xl font-bold tracking-wide">1661-0646</span>
+          </Link>
+        </div>
 
         {/* 하단: 흰색 아래 화살표 */}
         <div className="mt-10 sm:mt-14 flex justify-center">

@@ -429,10 +429,10 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* 클라이언트 성장 메시지 - 10번 섹션 위 */}
+      {/* 10번 섹션: 클라이언트 성장 + 무료 상담 CTA */}
       <ClientGrowthSection />
 
-      {/* Blogs - 열번째 섹션 */}
+      {/* Blogs - 열한번째 섹션 */}
       <section id="insights" className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <Container>
           <SectionKicker>Blogs</SectionKicker>
