@@ -140,33 +140,33 @@ export function ResultsWithGraph() {
 
         {/* 05 섹션 아래: 3열 통계 (흰 배경) */}
         <motion.div
-          className="mt-16 sm:mt-20 lg:mt-24 pt-14 sm:pt-16 lg:pt-20 border-t border-slate-200"
+          className="mt-20 sm:mt-24 lg:mt-28 pt-16 sm:pt-20 lg:pt-24 border-t border-slate-200"
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ amount: 0.2, once: true }}
           transition={{ duration: 0.5 }}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-14 sm:gap-16 lg:gap-20">
             <div className="text-center">
-              <p className="text-sm font-medium text-slate-500">광고주 평균 ROAS</p>
-              <p className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold tabular-nums text-slate-900">
+              <p className="text-base font-medium text-slate-500">광고주 평균 ROAS</p>
+              <p className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tabular-nums text-slate-900">
                 500%
               </p>
-              <p className="mt-2 text-sm text-slate-500">업계 평균 대비 3.5배 높은 성과</p>
+              <p className="mt-3 text-base text-slate-500">업계 평균 대비 3.5배 높은 성과</p>
             </div>
             <div className="text-center">
-              <p className="text-sm font-medium text-slate-500">누적 광고 집행 금액</p>
-              <p className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold tabular-nums text-slate-900">
+              <p className="text-base font-medium text-slate-500">누적 광고 집행 금액</p>
+              <p className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tabular-nums text-slate-900">
                 470억+
               </p>
-              <p className="mt-2 text-sm text-slate-500">데이터로 검증된 집행 노하우</p>
+              <p className="mt-3 text-base text-slate-500">데이터로 검증된 집행 노하우</p>
             </div>
             <div className="text-center">
-              <p className="text-sm font-medium text-slate-500">월 구글 애즈 집행 예산</p>
-              <p className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold tabular-nums text-slate-900">
+              <p className="text-base font-medium text-slate-500">월 구글 애즈 집행 예산</p>
+              <p className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tabular-nums text-slate-900">
                 30억
               </p>
-              <p className="mt-2 text-sm text-slate-500">대규모 예산 운영 최적화</p>
+              <p className="mt-3 text-base text-slate-500">대규모 예산 운영 최적화</p>
             </div>
           </div>
         </motion.div>
