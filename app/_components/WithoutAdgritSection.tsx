@@ -23,7 +23,7 @@ export function WithoutAdgritSection() {
   return (
     <section
       id="without-adgrit"
-      className="relative z-10 border-t border-slate-800 bg-[#1e3a5f] py-16 sm:py-20 overflow-hidden"
+      className="relative z-10 border-t border-slate-800 bg-[#1e3a5f] py-[4.4rem] sm:py-[5.5rem] overflow-hidden"
     >
       <Container>
         <div className="flex flex-col items-center">
@@ -37,13 +37,13 @@ export function WithoutAdgritSection() {
             </p>
           </div>
 
-          {/* 말풍선 - 가로 15% 더 길게, 크기 통일 */}
-          <div className="mt-10 sm:mt-14 w-full max-w-[49.5rem] mx-auto h-[340px] sm:h-[400px] overflow-hidden rounded-xl flex justify-center">
-            <div className="flex flex-col gap-4 animate-bubbles-up w-full max-w-[49.5rem] mx-auto">
+          {/* 말풍선 - 가로 15% 더 길게, 크기 통일, 위아래 폭 10% 넓게 */}
+          <div className="mt-11 sm:mt-16 w-full max-w-[49.5rem] mx-auto h-[374px] sm:h-[440px] overflow-hidden rounded-xl flex justify-center">
+            <div className="flex flex-col gap-[1.1rem] animate-bubbles-up w-full max-w-[49.5rem] mx-auto">
               {[...MESSAGES, ...MESSAGES].map((text, i) => (
                 <div
                   key={`bubble-${i}`}
-                  className="flex items-center gap-3 rounded-full px-6 py-4 w-full min-w-full text-white text-[1.2rem] leading-snug shadow-lg"
+                  className="flex items-center gap-3 rounded-full px-6 py-[1.1rem] w-full min-w-full text-white text-[1.2rem] leading-snug shadow-lg"
                   style={{ backgroundColor: BUBBLE_BLUE }}
                 >
                   <span className="flex-shrink-0 text-white/90" aria-hidden>
@@ -59,7 +59,7 @@ export function WithoutAdgritSection() {
         </div>
 
         {/* 하단 안내 문구 - 글자 얇게, 3pt 작게 */}
-        <div className="mt-16 sm:mt-20 pt-12 border-t border-slate-600/50">
+        <div className="mt-[4.4rem] sm:mt-[5.5rem] pt-[3.3rem] border-t border-slate-600/50">
           <p className="text-base sm:text-lg lg:text-xl font-normal leading-relaxed text-white text-center max-w-4xl mx-auto">
             {BOTTOM_MESSAGE}
           </p>
