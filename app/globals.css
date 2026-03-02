@@ -254,3 +254,15 @@ header nav a {
 @media (prefers-reduced-motion: reduce) {
   .scroll-indicator { animation: none; }
 }
+
+/* OUR CLIENTS - 끊임없이 왼쪽으로 흐르는 마키 */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+}
