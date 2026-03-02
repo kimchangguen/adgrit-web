@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 
-const MILESTONES_TABLE = [
+const MILESTONES = [
   { year: "2019", text: "디지털 마케팅 전문팀 구성" },
   { year: "2020", text: "데이터 기반 광고 시스템 구축" },
   { year: "2022", text: "AI 마케팅 전략 상용화" },
@@ -64,7 +64,7 @@ export function ResultsWithGraph() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {/* 상단: 2단 - 왼쪽 텍스트, 오른쪽 막대 그래프 + 표 */}
+        {/* 상단: 2단 - 왼쪽 텍스트, 오른쪽 그래프 위 글씨 + 막대 그래프 */}
         <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-16">
           {/* 왼쪽: 텍스트 */}
           <div className="flex-1 max-w-xl">
@@ -75,7 +75,7 @@ export function ResultsWithGraph() {
               viewport={{ amount: 0.2, once: true }}
               transition={{ duration: 0.4 }}
             >
-              Our goal is success
+              About Us
             </motion.span>
             <motion.h2
               className="mt-3 text-2xl font-extrabold leading-tight text-white sm:text-3xl lg:text-4xl"
@@ -84,7 +84,9 @@ export function ResultsWithGraph() {
               viewport={{ amount: 0.2, once: true }}
               transition={{ duration: 0.4, delay: 0.05 }}
             >
-              100원도 허투로 사용하지 않아요
+              데이터 기반 마케팅,
+              <br />
+              애드그릿이 앞장섭니다.
             </motion.h2>
             <motion.p
               className="mt-5 text-base leading-relaxed text-white/95 sm:text-lg"
@@ -93,22 +95,20 @@ export function ResultsWithGraph() {
               viewport={{ amount: 0.2, once: true }}
               transition={{ duration: 0.4, delay: 0.1 }}
             >
-              애드그릿은 단순 실행이 아닌{" "}
-              <span className="font-semibold text-sky-300">예산 대비 효율 ROAS</span>의 지속적인 상승을 목표로 설계하고 운영합니다.
+              산업의 마케팅을 넘어, 데이터 기반 혁신으로 나아갑니다.
             </motion.p>
             <motion.p
-              className="mt-4 flex items-start gap-2 text-sm text-white/85"
+              className="mt-3 text-base leading-relaxed text-white/95 sm:text-lg"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
               transition={{ duration: 0.4, delay: 0.15 }}
             >
-              <span className="mt-0.5 text-slate-900">●</span>
-              <span>모든 사용 예산은 회차 보고서에서 투명하게 확인하실 수 있습니다.</span>
+              첨단 AI 기술과 검증된 전략이 만드는 새로운 성장 패러다임, 애드그릿이 앞장섭니다.
             </motion.p>
           </div>
 
-          {/* 오른쪽: 막대 그래프 + ROAS 라벨 + 표 */}
+          {/* 오른쪽: 그래프 위 글씨 + 막대 그래프 + ROAS 라벨 */}
           <motion.div
             className="flex flex-1 flex-col items-center lg:items-end min-w-0"
             initial={{ opacity: 0 }}
@@ -116,12 +116,41 @@ export function ResultsWithGraph() {
             viewport={{ amount: 0.2, once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
+            {/* 그래프 위: 연도별 마일스톤 + 광고주 평균 ROAS 500% (글씨만) */}
+            <div className="mb-6 w-full max-w-md space-y-2 text-left">
+              {MILESTONES.map((row, i) => (
+                <motion.div
+                  key={row.year}
+                  className="text-sm text-white/95"
+                  initial={{ opacity: 0, x: 8 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ amount: 0.3, once: true }}
+                  transition={{ duration: 0.35, delay: 0.1 + i * 0.05 }}
+                >
+                  <span className="font-semibold text-white/80">{row.year}</span>
+                  {" "}
+                  <span>{row.text}</span>
+                </motion.div>
+              ))}
+              <motion.div
+                className="pt-2 text-white/95"
+                initial={{ opacity: 0, x: 8 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ amount: 0.3, once: true }}
+                transition={{ duration: 0.35, delay: 0.35 }}
+              >
+                <span className="font-semibold text-sky-300/90">광고주 평균 ROAS</span>
+                {" "}
+                <span className="text-lg font-bold text-amber-400">500%</span>
+              </motion.div>
+            </div>
+
             {/* 막대 그래프 */}
-            <div className="flex items-end justify-center gap-4 sm:gap-6 h-44 sm:h-52">
+            <div className="flex items-end justify-center gap-4 sm:gap-6 h-44 sm:h-52 w-full max-w-md">
               {BAR_HEIGHTS.map((ratio, i) => (
                 <motion.div
                   key={i}
-                  className="w-10 sm:w-12 rounded-t-lg min-h-[8px]"
+                  className="flex-1 max-w-[4rem] rounded-t-lg min-h-[8px]"
                   style={{
                     backgroundColor: BAR_COLORS[i],
                     height: barAnimated ? `${ratio * 100}%` : "8px",
@@ -144,41 +173,6 @@ export function ResultsWithGraph() {
             >
               <span className="text-sm font-bold text-slate-800">ROAS</span>
             </motion.div>
-
-            {/* 표: 연도별 마일스톤 + 광고주 평균 ROAS 500% */}
-            <div className="mt-8 w-full max-w-md">
-              <table className="w-full border-collapse text-left">
-                <tbody className="text-white/95">
-                  {MILESTONES_TABLE.map((row, i) => (
-                    <motion.tr
-                      key={row.year}
-                      className="border-b border-white/15"
-                      initial={{ opacity: 0, x: 8 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ amount: 0.3, once: true }}
-                      transition={{ duration: 0.35, delay: 0.1 + i * 0.05 }}
-                    >
-                      <td className="py-3 pr-4 text-sm font-semibold text-white/80 w-16 sm:w-20">
-                        {row.year}
-                      </td>
-                      <td className="py-3 text-sm">{row.text}</td>
-                    </motion.tr>
-                  ))}
-                  <motion.tr
-                    className="border-b border-white/15"
-                    initial={{ opacity: 0, x: 8 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ amount: 0.3, once: true }}
-                    transition={{ duration: 0.35, delay: 0.35 }}
-                  >
-                    <td className="py-3 pr-4 text-sm font-semibold text-sky-300/90">
-                      광고주 평균 ROAS
-                    </td>
-                    <td className="py-3 text-lg font-bold text-amber-400">500%</td>
-                  </motion.tr>
-                </tbody>
-              </table>
-            </div>
           </motion.div>
         </div>
 
