@@ -266,3 +266,15 @@ header nav a {
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee { animation: none; }
 }
+
+/* 섹션06 - 말풍선 위로 올라가는 애니메이션 */
+@keyframes bubbles-up {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+.animate-bubbles-up {
+  animation: bubbles-up 35s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-bubbles-up { animation: none; }
+}

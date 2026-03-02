@@ -18,8 +18,13 @@ export function ClientGrowthSection() {
       <div className="absolute inset-0 bg-slate-900/80" aria-hidden />
 
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 py-20 text-center">
-        {/* 첫 줄: 오렌지 별 + 클라이언트 성장 문구 */}
-        <p className="flex items-center justify-center gap-2 text-white/95 text-base sm:text-lg">
+        {/* 섹션 10 메인: 우리의 자랑이 되어주시겠습니까? */}
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+          우리의 자랑이 되어주시겠습니까?
+        </h2>
+
+        {/* 보조 문구: 오렌지 별 + 클라이언트 성장 */}
+        <p className="mt-6 sm:mt-8 flex items-center justify-center gap-2 text-white/95 text-base sm:text-lg">
           <span className="text-[#ff9e14]" aria-hidden>
             <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6L12 2z" />
@@ -27,10 +32,6 @@ export function ClientGrowthSection() {
           </span>
           클라이언트의 성장이 곧 우리의 성장이자 성공입니다.
         </p>
-
-        <h2 className="mt-6 sm:mt-8 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
-          우리의 자랑이 되어주시겠습니까?
-        </h2>
 
         {/* 무료 상담 블록 */}
         <div className="mt-14 sm:mt-20">
