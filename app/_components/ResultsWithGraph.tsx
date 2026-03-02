@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 
-const MILESTONES_TABLE = [
+const MILESTONES = [
   { year: "2019", text: "디지털 마케팅 전문팀 구성" },
   { year: "2020", text: "데이터 기반 광고 시스템 구축" },
   { year: "2022", text: "AI 마케팅 전략 상용화" },
@@ -12,12 +12,13 @@ const MILESTONES_TABLE = [
   { year: "2025", text: "글로벌 마케팅 확대" },
 ];
 
-const BAR_HEIGHTS = [0.5, 0.7, 0.85, 1];
+const BAR_HEIGHTS = [0.55, 0.7, 0.82, 0.92, 1];
 const BAR_COLORS = [
   "rgb(30, 58, 138)",
   "rgb(59, 130, 246)",
   "rgb(96, 165, 250)",
   "rgb(147, 197, 253)",
+  "rgb(186, 230, 253)",
 ];
 
 export function ResultsWithGraph() {
@@ -37,36 +38,9 @@ export function ResultsWithGraph() {
       id="results"
       className="relative z-10 w-full overflow-hidden bg-white py-16 sm:py-20 lg:py-24"
     >
-      {/* 배경: 은은한 곡선 패턴 (흰 배경용) */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
-        <svg className="h-full w-full" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <linearGradient id="results-bg-wave" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#64748b" />
-              <stop offset="100%" stopColor="#94a3b8" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M0 200 Q300 100 600 150 T1200 100 L1200 800 L0 800 Z"
-            fill="url(#results-bg-wave)"
-          />
-          <path
-            d="M0 500 Q400 400 800 450 T1200 400 L1200 800 L0 800 Z"
-            fill="url(#results-bg-wave)"
-            opacity="0.6"
-          />
-          <path
-            d="M1200 0 Q900 80 500 50 T0 120 L0 0 Z"
-            fill="url(#results-bg-wave)"
-            opacity="0.5"
-          />
-        </svg>
-      </div>
-
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {/* 2단: 왼쪽 텍스트, 오른쪽 막대 그래프 + 표 */}
-        <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-16">
-          {/* 왼쪽: 텍스트 (검정색) */}
+        <div className="flex flex-col gap-12 lg:flex-row lg:items-stretch lg:gap-16">
+          {/* 왼쪽: 텍스트 */}
           <div className="flex-1 max-w-xl">
             <motion.span
               className="text-xs font-medium uppercase tracking-[0.2em] text-black/70"
@@ -108,81 +82,68 @@ export function ResultsWithGraph() {
             </motion.p>
           </div>
 
-          {/* 오른쪽: 막대 그래프 + ROAS 라벨 + 표 */}
+          {/* 오른쪽: 큰 그래프 (막대 + 막대마다 연도·설명 + ROAS 500% 표시) */}
           <motion.div
-            className="flex flex-1 flex-col items-center lg:items-end min-w-0"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            className="flex-1 min-w-0 rounded-2xl border border-slate-200 bg-slate-50/50 p-6 sm:p-8 lg:p-10"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ amount: 0.2, once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            {/* 막대 그래프 */}
-            <div className="flex items-end justify-center gap-4 sm:gap-6 h-44 sm:h-52 w-full max-w-md">
-              {BAR_HEIGHTS.map((ratio, i) => (
+            {/* 그래프 상단: 광고주 평균 ROAS 500% */}
+            <div className="mb-6 flex flex-wrap items-baseline justify-between gap-4">
+              <span className="text-sm font-medium text-slate-600">광고주 평균 ROAS</span>
+              <span className="text-2xl font-bold tabular-nums text-sky-600 sm:text-3xl">
+                500%
+              </span>
+            </div>
+
+            {/* 막대 그래프 (크게) + 각 막대 아래 연도·설명 */}
+            <div className="flex gap-3 sm:gap-4 lg:gap-5">
+              {MILESTONES.map((item, i) => (
                 <motion.div
-                  key={i}
-                  className="flex-1 max-w-[4rem] rounded-t-lg min-h-[8px]"
-                  style={{
-                    backgroundColor: BAR_COLORS[i],
-                    height: barAnimated ? `${ratio * 100}%` : "8px",
-                  }}
-                  initial={{ height: "8px" }}
-                  animate={barAnimated ? { height: `${ratio * 100}%` } : { height: "8px" }}
-                  transition={{
-                    duration: 0.8,
-                    delay: 0.2 + i * 0.1,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                />
+                  key={item.year}
+                  className="flex flex-1 min-w-0 flex-col items-center"
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ amount: 0.3, once: true }}
+                  transition={{ duration: 0.4, delay: 0.15 + i * 0.06 }}
+                >
+                  {/* 막대 영역: 고정 높이, 막대가 아래에서 올라옴 */}
+                  <div className="flex h-56 sm:h-64 lg:h-72 w-full flex-col justify-end">
+                    <motion.div
+                      className="w-full max-w-[4rem] sm:max-w-[4.5rem] mx-auto rounded-t-lg"
+                      style={{ backgroundColor: BAR_COLORS[i] }}
+                      initial={{ height: "0%" }}
+                      animate={
+                        barAnimated
+                          ? { height: `${BAR_HEIGHTS[i] * 100}%` }
+                          : { height: "0%" }
+                      }
+                      transition={{
+                        duration: 0.8,
+                        delay: 0.2 + i * 0.08,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                    />
+                  </div>
+                  <div className="mt-4 w-full min-w-0 text-center">
+                    <p className="text-sm font-semibold text-slate-700">{item.year}</p>
+                    <p className="mt-1 text-xs leading-snug text-slate-600 line-clamp-2 sm:line-clamp-3">
+                      {item.text}
+                    </p>
+                  </div>
+                </motion.div>
               ))}
             </div>
-            <motion.div
-              className="mt-4 rounded-lg border border-slate-200 bg-slate-50 px-6 py-2.5"
-              initial={{ opacity: 0, y: 4 }}
-              animate={barAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
-              transition={{ duration: 0.4, delay: 0.65 }}
-            >
-              <span className="text-sm font-bold text-slate-800">ROAS</span>
-            </motion.div>
 
-            {/* 표: 연도별 마일스톤 + 광고주 평균 ROAS 500% */}
-            <div className="mt-8 w-full max-w-md">
-              <table className="w-full border-collapse text-left">
-                <tbody className="text-black">
-                  {MILESTONES_TABLE.map((row, i) => (
-                    <motion.tr
-                      key={row.year}
-                      className="border-b border-slate-200"
-                      initial={{ opacity: 0, x: 8 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ amount: 0.3, once: true }}
-                      transition={{ duration: 0.35, delay: 0.1 + i * 0.05 }}
-                    >
-                      <td className="py-3 pr-4 text-sm font-semibold text-slate-600 w-16 sm:w-20">
-                        {row.year}
-                      </td>
-                      <td className="py-3 text-sm text-slate-800">{row.text}</td>
-                    </motion.tr>
-                  ))}
-                  <motion.tr
-                    className="border-b border-slate-200"
-                    initial={{ opacity: 0, x: 8 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ amount: 0.3, once: true }}
-                    transition={{ duration: 0.35, delay: 0.35 }}
-                  >
-                    <td className="py-3 pr-4 text-sm font-semibold text-slate-600">
-                      광고주 평균 ROAS
-                    </td>
-                    <td className="py-3 text-lg font-bold text-slate-900">500%</td>
-                  </motion.tr>
-                </tbody>
-              </table>
+            <div className="rounded-lg border border-slate-200 bg-white mt-6 py-2.5 text-center">
+              <span className="text-sm font-bold text-slate-800">ROAS</span>
             </div>
           </motion.div>
         </div>
 
-        {/* 하단 우측: CTA 버튼 (검정 배경 + 흰 글씨) */}
+        {/* 하단: CTA 버튼 */}
         <motion.div
           className="mt-12 flex flex-col items-end gap-3 sm:gap-4"
           initial={{ opacity: 0, y: 8 }}
