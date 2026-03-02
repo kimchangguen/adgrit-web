@@ -49,9 +49,9 @@ export function OurClientsSection() {
             OUR CLIENTS
           </p>
           <h2 className="mt-4 text-[1.96rem] font-bold leading-tight text-black sm:text-[2.44rem] lg:text-[2.92rem]">
-            <span style={{ color: "#ff9e14" }}>약 20+ 대형 브랜드</span>와,
+            <span style={{ color: "#2892d2" }}>약 20+ 대형 브랜드</span>와,
             <br />
-            <span style={{ color: "#ff9e14" }}>150+ 소상공인 브랜드</span>와 함께 성장중입니다
+            <span style={{ color: "#2892d2" }}>150+ 소상공인 브랜드</span>와 함께 성장중입니다
           </h2>
         </div>
 
