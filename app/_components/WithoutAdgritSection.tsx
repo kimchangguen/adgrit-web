@@ -37,13 +37,13 @@ export function WithoutAdgritSection() {
             </p>
           </div>
 
-          {/* 말풍선 - 중앙, 가로 20% 더 넓게 */}
-          <div className="mt-10 sm:mt-14 w-full max-w-[43rem] mx-auto h-[340px] sm:h-[400px] overflow-hidden rounded-xl flex justify-center">
-            <div className="flex flex-col gap-4 animate-bubbles-up w-full max-w-[43rem] mx-auto">
+          {/* 말풍선 - 가로 15% 더 길게, 크기 통일 */}
+          <div className="mt-10 sm:mt-14 w-full max-w-[49.5rem] mx-auto h-[340px] sm:h-[400px] overflow-hidden rounded-xl flex justify-center">
+            <div className="flex flex-col gap-4 animate-bubbles-up w-full max-w-[49.5rem] mx-auto">
               {[...MESSAGES, ...MESSAGES].map((text, i) => (
                 <div
                   key={`bubble-${i}`}
-                  className="flex items-center gap-3 rounded-full px-6 py-4 w-max max-w-full text-white text-[1.2rem] leading-snug shadow-lg mx-auto"
+                  className="flex items-center gap-3 rounded-full px-6 py-4 w-full min-w-full text-white text-[1.2rem] leading-snug shadow-lg"
                   style={{ backgroundColor: BUBBLE_BLUE }}
                 >
                   <span className="flex-shrink-0 text-white/90" aria-hidden>
@@ -51,7 +51,7 @@ export function WithoutAdgritSection() {
                       <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z" />
                     </svg>
                   </span>
-                  <span className="line-clamp-2">{text}</span>
+                  <span className="line-clamp-2 flex-1 min-w-0">{text}</span>
                 </div>
               ))}
             </div>

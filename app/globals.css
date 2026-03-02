@@ -273,7 +273,7 @@ header nav a {
   100% { transform: translateY(-50%); }
 }
 .animate-bubbles-up {
-  animation: bubbles-up 31.5s linear infinite;
+  animation: bubbles-up 28.35s linear infinite;
 }
 @media (prefers-reduced-motion: reduce) {
   .animate-bubbles-up { animation: none; }
