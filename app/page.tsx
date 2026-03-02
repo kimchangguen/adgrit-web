@@ -18,6 +18,7 @@ import { SloganWithEffects } from "./_components/SloganWithEffects";
 import { VisionCarousel } from "./_components/VisionCarousel";
 import { ResultsWithGraph } from "./_components/ResultsWithGraph";
 import { OurClientsSection } from "./_components/OurClientsSection";
+import { ClientGrowthSection } from "./_components/ClientGrowthSection";
 import { WithoutAdgritSection } from "./_components/WithoutAdgritSection";
 import { KakaoTestimonialsSection } from "./_components/KakaoTestimonialsSection";
 import { MarketingProductsSection } from "./_components/MarketingProductsSection";
@@ -427,6 +428,9 @@ function SiteChrome({
           </div>
         </Container>
       </section>
+
+      {/* 클라이언트 성장 메시지 - 10번 섹션 위 */}
+      <ClientGrowthSection />
 
       {/* Blogs - 열번째 섹션 */}
       <section id="insights" className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
