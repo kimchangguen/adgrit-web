@@ -16,7 +16,7 @@ export function WhyAdgritSection() {
       <Container>
         <div className="text-center">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black">
-            애드그릿, 이런 점이 달라요
+            애드그릿의 다양한 마케팅 상품
           </h2>
           <Link
             href="#why-adgrit"
@@ -36,28 +36,11 @@ export function WhyAdgritSection() {
             </div>
 
             <div className="relative flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12 p-8 sm:p-10 lg:p-12 pb-12">
-              {/* 왼쪽: 번호 뱃지 + 설명 */}
+              {/* 왼쪽: 홈페이지제작 */}
               <div className="flex-shrink-0 lg:min-w-[280px]">
-                <div className="flex items-start gap-5">
-                  <span
-                    className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 text-lg font-bold"
-                    style={{ borderColor: CARD_BLUE_DARK, color: CARD_BLUE }}
-                    aria-hidden
-                  >
-                    01
-                  </span>
-                  <div>
-                    <p className="text-black font-bold text-lg sm:text-xl leading-snug">
-                      광고 성과에 대해서만
-                    </p>
-                    <p className="text-black font-bold text-lg sm:text-xl leading-snug mt-0.5">
-                      비용이 발생해요
-                    </p>
-                    <p className="text-white/95 text-sm sm:text-base mt-3 leading-relaxed">
-                      성과 기반 집행으로 불필요한 비용을 줄이고, 실제 전환과 매출에 집중합니다.
-                    </p>
-                  </div>
-                </div>
+                <p className="text-white text-2xl sm:text-3xl font-bold">
+                  홈페이지제작
+                </p>
               </div>
 
               {/* 오른쪽: 모니터 + 아이콘 일러스트 */}
