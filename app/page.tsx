@@ -23,6 +23,7 @@ import { ContactSection } from "./_components/ContactSection";
 import { WithoutAdgritSection } from "./_components/WithoutAdgritSection";
 import { KakaoTestimonialsSection } from "./_components/KakaoTestimonialsSection";
 import { MarketingProductsSection } from "./_components/MarketingProductsSection";
+import { WhyAdgritSection } from "./_components/WhyAdgritSection";
 import { Section2CardList } from "./_components/Section2CardList";
 import { Section2Wrapper } from "./_components/Section2Wrapper";
 
@@ -400,6 +401,9 @@ function SiteChrome({
 
       {/* 클라이언트 만족후기 (카카오톡) - 일곱번째 섹션 */}
       <KakaoTestimonialsSection />
+
+      {/* 애드그릿, 이런 점이 달라요 - 8번 섹션 위 */}
+      <WhyAdgritSection />
 
       {/* 애드그릿의 다양한 마케팅 상품 - 여덟번째 섹션 */}
       <MarketingProductsSection />

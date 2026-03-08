@@ -1,0 +1,95 @@
+"use client";
+
+import Link from "next/link";
+import { Container } from "./Container";
+
+const CARD_BLUE = "#2362ff";
+const CARD_BLUE_DARK = "#1d51d9";
+const CARD_BLUE_LAYER = "#1a47b8";
+
+export function WhyAdgritSection() {
+  return (
+    <section
+      id="why-adgrit"
+      className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20"
+    >
+      <Container>
+        <div className="text-center">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black">
+            애드그릿, 이런 점이 달라요
+          </h2>
+          <Link
+            href="#why-adgrit"
+            className="mt-4 inline-flex items-center justify-center rounded-full border-2 border-[#2362ff] px-5 py-2.5 text-sm font-medium text-[#2362ff] hover:bg-[#2362ff] hover:text-white transition-colors"
+          >
+            펼쳐서 보기
+          </Link>
+        </div>
+
+        {/* 큰 파란 카드 - 레이어드 하단 + 좌 텍스트 / 우 일러스트 */}
+        <div className="mt-10 sm:mt-14 max-w-5xl mx-auto">
+          <div className="relative rounded-2xl overflow-hidden" style={{ backgroundColor: CARD_BLUE }}>
+            {/* 하단 레이어드 스트립 (2줄) */}
+            <div className="absolute bottom-0 left-0 right-0 flex flex-col gap-1">
+              <div className="h-2 w-full rounded-b" style={{ backgroundColor: CARD_BLUE_DARK }} aria-hidden />
+              <div className="h-2 w-full rounded-b" style={{ backgroundColor: CARD_BLUE_LAYER }} aria-hidden />
+            </div>
+
+            <div className="relative flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12 p-8 sm:p-10 lg:p-12 pb-12">
+              {/* 왼쪽: 번호 뱃지 + 설명 */}
+              <div className="flex-shrink-0 lg:min-w-[280px]">
+                <div className="flex items-start gap-5">
+                  <span
+                    className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 text-lg font-bold"
+                    style={{ borderColor: CARD_BLUE_DARK, color: CARD_BLUE }}
+                    aria-hidden
+                  >
+                    01
+                  </span>
+                  <div>
+                    <p className="text-black font-bold text-lg sm:text-xl leading-snug">
+                      광고 성과에 대해서만
+                    </p>
+                    <p className="text-black font-bold text-lg sm:text-xl leading-snug mt-0.5">
+                      비용이 발생해요
+                    </p>
+                    <p className="text-white/95 text-sm sm:text-base mt-3 leading-relaxed">
+                      성과 기반 집행으로 불필요한 비용을 줄이고, 실제 전환과 매출에 집중합니다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 오른쪽: 모니터 + 아이콘 일러스트 */}
+              <div className="flex-1 flex justify-center lg:justify-end">
+                <div className="relative w-full max-w-[320px] aspect-[4/3] flex items-center justify-center">
+                  {/* 모니터 */}
+                  <div className="relative w-32 h-24 sm:w-40 sm:h-28 rounded-lg bg-sky-100 border-2 border-white/50 shadow-lg flex items-center justify-center">
+                    <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sky-600" aria-hidden>
+                      <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M13 5l7 7-7 7V5z M5 5l7 7-7 7V5z" />
+                      </svg>
+                    </span>
+                  </div>
+                  {/* 주변 아이콘 버블 */}
+                  <span className="absolute top-2 left-4 w-8 h-8 rounded-full bg-slate-700/90 flex items-center justify-center text-white" aria-hidden>
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                  </span>
+                  <span className="absolute top-2 right-6 w-9 h-9 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm" aria-hidden>
+                    $
+                  </span>
+                  <span className="absolute bottom-4 right-2 w-8 h-8 rounded-full bg-slate-700/90 flex items-center justify-center text-white" aria-hidden>
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                  </span>
+                  <span className="absolute bottom-6 left-6 w-8 h-8 rounded-full bg-slate-700/90 flex items-center justify-center text-white" aria-hidden>
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
