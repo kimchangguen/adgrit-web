@@ -146,7 +146,7 @@ function ProcessStep({
   title: string;
   desc: string;
   buttonText?: string;
-  icon?: "bell" | "circle" | "star";
+  icon?: "bell" | "target" | "star";
 }) {
   const IconEl = () => {
     const i = icon ?? "star";
@@ -159,9 +159,16 @@ function ProcessStep({
         </div>
       );
     }
-    if (i === "circle") {
+    if (i === "target") {
       return (
-        <div className="mx-auto h-10 w-10 rounded-full bg-[#1e40af]/20 border-2 border-[#1e40af]" aria-hidden />
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#1e40af]/15 text-[#1e40af]">
+          <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden>
+            <circle cx="12" cy="12" r="3" strokeDasharray="2 2" />
+            <circle cx="12" cy="12" r="6" strokeDasharray="3 3" />
+            <circle cx="12" cy="12" r="9" strokeDasharray="2 2" />
+            <circle cx="12" cy="12" r="10" />
+          </svg>
+        </div>
       );
     }
     return (
@@ -174,18 +181,16 @@ function ProcessStep({
   };
   return (
     <div className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-      <span className="text-sm font-bold text-[#1e40af]">STEP {step}</span>
+      <span className="text-sm font-bold uppercase tracking-wide text-[#1e40af]">STEP {step}</span>
       <div className="mt-4">
         <IconEl />
       </div>
       <h3 className="mt-4 text-lg font-bold text-black">{title}</h3>
       <p className="mt-3 flex-1 text-left text-sm leading-relaxed text-slate-700">{desc}</p>
       {buttonText && (
-        <div className="mt-6">
-          <span className="inline-block w-full rounded-lg bg-blue-100 py-3 text-center text-sm font-semibold text-[#1e40af]">
-            {buttonText}
-          </span>
-        </div>
+        <p className="mt-6 text-sm font-semibold text-[#1e40af]">
+          {buttonText}
+        </p>
       )}
     </div>
   );
@@ -419,8 +424,8 @@ function SiteChrome({
           <div className="mt-10 grid gap-6 md:grid-cols-3 md:items-stretch">
             {[
               { step: "01", title: "Discovery 진단단계", desc: "고객사의 비즈니스 환경과 과제를 깊이 이해하는 것에서 시작됩니다. 맞춤형 상담을 통해 목표, 문제점, 기회 요소를 면밀히 파악합니다.", buttonText: "상담 접수 24시간 내", icon: "bell" as const },
-              { step: "02", title: "Development 전략단계", desc: "수집된 인사이트를 바탕으로 맞춤형 전략을 수립합니다. 데이터 기반으로 목표에 최적화된 실행 계획을 설계합니다.", buttonText: "Day 1-2", icon: "circle" as const },
-              { step: "03", title: "Implementation 실행단계", desc: "설계된 전략을 현장에 적용하고 지속적으로 모니터링합니다. 빠른 실험과 개선으로 성과를 극대화합니다.", buttonText: "Day 3", icon: "star" as const },
+              { step: "02", title: "Development 전략단계", desc: "수집된 인사이트를 바탕으로 맞춤형 전략을 수립합니다. 데이터 기반으로 목표에 최적화된 실행 계획을 설계합니다.", buttonText: "상담 후 2주 소요", icon: "target" as const },
+              { step: "03", title: "Implementation 실행단계", desc: "설계된 전략을 현장에 적용하고 지속적으로 모니터링합니다. 빠른 실험과 개선으로 성과를 극대화합니다.", buttonText: "지속적으로 모니터링", icon: "star" as const },
             ].map((p, i) => (
               <AnimatedCard key={p.step} index={i}>
                 <ProcessStep step={p.step} title={p.title} desc={p.desc} buttonText={p.buttonText} icon={p.icon} />
