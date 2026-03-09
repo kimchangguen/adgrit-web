@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Container } from "./Container";
 
@@ -156,8 +156,34 @@ const ITEMS = [
   },
 ];
 
+const AUTO_SCROLL_SPEED = 0.8; // px per frame
+const AUTO_SCROLL_INTERVAL_MS = 30;
+
 export function MarketingProductsSection() {
   const [expanded, setExpanded] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // 접힌 상태일 때만 자동으로 아래로 스크롤
+  useEffect(() => {
+    if (expanded) return;
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const tick = () => {
+      const { scrollTop, scrollHeight, clientHeight } = el;
+      const maxScroll = scrollHeight - clientHeight;
+      if (maxScroll <= 0) return;
+
+      if (scrollTop >= maxScroll - 2) {
+        el.scrollTo({ top: 0, behavior: "auto" });
+        return;
+      }
+      el.scrollTop += AUTO_SCROLL_SPEED;
+    };
+
+    const id = setInterval(tick, AUTO_SCROLL_INTERVAL_MS);
+    return () => clearInterval(id);
+  }, [expanded]);
 
   return (
     <section id="services" className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
@@ -176,10 +202,10 @@ export function MarketingProductsSection() {
         </div>
 
         <div
+          ref={scrollRef}
           className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 overflow-x-hidden ${
-            expanded ? "" : "max-h-[420px] overflow-y-auto scrollbar-hide scroll-smooth"
+            expanded ? "" : "max-h-[420px] overflow-y-auto scrollbar-hide"
           }`}
-          style={expanded ? undefined : { scrollBehavior: "smooth" }}
         >
           {ITEMS.map((item) => (
             <div
