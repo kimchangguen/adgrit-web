@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { Container } from "./Container";
 
@@ -156,19 +157,29 @@ const ITEMS = [
 ];
 
 export function MarketingProductsSection() {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <section id="services" className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
       <Container>
-        <div className="text-center mb-10">
+        <div className="text-center mb-6">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black">
             애드그릿의 다양한 <span className="text-orange-500">마케팅 상품</span>
           </h2>
+          <button
+            type="button"
+            onClick={() => setExpanded((e) => !e)}
+            className="mt-4 inline-flex items-center justify-center rounded-full border-2 border-orange-500 bg-white px-6 py-2.5 text-sm font-medium text-orange-500 hover:bg-orange-50 transition-colors"
+          >
+            {expanded ? "접기" : "펼쳐서 보기"}
+          </button>
         </div>
 
-        {/* 2줄만 보이게, 나머지는 휠 스크롤 */}
         <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-h-[420px] overflow-y-auto overflow-x-hidden scrollbar-hide scroll-smooth"
-          style={{ scrollBehavior: "smooth" }}
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 overflow-x-hidden ${
+            expanded ? "" : "max-h-[420px] overflow-y-auto scrollbar-hide scroll-smooth"
+          }`}
+          style={expanded ? undefined : { scrollBehavior: "smooth" }}
         >
           {ITEMS.map((item) => (
             <div
