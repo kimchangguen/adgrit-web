@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { AnimatedCard } from "./_components/AnimatedCard";
@@ -140,53 +141,30 @@ function ProcessStep({
   title,
   desc,
   buttonText,
-  icon,
 }: {
   step: string;
   title: string;
   desc: string;
   buttonText?: string;
-  icon?: "bell" | "target" | "star";
 }) {
-  const IconEl = () => {
-    const i = icon ?? "star";
-    if (i === "bell") {
-      return (
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-teal-100 text-teal-600">
-          <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
-            <path d="M12 2a2 2 0 012 2v1.09A6 6 0 0118 11v1h2a1 1 0 010 2H4a1 1 0 010-2h2v-1a6 6 0 014-5.91V4a2 2 0 012-2zm0 2v.09A6 6 0 006 11v1h12v-1a6 6 0 00-6-5.91V4zM8 15a1 1 0 011 1v2a3 3 0 106 0v-2a1 1 0 011-1 1 1 0 10-2 0v2a1 1 0 01-2 0v-2a1 1 0 10-2 0z" />
-          </svg>
-        </div>
-      );
-    }
-    if (i === "target") {
-      return (
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#1e40af]/15 text-[#1e40af]">
-          <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden>
-            <circle cx="12" cy="12" r="3" strokeDasharray="2 2" />
-            <circle cx="12" cy="12" r="6" strokeDasharray="3 3" />
-            <circle cx="12" cy="12" r="9" strokeDasharray="2 2" />
-            <circle cx="12" cy="12" r="10" />
-          </svg>
-        </div>
-      );
-    }
-    return (
-      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-teal-100 text-teal-600">
-        <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-        </svg>
-      </div>
-    );
-  };
+  const stepNum = parseInt(step, 10);
+  const iconSrc = `/process-iocons/step-${stepNum}.png`;
+
   return (
     <div className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm text-center">
       <span className="text-sm font-bold uppercase tracking-wide text-[#1e40af]">STEP {step}</span>
-      <div className="mt-4">
-        <IconEl />
+      <div className="mt-4 mx-auto flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-slate-100">
+        <Image
+          src={iconSrc}
+          alt=""
+          width={56}
+          height={56}
+          className="h-full w-full object-cover"
+          aria-hidden
+        />
       </div>
       <h3 className="mt-4 text-lg font-bold text-black">{title}</h3>
-      <p className="mt-3 flex-1 text-center text-sm leading-relaxed text-slate-700">{desc}</p>
+      <p className="mt-3 flex-1 text-center text-sm leading-relaxed text-slate-700 whitespace-pre-line">{desc}</p>
       {buttonText && (
         <div className="mt-6 rounded-lg py-3 px-4 text-sm font-semibold bg-blue-100 text-[#1e40af]">
           {buttonText}
@@ -449,25 +427,22 @@ function SiteChrome({
                 title: "Discovery 진단단계",
                 desc: "고객사의 비즈니스 환경과 과제를 깊이 이해하는 것에서 시작됩니다.\n맞춤형 상담을 통해 목표, 문제점, 기회 요소를 면밀히 파악합니다.",
                 buttonText: "상담 접수 24시간 내",
-                icon: "bell" as const,
               },
               {
                 step: "02",
                 title: "Development 전략단계",
                 desc: "수집된 인사이트를 바탕으로 맞춤형 전략을 수립합니다.\n데이터 기반으로 목표에 최적화된 실행 계획을 설계합니다.",
                 buttonText: "상담 후 2주 소요",
-                icon: "target" as const,
               },
               {
                 step: "03",
                 title: "Implementation 실행단계",
                 desc: "설계된 전략을 현장에 적용하고 지속적으로 모니터링합니다.\n빠른 실험과 개선으로 성과를 극대화합니다.",
                 buttonText: "지속적으로 모니터링",
-                icon: "star" as const,
               },
             ].map((p, i) => (
               <AnimatedCard key={p.step} index={i}>
-                <ProcessStep step={p.step} title={p.title} desc={p.desc} buttonText={p.buttonText} icon={p.icon} />
+                <ProcessStep step={p.step} title={p.title} desc={p.desc} buttonText={p.buttonText} />
               </AnimatedCard>
             ))}
           </div>
