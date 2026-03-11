@@ -7,8 +7,8 @@ import { Container } from "./Container";
 // 제공하신 카카오톡 후기 스크린샷 10장을 public/kakao-screens/에 kakao-1.png ~ kakao-10.png 로 넣어주세요.
 const KAKAO_IMAGES = Array.from({ length: 10 }, (_, i) => `/kakao-screens/kakao-${i + 1}.png`);
 
-const CARD_WIDTH = 320;
-const GAP = 24;
+const CARD_WIDTH = 384; // 320 * 1.2
+const GAP = 29;
 const AUTO_PLAY_INTERVAL = 5000; // 5초마다
 
 export function KakaoTestimonialsSection() {
@@ -100,32 +100,32 @@ export function KakaoTestimonialsSection() {
   return (
     <section
       id="kakao-testimonials"
-      className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20"
+      className="relative z-10 border-t border-slate-100 bg-white py-[4.8rem] sm:py-[6rem]"
     >
       <Container>
-        {/* 상단 헤더 */}
+        {/* 상단 헤더 - 20% 확대 */}
         <div className="text-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight">
+          <h2 className="text-[1.8rem] sm:text-[2.25rem] lg:text-[2.7rem] font-black tracking-tight">
             <span className="text-[#1a1a2e]">클라이언트</span>
             <span className="text-orange-500"> 만족후기</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-5 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
             애드그릿은 사장님과 꾸준한소통으로
             <br />
             매장의 안정화된 매출성장을 위해 소통과 개발을 합니다.
           </p>
         </div>
 
-        {/* 카카오톡 화면 가로 캐러셀 */}
-        <div className="mt-12 sm:mt-14 relative">
+        {/* 카카오톡 화면 가로 캐러셀 - 20% 확대 */}
+        <div className="mt-14 sm:mt-[4.2rem] relative">
           {/* 좌측 화살표 */}
           <button
             type="button"
             onClick={() => goTo(currentIndex - 1)}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-4 z-10 w-12 h-12 rounded-full bg-white border border-slate-200 shadow-lg flex items-center justify-center text-[#1e40af] hover:bg-slate-50 transition-colors"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-4 z-10 w-14 h-14 rounded-full bg-white border border-slate-200 shadow-lg flex items-center justify-center text-[#1e40af] hover:bg-slate-50 transition-colors"
             aria-label="이전"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
@@ -134,18 +134,18 @@ export function KakaoTestimonialsSection() {
           <button
             type="button"
             onClick={() => goTo(currentIndex + 1)}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-4 z-10 w-12 h-12 rounded-full bg-white border border-slate-200 shadow-lg flex items-center justify-center text-[#1e40af] hover:bg-slate-50 transition-colors"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-4 z-10 w-14 h-14 rounded-full bg-white border border-slate-200 shadow-lg flex items-center justify-center text-[#1e40af] hover:bg-slate-50 transition-colors"
             aria-label="다음"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
 
-          {/* 스크롤 영역 - 마우스 드래그로 좌우 이동 가능 */}
+          {/* 스크롤 영역 */}
           <div
             ref={scrollRef}
-            className={`flex gap-6 overflow-x-auto scroll-smooth py-4 px-2 cursor-grab active:cursor-grabbing select-none [&::-webkit-scrollbar]:hidden ${
+            className={`flex gap-7 overflow-x-auto scroll-smooth py-5 px-2 cursor-grab active:cursor-grabbing select-none [&::-webkit-scrollbar]:hidden ${
               isDragging ? "cursor-grabbing" : ""
             }`}
             style={{ scrollbarWidth: "none", scrollSnapType: "x mandatory" }}
@@ -164,13 +164,13 @@ export function KakaoTestimonialsSection() {
                   boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
                 }}
               >
-                <div className="relative w-full aspect-[9/16] max-h-[520px] select-none">
+                <div className="relative w-full aspect-[9/16] max-h-[624px] select-none">
                   <Image
                     src={src}
                     alt={`클라이언트 만족후기 ${i + 1}`}
                     fill
                     className="object-cover object-top pointer-events-none"
-                    sizes="320px"
+                    sizes="384px"
                     draggable={false}
                   />
                 </div>
@@ -179,13 +179,13 @@ export function KakaoTestimonialsSection() {
           </div>
 
           {/* 페이지네이션 */}
-          <div className="flex justify-center gap-1.5 mt-6 flex-wrap max-w-full">
+          <div className="flex justify-center gap-2 mt-7 flex-wrap max-w-full">
             {KAKAO_IMAGES.map((_, i) => (
               <button
                 key={i}
                 type="button"
                 onClick={() => goTo(i)}
-                className={`w-2 h-2 rounded-full transition-colors flex-shrink-0 ${
+                className={`w-2.5 h-2.5 rounded-full transition-colors flex-shrink-0 ${
                   i === currentIndex ? "bg-[#1e40af] scale-110" : "bg-slate-300 hover:bg-slate-400"
                 }`}
                 aria-label={`${i + 1}번째로 이동`}
