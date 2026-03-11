@@ -437,7 +437,7 @@ function SiteChrome({
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-black">
               프로세스
             </h2>
-            <p className="mt-3 text-base text-slate-600">
+            <p className="mt-3 text-[1.04rem] sm:text-[1.17rem] text-slate-600">
               단 세 단계로 완성하는 성공적인 컨설팅 프로세스
             </p>
           </div>
