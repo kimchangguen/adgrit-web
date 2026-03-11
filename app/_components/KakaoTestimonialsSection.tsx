@@ -4,11 +4,12 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Container } from "./Container";
 
-const KAKAO_IMAGES = Array.from({ length: 15 }, (_, i) => `/kakao-screens/kakao-${i + 1}.png`);
+// 제공하신 카카오톡 후기 스크린샷 10장을 public/kakao-screens/에 kakao-1.png ~ kakao-10.png 로 넣어주세요.
+const KAKAO_IMAGES = Array.from({ length: 10 }, (_, i) => `/kakao-screens/kakao-${i + 1}.png`);
 
 const CARD_WIDTH = 320;
 const GAP = 24;
-const AUTO_PLAY_INTERVAL = 1000; // 1초마다
+const AUTO_PLAY_INTERVAL = 5000; // 5초마다
 
 export function KakaoTestimonialsSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
