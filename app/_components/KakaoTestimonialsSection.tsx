@@ -4,8 +4,8 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Container } from "./Container";
 
-// 제공하신 카카오톡 후기 스크린샷 10장을 public/kakao-screens/에 kakao-1.png ~ kakao-10.png 로 넣어주세요.
-const KAKAO_IMAGES = Array.from({ length: 10 }, (_, i) => `/kakao-screens/kakao-${i + 1}.png`);
+// public/kakao-screens/ 에 kakao-1.jpg ~ kakao-10.jpg (또는 .png) 로 넣어주세요.
+const KAKAO_IMAGES = Array.from({ length: 10 }, (_, i) => `/kakao-screens/kakao-${i + 1}.jpg`);
 
 const CARD_WIDTH = 384; // 320 * 1.2
 const GAP = 29;
