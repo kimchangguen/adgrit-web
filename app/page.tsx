@@ -268,13 +268,27 @@ function SiteChrome({
             <div className="text-left font-worry order-2 lg:order-1">
               <AnimatedHero>
                 <AnimatedHeroItem>
-                  <p className="text-[1.1rem] text-[#374151] leading-relaxed">
+                  {/* PC: 한 줄 */}
+                  <p className="hidden md:block text-[1.1rem] text-[#374151] leading-relaxed">
                     성공한 사장님들은 마케팅을 &apos;비용&apos;이라 부르지 않습니다.
+                  </p>
+                  {/* 모바일: 2줄 */}
+                  <p className="md:hidden text-[1.1rem] text-[#374151] leading-relaxed">
+                    성공한 사장님들은 마케팅을 &apos;비용&apos;이라
+                    <br />
+                    부르지 않습니다.
                   </p>
                 </AnimatedHeroItem>
                 <AnimatedHeroItem>
-                  <p className="mt-6 text-[2.06rem] sm:text-[2.48rem] md:text-[3.3rem] font-bold tracking-tight text-[#111827] leading-[1.25]">
+                  {/* PC: 한 줄 */}
+                  <p className="hidden md:block mt-6 text-[2.06rem] sm:text-[2.48rem] md:text-[3.3rem] font-bold tracking-tight text-[#111827] leading-[1.25]">
                     그들은 <span className="text-[#FF7F00]">&apos;연료&apos;</span>라고 부릅니다.
+                  </p>
+                  {/* 모바일: 2줄 */}
+                  <p className="md:hidden mt-6 text-[2.06rem] sm:text-[2.48rem] font-bold tracking-tight text-[#111827] leading-[1.25]">
+                    그들은 <span className="text-[#FF7F00]">&apos;연료&apos;</span>라고
+                    <br />
+                    부릅니다.
                   </p>
                 </AnimatedHeroItem>
                 <AnimatedHeroItem>
@@ -285,8 +299,15 @@ function SiteChrome({
                   </p>
                 </AnimatedHeroItem>
                 <AnimatedHeroItem>
-                  <p className="mt-6 text-[1.1rem] text-[#374151] leading-relaxed">
+                  {/* PC: 한 줄 */}
+                  <p className="hidden md:block mt-6 text-[1.1rem] text-[#374151] leading-relaxed">
                     이제는 개발실행사와 직접 제대로된 <span className="font-semibold">AI CORE Marketing</span> 하세요
+                  </p>
+                  {/* 모바일: 2줄 */}
+                  <p className="md:hidden mt-6 text-[1.1rem] text-[#374151] leading-relaxed">
+                    이제는 개발실행사와 직접 제대로된
+                    <br />
+                    <span className="font-semibold">AI CORE Marketing</span> 하세요
                   </p>
                 </AnimatedHeroItem>
                 <AnimatedHeroItem>
