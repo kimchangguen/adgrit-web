@@ -153,13 +153,13 @@ function ProcessStep({
   return (
     <div className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm text-center">
       <span className="text-sm font-bold uppercase tracking-wide text-[#1e40af]">STEP {step}</span>
-      <div className="mt-4 mx-auto flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-slate-100">
+      <div className="mt-4 mx-auto flex h-14 w-14 items-center justify-center">
         <Image
           src={iconSrc}
           alt=""
           width={56}
           height={56}
-          className="h-full w-full object-cover"
+          className="h-14 w-14 object-contain"
           aria-hidden
         />
       </div>
