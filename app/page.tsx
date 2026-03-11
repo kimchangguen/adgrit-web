@@ -141,12 +141,14 @@ function ProcessStep({
   desc,
   buttonText,
   icon,
+  ctaFilled = false,
 }: {
   step: string;
   title: string;
   desc: string;
   buttonText?: string;
   icon?: "bell" | "target" | "star";
+  ctaFilled?: boolean;
 }) {
   const IconEl = () => {
     const i = icon ?? "star";
@@ -180,17 +182,21 @@ function ProcessStep({
     );
   };
   return (
-    <div className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm text-center">
       <span className="text-sm font-bold uppercase tracking-wide text-[#1e40af]">STEP {step}</span>
       <div className="mt-4">
         <IconEl />
       </div>
       <h3 className="mt-4 text-lg font-bold text-black">{title}</h3>
-      <p className="mt-3 flex-1 text-left text-sm leading-relaxed text-slate-700">{desc}</p>
+      <p className="mt-3 flex-1 text-center text-sm leading-relaxed text-slate-700">{desc}</p>
       {buttonText && (
-        <p className="mt-6 text-sm font-semibold text-[#1e40af]">
+        <div
+          className={`mt-6 rounded-lg py-3 px-4 text-sm font-semibold ${
+            ctaFilled ? "bg-[#1e40af] text-white" : "bg-blue-100 text-[#1e40af]"
+          }`}
+        >
           {buttonText}
-        </p>
+        </div>
       )}
     </div>
   );
@@ -444,12 +450,12 @@ function SiteChrome({
 
           <div className="mt-10 grid gap-6 md:grid-cols-3 md:items-stretch">
             {[
-              { step: "01", title: "Discovery 진단단계", desc: "고객사의 비즈니스 환경과 과제를 깊이 이해하는 것에서 시작됩니다. 맞춤형 상담을 통해 목표, 문제점, 기회 요소를 면밀히 파악합니다.", buttonText: "상담 접수 24시간 내", icon: "bell" as const },
-              { step: "02", title: "Development 전략단계", desc: "수집된 인사이트를 바탕으로 맞춤형 전략을 수립합니다. 데이터 기반으로 목표에 최적화된 실행 계획을 설계합니다.", buttonText: "상담 후 2주 소요", icon: "target" as const },
-              { step: "03", title: "Implementation 실행단계", desc: "설계된 전략을 현장에 적용하고 지속적으로 모니터링합니다. 빠른 실험과 개선으로 성과를 극대화합니다.", buttonText: "지속적으로 모니터링", icon: "star" as const },
+              { step: "01", title: "Discovery 진단단계", desc: "고객사의 비즈니스 환경과 과제를 깊이 이해하는 것에서 시작됩니다. 맞춤형 상담을 통해 목표, 문제점, 기회 요소를 면밀히 파악합니다.", buttonText: "상담 접수 24시간 내", icon: "bell" as const, ctaFilled: false },
+              { step: "02", title: "Development 전략단계", desc: "수집된 인사이트를 바탕으로 맞춤형 전략을 수립합니다. 데이터 기반으로 목표에 최적화된 실행 계획을 설계합니다.", buttonText: "상담 후 2주 소요", icon: "target" as const, ctaFilled: false },
+              { step: "03", title: "Implementation 실행단계", desc: "설계된 전략을 현장에 적용하고 지속적으로 모니터링합니다. 빠른 실험과 개선으로 성과를 극대화합니다.", buttonText: "지속적으로 모니터링", icon: "star" as const, ctaFilled: true },
             ].map((p, i) => (
               <AnimatedCard key={p.step} index={i}>
-                <ProcessStep step={p.step} title={p.title} desc={p.desc} buttonText={p.buttonText} icon={p.icon} />
+                <ProcessStep step={p.step} title={p.title} desc={p.desc} buttonText={p.buttonText} icon={p.icon} ctaFilled={p.ctaFilled} />
               </AnimatedCard>
             ))}
           </div>
