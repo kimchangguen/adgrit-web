@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import type { ReactNode } from "react";
+import { motion } from "framer-motion";
 import { Section2LeftColumn } from "./Section2LeftColumn";
 
 type Section2WrapperProps = {
@@ -9,23 +10,25 @@ type Section2WrapperProps = {
 };
 
 export function Section2Wrapper({ leftContent, rightContent }: Section2WrapperProps) {
-  const sectionRef = useRef<HTMLElement>(null);
-
   return (
-    <section
-      ref={sectionRef}
-      id="section2"
-      className="section2 section-two relative z-10 mt-12 bg-[#1e3a5f] py-20 sm:py-24 lg:py-28"
-    >
-      <div className="wave-top" aria-hidden="true" />
-      <div className="mx-auto w-full max-w-[1080px] px-6">
-        <div className="flex flex-col lg:flex-row lg:items-start gap-12 lg:gap-16">
-          <Section2LeftColumn sectionRef={sectionRef}>
-            {leftContent}
-          </Section2LeftColumn>
-          {rightContent}
+    <div className="w-full bg-white px-4 sm:px-6 mt-12">
+      <motion.section
+        id="section2"
+        className="section2 section-two relative z-10 mx-auto w-full max-w-[1200px] rounded-[2rem] sm:rounded-[3rem] bg-[#1e3a5f] py-20 sm:py-24 lg:py-28"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <div className="mx-auto w-full px-6 md:px-10 lg:px-14">
+          <div className="flex flex-col lg:flex-row lg:items-start gap-12 lg:gap-16">
+            <Section2LeftColumn>
+              {leftContent}
+            </Section2LeftColumn>
+            {rightContent}
+          </div>
         </div>
-      </div>
-    </section>
+      </motion.section>
+    </div>
   );
 }

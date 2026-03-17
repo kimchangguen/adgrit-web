@@ -56,11 +56,33 @@ export function OurClientsSection() {
         </div>
 
         {/* 끊임없이 왼쪽으로 흐르는 마키 */}
-        <div className="mt-12 sm:mt-16 overflow-hidden">
-          <div className="flex animate-marquee gap-4 sm:gap-6 w-max">
-            {[...CLIENTS, ...CLIENTS].map((client, i) => (
+        <div className="mt-12 sm:mt-16 overflow-hidden flex whitespace-nowrap">
+          <style dangerouslySetInnerHTML={{__html: `
+            @keyframes force-marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-100%); }
+            }
+            .force-animate-marquee {
+              animation: force-marquee 35s linear infinite;
+              will-change: transform;
+            }
+          `}} />
+          
+          <div className="flex force-animate-marquee gap-4 sm:gap-6 w-max pr-4 sm:pr-6">
+            {CLIENTS.map((client, i) => (
               <ClientCard
-                key={i}
+                key={`client-1-${i}`}
+                name={client.name}
+                desc={client.desc}
+                logo={client.logo}
+              />
+            ))}
+          </div>
+          
+          <div className="flex force-animate-marquee gap-4 sm:gap-6 w-max pr-4 sm:pr-6" aria-hidden="true">
+            {CLIENTS.map((client, i) => (
+              <ClientCard
+                key={`client-2-${i}`}
                 name={client.name}
                 desc={client.desc}
                 logo={client.logo}

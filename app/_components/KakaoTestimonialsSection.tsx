@@ -9,7 +9,7 @@ const KAKAO_IMAGES = Array.from({ length: 10 }, (_, i) => `/kakao-screens/kakao-
 
 const CARD_WIDTH = 384; // 320 * 1.2
 const GAP = 29;
-const AUTO_PLAY_INTERVAL = 5000; // 5초마다
+const AUTO_PLAY_INTERVAL = 2500; // 2.5초로 단축
 
 export function KakaoTestimonialsSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -19,6 +19,7 @@ export function KakaoTestimonialsSection() {
   const scrollLeftStart = useRef(0);
   const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isProgrammaticScrollRef = useRef(false);
+  const animationFrameRef = useRef<number | null>(null);
 
   const maxIndex = KAKAO_IMAGES.length - 1;
 
@@ -26,8 +27,35 @@ export function KakaoTestimonialsSection() {
     const el = scrollRef.current;
     if (!el) return;
     isProgrammaticScrollRef.current = true;
-    el.scrollTo({ left: idx * (CARD_WIDTH + GAP), behavior: "smooth" });
-    setTimeout(() => { isProgrammaticScrollRef.current = false; }, 400);
+
+    const target = idx * (CARD_WIDTH + GAP);
+    const start = el.scrollLeft;
+    const change = target - start;
+    const startTime = performance.now();
+    const duration = 250; // 0.25s (기존 대비 2배 빠름)
+
+    if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+
+    const animateScroll = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // easeInOutCubic
+      const ease = progress < 0.5 
+        ? 4 * progress * progress * progress 
+        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+      el.scrollLeft = start + change * ease;
+
+      if (progress < 1) {
+        animationFrameRef.current = requestAnimationFrame(animateScroll);
+      } else {
+        isProgrammaticScrollRef.current = false;
+        animationFrameRef.current = null;
+      }
+    };
+
+    animationFrameRef.current = requestAnimationFrame(animateScroll);
   }, []);
 
   const goTo = useCallback((index: number) => {
@@ -44,6 +72,10 @@ export function KakaoTestimonialsSection() {
     if (autoPlayRef.current) {
       clearInterval(autoPlayRef.current);
       autoPlayRef.current = null;
+    }
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
     }
   };
 
@@ -77,6 +109,7 @@ export function KakaoTestimonialsSection() {
     }, AUTO_PLAY_INTERVAL);
     return () => {
       if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
   }, []);
 
@@ -145,7 +178,7 @@ export function KakaoTestimonialsSection() {
           {/* 스크롤 영역 */}
           <div
             ref={scrollRef}
-            className={`flex gap-7 overflow-x-auto scroll-smooth py-5 px-2 cursor-grab active:cursor-grabbing select-none [&::-webkit-scrollbar]:hidden ${
+            className={`flex gap-7 overflow-x-auto py-5 px-2 cursor-grab active:cursor-grabbing select-none [&::-webkit-scrollbar]:hidden ${
               isDragging ? "cursor-grabbing" : ""
             }`}
             style={{ scrollbarWidth: "none", scrollSnapType: "x mandatory" }}

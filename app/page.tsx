@@ -366,7 +366,7 @@ function SiteChrome({
       {/* 슬로건 - 세번째 섹션: 흰 배경, 좌 텍스트(검정), 우 노트북 이미지(오른쪽 반 블러) */}
       <section
         id="section3"
-        className="relative z-10 flex min-h-[918px] w-full items-center justify-center overflow-hidden bg-white"
+        className="relative z-10 flex h-[800px] w-full items-center justify-center overflow-hidden bg-white"
       >
         <SloganWithEffects />
       </section>

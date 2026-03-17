@@ -1,7 +1,39 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+
+function AnimatedCounter({
+  from = 0,
+  to,
+  duration = 1.5,
+  suffix = "",
+  decimals = 0,
+}: {
+  from?: number;
+  to: number;
+  duration?: number;
+  suffix?: string;
+  decimals?: number;
+}) {
+  const count = useMotionValue(from);
+  const rounded = useTransform(count, (latest) => {
+    if (decimals > 0) {
+      return latest.toFixed(decimals) + suffix;
+    }
+    return Math.round(latest) + suffix;
+  });
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+  useEffect(() => {
+    if (isInView) {
+      animate(count, to, { duration, ease: "easeOut" });
+    }
+  }, [isInView, count, to, duration]);
+
+  return <motion.span ref={ref}>{rounded}</motion.span>;
+}
 
 const MILESTONES = [
   { year: "2019", text: "디지털 마케팅 전문팀 구성" },
@@ -81,7 +113,7 @@ export function ResultsWithGraph() {
             </motion.p>
           </div>
 
-          {/* 오른쪽: 큰 그래프 (막대 + 막대마다 연도·설명 + ROAS 500% 표시) - 넓게 */}
+          {/* 오른쪽: 큰 그래프 (막대 + 막대마다 연도·설명 + ROAS 324% 표시) - 넓게 */}
           <motion.div
             className="flex-1 min-w-0 lg:min-w-[60%] p-7 sm:p-9 lg:p-11"
             initial={{ opacity: 0, y: 12 }}
@@ -89,11 +121,11 @@ export function ResultsWithGraph() {
             viewport={{ amount: 0.2, once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            {/* 그래프 상단: 광고주 평균 ROAS 500% */}
+            {/* 그래프 상단: 광고주 평균 ROAS 324% */}
             <div className="mb-7 flex flex-wrap items-baseline justify-between gap-4">
               <span className="text-[1.05rem] font-medium text-slate-600">광고주 평균 ROAS</span>
               <span className="text-[2.3rem] font-bold tabular-nums text-sky-600 sm:text-[3.45rem]">
-                500%
+                <AnimatedCounter to={324} suffix="%" duration={1.5} />
               </span>
             </div>
 
@@ -150,21 +182,21 @@ export function ResultsWithGraph() {
             <div className="text-center">
               <p className="text-base font-medium text-slate-500">광고주 평균 ROAS</p>
               <p className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tabular-nums text-slate-900">
-                500%
+                <AnimatedCounter to={324} suffix="%" duration={1.5} />
               </p>
               <p className="mt-3 text-base text-slate-500">업계 평균 대비 3.5배 높은 성과</p>
             </div>
             <div className="text-center">
               <p className="text-base font-medium text-slate-500">누적 광고 집행 금액</p>
               <p className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tabular-nums text-slate-900">
-                470억+
+                <AnimatedCounter to={172} suffix="억+" duration={1.5} />
               </p>
               <p className="mt-3 text-base text-slate-500">데이터로 검증된 집행 노하우</p>
             </div>
             <div className="text-center">
               <p className="text-base font-medium text-slate-500">월 구글 애즈 집행 예산</p>
               <p className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tabular-nums text-slate-900">
-                30억
+                <AnimatedCounter to={7.2} suffix="억" decimals={1} duration={1.5} />
               </p>
               <p className="mt-3 text-base text-slate-500">대규모 예산 운영 최적화</p>
             </div>

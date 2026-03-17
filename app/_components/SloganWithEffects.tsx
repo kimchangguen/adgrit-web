@@ -14,7 +14,7 @@ export function SloganWithEffects() {
   return (
     <div
       ref={sectionRef}
-      className="relative w-full flex items-center justify-center min-h-[918px] py-20 overflow-hidden bg-white"
+      className="relative w-full flex items-center justify-center h-[800px] py-10 overflow-hidden bg-white"
     >
       <Container className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10 lg:gap-12">
         {/* 왼쪽: 텍스트 (검정색) */}

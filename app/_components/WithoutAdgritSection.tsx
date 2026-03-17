@@ -1,6 +1,22 @@
 "use client";
 
 import { Container } from "./Container";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 const MESSAGES = [
   "기회비용 상실: 마케팅 헤매는 동안 경쟁사가 우리 잠재 고객을 다 채가서 생기는 매출 손실.",
@@ -37,12 +53,19 @@ export function WithoutAdgritSection() {
             </p>
           </div>
 
-          {/* 말풍선 - 가로 15% 더 길게, 크기 통일, 위아래 폭 10% 넓게 */}
-          <div className="mt-11 sm:mt-16 w-full max-w-[49.5rem] mx-auto h-[374px] sm:h-[440px] overflow-hidden rounded-xl flex justify-center">
-            <div className="flex flex-col gap-[1.1rem] animate-bubbles-up w-full max-w-[49.5rem] mx-auto">
-              {[...MESSAGES, ...MESSAGES].map((text, i) => (
-                <div
+          {/* 말풍선 리스트 (순차 등장 스태거 애니메이션) */}
+          <div className="mt-11 sm:mt-16 w-full max-w-[49.5rem] mx-auto flex justify-center">
+            <motion.div 
+              className="flex flex-col gap-[1.1rem] w-full"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.1 }}
+            >
+              {MESSAGES.map((text, i) => (
+                <motion.div
                   key={`bubble-${i}`}
+                  variants={itemVariants}
                   className="flex items-center gap-3 rounded-full px-6 py-[1.1rem] w-full min-w-full text-white text-[1.2rem] leading-snug shadow-lg"
                   style={{ backgroundColor: BUBBLE_BLUE }}
                 >
@@ -52,9 +75,9 @@ export function WithoutAdgritSection() {
                     </svg>
                   </span>
                   <span className="line-clamp-2 flex-1 min-w-0">{text}</span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
 
