@@ -4,126 +4,204 @@ import { motion } from "framer-motion";
 import { SiteHeader } from "../_components/SiteHeader";
 import { Footer } from "../_components/Footer";
 
-/* ─── 공통 이징 ─────────────────────────────────────── */
-const EASE = [0.22, 1, 0.36, 1] as const;
+/* ─── 모션 설정 ──────────────────────────────────────── */
+const SPRING_L = { type: "spring", stiffness: 300, damping: 28, mass: 0.9 } as const;
+const SPRING_R = { type: "spring", stiffness: 300, damping: 28, mass: 0.9 } as const;
+const EASE     = [0.22, 1, 0.36, 1] as const;
 const VIEWPORT = { once: true, margin: "-80px" } as const;
 
+/* ─── 타입 ───────────────────────────────────────────── */
+type Item  = { text: string; bold?: boolean };
+type Entry = { yearLabel: string; yearSub?: string; items: Item[] };
+
 /* ─── 연혁 데이터 ────────────────────────────────────── */
-const HISTORY = [
+const HISTORY: Entry[] = [
   {
-    year: "2019",
+    yearLabel: "2014",
     items: [
-      { month: "03", title: "ADGRIT 창업", desc: "디지털 마케팅 전문 에이전시로 출발, 퍼포먼스 광고 서비스 개시" },
-      { month: "08", title: "첫 주요 클라이언트 확보", desc: "국내 이커머스 TOP 브랜드와의 파트너십 체결 및 광고 운영 시작" },
+      { text: "원더폰코리아 협력업체 | 네오폰코리아 협력업체" },
+      { text: "마루네프가구 협력업체 | 한주얼리 협력업체" },
     ],
   },
   {
-    year: "2020",
+    yearLabel: "2015",
     items: [
-      { month: "02", title: "팀 구성 확대", desc: "데이터 분석팀·크리에이티브팀 신설, 전문 인력 15명 규모로 성장" },
-      { month: "09", title: "연 취급고 100억 돌파", desc: "창업 2년차 연간 광고 취급고 100억원 달성" },
+      { text: "네이버 블로그 상위노출 솔루션 개발 실행", bold: true },
+      { text: "PSU 에듀센터 | 아이폰 닥터 | 피부과 동안 중심" },
+      { text: "탈모 회사 웰킨 | 한백 자동차 운전학원 | 메디프랩" },
+      { text: "Kic 공무원 학원 | 카마 승무원 학원 외 30여 업체 진행" },
     ],
   },
   {
-    year: "2021",
+    yearLabel: "2017",
     items: [
-      { month: "04", title: "AI 마케팅 솔루션 도입", desc: "자체 개발 AI 기반 광고 최적화 툴 론칭, 머신러닝 기반 입찰 자동화 서비스 제공" },
-      { month: "11", title: "중소기업벤처부 선정 예비유니콘", desc: "혁신적 성장성을 인정받아 정부 주관 예비유니콘 기업 선정" },
+      { text: "카페 자동화 시스템 솔루션 개발", bold: true },
+      { text: "카피몬 | 칼라테크오에이 | SBS 뷰티아카데미" },
+      { text: "폰데이중고폰 | 머니게이션 | 폰플랜 | 판디스" },
+      { text: "모드 실용음악 아카데미 외 200여 업체 진행" },
     ],
   },
   {
-    year: "2022",
+    yearLabel: "2018",
     items: [
-      { month: "01", title: "누적 투자유치 310억 달성", desc: "시리즈 B 투자 유치 완료, 누적 투자유치금액 310억원 달성" },
-      { month: "06", title: "글로벌팀 신설", desc: "해외 진출 국내 브랜드 및 글로벌 브랜드 대상 글로벌 캠페인 전담팀 구성" },
-      { month: "12", title: "연 취급고 1,000억 돌파", desc: "4년 만에 연간 광고 취급고 1,000억원 달성, 폭발적 성장 입증" },
+      { text: "인스타그램 마케팅 솔루션 개발", bold: true },
+      { text: "인스타그램 솔루션 로직개발", bold: true },
+      { text: "인스타그램 2000여개 이상 업체 진행 | 전일건설" },
+      { text: "SNY트렌지 | 땅사랑 부동산 | 부동산노른자 | 부동산법인 정무" },
+      { text: "서인 부동산 외 건설, 부동산 분야 10여 업체 진행" },
     ],
   },
   {
-    year: "2023",
+    yearLabel: "2019",
     items: [
-      { month: "03", title: "아시아 시장 진출", desc: "일본·동남아 시장 진출 본격화, 해외 클라이언트 광고 집행 시작" },
-      { month: "09", title: "구성원 100명 돌파", desc: "분석·전략·운영·크리에이티브·기술 전 분야 전문가 100인 체제 완성" },
+      { text: "기업부설 연구소 설립", bold: true },
+      { text: "인스타그램 마케팅 솔루션 업데이트", bold: true },
+      { text: "인스타그램 노출 솔루션 로직 업데이트", bold: true },
+      { text: "블로그 로직분석 및 재작판매", bold: true },
+      { text: "인스타그램 3000여개 이상 업체 진행" },
+      { text: "네이버카페 마케팅 진행" },
+      { text: "네이버 플레이스 마케팅 진행 외" },
+      { text: "인스타 등 300여개 업체 진행…" },
     ],
   },
   {
-    year: "2024",
+    yearLabel: "2020",
     items: [
-      { month: "01", title: "연 취급고 3,500억 달성", desc: "국내 독립 디지털 마케팅 에이전시 최고 수준의 광고 취급고 달성" },
-      { month: "06", title: "AI 통합 마케팅 플랫폼 론칭", desc: "빅데이터 분석·AI 광고 최적화·자동 리포팅을 결합한 원스톱 마케팅 플랫폼 출시" },
+      { text: "통합마케팅 실행 시스템 구축" },
+      { text: "페이스북 타켓광고 로그분석" },
+      { text: "인스타그램 로직 업데이트" },
+      { text: "인스타그램 최적화계정 육성" },
+      { text: "CRM마케팅 고칭 및 프로세스 구축" },
     ],
   },
-] as const;
+  {
+    yearLabel: "2021",
+    yearSub: "~ 2023",
+    items: [
+      { text: "메타 광고 진행 | 브랜드 블로그 육성 및 판매", bold: true },
+      { text: "네이버카페 마케팅 진행 | 네이버 플레이스 마케팅 진행", bold: true },
+      { text: "인스타그램 최적화 육성 1만개 이상" },
+      { text: "인스타그램 노출 발행 10개 이상" },
+      { text: "매출성장 및 컨설팅 진행 100개업체 외" },
+      { text: "인스타 등 500여개 업체 진행…" },
+    ],
+  },
+];
 
-/* ─── 연혁 아이템 컴포넌트 ───────────────────────────── */
-function HistoryItem({
-  item,
-  isLast,
-}: {
-  item: { month: string; title: string; desc: string };
-  isLast: boolean;
-}) {
+/* ─── 연도 섹션 ──────────────────────────────────────── */
+function YearSection({ entry }: { entry: Entry }) {
   return (
-    <div className={`flex gap-6 sm:gap-10 ${isLast ? "" : "pb-10"}`}>
-      {/* 월 */}
-      <div className="shrink-0 w-10 text-right">
-        <span className="text-xs font-bold text-[#2563EB] tracking-widest">{item.month}</span>
-      </div>
+    <div className="relative">
 
-      {/* 점 + 선 */}
-      <div className="flex flex-col items-center shrink-0">
-        <div className="w-2.5 h-2.5 rounded-full bg-[#2563EB] mt-0.5 shrink-0" />
-        {!isLast && <div className="w-px flex-1 bg-white/[0.08] mt-2" />}
-      </div>
+      {/* ── 데스크톱 (sm 이상): 좌우 랑데부 레이아웃 ─── */}
+      <div className="hidden sm:grid grid-cols-2 relative">
 
-      {/* 내용 */}
-      <div className="flex-1 pb-2">
-        <h3 className="text-base sm:text-[1.0625rem] font-bold text-white mb-1.5 leading-snug">
-          {item.title}
-        </h3>
-        <p className="text-sm text-white/45 leading-[1.85]">{item.desc}</p>
-      </div>
-    </div>
-  );
-}
+        {/* 중앙 수직선 */}
+        <div className="absolute inset-y-0 left-1/2 w-px bg-white/[0.08] -translate-x-1/2 pointer-events-none" />
 
-/* ─── 연도 섹션 컴포넌트 ─────────────────────────────── */
-function YearSection({ entry }: { entry: typeof HISTORY[number] }) {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-0 sm:gap-16 border-t border-white/[0.07] pt-12 pb-4">
+        {/* 중앙 점 (블루) */}
+        <div className="absolute top-10 left-1/2 w-3 h-3 rounded-full bg-[#2563EB] -translate-x-1/2 z-10 ring-4 ring-black shadow-[0_0_12px_rgba(37,99,235,0.6)]" />
 
-      {/* 왼쪽: 연도 — 왼쪽에서 슬라이드 인 */}
-      <motion.div
-        className="mb-8 sm:mb-0 shrink-0"
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={VIEWPORT}
-        transition={{ duration: 0.75, ease: EASE }}
-      >
-        <span
-          className="font-black text-white leading-none tracking-tighter"
-          style={{ fontSize: "clamp(4rem, 8vw, 6.5rem)" }}
+        {/* 왼쪽: 연도 — 왼쪽에서 중앙선으로 랑데부 */}
+        <motion.div
+          className="pr-12 xl:pr-20 text-right pt-8 pb-14"
+          initial={{ opacity: 0, x: -60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={VIEWPORT}
+          transition={SPRING_L}
         >
-          {entry.year}
-        </span>
-      </motion.div>
+          <span
+            className="font-black text-white leading-none tracking-tighter block"
+            style={{ fontSize: "clamp(4.5rem, 7vw, 6.5rem)" }}
+          >
+            {entry.yearLabel}
+          </span>
+          {entry.yearSub && (
+            <span className="text-[#2563EB] font-bold text-lg sm:text-xl tracking-tight block mt-1">
+              {entry.yearSub}
+            </span>
+          )}
+          <span className="text-white/20 text-sm font-medium tracking-widest block mt-2">년</span>
+        </motion.div>
 
-      {/* 오른쪽: 항목 목록 — 오른쪽에서 슬라이드 인 */}
-      <motion.div
-        className="flex-1"
-        initial={{ opacity: 0, x: 50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={VIEWPORT}
-        transition={{ duration: 0.75, ease: EASE }}
-      >
-        {entry.items.map((item, i) => (
-          <HistoryItem
-            key={item.title}
-            item={item}
-            isLast={i === entry.items.length - 1}
-          />
-        ))}
-      </motion.div>
+        {/* 오른쪽: 내용 — 오른쪽에서 중앙선으로 랑데부 */}
+        <motion.div
+          className="pl-12 xl:pl-20 pt-8 pb-14"
+          initial={{ opacity: 0, x: 60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={VIEWPORT}
+          transition={SPRING_R}
+        >
+          <ul className="space-y-3">
+            {entry.items.map((item, i) => (
+              <li key={i} className="flex items-start gap-3">
+                {/* 블루 인디케이터 (볼드 항목만) */}
+                {item.bold && (
+                  <span className="mt-[0.35em] shrink-0 w-1 h-1 rounded-full bg-[#2563EB]" />
+                )}
+                <p
+                  className={`text-sm sm:text-[0.9rem] leading-relaxed ${
+                    item.bold
+                      ? "font-bold text-white"
+                      : "text-white/45 font-normal"
+                  } ${!item.bold ? "pl-4" : ""}`}
+                >
+                  {item.text}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      </div>
+
+      {/* ── 모바일: 단일 열 ──────────────────────────────── */}
+      <div className="sm:hidden relative pl-6 border-l border-white/[0.08] py-10">
+
+        {/* 블루 점 */}
+        <div className="absolute top-10 -left-[7px] w-3 h-3 rounded-full bg-[#2563EB] ring-4 ring-black shadow-[0_0_10px_rgba(37,99,235,0.5)]" />
+
+        {/* 연도 — 왼쪽에서 슬라이드 */}
+        <motion.div
+          className="mb-5"
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={VIEWPORT}
+          transition={SPRING_L}
+        >
+          <span className="text-[3rem] font-black text-white leading-none tracking-tighter block">
+            {entry.yearLabel}
+          </span>
+          {entry.yearSub && (
+            <span className="text-[#2563EB] font-bold text-base block mt-0.5">
+              {entry.yearSub}
+            </span>
+          )}
+        </motion.div>
+
+        {/* 내용 — 오른쪽에서 슬라이드 */}
+        <motion.ul
+          className="space-y-3"
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={VIEWPORT}
+          transition={SPRING_R}
+        >
+          {entry.items.map((item, i) => (
+            <li key={i} className="flex items-start gap-2.5">
+              {item.bold && (
+                <span className="mt-[0.35em] shrink-0 w-1 h-1 rounded-full bg-[#2563EB]" />
+              )}
+              <p
+                className={`text-sm leading-relaxed ${
+                  item.bold ? "font-bold text-white" : "text-white/45 font-normal"
+                } ${!item.bold ? "pl-3.5" : ""}`}
+              >
+                {item.text}
+              </p>
+            </li>
+          ))}
+        </motion.ul>
+      </div>
     </div>
   );
 }
@@ -137,10 +215,10 @@ export default function HistoryPage() {
       <main className="pt-16">
 
         {/* ── 히어로 ─────────────────────────────────── */}
-        <section className="px-6 sm:px-14 lg:px-24 pt-28 sm:pt-36 pb-20 sm:pb-28">
+        <section className="px-6 sm:px-14 lg:px-24 pt-28 sm:pt-36 pb-16 sm:pb-24">
           <motion.p
             className="text-[0.65rem] font-bold tracking-[0.28em] text-[#2563EB] uppercase mb-6"
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
           >
@@ -150,7 +228,7 @@ export default function HistoryPage() {
           <motion.h1
             className="font-extrabold text-white leading-[1.1] tracking-tight"
             style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)" }}
-            initial={{ opacity: 0, y: 32 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
           >
@@ -158,19 +236,19 @@ export default function HistoryPage() {
           </motion.h1>
 
           <motion.p
-            className="mt-6 text-base sm:text-[1.0625rem] text-white/40 max-w-md leading-[1.85]"
-            initial={{ opacity: 0, y: 24 }}
+            className="mt-5 text-base sm:text-[1.0625rem] text-white/38 max-w-sm leading-[1.85]"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
+            transition={{ duration: 0.8, delay: 0.34, ease: EASE }}
           >
             ADGRIT의 도전과 성장의 기록입니다.
           </motion.p>
         </section>
 
-        {/* ── 연혁 타임라인 ───────────────────────────── */}
-        <section className="px-6 sm:px-14 lg:px-24 pb-36 sm:pb-52 space-y-14 sm:space-y-20">
+        {/* ── 타임라인 ─────────────────────────────────── */}
+        <section className="px-6 sm:px-14 lg:px-24 pb-40 sm:pb-56 divide-y divide-white/[0.06]">
           {HISTORY.map((entry) => (
-            <YearSection key={entry.year} entry={entry} />
+            <YearSection key={entry.yearLabel} entry={entry} />
           ))}
         </section>
 
