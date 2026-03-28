@@ -129,7 +129,7 @@ function EntryBlock({ entry }: { entry: Entry }) {
 /* ─── 페이지 ─────────────────────────────────────────── */
 export default function HistoryPage() {
   return (
-    <div className="bg-black text-white min-h-screen">
+    <div className="bg-[#1e3052] text-white min-h-screen">
       <SiteHeader />
 
       <main className="pt-16">
