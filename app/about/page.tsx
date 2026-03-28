@@ -1,7 +1,14 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView, type UseInViewOptions } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+  useSpring,
+  type UseInViewOptions,
+} from "framer-motion";
 import { SiteHeader } from "../_components/SiteHeader";
 import { Footer } from "../_components/Footer";
 
@@ -65,21 +72,34 @@ const GRID_ITEMS = [
 
 /* ─── 번호 섹션 컴포넌트 ─────────────────────────────── */
 function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[number]; reverse?: boolean }) {
-  const { ref, inView } = useReveal("-60px");
+  const ref = useRef<HTMLElement>(null);
 
-  const mo = (delay: number) => ({
-    initial: { opacity: 0, y: 60 },
-    animate: inView ? { opacity: 1, y: 0 } : {},
-    transition: { duration: 1.0, delay, ease: EASE },
+  /* 섹션이 뷰포트 하단에 진입(start end) → 중앙 정렬(center center) 구간을 0→1로 매핑 */
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "center center"],
   });
+
+  /* 숫자: reverse면 오른쪽 끝, 아니면 왼쪽 끝에서 출발 */
+  const numXRaw  = useTransform(scrollYProgress, [0, 1], [reverse ? 500 : -500, 0]);
+  /* 글: 숫자 반대편에서 출발 */
+  const textXRaw = useTransform(scrollYProgress, [0, 1], [reverse ? -500 : 500, 0]);
+  /* 페이드인: 진입 직후 0 → 0.4 구간에서 불투명 */
+  const opacityRaw = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
+
+  /* 쫀득한 스프링 — stiffness 낮을수록 느리고 말랑, damping 낮을수록 통통 */
+  const SP = { stiffness: 70, damping: 20, mass: 1.2 } as const;
+  const numX   = useSpring(numXRaw,   SP);
+  const textX  = useSpring(textXRaw,  SP);
+  const opacity = useSpring(opacityRaw, { stiffness: 70, damping: 20 });
 
   return (
     <section
       ref={ref}
-      className={`flex flex-col ${reverse ? "sm:flex-row-reverse" : "sm:flex-row"} gap-6 sm:gap-10 lg:gap-16 px-6 sm:px-14 lg:px-24 py-24 sm:py-32 border-t border-white/[0.07]`}
+      className={`overflow-hidden flex flex-col ${reverse ? "sm:flex-row-reverse" : "sm:flex-row"} gap-6 sm:gap-10 lg:gap-16 px-6 sm:px-14 lg:px-24 py-24 sm:py-32 border-t border-white/[0.07]`}
     >
-      {/* 왼쪽: 블루 섹션 번호 */}
-      <motion.div {...mo(0)} className="shrink-0 flex items-start sm:pt-2">
+      {/* 숫자: 한쪽 끝에서 중앙으로 */}
+      <motion.div style={{ x: numX, opacity }} className="shrink-0 flex items-start sm:pt-2">
         <span
           className="font-black text-[#2563EB] leading-none"
           style={{ fontSize: "clamp(5.5rem, 11vw, 9rem)" }}
@@ -88,23 +108,18 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
         </span>
       </motion.div>
 
-      {/* 구분 블루 점 (데스크톱만) */}
-      <motion.div {...mo(0.06)} className="hidden sm:flex items-start pt-7">
+      {/* 구분 블루 점 (데스크톱만) — 중앙에서 페이드인 */}
+      <motion.div style={{ opacity }} className="hidden sm:flex items-start pt-7">
         <span className="w-3 h-3 rounded-sm bg-[#2563EB] shrink-0 mt-2" />
       </motion.div>
 
-      {/* 오른쪽: 콘텐츠 */}
-      <div className="flex-1 space-y-6 sm:pt-2">
-        {/* 영문 레이블 */}
-        <motion.p
-          {...mo(0.12)}
-          className="text-[0.65rem] font-bold tracking-[0.24em] text-white/30 uppercase"
-        >
+      {/* 글: 반대편 끝에서 중앙으로 */}
+      <motion.div style={{ x: textX, opacity }} className="flex-1 space-y-6 sm:pt-2">
+        <p className="text-[0.65rem] font-bold tracking-[0.24em] text-white/30 uppercase">
           {item.en}
-        </motion.p>
+        </p>
 
-        {/* 헤드라인 */}
-        <motion.h2 {...mo(0.20)}>
+        <h2>
           {item.headline.split("\n").map((line, i) => (
             <span
               key={i}
@@ -114,26 +129,22 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
               {line}
             </span>
           ))}
-        </motion.h2>
+        </h2>
 
-        {/* 본문 or 불릿 */}
         {item.body ? (
-          <motion.p
-            {...mo(0.30)}
-            className="text-[0.9375rem] text-white/45 leading-[1.95] max-w-xl"
-          >
+          <p className="text-[0.9375rem] text-white/45 leading-[1.95] max-w-xl">
             {item.body}
-          </motion.p>
+          </p>
         ) : (
-          <motion.ul {...mo(0.30)} className="space-y-2.5">
+          <ul className="space-y-2.5">
             {item.bullets?.map((b, i) => (
               <li key={i} className="text-[0.9375rem] text-white/45 leading-[1.8]">
                 — {b}
               </li>
             ))}
-          </motion.ul>
+          </ul>
         )}
-      </div>
+      </motion.div>
     </section>
   );
 }
