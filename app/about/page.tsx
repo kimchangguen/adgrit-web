@@ -96,7 +96,7 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
   return (
     <section
       ref={ref}
-      className={`overflow-hidden flex flex-col ${reverse ? "sm:flex-row-reverse" : "sm:flex-row"} sm:justify-center sm:items-start gap-6 sm:gap-10 px-6 sm:px-14 lg:px-24 py-24 sm:py-32 border-t border-white/[0.07]`}
+      className={`overflow-hidden flex flex-col ${reverse ? "sm:flex-row-reverse" : "sm:flex-row"} sm:justify-center sm:items-start gap-6 sm:gap-20 lg:gap-28 px-6 sm:px-14 lg:px-24 py-24 sm:py-32 border-t border-white/[0.07]`}
     >
       {/* 숫자: 한쪽 끝에서 중앙으로 */}
       <motion.div style={{ x: numX, opacity }} className="shrink-0 flex items-start sm:pt-2">
