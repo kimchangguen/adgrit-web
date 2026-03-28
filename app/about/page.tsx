@@ -142,16 +142,17 @@ const DEPARTMENTS = [
 
 /* ─── 조직도 섹션 컴포넌트 ───────────────────────────── */
 function OrgSection() {
-  const { ref, inView } = useReveal("-60px");
+  const { ref: headRef, inView: headInView } = useReveal("-40px");
+  const { ref: ceoRef,  inView: ceoInView  } = useReveal("-40px");
+
   return (
-    <section
-      ref={ref}
-      className="px-6 sm:px-14 lg:px-24 pt-20 pb-32 sm:pb-44 border-t border-white/[0.07]"
-    >
-      {/* 헤더 */}
+    <section className="bg-black px-6 sm:px-14 lg:px-24 pt-20 pb-32 sm:pb-44 border-t border-white/[0.07]">
+
+      {/* ── 헤더 ── */}
       <motion.div
-        initial={{ opacity: 0, y: 32 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
+        ref={headRef}
+        initial={{ opacity: 0, y: 40 }}
+        animate={headInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, ease: EASE }}
         className="mb-16 sm:mb-20"
       >
@@ -166,59 +167,64 @@ function OrgSection() {
         </h2>
       </motion.div>
 
-      {/* CEO */}
+      {/* ── CEO + 지원 조직 ── */}
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-        className="flex flex-col items-center gap-4 mb-10"
+        ref={ceoRef}
+        initial={{ opacity: 0, y: 36 }}
+        animate={ceoInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.75, ease: EASE }}
+        className="flex flex-col items-center gap-5 mb-12"
       >
-        <div className="w-20 h-20 rounded-full bg-[#2563EB] flex items-center justify-center shadow-[0_0_28px_rgba(37,99,235,0.45)]">
-          <span className="text-white font-black text-lg tracking-wide">CEO</span>
+        {/* CEO 원형 */}
+        <div className="w-24 h-24 rounded-full bg-[#2563EB] border-2 border-blue-400 flex items-center justify-center shadow-[0_0_36px_rgba(37,99,235,0.5)]">
+          <span className="text-white font-black text-xl tracking-wide">CEO</span>
         </div>
-        {/* 지원 조직 */}
+
+        {/* 지원 조직 태그 */}
         <div className="flex gap-3 flex-wrap justify-center">
           {["R&D 센터", "경영지원부서"].map((label) => (
             <span
               key={label}
-              className="px-4 py-1.5 rounded-md border border-[#2563EB]/40 bg-[#2563EB]/10 text-[#93c5fd] text-xs font-semibold tracking-wide"
+              className="px-4 py-2 rounded-lg border border-blue-600 bg-[#0d1b35] text-white text-xs font-semibold tracking-wide"
             >
               {label}
             </span>
           ))}
         </div>
-        {/* 연결선 */}
-        <div className="w-px h-8 bg-white/[0.12]" />
+
+        {/* 수직 연결선 */}
+        <div className="w-px h-10 bg-blue-600/40" />
       </motion.div>
 
-      {/* 부서 카드 그리드 */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+      {/* ── 부서 카드 그리드 ── */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 lg:gap-5">
         {DEPARTMENTS.map(({ key, items }, i) => {
           // eslint-disable-next-line react-hooks/rules-of-hooks
-          const { ref: cardRef, inView: cardInView } = useReveal("-40px");
+          const { ref: cardRef, inView: cardInView } = useReveal("-30px");
           return (
             <motion.div
               key={key}
               ref={cardRef}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 48 }}
               animate={cardInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.75, delay: i * 0.08, ease: EASE }}
-              className="rounded-xl border border-white/[0.08] bg-white/[0.02] overflow-hidden hover:border-[#2563EB]/30 transition-colors duration-300"
+              transition={{ duration: 0.7, delay: i * 0.09, ease: EASE }}
+              className="rounded-xl border border-blue-600 bg-[#0d1b35] overflow-hidden hover:border-blue-400 hover:shadow-[0_0_18px_rgba(37,99,235,0.25)] transition-all duration-300"
             >
               {/* 부서명 헤더 */}
-              <div className="bg-[#2563EB] px-4 py-3">
-                <span className="text-white font-black text-[0.7rem] tracking-[0.12em] uppercase">
+              <div className="bg-blue-600 px-4 py-3">
+                <span className="text-white font-black text-[0.68rem] tracking-[0.15em] uppercase">
                   {key}
                 </span>
               </div>
+
               {/* 항목 목록 */}
-              <ul className="px-4 py-4 space-y-2">
+              <ul className="px-4 py-4 space-y-2.5">
                 {items.map((item) => (
                   <li
                     key={item}
-                    className="text-[0.72rem] text-white/55 leading-snug flex items-start gap-1.5"
+                    className="text-[0.73rem] text-white leading-snug flex items-start gap-2"
                   >
-                    <span className="mt-[0.35em] w-1 h-1 rounded-full bg-[#2563EB]/60 shrink-0" />
+                    <span className="mt-[0.4em] w-1 h-1 rounded-full bg-blue-500 shrink-0" />
                     {item}
                   </li>
                 ))}
