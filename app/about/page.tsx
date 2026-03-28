@@ -64,7 +64,7 @@ const GRID_ITEMS = [
 ] as const;
 
 /* ─── 번호 섹션 컴포넌트 ─────────────────────────────── */
-function NumberedSection({ item }: { item: typeof SECTIONS[number] }) {
+function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[number]; reverse?: boolean }) {
   const { ref, inView } = useReveal("-60px");
 
   const mo = (delay: number) => ({
@@ -76,7 +76,7 @@ function NumberedSection({ item }: { item: typeof SECTIONS[number] }) {
   return (
     <section
       ref={ref}
-      className="flex flex-col sm:flex-row gap-6 sm:gap-10 lg:gap-16 px-6 sm:px-14 lg:px-24 py-24 sm:py-32 border-t border-white/[0.07]"
+      className={`flex flex-col ${reverse ? "sm:flex-row-reverse" : "sm:flex-row"} gap-6 sm:gap-10 lg:gap-16 px-6 sm:px-14 lg:px-24 py-24 sm:py-32 border-t border-white/[0.07]`}
     >
       {/* 왼쪽: 블루 섹션 번호 */}
       <motion.div {...mo(0)} className="shrink-0 flex items-start sm:pt-2">
@@ -220,7 +220,7 @@ export default function AboutPage() {
 
         {/* ══ 01 / 02 / 03 번호 섹션 ══════════════════════ */}
         {SECTIONS.map((item) => (
-          <NumberedSection key={item.num} item={item} />
+          <NumberedSection key={item.num} item={item} reverse={item.num === "02"} />
         ))}
 
         {/* ══ 클로징 문장 (영상의 재등장 문구) ══════════════ */}
