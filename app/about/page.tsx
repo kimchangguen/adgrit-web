@@ -80,10 +80,13 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
     offset: ["start end", "center center"],
   });
 
-  /* 숫자: reverse면 오른쪽 끝, 아니면 왼쪽 끝에서 출발 */
-  const numXRaw  = useTransform(scrollYProgress, [0, 1], [reverse ? 500 : -500, 0]);
-  /* 글: 숫자 반대편에서 출발 */
-  const textXRaw = useTransform(scrollYProgress, [0, 1], [reverse ? -500 : 500, 0]);
+  /* 침범 거리: 자연 위치(0)를 넘어 반대쪽으로 밀고 들어오는 px */
+  const OVERSHOOT = 52;
+
+  /* 숫자: 끝에서 출발 → 중앙선 침범 (+방향이 텍스트 쪽) */
+  const numXRaw  = useTransform(scrollYProgress, [0, 1], [reverse ? 500 : -500, reverse ? -OVERSHOOT : OVERSHOOT]);
+  /* 글: 반대편에서 출발 → 중앙선 침범 (숫자 쪽으로) */
+  const textXRaw = useTransform(scrollYProgress, [0, 1], [reverse ? -500 : 500, reverse ? OVERSHOOT : -OVERSHOOT]);
   /* 페이드인: 진입 직후 0 → 0.4 구간에서 불투명 */
   const opacityRaw = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
 
