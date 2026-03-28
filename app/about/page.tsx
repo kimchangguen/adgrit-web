@@ -21,7 +21,7 @@ function useReveal(margin: UseInViewOptions["margin"] = "-60px") {
   return { ref, inView };
 }
 
-/* ─── 번호 섹션 데이터 (영상 기반, ADGRIT으로 대체) ────── */
+/* ─── 번호 섹션 데이터 ───────────────────────────────── */
 const SECTIONS = [
   {
     num: "01",
@@ -51,213 +51,22 @@ const SECTIONS = [
   },
 ] as const;
 
-/* ─── DATA / GLOBAL / GROWTH ────────────────────────── */
-const GRID_ITEMS = [
-  {
-    key: "DATA",
-    subtitle: "AI Marketing Company",
-    body: "ADGRIT은 자동화 및 빅데이터 분석이 가능한 AE뿐 아니라 국내 대행사 중 최고 수준의 데이터·개발 조직을 갖고 있습니다. AI 기술을 활용한 차별화, 시각화된 데이터 분석 결과와 축적된 노하우를 바탕으로 최고의 성과를 보장할 수 있는 최적의 성장 환경을 제공합니다.",
-  },
-  {
-    key: "GLOBAL",
-    subtitle: "세계로 뻗어 나갑니다",
-    body: "한국을 넘어 글로벌 시장까지 비즈니스 영역을 확장하고 있는 ADGRIT! 해외 시장에 진출하는 국내 브랜드부터 한국 시장에 진입하는 글로벌 브랜드까지, 별도 글로벌팀을 구축하여 폭넓은 영역의 글로벌 캠페인을 전문적으로 담당하고 있습니다.",
-  },
-  {
-    key: "GROWTH",
-    subtitle: "매년 2배 이상의 성장를 달성",
-    body: "ADGRIT은 각 분야의 뛰어난 전문가들과 함께 매년 약 2배씩 취급고가 성장하는 성과를 이루어내고 있습니다. 매년 폭발적인 성장을 이루어내는 ADGRIT과 함께 새로운 성공을 시작해보세요.",
-  },
-] as const;
-
-/* ─── 조직도 데이터 ──────────────────────────────────── */
-const DEPARTMENTS = [
-  {
-    key: "CONSULTING",
-    color: "#2563EB",
-    items: [
-      "프로젝트 제안 기획",
-      "브랜드 분석",
-      "타겟 설정",
-      "매체 및 방식 전략",
-      "문제 수정",
-      "미스터리쇼퍼",
-    ],
-  },
-  {
-    key: "DIGITAL IMC",
-    color: "#2563EB",
-    items: [
-      "IMC 통합 마케팅",
-      "인스타그램 통합 마케팅",
-      "페이스북 타겟 광고",
-      "블로그 통합 마케팅",
-      "카페 마케팅 및 바이럴",
-      "SNS 마케팅",
-      "플레이스 설계 및 관리",
-      "언론홍보",
-      "유튜브",
-      "당근, 카카오, 밴드",
-    ],
-  },
-  {
-    key: "CREATIVE",
-    color: "#2563EB",
-    items: [
-      "슬로건 아이덴티티 구축",
-      "CRM 앤트 설계",
-      "동영상 촬영 및 편집",
-      "블로그 원고",
-      "블로그 이미지",
-      "디스플레이 배너",
-      "카드 뉴스",
-      "인스타그램용 이미지",
-    ],
-  },
-  {
-    key: "DEVELOPMENT",
-    color: "#2563EB",
-    items: [
-      "준 최적화 블로그",
-      "인스타 노출 솔루션",
-      "플레이스 리뷰 솔루션",
-      "블로거 서칭 및 개발",
-      "블로그 로직 연구",
-      "인스타그램 로직 연구",
-    ],
-  },
-  {
-    key: "REPUBLISHING",
-    color: "#2563EB",
-    items: [
-      "HTML",
-      "JAVA",
-      "PHP",
-      "UI UX 컨설팅",
-      "웹 표준화 컨설팅",
-      "···",
-    ],
-  },
-] as const;
-
-/* ─── 조직도 섹션 컴포넌트 ───────────────────────────── */
-function OrgSection() {
-  const { ref: headRef, inView: headInView } = useReveal("-40px");
-  const { ref: ceoRef,  inView: ceoInView  } = useReveal("-40px");
-
-  return (
-    <section className="bg-black px-6 sm:px-14 lg:px-24 pt-20 pb-32 sm:pb-44 border-t border-white/[0.07]">
-
-      {/* ── 헤더 ── */}
-      <motion.div
-        ref={headRef}
-        initial={{ opacity: 0, y: 40 }}
-        animate={headInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, ease: EASE }}
-        className="mb-16 sm:mb-20"
-      >
-        <p className="text-[0.65rem] font-bold tracking-[0.28em] text-[#2563EB] uppercase mb-4">
-          Organization
-        </p>
-        <h2
-          className="font-extrabold text-white leading-[1.1] tracking-tight"
-          style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)" }}
-        >
-          조직도
-        </h2>
-      </motion.div>
-
-      {/* ── CEO + 지원 조직 ── */}
-      <motion.div
-        ref={ceoRef}
-        initial={{ opacity: 0, y: 36 }}
-        animate={ceoInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.75, ease: EASE }}
-        className="flex flex-col items-center gap-5 mb-12"
-      >
-        {/* CEO 원형 */}
-        <div className="w-24 h-24 rounded-full bg-[#2563EB] border-2 border-blue-400 flex items-center justify-center shadow-[0_0_36px_rgba(37,99,235,0.5)]">
-          <span className="text-white font-black text-xl tracking-wide">CEO</span>
-        </div>
-
-        {/* 지원 조직 태그 */}
-        <div className="flex gap-3 flex-wrap justify-center">
-          {["R&D 센터", "경영지원부서"].map((label) => (
-            <span
-              key={label}
-              className="px-4 py-2 rounded-lg border border-blue-600 bg-[#0d1b35] text-white text-xs font-semibold tracking-wide"
-            >
-              {label}
-            </span>
-          ))}
-        </div>
-
-        {/* 수직 연결선 */}
-        <div className="w-px h-10 bg-blue-600/40" />
-      </motion.div>
-
-      {/* ── 부서 카드 그리드 ── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 lg:gap-5">
-        {DEPARTMENTS.map(({ key, items }, i) => {
-          // eslint-disable-next-line react-hooks/rules-of-hooks
-          const { ref: cardRef, inView: cardInView } = useReveal("-30px");
-          return (
-            <motion.div
-              key={key}
-              ref={cardRef}
-              initial={{ opacity: 0, y: 48 }}
-              animate={cardInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: i * 0.09, ease: EASE }}
-              className="rounded-xl border border-blue-600 bg-[#0d1b35] overflow-hidden hover:border-blue-400 hover:shadow-[0_0_18px_rgba(37,99,235,0.25)] transition-all duration-300"
-            >
-              {/* 부서명 헤더 */}
-              <div className="bg-blue-600 px-4 py-3">
-                <span className="text-white font-black text-[0.68rem] tracking-[0.15em] uppercase">
-                  {key}
-                </span>
-              </div>
-
-              {/* 항목 목록 */}
-              <ul className="px-4 py-4 space-y-2.5">
-                {items.map((item) => (
-                  <li
-                    key={item}
-                    className="text-[0.73rem] text-white leading-snug flex items-start gap-2"
-                  >
-                    <span className="mt-[0.4em] w-1 h-1 rounded-full bg-blue-500 shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
 /* ─── 번호 섹션 컴포넌트 ─────────────────────────────── */
 function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[number]; reverse?: boolean }) {
   const ref = useRef<HTMLElement>(null);
 
-  /* 섹션이 뷰포트 하단에 진입(start end) → 중앙 정렬(center center) 구간을 0→1로 매핑 */
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "center center"],
   });
 
-  /* 숫자: 끝에서 출발 → 자연 위치(0)에 착지, gap-10이 겹침 방지 */
-  const numXRaw  = useTransform(scrollYProgress, [0, 1], [reverse ? 500 : -500, 0]);
-  /* 글: 반대편에서 출발 → 자연 위치(0)에 착지 */
-  const textXRaw = useTransform(scrollYProgress, [0, 1], [reverse ? -500 : 500, 0]);
-  /* 페이드인: 진입 직후 0 → 0.4 구간에서 불투명 */
+  const numXRaw   = useTransform(scrollYProgress, [0, 1], [reverse ? 500 : -500, 0]);
+  const textXRaw  = useTransform(scrollYProgress, [0, 1], [reverse ? -500 : 500, 0]);
   const opacityRaw = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
 
-  /* 쫀득한 스프링 — stiffness 낮을수록 느리고 말랑, damping 낮을수록 통통 */
   const SP = { stiffness: 70, damping: 20, mass: 1.2 } as const;
-  const numX   = useSpring(numXRaw,   SP);
-  const textX  = useSpring(textXRaw,  SP);
+  const numX    = useSpring(numXRaw,    SP);
+  const textX   = useSpring(textXRaw,   SP);
   const opacity = useSpring(opacityRaw, { stiffness: 70, damping: 20 });
 
   return (
@@ -265,7 +74,6 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
       ref={ref}
       className={`overflow-hidden flex flex-col ${reverse ? "sm:flex-row-reverse" : "sm:flex-row"} sm:justify-center sm:items-start gap-6 sm:gap-20 lg:gap-28 px-6 sm:px-14 lg:px-24 py-24 sm:py-32 border-t border-white/[0.07]`}
     >
-      {/* 숫자: 한쪽 끝에서 중앙으로 */}
       <motion.div style={{ x: numX, opacity }} className="shrink-0 flex items-start sm:pt-2">
         <span
           className="font-black text-[#2563EB] leading-none"
@@ -275,7 +83,6 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
         </span>
       </motion.div>
 
-      {/* 글: 반대편 끝에서 중앙으로 */}
       <motion.div style={{ x: textX, opacity }} className="min-w-0 sm:max-w-[420px] space-y-6 sm:pt-2">
         <p className="text-[0.68rem] font-semibold tracking-[0.22em] text-white/30 uppercase">
           {item.en}
@@ -314,7 +121,6 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
 /* ─── 페이지 ─────────────────────────────────────────── */
 export default function AboutPage() {
   const { ref: introRef, inView: introInView } = useReveal("-40px");
-  const { ref: closingRef, inView: closingInView } = useReveal("-60px");
 
   return (
     <div className="bg-[#1e3052] text-white min-h-screen">
@@ -330,7 +136,6 @@ export default function AboutPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, ease: EASE }}
           >
-            {/* 거대 브랜드명 */}
             <h1
               className="font-black leading-none tracking-tighter select-none"
               style={{ fontSize: "clamp(3.5rem, 14vw, 12rem)" }}
@@ -339,7 +144,6 @@ export default function AboutPage() {
               <span className="text-white">GRIT</span>
             </h1>
 
-            {/* 태그라인 */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -352,7 +156,6 @@ export default function AboutPage() {
             </motion.div>
           </motion.div>
 
-          {/* 스크롤 유도 화살표 */}
           <motion.div
             className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
             initial={{ opacity: 0 }}
@@ -395,65 +198,6 @@ export default function AboutPage() {
         {SECTIONS.map((item) => (
           <NumberedSection key={item.num} item={item} reverse={item.num === "02"} />
         ))}
-
-        {/* ══ 클로징 문장 (영상의 재등장 문구) ══════════════ */}
-        <section
-          ref={closingRef}
-          className="px-6 sm:px-14 lg:px-24 py-32 sm:py-44 border-t border-white/[0.07]"
-        >
-          {[
-            { text: "ADGRIT은", delay: 0 },
-            { text: "기술과 데이터 기반으로", delay: 0.14 },
-            { text: "디지털 마케팅 시장을 선도하고 있습니다.", delay: 0.28 },
-          ].map(({ text, delay }) => (
-            <motion.p
-              key={text}
-              initial={{ opacity: 0, y: 52 }}
-              animate={closingInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.0, delay, ease: EASE }}
-              className="font-extrabold text-white leading-[1.1] tracking-tight"
-              style={{ fontSize: "clamp(1.6rem, 3.5vw, 3rem)" }}
-            >
-              {text}
-            </motion.p>
-          ))}
-        </section>
-
-        {/* ══ DATA / GLOBAL / GROWTH 그리드 ══════════════ */}
-        <section className="px-6 sm:px-14 lg:px-24 pb-32 sm:pb-44 border-t border-white/[0.07] pt-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-7">
-            {GRID_ITEMS.map(({ key, subtitle, body }, i) => {
-              const { ref, inView } = useReveal(); // eslint-disable-line react-hooks/rules-of-hooks
-              return (
-                <motion.div
-                  key={key}
-                  ref={ref}
-                  initial={{ opacity: 0, y: 56 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.92, delay: i * 0.13, ease: EASE }}
-                  className="h-full rounded-2xl border border-white/[0.08] bg-white/[0.02] p-8 sm:p-10 flex flex-col gap-7 hover:border-[#2563EB]/25 transition-colors duration-300"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="w-2.5 h-2.5 rounded-sm bg-[#2563EB] shrink-0" />
-                    <h3 className="text-xl font-black tracking-[0.08em] text-white">
-                      {key}
-                    </h3>
-                  </div>
-                  <div className="h-px bg-white/[0.1]" />
-                  <p className="text-sm font-semibold text-[#2563EB] leading-snug">
-                    {subtitle}
-                  </p>
-                  <p className="text-sm text-white/45 leading-[1.9] flex-1">
-                    {body}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* ══ 조직도 ════════════════════════════════════════ */}
-        <OrgSection />
 
       </main>
 
