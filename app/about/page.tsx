@@ -114,7 +114,7 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
       </motion.div>
 
       {/* 글: 반대편 끝에서 중앙으로 */}
-      <motion.div style={{ x: textX, opacity }} className="sm:max-w-[52%] space-y-6 sm:pt-2">
+      <motion.div style={{ x: textX, opacity }} className="min-w-0 sm:max-w-[52%] space-y-6 sm:pt-2">
         <p className="text-[0.68rem] font-semibold tracking-[0.22em] text-white/30 uppercase">
           {item.en}
         </p>
