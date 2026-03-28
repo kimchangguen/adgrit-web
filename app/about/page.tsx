@@ -102,7 +102,7 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
       <motion.div style={{ x: numX, opacity }} className="shrink-0 flex items-start sm:pt-2">
         <span
           className="font-black text-[#2563EB] leading-none"
-          style={{ fontSize: "clamp(5.5rem, 11vw, 9rem)" }}
+          style={{ fontSize: "clamp(3.5rem, 8vw, 7rem)" }}
         >
           {item.num}
         </span>
@@ -115,7 +115,7 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
 
       {/* 글: 반대편 끝에서 중앙으로 */}
       <motion.div style={{ x: textX, opacity }} className="flex-1 space-y-6 sm:pt-2">
-        <p className="text-[0.65rem] font-bold tracking-[0.24em] text-white/30 uppercase">
+        <p className="text-[0.68rem] font-semibold tracking-[0.22em] text-white/30 uppercase">
           {item.en}
         </p>
 
@@ -124,7 +124,7 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
             <span
               key={i}
               className="block font-extrabold text-white leading-[1.15] tracking-tight"
-              style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.6rem)" }}
+              style={{ fontSize: "clamp(1.4rem, 2.6vw, 2.2rem)" }}
             >
               {line}
             </span>
@@ -132,13 +132,13 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
         </h2>
 
         {item.body ? (
-          <p className="text-[0.9375rem] text-white/45 leading-[1.95] max-w-xl">
+          <p className="text-sm text-white/45 leading-[1.9] max-w-xl">
             {item.body}
           </p>
         ) : (
           <ul className="space-y-2.5">
             {item.bullets?.map((b, i) => (
-              <li key={i} className="text-[0.9375rem] text-white/45 leading-[1.8]">
+              <li key={i} className="text-sm text-white/45 leading-[1.8]">
                 — {b}
               </li>
             ))}
@@ -171,7 +171,7 @@ export default function AboutPage() {
             {/* 거대 브랜드명 */}
             <h1
               className="font-black leading-none tracking-tighter select-none"
-              style={{ fontSize: "clamp(5rem, 19vw, 18rem)" }}
+              style={{ fontSize: "clamp(3.5rem, 14vw, 12rem)" }}
             >
               <span className="text-[#2563EB]">AD</span>
               <span className="text-white">GRIT</span>
@@ -184,7 +184,7 @@ export default function AboutPage() {
               transition={{ duration: 0.9, delay: 0.6, ease: EASE }}
               className="mt-10"
             >
-              <span className="inline-block border border-white/15 text-white/45 text-sm sm:text-base px-7 py-3.5 rounded-full tracking-wide">
+              <span className="inline-block border border-white/15 text-white/40 text-xs sm:text-sm px-6 py-3 rounded-full tracking-widest uppercase">
                 AD(성과, 광고, 도전) + GRIT(투지, 불굴의 의지)
               </span>
             </motion.div>
@@ -216,12 +216,12 @@ export default function AboutPage() {
             className="max-w-3xl mx-auto text-center space-y-5"
           >
             <p
-              className="font-bold text-white leading-[1.65]"
-              style={{ fontSize: "clamp(1.1rem, 2.2vw, 1.5rem)" }}
+              className="font-bold text-white leading-[1.6]"
+              style={{ fontSize: "clamp(1rem, 1.9vw, 1.35rem)" }}
             >
               ADGRIT은 혁신적인 성과를 만드는 AI 마케팅 컴퍼니입니다.
             </p>
-            <p className="text-[0.9375rem] sm:text-base text-white/45 leading-[1.95]">
+            <p className="text-sm sm:text-base text-white/45 leading-[1.9]">
               분석, 전략, 운영, 크리에이티브, 브랜딩, 기술 등 각 분야에 전문화된 구성원을 중심으로
               <br className="hidden sm:block" />
               디지털 마케팅에 특화된 고객 맞춤형 퍼포먼스를 제공합니다.
@@ -250,7 +250,7 @@ export default function AboutPage() {
               animate={closingInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1.0, delay, ease: EASE }}
               className="font-extrabold text-white leading-[1.1] tracking-tight"
-              style={{ fontSize: "clamp(1.8rem, 4vw, 3.5rem)" }}
+              style={{ fontSize: "clamp(1.6rem, 3.5vw, 3rem)" }}
             >
               {text}
             </motion.p>
@@ -273,15 +273,15 @@ export default function AboutPage() {
                 >
                   <div className="flex items-center gap-3">
                     <span className="w-2.5 h-2.5 rounded-sm bg-[#2563EB] shrink-0" />
-                    <h3 className="text-xl sm:text-2xl font-black tracking-[0.1em] text-white">
+                    <h3 className="text-xl font-black tracking-[0.08em] text-white">
                       {key}
                     </h3>
                   </div>
                   <div className="h-px bg-white/[0.1]" />
-                  <p className="text-[0.9375rem] font-bold text-[#2563EB] leading-snug">
+                  <p className="text-sm font-semibold text-[#2563EB] leading-snug">
                     {subtitle}
                   </p>
-                  <p className="text-sm sm:text-[0.9375rem] text-white/45 leading-[1.9] flex-1">
+                  <p className="text-sm text-white/45 leading-[1.9] flex-1">
                     {body}
                   </p>
                 </motion.div>
