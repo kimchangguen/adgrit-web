@@ -1,9 +1,18 @@
 import Link from "next/link";
-import { SiteHeader } from "../_components/SiteHeader";
-import { Footer } from "../_components/Footer";
-import { BlogSidebar } from "../_components/BlogSidebar";
+import { notFound } from "next/navigation";
+import { SiteHeader } from "../../../_components/SiteHeader";
+import { Footer } from "../../../_components/Footer";
+import { BlogSidebar } from "../../../_components/BlogSidebar";
 
 const WP_BASE = "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2";
+
+type Category = {
+  id: number;
+  name: string;
+  slug: string;
+  count: number;
+  description: string;
+};
 
 type Post = {
   id: number;
@@ -11,17 +20,29 @@ type Post = {
   excerpt: { rendered: string };
   date: string;
   slug: string;
-  categories: number[];
   _embedded?: {
     "wp:featuredmedia"?: Array<{ source_url: string; alt_text: string }>;
     "wp:term"?: Array<Array<{ id: number; name: string; slug: string }>>;
   };
 };
 
-async function getPosts(): Promise<Post[]> {
+async function getCategoryBySlug(slug: string): Promise<Category | null> {
+  try {
+    const res = await fetch(`${WP_BASE}/categories?slug=${encodeURIComponent(slug)}`, {
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return null;
+    const cats: Category[] = await res.json();
+    return cats[0] ?? null;
+  } catch {
+    return null;
+  }
+}
+
+async function getPostsByCategory(categoryId: number): Promise<Post[]> {
   try {
     const res = await fetch(
-      `${WP_BASE}/posts?_embed&per_page=20&orderby=date`,
+      `${WP_BASE}/posts?_embed&per_page=20&orderby=date&categories=${categoryId}`,
       { next: { revalidate: 60 } }
     );
     if (!res.ok) return [];
@@ -43,26 +64,44 @@ function formatDate(dateStr: string) {
   });
 }
 
-export default async function BlogPage() {
-  const posts = await getPosts();
+export default async function CategoryPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const category = await getCategoryBySlug(slug);
+
+  if (!category) notFound();
+
+  const posts = await getPostsByCategory(category.id);
 
   return (
     <div className="min-h-screen bg-[#f8f9fc] text-[#1a1a2e]">
       <SiteHeader />
 
-      {/* 히어로 배너 */}
-      <section className="bg-[#1A237E] pt-28 pb-12 sm:pt-32 sm:pb-16">
+      {/* 히어로 */}
+      <section className="bg-[#1A237E] pt-28 pb-10 sm:pt-32 sm:pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* 브레드크럼 */}
+          <nav className="flex items-center gap-2 text-xs text-blue-200 mb-4">
+            <Link href="/" className="hover:text-white transition-colors">홈</Link>
+            <span>/</span>
+            <Link href="/blog" className="hover:text-white transition-colors">블로그</Link>
+            <span>/</span>
+            <span className="text-white">{category.name}</span>
+          </nav>
+
           <p className="text-blue-200 text-sm font-semibold tracking-widest uppercase mb-2">
-            ADGRIT BLOG
+            CATEGORY
           </p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
-            마케팅 인사이트의 모든 것,<br className="hidden sm:block" />
-            <span className="text-[#FFBD4F]"> 애드그릿 블로그</span>
+          <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight">
+            {category.name}
           </h1>
-          <p className="mt-4 text-blue-100 text-base sm:text-lg max-w-2xl">
-            실전 마케팅 노하우, 최신 트렌드, 전문가 칼럼을 한 곳에서 확인하세요.
-          </p>
+          {category.description && (
+            <p className="mt-3 text-blue-100 text-base max-w-2xl">{category.description}</p>
+          )}
+          <p className="mt-2 text-blue-200 text-sm">총 {category.count}개의 글</p>
         </div>
       </section>
 
@@ -74,15 +113,13 @@ export default async function BlogPage() {
           <div className="flex-1 min-w-0">
             {posts.length === 0 ? (
               <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center text-slate-500">
-                등록된 글이 없습니다.
+                이 카테고리에 등록된 글이 없습니다.
               </div>
             ) : (
               <div className="grid gap-6 sm:grid-cols-2">
                 {posts.map((post) => {
                   const thumb = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
                   const alt = post._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || stripHTML(post.title.rendered);
-                  const catTerms = post._embedded?.["wp:term"]?.[0] ?? [];
-                  const firstCat = catTerms[0];
                   const excerpt = stripHTML(post.excerpt.rendered);
 
                   return (
@@ -106,11 +143,9 @@ export default async function BlogPage() {
                             <span className="text-4xl opacity-20">📝</span>
                           </div>
                         )}
-                        {firstCat && (
-                          <span className="absolute top-3 left-3 bg-[#1A237E] text-white text-xs font-semibold px-2.5 py-1 rounded-full">
-                            {firstCat.name}
-                          </span>
-                        )}
+                        <span className="absolute top-3 left-3 bg-[#1A237E] text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+                          {category.name}
+                        </span>
                       </div>
 
                       {/* 카드 본문 */}
@@ -137,7 +172,7 @@ export default async function BlogPage() {
           </div>
 
           {/* 우측: 사이드바 */}
-          <BlogSidebar />
+          <BlogSidebar activeCategorySlug={slug} />
         </div>
       </main>
 
