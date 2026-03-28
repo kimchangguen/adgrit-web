@@ -57,7 +57,7 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
 
   return (
     <header
-      className={`fixed left-0 right-0 top-0 z-50 w-full ${
+      className={`fixed left-0 right-0 top-0 z-[999] w-full ${
         transparent
           ? "bg-transparent backdrop-blur-[2px]"
           : "border-b border-slate-200 bg-white/95 backdrop-blur-sm shadow-sm"
