@@ -105,20 +105,17 @@ function EntryBlock({ entry }: { entry: Entry }) {
       transition={SPRING}
     >
       {/* 연도 */}
-      <h2
-        className="font-bold text-white leading-none tracking-tight mb-4"
-        style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.4rem)" }}
-      >
+      <h2 className="text-[1.35rem] font-bold text-white leading-none tracking-tight mb-2.5">
         {entry.year}
       </h2>
 
       {/* 항목 */}
-      <div className="space-y-1.5">
+      <div className="space-y-1">
         {entry.items.map((item, i) => (
           <p
             key={i}
-            className={`text-[0.82rem] sm:text-sm leading-relaxed ${
-              item.bold ? "font-bold text-white" : "text-white/45"
+            className={`text-[0.78rem] leading-snug ${
+              item.bold ? "font-bold text-white" : "text-white/50"
             }`}
           >
             {item.text}
@@ -138,7 +135,7 @@ export default function HistoryPage() {
       <main className="pt-16">
 
         {/* ── 히어로 ─────────────────────────────────── */}
-        <section className="px-6 sm:px-14 lg:px-24 pt-28 sm:pt-36 pb-20 sm:pb-28">
+        <section className="px-6 sm:px-14 lg:px-24 pt-20 sm:pt-28 pb-10 sm:pb-16">
           <motion.p
             className="text-[0.65rem] font-bold tracking-[0.28em] text-[#2563EB] uppercase mb-5"
             initial={{ opacity: 0, y: 16 }}
@@ -167,24 +164,24 @@ export default function HistoryPage() {
         </section>
 
         {/* ── 지그재그 타임라인 (데스크톱) ────────────── */}
-        <section className="hidden sm:block relative px-10 lg:px-20 xl:px-32 pb-48">
+        <section className="hidden sm:block relative px-6 lg:px-16 xl:px-28 pb-36">
 
           {/* 중앙 수직선 */}
           <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/[0.08] -translate-x-1/2 pointer-events-none" />
 
           {HISTORY.map((entry) => (
-            <div key={entry.year} className="relative grid grid-cols-2 py-12">
+            <div key={entry.year} className="relative grid grid-cols-2 py-7">
 
               {/* 중앙 블루 점 */}
-              <div className="absolute left-1/2 top-[3.25rem] -translate-x-1/2 w-[11px] h-[11px] rounded-full bg-[#2563EB] ring-[5px] ring-black z-10 shadow-[0_0_14px_rgba(37,99,235,0.55)]" />
+              <div className="absolute left-1/2 top-8 -translate-x-1/2 w-[9px] h-[9px] rounded-full bg-[#2563EB] ring-4 ring-black z-10 shadow-[0_0_10px_rgba(37,99,235,0.5)]" />
 
               {/* 왼쪽 셀: side="left" 일 때만 콘텐츠 */}
-              <div className="pr-14 xl:pr-24">
+              <div className="pr-8 lg:pr-12">
                 {entry.side === "left" && <EntryBlock entry={entry} />}
               </div>
 
               {/* 오른쪽 셀: side="right" 일 때만 콘텐츠 */}
-              <div className="pl-14 xl:pl-24">
+              <div className="pl-8 lg:pl-12">
                 {entry.side === "right" && <EntryBlock entry={entry} />}
               </div>
             </div>
@@ -192,27 +189,27 @@ export default function HistoryPage() {
         </section>
 
         {/* ── 지그재그 타임라인 (모바일 — 단일 열) ───── */}
-        <section className="sm:hidden relative ml-5 pl-6 border-l border-white/[0.08] pb-36 space-y-12">
+        <section className="sm:hidden relative ml-5 pl-5 border-l border-white/[0.08] pb-28 space-y-8">
           {HISTORY.map((entry) => (
             <div key={entry.year} className="relative">
               {/* 블루 점 */}
-              <div className="absolute -left-[1.4375rem] top-2 w-[11px] h-[11px] rounded-full bg-[#2563EB] ring-[5px] ring-black shadow-[0_0_10px_rgba(37,99,235,0.5)]" />
+              <div className="absolute -left-[1.3125rem] top-1.5 w-[9px] h-[9px] rounded-full bg-[#2563EB] ring-4 ring-black shadow-[0_0_8px_rgba(37,99,235,0.5)]" />
 
               <motion.div
-                initial={{ opacity: 0, x: -40 }}
+                initial={{ opacity: 0, x: -36 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={VIEWPORT}
                 transition={SPRING}
               >
-                <h2 className="text-[1.55rem] font-bold text-white tracking-tight leading-none mb-3">
+                <h2 className="text-[1.2rem] font-bold text-white tracking-tight leading-none mb-2">
                   {entry.year}
                 </h2>
-                <div className="space-y-1.5">
+                <div className="space-y-1">
                   {entry.items.map((item, i) => (
                     <p
                       key={i}
-                      className={`text-[0.8rem] leading-relaxed ${
-                        item.bold ? "font-bold text-white" : "text-white/45"
+                      className={`text-[0.75rem] leading-snug ${
+                        item.bold ? "font-bold text-white" : "text-white/50"
                       }`}
                     >
                       {item.text}
