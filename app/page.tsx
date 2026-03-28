@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { ReactNode } from "react";
 import { AnimatedCard } from "./_components/AnimatedCard";
 import { HeroWithScrollEffect } from "./_components/HeroWithScrollEffect";
@@ -7,14 +6,8 @@ import {
   AnimatedHero,
   AnimatedHeroItem,
 } from "./_components/AnimatedHero";
-import { AnimatedSection, FadeInItem } from "./_components/AnimatedSection";
 import { Container } from "./_components/Container";
 import { Footer } from "./_components/Footer";
-import { SiteHeader } from "./_components/SiteHeader";
-import {
-  SectionKicker,
-  SectionTitle,
-} from "./_components/SectionTitle";
 import { SloganWithEffects } from "./_components/SloganWithEffects";
 import { VisionCarousel } from "./_components/VisionCarousel";
 import { ResultsWithGraph } from "./_components/ResultsWithGraph";
@@ -27,47 +20,10 @@ import { MarketingProductsSection } from "./_components/MarketingProductsSection
 import { Section2CardList } from "./_components/Section2CardList";
 import { Section2Wrapper } from "./_components/Section2Wrapper";
 
-const WP_REST_ENDPOINT =
-  "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2/posts?_embed&per_page=5";
-
-type Post = {
-  id: number;
-  title: { rendered: string };
-  excerpt: { rendered: string };
-  link: string;
-  _embedded?: {
-    "wp:featuredmedia"?: Array<{
-      source_url: string;
-      alt_text: string;
-    }>;
-  };
-};
-
-async function getRecentPosts(): Promise<Post[]> {
-  const res = await fetch(WP_REST_ENDPOINT, {
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) throw new Error("글을 불러올 수 없습니다.");
-  return res.json();
-}
-
-function stripHTML(html: string) {
-  return html.replace(/<[^>]+>/g, "");
-}
-
 export default async function Home() {
-  let posts: Post[] = [];
-  let error: string | null = null;
-
-  try {
-    posts = await getRecentPosts();
-  } catch {
-    error = "최근 게시글을 불러올 수 없습니다.";
-  }
-
   return (
     <div className="min-h-screen bg-white text-[#1a1a2e]">
-      <SiteChrome posts={posts} error={error} stripHTML={stripHTML} />
+      <SiteChrome />
     </div>
   );
 }
@@ -174,68 +130,7 @@ function ProcessStep({
   );
 }
 
-function InsightCard({
-  id,
-  title,
-  excerptHtml,
-  thumbnail,
-  alt,
-  type = "Article",
-  date,
-}: {
-  id: number;
-  title: string;
-  excerptHtml: string;
-  thumbnail: string | null;
-  alt: string;
-  type?: string;
-  date?: string;
-}) {
-  return (
-    <Link
-      href={`/posts/${id}`}
-      className="group flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-[#1e40af]/30 transition-all"
-    >
-      {thumbnail ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={thumbnail}
-          alt={alt}
-          className="h-44 w-full object-cover"
-          loading="lazy"
-        />
-      ) : (
-        <div className="h-44 w-full bg-gradient-to-br from-[#1e40af]/10 to-slate-100" />
-      )}
-      <div className="flex-1 p-6">
-        <div className="flex items-center gap-2 text-xs text-slate-500">
-          <span>{type}</span>
-          {date && <span>{date}</span>}
-        </div>
-        <div className="mt-3 text-sm font-semibold text-[#1a1a2e] group-hover:text-[#1e40af] transition-colors line-clamp-2">
-          {title}
-        </div>
-        <div
-          className="mt-3 text-sm leading-relaxed text-slate-600 line-clamp-3"
-          dangerouslySetInnerHTML={{ __html: excerptHtml || "" }}
-        />
-        <span className="mt-3 inline-block text-sm font-semibold text-[#1e40af]">
-          자세히 보기 →
-        </span>
-      </div>
-    </Link>
-  );
-}
-
-function SiteChrome({
-  posts,
-  error,
-  stripHTML,
-}: {
-  posts: Post[];
-  error: string | null;
-  stripHTML: (html: string) => string;
-}) {
+function SiteChrome() {
   return (
     <>
       {/* 헤더 + 첫번째 섹션: 흰 배경, 좌우 2단(텍스트+CTA / 2x2 그리드) */}
@@ -449,60 +344,7 @@ function SiteChrome({
         </Container>
       </section>
 
-      {/* Blogs */}
-      <section id="insights" className="relative z-10 border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
-        <Container>
-          <SectionKicker>Blogs</SectionKicker>
-          <SectionTitle className="mt-3">
-            비즈니스 인사이트의 모든 것,
-            <br />
-            애드그릿 블로그
-          </SectionTitle>
-
-          <div className="mt-10">
-            {error ? (
-              <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-red-700">
-                {error}
-              </div>
-            ) : (
-              <div className="space-y-8">
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {posts.slice(0, 3).map((post, i) => {
-                  const thumbnail =
-                    post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ?? null;
-                  const alt =
-                    post._embedded?.["wp:featuredmedia"]?.[0]?.alt_text ??
-                    stripHTML(post.title.rendered);
-                  return (
-                    <AnimatedCard key={post.id} index={i}>
-                      <InsightCard
-                        id={post.id}
-                        title={stripHTML(post.title.rendered)}
-                        excerptHtml={post.excerpt.rendered || ""}
-                        thumbnail={thumbnail}
-                        alt={alt}
-                        type="Article"
-                        date="25년 06월 09일"
-                      />
-                    </AnimatedCard>
-                  );
-                })}
-              </div>
-                <div className="text-center">
-                  <Link
-                    href="/blog"
-                    className="inline-flex items-center justify-center rounded-full border-2 border-[#1e40af] px-8 py-3 text-sm font-semibold text-[#1e40af] hover:bg-[#1e40af] hover:text-white transition-colors"
-                  >
-                    블로그 전체보기 →
-                  </Link>
-                </div>
-              </div>
-            )}
-          </div>
-        </Container>
-      </section>
-
-      {/* 10번 섹션: 클라이언트 성장 + 무료 상담 CTA - 마지막 섹션 바로 위 */}
+      {/* 클라이언트 성장 + 무료 상담 CTA - 마지막 섹션 바로 위 */}
       <ClientGrowthSection />
 
       {/* Contact - 마지막 섹션 */}
