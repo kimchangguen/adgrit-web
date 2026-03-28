@@ -96,7 +96,7 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
   return (
     <section
       ref={ref}
-      className={`overflow-hidden flex flex-col ${reverse ? "sm:flex-row-reverse" : "sm:flex-row"} sm:justify-between sm:items-start gap-6 sm:gap-0 px-6 sm:px-14 lg:px-24 py-24 sm:py-32 border-t border-white/[0.07]`}
+      className={`overflow-hidden flex flex-col ${reverse ? "sm:flex-row-reverse" : "sm:flex-row"} sm:justify-center sm:items-start gap-6 sm:gap-10 px-6 sm:px-14 lg:px-24 py-24 sm:py-32 border-t border-white/[0.07]`}
     >
       {/* 숫자: 한쪽 끝에서 중앙으로 */}
       <motion.div style={{ x: numX, opacity }} className="shrink-0 flex items-start sm:pt-2">
@@ -108,13 +108,8 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
         </span>
       </motion.div>
 
-      {/* 구분 블루 점 (데스크톱만) — 중앙에서 페이드인 */}
-      <motion.div style={{ opacity }} className="hidden sm:flex items-start pt-7">
-        <span className="w-3 h-3 rounded-sm bg-[#2563EB] shrink-0 mt-2" />
-      </motion.div>
-
       {/* 글: 반대편 끝에서 중앙으로 */}
-      <motion.div style={{ x: textX, opacity }} className="min-w-0 sm:max-w-[52%] space-y-6 sm:pt-2">
+      <motion.div style={{ x: textX, opacity }} className="min-w-0 sm:max-w-[420px] space-y-6 sm:pt-2">
         <p className="text-[0.68rem] font-semibold tracking-[0.22em] text-white/30 uppercase">
           {item.en}
         </p>
