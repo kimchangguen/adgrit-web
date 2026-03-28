@@ -150,7 +150,7 @@ export default function AboutPage() {
   const { ref: closingRef, inView: closingInView } = useReveal("-60px");
 
   return (
-    <div className="bg-black text-white min-h-screen">
+    <div className="bg-[#1e3052] text-white min-h-screen">
       <SiteHeader />
 
       <main className="pt-16">
