@@ -141,11 +141,28 @@ export default async function BlogPage() {
     };
   });
 
-  /* 카테고리별 포스트 그룹화 */
-  const postsByCategory = categories.map((cat) => ({
-    category: cat,
-    posts: posts.filter((p) => p.categories.includes(cat.id)),
-  })).filter((g) => g.posts.length > 0);
+  /* 카테고리 노출 순서 고정 */
+  const CATEGORY_ORDER = [
+    "industry-secrets",
+    "service-guide",
+    "marketing-tips",
+    "marketing-guide",
+    "expert-column",
+    "affiliate-marketing",
+  ];
+
+  const catMap = new Map(categories.map((c) => [c.slug, c]));
+
+  const postsByCategory = CATEGORY_ORDER
+    .map((slug) => {
+      const cat = catMap.get(slug);
+      if (!cat) return null;
+      return {
+        category: cat,
+        posts: posts.filter((p) => p.categories.includes(cat.id)),
+      };
+    })
+    .filter((g): g is { category: WPCategory; posts: WPPost[] } => g !== null && g.posts.length > 0);
 
   return (
     <div className="min-h-screen bg-white text-[#1a1a2e]">
