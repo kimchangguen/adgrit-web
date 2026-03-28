@@ -4,27 +4,28 @@ import { motion } from "framer-motion";
 import { SiteHeader } from "../_components/SiteHeader";
 import { Footer } from "../_components/Footer";
 
-/* ─── 모션 설정 ──────────────────────────────────────── */
-const SPRING_L = { type: "spring", stiffness: 300, damping: 28, mass: 0.9 } as const;
-const SPRING_R = { type: "spring", stiffness: 300, damping: 28, mass: 0.9 } as const;
+/* ─── 모션 ───────────────────────────────────────────── */
+const SPRING   = { type: "spring", stiffness: 300, damping: 28, mass: 0.9 } as const;
 const EASE     = [0.22, 1, 0.36, 1] as const;
 const VIEWPORT = { once: true, margin: "-80px" } as const;
 
 /* ─── 타입 ───────────────────────────────────────────── */
 type Item  = { text: string; bold?: boolean };
-type Entry = { yearLabel: string; yearSub?: string; items: Item[] };
+type Entry = { year: string; side: "left" | "right"; items: Item[] };
 
-/* ─── 연혁 데이터 ────────────────────────────────────── */
+/* ─── 데이터 (이미지 전문 스캔 · 매드업 → 애드그릿 치환) ── */
 const HISTORY: Entry[] = [
   {
-    yearLabel: "2014",
+    year: "2014년",
+    side: "left",
     items: [
       { text: "원더폰코리아 협력업체 | 네오폰코리아 협력업체" },
       { text: "마루네프가구 협력업체 | 한주얼리 협력업체" },
     ],
   },
   {
-    yearLabel: "2015",
+    year: "2015년",
+    side: "right",
     items: [
       { text: "네이버 블로그 상위노출 솔루션 개발 실행", bold: true },
       { text: "PSU 에듀센터 | 아이폰 닥터 | 피부과 동안 중심" },
@@ -33,7 +34,8 @@ const HISTORY: Entry[] = [
     ],
   },
   {
-    yearLabel: "2017",
+    year: "2017년",
+    side: "left",
     items: [
       { text: "카페 자동화 시스템 솔루션 개발", bold: true },
       { text: "카피몬 | 칼라테크오에이 | SBS 뷰티아카데미" },
@@ -42,7 +44,8 @@ const HISTORY: Entry[] = [
     ],
   },
   {
-    yearLabel: "2018",
+    year: "2018년",
+    side: "right",
     items: [
       { text: "인스타그램 마케팅 솔루션 개발", bold: true },
       { text: "인스타그램 솔루션 로직개발", bold: true },
@@ -52,7 +55,8 @@ const HISTORY: Entry[] = [
     ],
   },
   {
-    yearLabel: "2019",
+    year: "2019년",
+    side: "left",
     items: [
       { text: "기업부설 연구소 설립", bold: true },
       { text: "인스타그램 마케팅 솔루션 업데이트", bold: true },
@@ -65,7 +69,8 @@ const HISTORY: Entry[] = [
     ],
   },
   {
-    yearLabel: "2020",
+    year: "2020년",
+    side: "right",
     items: [
       { text: "통합마케팅 실행 시스템 구축" },
       { text: "페이스북 타켓광고 로그분석" },
@@ -75,8 +80,8 @@ const HISTORY: Entry[] = [
     ],
   },
   {
-    yearLabel: "2021",
-    yearSub: "~ 2023",
+    year: "2021년~2023년",
+    side: "left",
     items: [
       { text: "메타 광고 진행 | 브랜드 블로그 육성 및 판매", bold: true },
       { text: "네이버카페 마케팅 진행 | 네이버 플레이스 마케팅 진행", bold: true },
@@ -88,121 +93,39 @@ const HISTORY: Entry[] = [
   },
 ];
 
-/* ─── 연도 섹션 ──────────────────────────────────────── */
-function YearSection({ entry }: { entry: Entry }) {
+/* ─── 콘텐츠 블록 ────────────────────────────────────── */
+function EntryBlock({ entry }: { entry: Entry }) {
+  const isLeft = entry.side === "left";
   return (
-    <div className="relative">
+    <motion.div
+      className={isLeft ? "text-right" : "text-left"}
+      initial={{ opacity: 0, x: isLeft ? -56 : 56 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={VIEWPORT}
+      transition={SPRING}
+    >
+      {/* 연도 */}
+      <h2
+        className="font-bold text-white leading-none tracking-tight mb-4"
+        style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.4rem)" }}
+      >
+        {entry.year}
+      </h2>
 
-      {/* ── 데스크톱 (sm 이상): 좌우 랑데부 레이아웃 ─── */}
-      <div className="hidden sm:grid grid-cols-2 relative">
-
-        {/* 중앙 수직선 */}
-        <div className="absolute inset-y-0 left-1/2 w-px bg-white/[0.08] -translate-x-1/2 pointer-events-none" />
-
-        {/* 중앙 점 (블루) */}
-        <div className="absolute top-10 left-1/2 w-3 h-3 rounded-full bg-[#2563EB] -translate-x-1/2 z-10 ring-4 ring-black shadow-[0_0_12px_rgba(37,99,235,0.6)]" />
-
-        {/* 왼쪽: 연도 — 왼쪽에서 중앙선으로 랑데부 */}
-        <motion.div
-          className="pr-12 xl:pr-20 text-right pt-8 pb-14"
-          initial={{ opacity: 0, x: -60 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={VIEWPORT}
-          transition={SPRING_L}
-        >
-          <span
-            className="font-black text-white leading-none tracking-tighter block"
-            style={{ fontSize: "clamp(4.5rem, 7vw, 6.5rem)" }}
+      {/* 항목 */}
+      <div className="space-y-1.5">
+        {entry.items.map((item, i) => (
+          <p
+            key={i}
+            className={`text-[0.82rem] sm:text-sm leading-relaxed ${
+              item.bold ? "font-bold text-white" : "text-white/45"
+            }`}
           >
-            {entry.yearLabel}
-          </span>
-          {entry.yearSub && (
-            <span className="text-[#2563EB] font-bold text-lg sm:text-xl tracking-tight block mt-1">
-              {entry.yearSub}
-            </span>
-          )}
-          <span className="text-white/20 text-sm font-medium tracking-widest block mt-2">년</span>
-        </motion.div>
-
-        {/* 오른쪽: 내용 — 오른쪽에서 중앙선으로 랑데부 */}
-        <motion.div
-          className="pl-12 xl:pl-20 pt-8 pb-14"
-          initial={{ opacity: 0, x: 60 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={VIEWPORT}
-          transition={SPRING_R}
-        >
-          <ul className="space-y-3">
-            {entry.items.map((item, i) => (
-              <li key={i} className="flex items-start gap-3">
-                {/* 블루 인디케이터 (볼드 항목만) */}
-                {item.bold && (
-                  <span className="mt-[0.35em] shrink-0 w-1 h-1 rounded-full bg-[#2563EB]" />
-                )}
-                <p
-                  className={`text-sm sm:text-[0.9rem] leading-relaxed ${
-                    item.bold
-                      ? "font-bold text-white"
-                      : "text-white/45 font-normal"
-                  } ${!item.bold ? "pl-4" : ""}`}
-                >
-                  {item.text}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
+            {item.text}
+          </p>
+        ))}
       </div>
-
-      {/* ── 모바일: 단일 열 ──────────────────────────────── */}
-      <div className="sm:hidden relative pl-6 border-l border-white/[0.08] py-10">
-
-        {/* 블루 점 */}
-        <div className="absolute top-10 -left-[7px] w-3 h-3 rounded-full bg-[#2563EB] ring-4 ring-black shadow-[0_0_10px_rgba(37,99,235,0.5)]" />
-
-        {/* 연도 — 왼쪽에서 슬라이드 */}
-        <motion.div
-          className="mb-5"
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={VIEWPORT}
-          transition={SPRING_L}
-        >
-          <span className="text-[3rem] font-black text-white leading-none tracking-tighter block">
-            {entry.yearLabel}
-          </span>
-          {entry.yearSub && (
-            <span className="text-[#2563EB] font-bold text-base block mt-0.5">
-              {entry.yearSub}
-            </span>
-          )}
-        </motion.div>
-
-        {/* 내용 — 오른쪽에서 슬라이드 */}
-        <motion.ul
-          className="space-y-3"
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={VIEWPORT}
-          transition={SPRING_R}
-        >
-          {entry.items.map((item, i) => (
-            <li key={i} className="flex items-start gap-2.5">
-              {item.bold && (
-                <span className="mt-[0.35em] shrink-0 w-1 h-1 rounded-full bg-[#2563EB]" />
-              )}
-              <p
-                className={`text-sm leading-relaxed ${
-                  item.bold ? "font-bold text-white" : "text-white/45 font-normal"
-                } ${!item.bold ? "pl-3.5" : ""}`}
-              >
-                {item.text}
-              </p>
-            </li>
-          ))}
-        </motion.ul>
-      </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -215,40 +138,89 @@ export default function HistoryPage() {
       <main className="pt-16">
 
         {/* ── 히어로 ─────────────────────────────────── */}
-        <section className="px-6 sm:px-14 lg:px-24 pt-28 sm:pt-36 pb-16 sm:pb-24">
+        <section className="px-6 sm:px-14 lg:px-24 pt-28 sm:pt-36 pb-20 sm:pb-28">
           <motion.p
-            className="text-[0.65rem] font-bold tracking-[0.28em] text-[#2563EB] uppercase mb-6"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-[0.65rem] font-bold tracking-[0.28em] text-[#2563EB] uppercase mb-5"
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
+            transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
           >
             ADGRIT HISTORY
           </motion.p>
-
           <motion.h1
             className="font-extrabold text-white leading-[1.1] tracking-tight"
-            style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)" }}
-            initial={{ opacity: 0, y: 28 }}
+            style={{ fontSize: "clamp(2.6rem, 6vw, 5rem)" }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
+            transition={{ duration: 0.85, delay: 0.2, ease: EASE }}
           >
             회사연혁
           </motion.h1>
-
           <motion.p
-            className="mt-5 text-base sm:text-[1.0625rem] text-white/38 max-w-sm leading-[1.85]"
-            initial={{ opacity: 0, y: 20 }}
+            className="mt-5 text-sm sm:text-base text-white/38 leading-[1.85]"
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.34, ease: EASE }}
+            transition={{ duration: 0.7, delay: 0.32, ease: EASE }}
           >
-            ADGRIT의 도전과 성장의 기록입니다.
+            애드그릿의 도전과 성장의 기록입니다.
           </motion.p>
         </section>
 
-        {/* ── 타임라인 ─────────────────────────────────── */}
-        <section className="px-6 sm:px-14 lg:px-24 pb-40 sm:pb-56 divide-y divide-white/[0.06]">
+        {/* ── 지그재그 타임라인 (데스크톱) ────────────── */}
+        <section className="hidden sm:block relative px-10 lg:px-20 xl:px-32 pb-48">
+
+          {/* 중앙 수직선 */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/[0.08] -translate-x-1/2 pointer-events-none" />
+
           {HISTORY.map((entry) => (
-            <YearSection key={entry.yearLabel} entry={entry} />
+            <div key={entry.year} className="relative grid grid-cols-2 py-12">
+
+              {/* 중앙 블루 점 */}
+              <div className="absolute left-1/2 top-[3.25rem] -translate-x-1/2 w-[11px] h-[11px] rounded-full bg-[#2563EB] ring-[5px] ring-black z-10 shadow-[0_0_14px_rgba(37,99,235,0.55)]" />
+
+              {/* 왼쪽 셀: side="left" 일 때만 콘텐츠 */}
+              <div className="pr-14 xl:pr-24">
+                {entry.side === "left" && <EntryBlock entry={entry} />}
+              </div>
+
+              {/* 오른쪽 셀: side="right" 일 때만 콘텐츠 */}
+              <div className="pl-14 xl:pl-24">
+                {entry.side === "right" && <EntryBlock entry={entry} />}
+              </div>
+            </div>
+          ))}
+        </section>
+
+        {/* ── 지그재그 타임라인 (모바일 — 단일 열) ───── */}
+        <section className="sm:hidden relative ml-5 pl-6 border-l border-white/[0.08] pb-36 space-y-12">
+          {HISTORY.map((entry) => (
+            <div key={entry.year} className="relative">
+              {/* 블루 점 */}
+              <div className="absolute -left-[1.4375rem] top-2 w-[11px] h-[11px] rounded-full bg-[#2563EB] ring-[5px] ring-black shadow-[0_0_10px_rgba(37,99,235,0.5)]" />
+
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={VIEWPORT}
+                transition={SPRING}
+              >
+                <h2 className="text-[1.55rem] font-bold text-white tracking-tight leading-none mb-3">
+                  {entry.year}
+                </h2>
+                <div className="space-y-1.5">
+                  {entry.items.map((item, i) => (
+                    <p
+                      key={i}
+                      className={`text-[0.8rem] leading-relaxed ${
+                        item.bold ? "font-bold text-white" : "text-white/45"
+                      }`}
+                    >
+                      {item.text}
+                    </p>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
           ))}
         </section>
 
