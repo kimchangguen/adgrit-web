@@ -197,7 +197,8 @@ header nav a {
 }
 .hero > * {
   position: relative;
-  z-index: 1;
+  /* z-index 제거: 값이 있으면 stacking context가 생성되어
+     내부 fixed 헤더가 루트에서 z-1 버블에 갇힘 */
 }
 
 /* 스크롤 인디케이터 - 캡슐 스타일 + 바운스 */
