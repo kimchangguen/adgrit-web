@@ -121,7 +121,7 @@ export default function OrganizationPage() {
         {/* ── 조직도 본문 ─────────────────────────────── */}
         <section
           ref={heroRef}
-          className="bg-black px-6 sm:px-14 lg:px-24 pt-20 pb-32 sm:pb-44 border-t border-white/[0.07]"
+          className="bg-[#1e3052] px-6 sm:px-14 lg:px-24 pt-20 pb-32 sm:pb-44 border-t border-white/[0.07]"
         >
           {/* CEO + 지원 조직 */}
           <motion.div
