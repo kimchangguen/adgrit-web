@@ -91,6 +91,7 @@ export default function OrganizationPage() {
 
         {/* ── 히어로 ─────────────────────────────────── */}
         <section className="px-6 sm:px-14 lg:px-24 pt-20 sm:pt-28 pb-16 sm:pb-20">
+          <div className="max-w-[1200px] mx-auto">
           <motion.p
             className="text-[0.65rem] font-bold tracking-[0.28em] text-[#2563EB] uppercase mb-5"
             initial={{ opacity: 0, y: 16 }}
@@ -116,6 +117,7 @@ export default function OrganizationPage() {
           >
             애드그릿의 조직 구조를 소개합니다.
           </motion.p>
+          </div>
         </section>
 
         {/* ── 조직도 본문 ─────────────────────────────── */}
@@ -123,6 +125,7 @@ export default function OrganizationPage() {
           ref={heroRef}
           className="bg-[#1e3052] px-6 sm:px-14 lg:px-24 pt-20 pb-32 sm:pb-44 border-t border-white/[0.07]"
         >
+          <div className="max-w-[1200px] mx-auto">
           {/* CEO + 지원 조직 */}
           <motion.div
             ref={ceoRef}
@@ -179,11 +182,11 @@ export default function OrganizationPage() {
                       </span>
                     </div>
 
-                    <div className="px-4 py-4 flex flex-col gap-3">
+                    <div className="px-3 py-3 flex flex-col items-stretch gap-2">
                       {items.map((item) => (
                         <div
                           key={item}
-                          className="rounded-md border border-blue-500/30 bg-white/5 px-4 py-3 text-[0.75rem] text-white/90 leading-snug"
+                          className="rounded-md border border-blue-500/30 bg-white/5 px-3 py-1.5 text-[0.75rem] text-white/90 leading-snug"
                         >
                           {item}
                         </div>
@@ -193,6 +196,7 @@ export default function OrganizationPage() {
                 </div>
               );
             })}
+          </div>
           </div>
         </section>
 
