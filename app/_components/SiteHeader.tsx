@@ -70,7 +70,7 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
           className="flex-shrink-0 justify-self-start select-none ml-[120px] flex items-center"
           aria-label="홈으로 이동"
         >
-          <Image src="/adgrit-logo.png" alt="ADGRIT 로고" height={32} width={116} className="h-8 w-auto object-contain" priority />
+          <Image src="/adgrit-logo-v2.png" alt="ADGRIT 로고" height={32} width={116} className="h-8 w-auto object-contain" priority />
         </Link>
 
         {/* 모바일: 메인 메뉴 + 탭 시 서브메뉴 드롭다운 */}
