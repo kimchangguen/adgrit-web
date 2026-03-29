@@ -91,7 +91,6 @@ export default function OrganizationPage() {
 
         {/* ── 히어로 ─────────────────────────────────── */}
         <section className="px-6 sm:px-14 lg:px-24 pt-20 sm:pt-28 pb-16 sm:pb-20">
-          <div className="max-w-[1200px] mx-auto">
           <motion.p
             className="text-[0.65rem] font-bold tracking-[0.28em] text-[#2563EB] uppercase mb-5"
             initial={{ opacity: 0, y: 16 }}
@@ -117,7 +116,6 @@ export default function OrganizationPage() {
           >
             애드그릿의 조직 구조를 소개합니다.
           </motion.p>
-          </div>
         </section>
 
         {/* ── 조직도 본문 ─────────────────────────────── */}
@@ -125,24 +123,24 @@ export default function OrganizationPage() {
           ref={heroRef}
           className="bg-[#1e3052] px-6 sm:px-14 lg:px-24 pt-20 pb-32 sm:pb-44 border-t border-white/[0.07]"
         >
-          <div className="max-w-[1200px] mx-auto">
+          <div className="max-w-[900px] mx-auto">
           {/* CEO + 지원 조직 */}
           <motion.div
             ref={ceoRef}
             initial={{ opacity: 0, y: 36 }}
             animate={ceoInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.75, ease: EASE }}
-            className="flex flex-col items-center gap-4 mb-0"
+            className="flex flex-col items-center gap-3 mb-0"
           >
-            <div className="w-24 h-24 rounded-full bg-[#2563EB] border-2 border-blue-400 flex items-center justify-center shadow-[0_0_36px_rgba(37,99,235,0.5)]">
-              <span className="text-white font-black text-xl tracking-wide">CEO</span>
+            <div className="w-16 h-16 rounded-full bg-[#2563EB] border-2 border-blue-400 flex items-center justify-center shadow-[0_0_24px_rgba(37,99,235,0.5)]">
+              <span className="text-white font-black text-base tracking-wide">CEO</span>
             </div>
 
-            <div className="flex gap-3 flex-wrap justify-center">
+            <div className="flex gap-2 flex-wrap justify-center">
               {["R&D 센터", "경영지원부서"].map((label) => (
                 <span
                   key={label}
-                  className="px-4 py-2 rounded-lg border border-blue-600 bg-[#0d1b35] text-white text-xs font-semibold tracking-wide"
+                  className="px-3 py-1.5 rounded-lg border border-blue-600 bg-[#0d1b35] text-white text-[0.7rem] font-semibold tracking-wide"
                 >
                   {label}
                 </span>
@@ -151,21 +149,21 @@ export default function OrganizationPage() {
 
             {/* 수직선 → 분기 노드 → 수평 바 */}
             <div className="flex flex-col items-center w-full">
-              <div className="w-px h-8 bg-blue-600/50" />
-              <div className="w-3 h-3 rounded-full bg-blue-500 border-2 border-blue-300 shadow-[0_0_8px_rgba(37,99,235,0.6)]" />
-              <div className="w-full h-px bg-blue-600/40 mt-0" />
+              <div className="w-px h-5 bg-blue-600/50" />
+              <div className="w-2.5 h-2.5 rounded-full bg-blue-500 border-2 border-blue-300 shadow-[0_0_6px_rgba(37,99,235,0.6)]" />
+              <div className="w-full h-px bg-blue-600/40" />
             </div>
           </motion.div>
 
           {/* 부서 카드 그리드 — 각 열에 수직 드롭 + 카드 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 lg:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
             {DEPARTMENTS.map(({ key, items }, i) => {
               // eslint-disable-next-line react-hooks/rules-of-hooks
               const { ref: cardRef, inView: cardInView } = useReveal("-30px");
               return (
                 <div key={key} className="flex flex-col items-center">
                   {/* 수직 드롭 — 모바일에서는 숨김 */}
-                  <div className="hidden xl:block w-px h-6 bg-blue-600/40 shrink-0" />
+                  <div className="hidden xl:block w-px h-4 bg-blue-600/40 shrink-0" />
 
                   <motion.div
                     ref={cardRef}
@@ -174,19 +172,19 @@ export default function OrganizationPage() {
                     transition={{ duration: 0.7, delay: i * 0.09, ease: EASE }}
                     className="w-full rounded-xl border border-blue-600 bg-[#0d1b35] overflow-hidden hover:border-blue-400 hover:shadow-[0_0_18px_rgba(37,99,235,0.25)] transition-all duration-300"
                   >
-                    {/* 부서 헤더 — 그라데이션으로 강조 */}
-                    <div className="bg-gradient-to-r from-blue-600 to-blue-500 px-4 py-3.5 flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-white/70 shrink-0" />
-                      <span className="text-white font-black text-[0.7rem] tracking-[0.18em] uppercase drop-shadow-sm">
+                    {/* 부서 헤더 */}
+                    <div className="bg-gradient-to-r from-blue-600 to-blue-500 px-3 py-2.5 flex items-center gap-1.5">
+                      <span className="w-1 h-1 rounded-full bg-white/70 shrink-0" />
+                      <span className="text-white font-black text-[0.65rem] tracking-[0.15em] uppercase drop-shadow-sm">
                         {key}
                       </span>
                     </div>
 
-                    <div className="px-3 py-3 flex flex-col items-stretch gap-2">
+                    <div className="px-2.5 py-2.5 flex flex-col items-stretch gap-1.5">
                       {items.map((item) => (
                         <div
                           key={item}
-                          className="rounded-md border border-blue-500/30 bg-white/5 px-3 py-1.5 text-[0.75rem] text-white/90 leading-snug"
+                          className="rounded border border-blue-500/30 bg-white/5 px-2.5 py-1 text-[0.68rem] text-white/90 leading-snug"
                         >
                           {item}
                         </div>
