@@ -67,10 +67,10 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
       <Container className="relative grid h-14 sm:h-16 grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4">
         <Link
           href="/"
-          className="flex-shrink-0 justify-self-start select-none ml-[120px]"
+          className="flex-shrink-0 justify-self-start select-none ml-[120px] flex items-center"
           aria-label="홈으로 이동"
         >
-          <Image src="/logo.png" alt="ADGRIT" height={40} width={140} className="h-10 w-auto" priority />
+          <Image src="/logo.png" alt="ADGRIT 로고" height={44} width={160} className="h-11 w-auto object-contain" priority />
         </Link>
 
         {/* 모바일: 메인 메뉴 + 탭 시 서브메뉴 드롭다운 */}
