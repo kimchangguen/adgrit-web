@@ -105,16 +105,16 @@ function EntryBlock({ entry }: { entry: Entry }) {
       transition={SPRING}
     >
       {/* 연도 */}
-      <h2 className="text-[1.35rem] font-bold text-white leading-none tracking-tight mb-2.5">
+      <h2 className="text-[2rem] font-bold text-white leading-none tracking-tight mb-4">
         {entry.year}
       </h2>
 
       {/* 항목 */}
-      <div className="space-y-1">
+      <div className="space-y-2">
         {entry.items.map((item, i) => (
           <p
             key={i}
-            className={`text-[0.78rem] leading-snug ${
+            className={`text-[1.17rem] leading-relaxed ${
               item.bold ? "font-bold text-white" : "text-white/50"
             }`}
           >
@@ -137,7 +137,7 @@ export default function HistoryPage() {
         {/* ── 히어로 ─────────────────────────────────── */}
         <section className="px-6 sm:px-14 lg:px-24 pt-20 sm:pt-28 pb-10 sm:pb-16">
           <motion.p
-            className="text-[0.65rem] font-bold tracking-[0.28em] text-[#2563EB] uppercase mb-5"
+            className="text-[0.975rem] font-bold tracking-[0.28em] text-[#2563EB] uppercase mb-5"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
@@ -154,7 +154,7 @@ export default function HistoryPage() {
             회사연혁
           </motion.h1>
           <motion.p
-            className="mt-5 text-sm sm:text-base text-white/38 leading-[1.85]"
+            className="mt-5 text-lg sm:text-xl text-white/38 leading-[1.85]"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.32, ease: EASE }}
@@ -201,14 +201,14 @@ export default function HistoryPage() {
                 viewport={VIEWPORT}
                 transition={SPRING}
               >
-                <h2 className="text-[1.2rem] font-bold text-white tracking-tight leading-none mb-2">
+                <h2 className="text-[1.8rem] font-bold text-white tracking-tight leading-none mb-3">
                   {entry.year}
                 </h2>
-                <div className="space-y-1">
+                <div className="space-y-2">
                   {entry.items.map((item, i) => (
                     <p
                       key={i}
-                      className={`text-[0.75rem] leading-snug ${
+                      className={`text-[1.125rem] leading-relaxed ${
                         item.bold ? "font-bold text-white" : "text-white/50"
                       }`}
                     >

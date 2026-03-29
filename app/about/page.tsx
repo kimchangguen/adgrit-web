@@ -84,7 +84,7 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
       </motion.div>
 
       <motion.div style={{ x: textX, opacity }} className="min-w-0 sm:max-w-[420px] space-y-6 sm:pt-2">
-        <p className="text-[0.68rem] font-semibold tracking-[0.22em] text-white/30 uppercase">
+        <p className="text-[1rem] font-semibold tracking-[0.22em] text-white/30 uppercase">
           {item.en}
         </p>
 
@@ -93,7 +93,7 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
             <span
               key={i}
               className="block font-extrabold text-white leading-[1.15] tracking-tight"
-              style={{ fontSize: "clamp(1.4rem, 2.6vw, 2.2rem)" }}
+              style={{ fontSize: "clamp(2.1rem, 3.9vw, 3.3rem)" }}
             >
               {line}
             </span>
@@ -101,13 +101,13 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
         </h2>
 
         {item.body ? (
-          <p className="text-sm text-white/45 leading-[1.9] max-w-xl">
+          <p className="text-lg text-white/45 leading-[1.9] max-w-xl">
             {item.body}
           </p>
         ) : (
-          <ul className="space-y-2.5">
+          <ul className="space-y-3">
             {item.bullets?.map((b, i) => (
-              <li key={i} className="text-sm text-white/45 leading-[1.8]">
+              <li key={i} className="text-lg text-white/45 leading-[1.8]">
                 — {b}
               </li>
             ))}
@@ -150,7 +150,7 @@ export default function AboutPage() {
               transition={{ duration: 0.9, delay: 0.6, ease: EASE }}
               className="mt-10"
             >
-              <span className="inline-block border border-white/15 text-white/40 text-xs sm:text-sm px-6 py-3 rounded-full tracking-widest uppercase">
+              <span className="inline-block border border-white/15 text-white/40 text-sm sm:text-base px-6 py-3 rounded-full tracking-widest uppercase">
                 AD(성과, 광고, 도전) + GRIT(투지, 불굴의 의지)
               </span>
             </motion.div>
@@ -162,7 +162,7 @@ export default function AboutPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.4, ease: EASE }}
           >
-            <span className="text-[0.65rem] tracking-[0.22em] text-white/25 uppercase">scroll</span>
+            <span className="text-[0.975rem] tracking-[0.22em] text-white/25 uppercase">scroll</span>
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
@@ -182,11 +182,11 @@ export default function AboutPage() {
           >
             <p
               className="font-bold text-white leading-[1.6]"
-              style={{ fontSize: "clamp(1rem, 1.9vw, 1.35rem)" }}
+              style={{ fontSize: "clamp(1.5rem, 2.85vw, 2rem)" }}
             >
               ADGRIT은 혁신적인 성과를 만드는 AI 마케팅 컴퍼니입니다.
             </p>
-            <p className="text-sm sm:text-base text-white/45 leading-[1.9]">
+            <p className="text-lg sm:text-xl text-white/45 leading-[1.9]">
               분석, 전략, 운영, 크리에이티브, 브랜딩, 기술 등 각 분야에 전문화된 구성원을 중심으로
               <br className="hidden sm:block" />
               디지털 마케팅에 특화된 고객 맞춤형 퍼포먼스를 제공합니다.

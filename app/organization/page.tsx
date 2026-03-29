@@ -92,7 +92,7 @@ export default function OrganizationPage() {
         {/* ── 히어로 ─────────────────────────────────── */}
         <section className="px-6 sm:px-14 lg:px-24 pt-20 sm:pt-28 pb-16 sm:pb-20">
           <motion.p
-            className="text-[0.65rem] font-bold tracking-[0.28em] text-[#2563EB] uppercase mb-5"
+            className="text-[0.975rem] font-bold tracking-[0.28em] text-[#2563EB] uppercase mb-5"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
@@ -109,7 +109,7 @@ export default function OrganizationPage() {
             조직도
           </motion.h1>
           <motion.p
-            className="mt-5 text-sm sm:text-base text-white/38 leading-[1.85]"
+            className="mt-5 text-lg sm:text-xl text-white/38 leading-[1.85]"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.32, ease: EASE }}
@@ -123,24 +123,24 @@ export default function OrganizationPage() {
           ref={heroRef}
           className="bg-[#1e3052] px-6 sm:px-14 lg:px-24 pt-20 pb-32 sm:pb-44 border-t border-white/[0.07]"
         >
-          <div className="max-w-[900px] mx-auto">
+          <div className="max-w-[1300px] mx-auto">
           {/* CEO + 지원 조직 */}
           <motion.div
             ref={ceoRef}
             initial={{ opacity: 0, y: 36 }}
             animate={ceoInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.75, ease: EASE }}
-            className="flex flex-col items-center gap-3 mb-0"
+            className="flex flex-col items-center gap-4 mb-0"
           >
-            <div className="w-16 h-16 rounded-full bg-[#2563EB] border-2 border-blue-400 flex items-center justify-center shadow-[0_0_24px_rgba(37,99,235,0.5)]">
-              <span className="text-white font-black text-base tracking-wide">CEO</span>
+            <div className="w-24 h-24 rounded-full bg-[#2563EB] border-2 border-blue-400 flex items-center justify-center shadow-[0_0_24px_rgba(37,99,235,0.5)]">
+              <span className="text-white font-black text-xl tracking-wide">CEO</span>
             </div>
 
-            <div className="flex gap-2 flex-wrap justify-center">
+            <div className="flex gap-3 flex-wrap justify-center">
               {["R&D 센터", "경영지원부서"].map((label) => (
                 <span
                   key={label}
-                  className="px-3 py-1.5 rounded-lg border border-blue-600 bg-[#0d1b35] text-white text-[0.7rem] font-semibold tracking-wide"
+                  className="px-4 py-2 rounded-lg border border-blue-600 bg-[#0d1b35] text-white text-[1.05rem] font-semibold tracking-wide"
                 >
                   {label}
                 </span>
@@ -173,18 +173,18 @@ export default function OrganizationPage() {
                     className="w-full rounded-xl border border-blue-600 bg-[#0d1b35] overflow-hidden hover:border-blue-400 hover:shadow-[0_0_18px_rgba(37,99,235,0.25)] transition-all duration-300"
                   >
                     {/* 부서 헤더 */}
-                    <div className="bg-gradient-to-r from-blue-600 to-blue-500 px-3 py-2.5 flex items-center gap-1.5">
-                      <span className="w-1 h-1 rounded-full bg-white/70 shrink-0" />
-                      <span className="text-white font-black text-[0.65rem] tracking-[0.15em] uppercase drop-shadow-sm">
+                    <div className="bg-gradient-to-r from-blue-600 to-blue-500 px-4 py-3.5 flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white/70 shrink-0" />
+                      <span className="text-white font-black text-[0.975rem] tracking-[0.15em] uppercase drop-shadow-sm">
                         {key}
                       </span>
                     </div>
 
-                    <div className="px-2.5 py-2.5 flex flex-col items-stretch gap-1.5">
+                    <div className="px-3 py-3 flex flex-col items-stretch gap-2.5">
                       {items.map((item) => (
                         <div
                           key={item}
-                          className="rounded border border-blue-500/30 bg-white/5 px-2.5 py-1 text-[0.68rem] text-white/90 leading-snug"
+                          className="rounded-md border border-blue-500/30 bg-white/5 px-3 py-2 text-[1.02rem] text-white/90 leading-snug"
                         >
                           {item}
                         </div>
