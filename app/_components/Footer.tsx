@@ -27,47 +27,21 @@ export function Footer() {
             <div>
               <div className="text-sm font-semibold text-white">Address</div>
               <ul className="mt-3 space-y-1 text-sm text-slate-400 leading-relaxed">
-                <li>(여기에 회사 주소 입력)</li>
+                <li>서울 송파구 문정동 634 405호 업무지점</li>
+                <li>경기도성남시 분당구 여수동 189 805호 연구지점</li>
                 <li>상호 : ADGRIT</li>
-                <li>대표 : (대표이름)</li>
-                <li>사업자 번호 : (사업자번호)</li>
-                <li>대표번호 : (전화번호)</li>
-                <li>팩스 : (팩스번호)</li>
-                <li>이메일 : (이메일)</li>
+                <li>대표 : 김창근</li>
+                <li>사업자 번호 : 263-23-00560</li>
+                <li>대표번호 : 1661-0646</li>
               </ul>
             </div>
             <div>
               <div className="text-sm font-semibold text-white">Contact</div>
               <ul className="mt-3 space-y-2 text-sm text-slate-400">
-                <li>T. (전화번호)</li>
-                <li>F. (팩스번호)</li>
+                <li>T. 010-3316-7663</li>
+                <li>T. 010-6663-2336</li>
+                <li>T. 010-3300-7088</li>
               </ul>
-
-              <nav className="mt-6">
-                <div className="text-sm font-semibold text-white">빠른 링크</div>
-                <ul className="mt-3 flex flex-wrap gap-4 text-sm text-slate-400">
-                  <li>
-                    <Link className="hover:text-white transition-colors" href="/about">
-                      About
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="hover:text-white transition-colors" href="/service/marketing">
-                      Services
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="hover:text-white transition-colors" href="/blog">
-                      Blogs
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="hover:text-white transition-colors" href="/contact">
-                      Contact us
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
             </div>
           </div>
         </div>
