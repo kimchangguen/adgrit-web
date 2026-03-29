@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Container } from "./Container";
@@ -66,10 +67,10 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
       <Container className="relative grid h-14 sm:h-16 grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4">
         <Link
           href="/"
-          className="logo flex-shrink-0 justify-self-start select-none ml-[90px]"
+          className="flex-shrink-0 justify-self-start select-none"
           aria-label="홈으로 이동"
         >
-          <img src="/logo.png" alt="ADGRIT" height="40" className="w-auto" />
+          <Image src="/logo.png" alt="ADGRIT" height={40} width={140} className="h-10 w-auto" priority />
         </Link>
 
         {/* 모바일: 메인 메뉴 + 탭 시 서브메뉴 드롭다운 */}
