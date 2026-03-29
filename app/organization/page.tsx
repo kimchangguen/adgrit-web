@@ -129,7 +129,7 @@ export default function OrganizationPage() {
             initial={{ opacity: 0, y: 36 }}
             animate={ceoInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.75, ease: EASE }}
-            className="flex flex-col items-center gap-5 mb-14"
+            className="flex flex-col items-center gap-4 mb-0"
           >
             <div className="w-24 h-24 rounded-full bg-[#2563EB] border-2 border-blue-400 flex items-center justify-center shadow-[0_0_36px_rgba(37,99,235,0.5)]">
               <span className="text-white font-black text-xl tracking-wide">CEO</span>
@@ -146,40 +146,51 @@ export default function OrganizationPage() {
               ))}
             </div>
 
-            <div className="w-px h-10 bg-blue-600/40" />
+            {/* 수직선 → 분기 노드 → 수평 바 */}
+            <div className="flex flex-col items-center w-full">
+              <div className="w-px h-8 bg-blue-600/50" />
+              <div className="w-3 h-3 rounded-full bg-blue-500 border-2 border-blue-300 shadow-[0_0_8px_rgba(37,99,235,0.6)]" />
+              <div className="w-full h-px bg-blue-600/40 mt-0" />
+            </div>
           </motion.div>
 
-          {/* 부서 카드 그리드 */}
+          {/* 부서 카드 그리드 — 각 열에 수직 드롭 + 카드 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 lg:gap-5">
             {DEPARTMENTS.map(({ key, items }, i) => {
               // eslint-disable-next-line react-hooks/rules-of-hooks
               const { ref: cardRef, inView: cardInView } = useReveal("-30px");
               return (
-                <motion.div
-                  key={key}
-                  ref={cardRef}
-                  initial={{ opacity: 0, y: 48 }}
-                  animate={cardInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7, delay: i * 0.09, ease: EASE }}
-                  className="rounded-xl border border-blue-600 bg-[#0d1b35] overflow-hidden hover:border-blue-400 hover:shadow-[0_0_18px_rgba(37,99,235,0.25)] transition-all duration-300"
-                >
-                  <div className="bg-blue-600 px-4 py-3">
-                    <span className="text-white font-black text-[0.68rem] tracking-[0.15em] uppercase">
-                      {key}
-                    </span>
-                  </div>
-                  <ul className="px-4 py-4 space-y-2.5">
-                    {items.map((item) => (
-                      <li
-                        key={item}
-                        className="text-[0.73rem] text-white leading-snug flex items-start gap-2"
-                      >
-                        <span className="mt-[0.4em] w-1 h-1 rounded-full bg-blue-500 shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
+                <div key={key} className="flex flex-col items-center">
+                  {/* 수직 드롭 — 모바일에서는 숨김 */}
+                  <div className="hidden xl:block w-px h-6 bg-blue-600/40 shrink-0" />
+
+                  <motion.div
+                    ref={cardRef}
+                    initial={{ opacity: 0, y: 48 }}
+                    animate={cardInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.7, delay: i * 0.09, ease: EASE }}
+                    className="w-full rounded-xl border border-blue-600 bg-[#0d1b35] overflow-hidden hover:border-blue-400 hover:shadow-[0_0_18px_rgba(37,99,235,0.25)] transition-all duration-300"
+                  >
+                    {/* 부서 헤더 — 그라데이션으로 강조 */}
+                    <div className="bg-gradient-to-r from-blue-600 to-blue-500 px-4 py-3.5 flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white/70 shrink-0" />
+                      <span className="text-white font-black text-[0.7rem] tracking-[0.18em] uppercase drop-shadow-sm">
+                        {key}
+                      </span>
+                    </div>
+
+                    <div className="px-4 py-4 flex flex-col gap-3">
+                      {items.map((item) => (
+                        <div
+                          key={item}
+                          className="rounded-md border border-blue-500/30 bg-white/5 px-4 py-3 text-[0.75rem] text-white/90 leading-snug"
+                        >
+                          {item}
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
               );
             })}
           </div>
