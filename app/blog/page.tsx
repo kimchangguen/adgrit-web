@@ -30,7 +30,7 @@ type WPCategory = {
 /* ─── 데이터 패칭 ───────────────────────────────────── */
 async function fetchAll(): Promise<{ posts: WPPost[]; categories: WPCategory[] }> {
   const [postsRes, catsRes] = await Promise.all([
-    fetch(`${WP_BASE}/posts?_embed&per_page=20&orderby=date`, { next: { revalidate: 60 } }),
+    fetch(`${WP_BASE}/posts?_embed&per_page=100&orderby=date`, { next: { revalidate: 60 } }),
     fetch(`${WP_BASE}/categories?per_page=20&hide_empty=true`, { next: { revalidate: 3600 } }),
   ]);
 
