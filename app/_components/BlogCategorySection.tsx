@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import {
@@ -92,12 +93,12 @@ export function BlogCategorySection({ category, posts, index }: Props) {
                 className="shrink-0 w-[88px] h-[62px] rounded-xl overflow-hidden bg-slate-50 border border-slate-100"
               >
                 {post.imageUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <Image
                     src={post.imageUrl}
                     alt=""
+                    width={88}
+                    height={62}
                     className="w-full h-full object-cover"
-                    loading="lazy"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1A237E]/8 to-slate-100">
@@ -142,14 +143,14 @@ export function BlogCategorySection({ category, posts, index }: Props) {
                 className="flex flex-col rounded-2xl overflow-hidden bg-white border border-slate-100 shadow-sm active:shadow-none transition-shadow"
               >
                 {/* 카드 이미지 영역 */}
-                <div className="w-full aspect-[16/10] bg-slate-50">
+                <div className="relative w-full aspect-[16/10] bg-slate-50">
                   {post.imageUrl ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <Image
                       src={post.imageUrl}
                       alt=""
-                      className="w-full h-full object-cover"
-                      loading="lazy"
+                      fill
+                      className="object-cover"
+                      sizes="200px"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1A237E]/8 to-slate-100">

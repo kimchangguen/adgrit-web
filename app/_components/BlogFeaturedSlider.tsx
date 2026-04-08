@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 export type SliderPost = {
@@ -33,12 +34,14 @@ export function BlogFeaturedSlider({ posts }: { posts: SliderPost[] }) {
     <div className="relative w-full h-[320px] sm:h-[420px] lg:h-[480px] overflow-hidden rounded-2xl bg-slate-800 select-none">
       {/* 배경 이미지 */}
       {post.imageUrl ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <Image
           key={post.slug}
           src={post.imageUrl}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+          fill
+          className="object-cover transition-opacity duration-700"
+          sizes="(max-width: 768px) 100vw, 90vw"
+          priority
         />
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-[#1A237E] to-slate-700" />

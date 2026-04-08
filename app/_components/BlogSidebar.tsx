@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const WP_BASE = process.env.WP_BASE ?? "";
@@ -135,12 +136,12 @@ export async function BlogSidebar({ activeCategorySlug }: { activeCategorySlug?:
                   {/* 썸네일 */}
                   <div className="shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-slate-100">
                     {thumb ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <Image
                         src={thumb}
                         alt=""
+                        width={64}
+                        height={64}
                         className="w-full h-full object-cover"
-                        loading="lazy"
                       />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-[#1A237E]/10 to-slate-100" />

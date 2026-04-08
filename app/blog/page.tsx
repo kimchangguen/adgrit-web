@@ -1,8 +1,21 @@
+import type { Metadata } from "next";
 import { SiteHeader } from "../_components/SiteHeader";
 import { Footer } from "../_components/Footer";
 import { BlogFeaturedSlider, type SliderPost } from "../_components/BlogFeaturedSlider";
 import { BlogAnimatedHero } from "../_components/BlogAnimatedHero";
 import { BlogCategorySection, type CategoryPostItem } from "../_components/BlogCategorySection";
+
+export const metadata: Metadata = {
+  title: "Grit View 블로그",
+  description:
+    "마케팅 인사이트, 업계 비밀, 전문가 칼럼 등 ADGRIT이 직접 쓰는 성장 콘텐츠를 만나보세요.",
+  openGraph: {
+    title: "Grit View 블로그 | ADGRIT",
+    description:
+      "마케팅 인사이트, 업계 비밀, 전문가 칼럼 등 ADGRIT이 직접 쓰는 성장 콘텐츠를 만나보세요.",
+    type: "website",
+  },
+};
 
 const WP_BASE = process.env.WP_BASE ?? "";
 

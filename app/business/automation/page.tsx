@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { SubPageLayout } from "../../_components/SubPageLayout";
+
+export const metadata: Metadata = {
+  title: "Automation",
+  description: "반복 업무를 자동화하여 시간과 비용을 절감합니다. ADGRIT 비즈니스 자동화 솔루션.",
+};
 
 export default function AutomationPage() {
   return (

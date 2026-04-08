@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         hostname: "wordpress-1580849-6168519.cloudwaysapps.com",
         pathname: "/wp-content/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
     ],
   },
   async redirects() {

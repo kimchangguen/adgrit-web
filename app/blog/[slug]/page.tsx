@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -35,12 +36,46 @@ async function getPostBySlug(slug: string): Promise<Post | null> {
   }
 }
 
+function stripHTML(html: string) {
+  return html.replace(/<[^>]+>/g, "").trim();
+}
+
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("ko-KR", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+  if (!post) return { title: "포스트 없음" };
+
+  const title = stripHTML(post.title.rendered);
+  const description = stripHTML(post.excerpt.rendered).slice(0, 160);
+  const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      ...(imageUrl ? { images: [{ url: imageUrl, width: 1200, height: 630, alt: title }] } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
 }
 
 export default async function PostDetail({

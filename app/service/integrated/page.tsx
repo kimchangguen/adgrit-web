@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { SubPageLayout } from "../../_components/SubPageLayout";
+
+export const metadata: Metadata = {
+  title: "통합솔루션",
+  description: "광고·SEO·콘텐츠·개발을 하나로 묶은 ADGRIT 통합 마케팅 솔루션.",
+};
 
 export default function IntegratedPage() {
   return (

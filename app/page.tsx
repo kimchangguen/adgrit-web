@@ -176,17 +176,14 @@ function SiteChrome() {
                   <p className="text-white/90 text-xs sm:text-sm tracking-widest mt-1">DEVELOPMENT & MARKETING</p>
                 </div>
               </div>
-              <div className="rounded-2xl overflow-hidden aspect-square min-h-[140px] sm:min-h-[180px] max-h-[200px] sm:max-h-[240px]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80" alt="" className="w-full h-full object-cover" />
+              <div className="relative rounded-2xl overflow-hidden aspect-square min-h-[140px] sm:min-h-[180px] max-h-[200px] sm:max-h-[240px]">
+                <Image src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97" fill alt="" className="object-cover" sizes="(max-width: 1024px) 50vw, 240px" />
               </div>
-              <div className="rounded-2xl overflow-hidden aspect-square min-h-[140px] sm:min-h-[180px] max-h-[200px] sm:max-h-[240px]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&q=80" alt="" className="w-full h-full object-cover" />
+              <div className="relative rounded-2xl overflow-hidden aspect-square min-h-[140px] sm:min-h-[180px] max-h-[200px] sm:max-h-[240px]">
+                <Image src="https://images.unsplash.com/photo-1556656793-08538906a9f8" fill alt="" className="object-cover" sizes="(max-width: 1024px) 50vw, 240px" />
               </div>
-              <div className="rounded-2xl overflow-hidden aspect-square min-h-[140px] sm:min-h-[180px] max-h-[200px] sm:max-h-[240px]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=600&q=80" alt="" className="w-full h-full object-cover" />
+              <div className="relative rounded-2xl overflow-hidden aspect-square min-h-[140px] sm:min-h-[180px] max-h-[200px] sm:max-h-[240px]">
+                <Image src="https://images.unsplash.com/photo-1557672172-298e090bd0f1" fill alt="" className="object-cover" sizes="(max-width: 1024px) 50vw, 240px" />
               </div>
             </div>
           </div>

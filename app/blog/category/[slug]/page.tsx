@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "../../../_components/SiteHeader";
@@ -62,6 +64,27 @@ function formatDate(dateStr: string) {
     month: "long",
     day: "numeric",
   });
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const category = await getCategoryBySlug(slug);
+  if (!category) return { title: "카테고리" };
+
+  return {
+    title: `${category.name} — 블로그`,
+    description:
+      category.description ||
+      `ADGRIT 블로그 ${category.name} 카테고리 — 총 ${category.count}개 글`,
+    openGraph: {
+      title: `${category.name} | ADGRIT 블로그`,
+      type: "website",
+    },
+  };
 }
 
 export default async function CategoryPage({
@@ -131,12 +154,12 @@ export default async function CategoryPage({
                       {/* 썸네일 */}
                       <div className="relative w-full aspect-[16/9] bg-slate-100 overflow-hidden">
                         {thumb ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
+                          <Image
                             src={thumb}
                             alt={alt}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            loading="lazy"
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            sizes="(max-width: 640px) 100vw, 50vw"
                           />
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-[#1A237E]/10 via-slate-100 to-slate-50 flex items-center justify-center">
