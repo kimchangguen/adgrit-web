@@ -114,7 +114,7 @@ export default async function BlogPage() {
   /* 카테고리별 포스트를 클라이언트 컴포넌트용으로 직렬화 */
   const categorySections = postsByCategory.map(({ category, posts: catPosts }) => ({
     category: { id: category.id, name: category.name, slug: category.slug },
-    posts: catPosts.slice(0, 3).map((p): CategoryPostItem => ({
+    posts: catPosts.slice(0, 6).map((p): CategoryPostItem => ({
       id: p.id,
       slug: p.slug,
       title: stripHTML(p.title.rendered),

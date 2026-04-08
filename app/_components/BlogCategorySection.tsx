@@ -73,52 +73,48 @@ export function BlogCategorySection({ category, posts, index }: Props) {
         </motion.div>
       </div>
 
-      {/* ── 데스크톱: 세로 리스트 ────────────────────── */}
-      <ul className="hidden sm:block mt-4 space-y-4">
+      {/* ── 데스크톱: 3×2 그리드 ────────────────────── */}
+      <div className="hidden sm:grid grid-cols-3 gap-3 mt-4">
         {posts.map((post, i) => (
-          <motion.li
+          <motion.div
             key={post.id}
-            initial={{ opacity: 0, x: -14 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.55, delay: index * 0.09 + i * 0.07 + 0.18, ease: EASE }}
+            initial={{ opacity: 0, y: 14 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.55, delay: index * 0.09 + i * 0.05 + 0.18, ease: EASE }}
           >
-            <Link
-              href={`/blog/${post.slug}`}
-              className="flex items-center gap-4 group"
-            >
-              {/* 썸네일 / 아이콘 */}
-              <motion.div
-                whileHover={{ scale: 1.07, rotate: -1 }}
-                transition={SPRING}
-                className="shrink-0 w-[88px] h-[62px] rounded-xl overflow-hidden bg-slate-50 border border-slate-100"
+            <motion.div whileHover={{ y: -3 }} transition={SPRING}>
+              <Link
+                href={`/blog/${post.slug}`}
+                className="flex flex-col rounded-xl overflow-hidden bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow group"
               >
-                {post.imageUrl ? (
-                  <Image
-                    src={post.imageUrl}
-                    alt=""
-                    width={88}
-                    height={62}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1A237E]/8 to-slate-100">
-                    <Icon
-                      size={24}
-                      className="text-[#1A237E]/40"
-                      strokeWidth={1.5}
+                {/* 썸네일 */}
+                <div className="relative w-full aspect-[4/3] bg-slate-50 overflow-hidden">
+                  {post.imageUrl ? (
+                    <Image
+                      src={post.imageUrl}
+                      alt=""
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 1280px) 15vw, 180px"
                     />
-                  </div>
-                )}
-              </motion.div>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1A237E]/8 to-slate-100">
+                      <Icon size={22} className="text-[#1A237E]/40" strokeWidth={1.5} />
+                    </div>
+                  )}
+                </div>
 
-              {/* 제목 */}
-              <p className="flex-1 text-[0.875rem] font-medium text-[#1a1a2e] group-hover:text-[#1A237E] transition-colors line-clamp-2 leading-[1.55]">
-                {post.title}
-              </p>
-            </Link>
-          </motion.li>
+                {/* 제목 */}
+                <div className="p-2.5">
+                  <p className="text-[0.75rem] font-medium text-[#1a1a2e] group-hover:text-[#1A237E] transition-colors line-clamp-2 leading-snug">
+                    {post.title}
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
+          </motion.div>
         ))}
-      </ul>
+      </div>
 
       {/* ── 모바일: 가로 스와이프 카드 ──────────────── */}
       <div
