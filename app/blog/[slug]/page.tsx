@@ -5,7 +5,7 @@ import { SiteHeader } from "../../_components/SiteHeader";
 import { Footer } from "../../_components/Footer";
 import { BlogSidebar } from "../../_components/BlogSidebar";
 
-const WP_BASE = "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2";
+const WP_BASE = process.env.WP_BASE ?? "";
 
 type Post = {
   id: number;

@@ -4,7 +4,7 @@ import { BlogFeaturedSlider, type SliderPost } from "../_components/BlogFeatured
 import { BlogAnimatedHero } from "../_components/BlogAnimatedHero";
 import { BlogCategorySection, type CategoryPostItem } from "../_components/BlogCategorySection";
 
-const WP_BASE = "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2";
+const WP_BASE = process.env.WP_BASE ?? "";
 
 /* ─── 타입 ─────────────────────────────────────────── */
 type WPPost = {
@@ -137,19 +137,6 @@ export default async function BlogPage() {
           ))}
         </div>
 
-        {/* 전체 글 보기 */}
-        {posts.length > 0 && (
-          <div className="mt-16 flex items-center gap-4 justify-center">
-            <div className="flex-1 max-w-[100px] h-px bg-slate-200" />
-            <a
-              href="/blog"
-              className="inline-flex items-center gap-2 border border-slate-300 text-slate-500 text-sm font-semibold px-8 py-3 rounded-full hover:border-[#1A237E] hover:text-[#1A237E] transition-colors"
-            >
-              전체 글 보기
-            </a>
-            <div className="flex-1 max-w-[100px] h-px bg-slate-200" />
-          </div>
-        )}
       </div>
 
       <Footer />

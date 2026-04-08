@@ -49,12 +49,8 @@ export function Footer() {
         <div className="mt-10 flex flex-col gap-2 border-t border-slate-700 pt-6 text-xs text-slate-500 md:flex-row md:items-center md:justify-between">
           <p>© {new Date().getFullYear()} ADGRIT. All rights reserved.</p>
           <div className="flex gap-4">
-            <a className="hover:text-slate-300 transition-colors" href="#">
-              개인정보처리방침
-            </a>
-            <a className="hover:text-slate-300 transition-colors" href="#">
-              이용약관
-            </a>
+            <span>개인정보처리방침</span>
+            <span>이용약관</span>
           </div>
         </div>
       </Container>

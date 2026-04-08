@@ -4,11 +4,11 @@ import { SiteHeader } from "../../_components/SiteHeader";
 import { Footer } from "../../_components/Footer";
 import { Container } from "../../_components/Container";
 
-const WP_BASE_URL = "https://wordpress-1580849-6168519.cloudwaysapps.com";
+const WP_BASE = process.env.WP_BASE ?? "";
 
 async function getPost(id: string) {
   try {
-    const res = await fetch(`${WP_BASE_URL}/wp-json/wp/v2/posts/${id}?_embed`, {
+    const res = await fetch(`${WP_BASE}/posts/${id}?_embed`, {
       next: { revalidate: 60 },
     });
     if (!res.ok) { return null; }

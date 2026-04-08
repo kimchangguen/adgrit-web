@@ -28,32 +28,6 @@ export default async function Home() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-xl border border-slate-200 bg-white p-6 text-center shadow-sm hover:shadow-md transition-shadow">
-      <div className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1e40af]">
-        {value}
-      </div>
-      <div className="mt-2 text-sm text-slate-600">{label}</div>
-    </div>
-  );
-}
-
-function VisionCard({
-  title,
-  desc,
-}: {
-  title: string;
-  desc: string;
-}) {
-  return (
-    <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md hover:border-[#1e40af]/30 transition-all">
-      <h3 className="text-lg font-bold text-[#1a1a2e]">{title}</h3>
-      <p className="mt-4 text-sm leading-relaxed text-slate-600">{desc}</p>
-    </div>
-  );
-}
-
 const ACCENT_ORANGE = "#FFBD4F";
 
 function WorryCard({
