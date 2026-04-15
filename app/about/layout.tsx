@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     description: "ADGRIT은 개발과 마케팅을 하나의 엔진으로 설계하는 성과 중심 광고대행사입니다.",
     type: "website",
   },
+  alternates: { canonical: "/about" },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

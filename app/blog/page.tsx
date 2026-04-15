@@ -15,6 +15,7 @@ export const metadata: Metadata = {
       "마케팅 인사이트, 업계 비밀, 전문가 칼럼 등 ADGRIT이 직접 쓰는 성장 콘텐츠를 만나보세요.",
     type: "website",
   },
+  alternates: { canonical: "/blog" },
 };
 
 const WP_BASE = process.env.WP_BASE ?? "";

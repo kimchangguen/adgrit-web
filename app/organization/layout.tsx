@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     description: "컨설팅·마케팅·개발·콘텐츠 전문 팀으로 구성된 ADGRIT 조직을 소개합니다.",
     type: "website",
   },
+  alternates: { canonical: "/organization" },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

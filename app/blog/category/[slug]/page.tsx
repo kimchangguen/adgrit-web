@@ -80,6 +80,7 @@ export async function generateMetadata({
     description:
       category.description ||
       `ADGRIT 블로그 ${category.name} 카테고리 — 총 ${category.count}개 글`,
+    alternates: { canonical: `/blog/category/${slug}` },
     openGraph: {
       title: `${category.name} | ADGRIT 블로그`,
       type: "website",
