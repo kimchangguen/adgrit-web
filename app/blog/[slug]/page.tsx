@@ -39,8 +39,50 @@ async function getPostBySlug(slug: string): Promise<Post | null> {
   }
 }
 
+const BRAND_SUFFIX = " | 애드그릿(ADGRIT)";
+/** 포스트 제목 최대 길이 (브랜드 suffix 포함 약 56자 이내로 유지) */
+const TITLE_POST_MAX = 42;
+
 function stripHTML(html: string) {
   return html.replace(/<[^>]+>/g, "").trim();
+}
+
+/** &amp; &nbsp; 같은 HTML 엔티티를 평문으로 변환 */
+function decodeEntities(str: string): string {
+  return str
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&#\d+;/g, "")
+    .replace(/&[a-z]+;/g, "");
+}
+
+/** SEO 제목: 포스트 제목 + 브랜드 suffix (총 56자 이내) */
+function buildSeoTitle(rawTitle: string): string {
+  const text = stripHTML(rawTitle);
+  const truncated =
+    text.length > TITLE_POST_MAX ? text.slice(0, TITLE_POST_MAX - 1) + "…" : text;
+  return truncated + BRAND_SUFFIX;
+}
+
+/**
+ * SEO 설명: excerpt(요약)가 있으면 사용, 없으면 본문 앞부분 ~150자 추출.
+ * HTML 태그 제거 + 엔티티 디코드 + 공백 정규화 처리.
+ */
+function buildSeoDescription(post: Post): string {
+  const excerpt = decodeEntities(stripHTML(post.excerpt.rendered))
+    .replace(/\s+/g, " ")
+    .trim();
+  if (excerpt.length > 20) {
+    return excerpt.length > 155 ? excerpt.slice(0, 154) + "…" : excerpt;
+  }
+  const content = decodeEntities(stripHTML(post.content.rendered))
+    .replace(/\s+/g, " ")
+    .trim();
+  return content.length > 150 ? content.slice(0, 149) + "…" : content;
 }
 
 function formatDate(dateStr: string) {
@@ -60,24 +102,36 @@ export async function generateMetadata({
   const post = await getPostBySlug(slug);
   if (!post) return { title: "포스트 없음" };
 
-  const title = stripHTML(post.title.rendered);
-  const description = stripHTML(post.excerpt.rendered).slice(0, 160);
-  const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+  const seoTitle    = buildSeoTitle(post.title.rendered);
+  const description = buildSeoDescription(post);
+  const postUrl     = `${SITE_URL}/blog/${slug}`;
+  const featuredMedia = post._embedded?.["wp:featuredmedia"]?.[0];
+  const imageUrl    = featuredMedia?.source_url;
+  const imageAlt    = featuredMedia?.alt_text || stripHTML(post.title.rendered);
 
   return {
-    title,
+    // absolute 사용: root layout template("%s | ADGRIT")을 무시하고 직접 제목 제어
+    title: { absolute: seoTitle },
     description,
     alternates: { canonical: `/blog/${slug}` },
     openGraph: {
-      title,
+      title: seoTitle,
       description,
       type: "article",
-      ...(imageUrl ? { images: [{ url: imageUrl, width: 1200, height: 630, alt: title }] } : {}),
+      url: postUrl,
+      siteName: "애드그릿(ADGRIT)",
+      locale: "ko_KR",
+      publishedTime: post.date,
+      modifiedTime: post.modified ?? post.date,
+      ...(imageUrl
+        ? { images: [{ url: imageUrl, width: 1200, height: 630, alt: imageAlt }] }
+        : {}),
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: seoTitle,
       description,
+      ...(imageUrl ? { images: [imageUrl] } : {}),
     },
   };
 }
@@ -102,7 +156,7 @@ export default async function PostDetail({
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: stripHTML(post.title.rendered),
-    description: stripHTML(post.excerpt.rendered).slice(0, 160),
+    description: buildSeoDescription(post),
     datePublished: post.date,
     dateModified: post.modified ?? post.date,
     url: postUrl,
