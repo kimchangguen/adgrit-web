@@ -43,6 +43,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        {/* Pretendard 폰트: CSS @import 대신 <link>로 이동 → CDN 연결과 globals.css를 병렬 로드 */}
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="antialiased">
         {children}
         <FloatingActions />

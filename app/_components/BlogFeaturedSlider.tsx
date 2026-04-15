@@ -32,20 +32,28 @@ export function BlogFeaturedSlider({ posts }: { posts: SliderPost[] }) {
 
   return (
     <div className="relative w-full h-[320px] sm:h-[420px] lg:h-[480px] overflow-hidden rounded-2xl bg-slate-800 select-none">
-      {/* 배경 이미지 */}
-      {post.imageUrl ? (
-        <Image
-          key={post.slug}
-          src={post.imageUrl}
-          alt=""
-          fill
-          className="object-cover transition-opacity duration-700"
-          sizes="(max-width: 768px) 100vw, 90vw"
-          priority
-        />
-      ) : (
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1A237E] to-slate-700" />
+      {/* 모든 슬라이드 이미지를 미리 쌓아두고 opacity로 전환 → 리마운트 없이 크로스페이드 */}
+      {posts.map((p, i) =>
+        p.imageUrl ? (
+          <Image
+            key={p.imageUrl}
+            src={p.imageUrl}
+            alt=""
+            fill
+            className={`object-cover absolute inset-0 transition-opacity duration-700 ${
+              i === current ? "opacity-100" : "opacity-0"
+            }`}
+            sizes="(max-width: 768px) 100vw, 90vw"
+            priority={i === 0}
+          />
+        ) : null
       )}
+      {/* 이미지 없는 슬라이드를 위한 그라데이션 폴백 */}
+      <div
+        className={`absolute inset-0 bg-gradient-to-br from-[#1A237E] to-slate-700 transition-opacity duration-700 ${
+          post.imageUrl ? "opacity-0" : "opacity-100"
+        }`}
+      />
 
       {/* 그라데이션 오버레이 */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10" />
