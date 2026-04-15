@@ -409,10 +409,10 @@ export default async function PostDetail({
                 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-[#1a1a2e] [&_h3]:mt-6 [&_h3]:mb-3
                 [&_h3]:pl-3 [&_h3]:border-l-2 [&_h3]:border-[#FF7F00]
                 [&_p]:text-slate-700 [&_p]:leading-relaxed [&_p]:mb-4
-                [&_ul]:list-disc [&_ul]:pl-8 [&_ul]:mb-5
-                [&_ol]:list-decimal [&_ol]:pl-8 [&_ol]:mb-5
-                [&_li]:[display:list-item] [&_li]:text-slate-700 [&_li]:mb-3 [&_li]:leading-[1.8] [&_li]:pl-1
-                [&_li>p]:mb-0 [&_li>p]:leading-[1.8]
+                [&_ul]:![list-style-type:disc] [&_ul]:![list-style-position:outside] [&_ul]:pl-8 [&_ul]:mb-5
+                [&_ol]:![list-style-type:decimal] [&_ol]:![list-style-position:outside] [&_ol]:pl-8 [&_ol]:mb-5
+                [&_li]:![display:list-item] [&_li]:![list-style-position:outside] [&_li]:text-slate-700 [&_li]:mb-4 [&_li]:leading-[1.8] [&_li]:pl-1
+                [&_li>p]:mb-0 [&_li>p]:![display:block] [&_li>p]:leading-[1.8]
                 [&_ul_ul]:mt-2 [&_ul_ul]:mb-2 [&_ol_ol]:mt-2 [&_ol_ol]:mb-2
                 [&_a]:text-[#1A237E] [&_a:hover]:underline
                 [&_strong]:font-bold [&_strong]:text-[#1a1a2e]
