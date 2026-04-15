@@ -265,6 +265,21 @@ export async function generateMetadata({
   };
 }
 
+/**
+ * <li> 태그 내부에 "1. 내용A 2. 내용B 3. 내용C" 처럼 뭉쳐 있는 번호 목록을
+ * <br /><br /> 로 강제 분리한다. 이미 정상적으로 나뉜 항목은 건드리지 않는다.
+ */
+function preprocessListContent(html: string): string {
+  return html.replace(/<li([^>]*)>([\s\S]*?)<\/li>/gi, (_match, attrs, content) => {
+    // ' 2. ' 이상의 패턴이 없으면 그대로 반환
+    if (!/ \d+\. /.test(content)) return _match;
+    const processed = content.replace(/ (\d+)\. /g, (_m: string, num: string) => {
+      return parseInt(num, 10) <= 1 ? _m : `<br /><br />${num}. `;
+    });
+    return `<li${attrs}>${processed}</li>`;
+  });
+}
+
 export default async function PostDetail({
   params,
 }: {
@@ -330,7 +345,7 @@ export default async function PostDetail({
     list-style-position: outside !important;
     margin-bottom: 1.2rem !important;
     line-height: 1.8 !important;
-    white-space: normal !important;
+    white-space: pre-line !important;
     clear: both !important;
   }
   .adgrit-content li > p { display: inline !important; }
@@ -443,7 +458,7 @@ export default async function PostDetail({
                 [&_img]:rounded-xl [&_img]:w-full [&_img]:my-4
                 [&_hr]:border-slate-200 [&_hr]:my-6
               "
-              dangerouslySetInnerHTML={{ __html: dynamicStyles + post.content.rendered }}
+              dangerouslySetInnerHTML={{ __html: dynamicStyles + preprocessListContent(post.content.rendered) }}
             />
 
             {/* 하단 내비게이션 */}
