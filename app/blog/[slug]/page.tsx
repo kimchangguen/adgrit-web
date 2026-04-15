@@ -309,6 +309,7 @@ export default async function PostDetail({
             {/* 본문 콘텐츠 */}
             <div
               className="
+                blog-content
                 bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 lg:p-10
                 prose prose-slate max-w-none
                 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[#1a1a2e] [&_h2]:mt-8 [&_h2]:mb-4
@@ -316,8 +317,11 @@ export default async function PostDetail({
                 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-[#1a1a2e] [&_h3]:mt-6 [&_h3]:mb-3
                 [&_h3]:pl-3 [&_h3]:border-l-2 [&_h3]:border-[#FF7F00]
                 [&_p]:text-slate-700 [&_p]:leading-relaxed [&_p]:mb-4
-                [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ul>li]:text-slate-700 [&_ul>li]:mb-1
-                [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_ol>li]:text-slate-700 [&_ol>li]:mb-1
+                [&_ul]:list-disc [&_ul]:pl-8 [&_ul]:mb-5
+                [&_ol]:list-decimal [&_ol]:pl-8 [&_ol]:mb-5
+                [&_li]:[display:list-item] [&_li]:text-slate-700 [&_li]:mb-3 [&_li]:leading-[1.8] [&_li]:pl-1
+                [&_li>p]:mb-0 [&_li>p]:leading-[1.8]
+                [&_ul_ul]:mt-2 [&_ul_ul]:mb-2 [&_ol_ol]:mt-2 [&_ol_ol]:mb-2
                 [&_a]:text-[#1A237E] [&_a:hover]:underline
                 [&_strong]:font-bold [&_strong]:text-[#1a1a2e]
                 [&_blockquote]:border-l-4 [&_blockquote]:border-[#1A237E] [&_blockquote]:bg-slate-50

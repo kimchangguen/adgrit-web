@@ -239,6 +239,38 @@ header nav a {
   .scroll-indicator { animation: none; }
 }
 
+/* 블로그 본문 리스트 타이포그래피 보강
+   dangerouslySetInnerHTML 로 주입된 WordPress HTML에서
+   Tailwind Preflight 리셋이 list-item display를 덮어쓰는 것을 방지 */
+.blog-content ul {
+  list-style-type: disc;
+  padding-left: 2rem;
+  margin-bottom: 1.25rem;
+}
+.blog-content ol {
+  list-style-type: decimal;
+  padding-left: 2rem;
+  margin-bottom: 1.25rem;
+}
+.blog-content li {
+  display: list-item;
+  color: #334155;
+  margin-bottom: 0.625rem;
+  line-height: 1.8;
+  padding-left: 0.25rem;
+}
+.blog-content li > p {
+  margin-bottom: 0;
+  line-height: 1.8;
+}
+.blog-content ul ul,
+.blog-content ol ol,
+.blog-content ul ol,
+.blog-content ol ul {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 /* OUR CLIENTS - 끊임없이 왼쪽으로 흐르는 마키 */
 @keyframes marquee {
   0% { transform: translateX(0); }
