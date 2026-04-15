@@ -6,7 +6,9 @@ import { SiteHeader } from "../../_components/SiteHeader";
 import { Footer } from "../../_components/Footer";
 import { BlogSidebar } from "../../_components/BlogSidebar";
 
-const WP_BASE = process.env.WP_BASE ?? "";
+const WP_BASE   = process.env.WP_BASE ?? "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2";
+const SITE_URL  = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.adgritcore.com";
+const LOGO_URL  = `${SITE_URL}/adgrit-logo-v2.png`;
 
 type Post = {
   id: number;
@@ -14,6 +16,7 @@ type Post = {
   content: { rendered: string };
   excerpt: { rendered: string };
   date: string;
+  modified: string;
   slug: string;
   categories: number[];
   _embedded?: {
@@ -93,8 +96,37 @@ export default async function PostDetail({
   const catTerms = post._embedded?.["wp:term"]?.[0] ?? [];
   const firstCat = catTerms[0];
 
+  const postUrl = `${SITE_URL}/blog/${post.slug}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: stripHTML(post.title.rendered),
+    description: stripHTML(post.excerpt.rendered).slice(0, 160),
+    datePublished: post.date,
+    dateModified: post.modified ?? post.date,
+    url: postUrl,
+    mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
+    author: {
+      "@type": "Person",
+      name: "애드그릿",
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "애드그릿",
+      logo: { "@type": "ImageObject", url: LOGO_URL },
+    },
+    ...(imageUrl
+      ? { image: { "@type": "ImageObject", url: imageUrl, alt: imageAlt } }
+      : {}),
+  };
+
   return (
     <div className="min-h-screen bg-[#f8f9fc] text-[#1a1a2e]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <SiteHeader />
 
       {/* 히어로 */}
