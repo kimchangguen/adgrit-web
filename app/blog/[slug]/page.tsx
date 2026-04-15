@@ -321,6 +321,23 @@ export default async function PostDetail({
       : {}),
   };
 
+  const dynamicStyles = `
+<style>
+  .adgrit-content ol { list-style-type: decimal !important; margin-left: 2rem !important; display: block !important; }
+  .adgrit-content ul { list-style-type: disc !important; margin-left: 2rem !important; display: block !important; }
+  .adgrit-content li {
+    display: list-item !important;
+    list-style-position: outside !important;
+    margin-bottom: 1.2rem !important;
+    line-height: 1.8 !important;
+    white-space: normal !important;
+    clear: both !important;
+  }
+  .adgrit-content li > p { display: inline !important; }
+  .adgrit-content div, .adgrit-content section { display: block !important; }
+</style>
+`;
+
   return (
     <div className="min-h-screen bg-[#f8f9fc] text-[#1a1a2e]">
       <script
@@ -401,7 +418,7 @@ export default async function PostDetail({
             {/* 본문 콘텐츠 */}
             <div
               className="
-                blog-content
+                blog-content adgrit-content
                 bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 lg:p-10
                 prose prose-slate max-w-none !block
                 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[#1a1a2e] [&_h2]:mt-8 [&_h2]:mb-4
@@ -426,7 +443,7 @@ export default async function PostDetail({
                 [&_img]:rounded-xl [&_img]:w-full [&_img]:my-4
                 [&_hr]:border-slate-200 [&_hr]:my-6
               "
-              dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+              dangerouslySetInnerHTML={{ __html: dynamicStyles + post.content.rendered }}
             />
 
             {/* 하단 내비게이션 */}
