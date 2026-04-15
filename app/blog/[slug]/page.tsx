@@ -124,6 +124,96 @@ function parseFaqFromHtml(html: string): Array<{ question: string; answer: strin
   return faqs;
 }
 
+type RelatedPost = {
+  id: number;
+  slug: string;
+  title: string;
+  excerpt: string;
+  imageUrl: string | null;
+  imageAlt: string;
+  date: string;
+  categoryName: string;
+  categorySlug: string;
+};
+
+function toRelatedPost(p: Post): RelatedPost {
+  const media = p._embedded?.["wp:featuredmedia"]?.[0];
+  const cat = (p._embedded?.["wp:term"]?.[0] ?? [])[0];
+  const excerpt = decodeEntities(stripHTML(p.excerpt.rendered))
+    .replace(/\s+/g, " ")
+    .trim();
+  return {
+    id: p.id,
+    slug: p.slug,
+    title: stripHTML(p.title.rendered),
+    excerpt: excerpt.length > 80 ? excerpt.slice(0, 79) + "…" : excerpt,
+    imageUrl: media?.source_url ?? null,
+    imageAlt: media?.alt_text || stripHTML(p.title.rendered),
+    date: new Date(p.date).toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }),
+    categoryName: cat?.name ?? "",
+    categorySlug: cat?.slug ?? "",
+  };
+}
+
+/**
+ * 연관 포스팅 최대 count개 반환.
+ * 1차: 동일 카테고리 최신순 (현재 글 제외)
+ * 2차: 부족하면 최신 전체글로 보충
+ */
+async function getRelatedPosts(
+  currentPostId: number,
+  categoryIds: number[],
+  count = 3
+): Promise<RelatedPost[]> {
+  const collected: RelatedPost[] = [];
+  const seenIds = new Set<number>([currentPostId]);
+
+  if (categoryIds.length > 0) {
+    try {
+      const res = await fetch(
+        `${WP_BASE}/posts?_embed&categories=${categoryIds[0]}&exclude=${currentPostId}&per_page=${count}&orderby=date&order=desc`,
+        { next: { revalidate: 60 } }
+      );
+      if (res.ok) {
+        const posts: Post[] = await res.json();
+        for (const p of posts) {
+          if (!seenIds.has(p.id)) {
+            seenIds.add(p.id);
+            collected.push(toRelatedPost(p));
+          }
+        }
+      }
+    } catch { /* 폴백으로 이어짐 */ }
+  }
+
+  if (collected.length < count) {
+    const needed = count - collected.length;
+    const excludeQuery = Array.from(seenIds)
+      .map((id) => `exclude[]=${id}`)
+      .join("&");
+    try {
+      const res = await fetch(
+        `${WP_BASE}/posts?_embed&${excludeQuery}&per_page=${needed}&orderby=date&order=desc`,
+        { next: { revalidate: 60 } }
+      );
+      if (res.ok) {
+        const posts: Post[] = await res.json();
+        for (const p of posts) {
+          if (!seenIds.has(p.id)) {
+            collected.push(toRelatedPost(p));
+          }
+        }
+      }
+    } catch { /* ignore */ }
+  }
+
+  return collected.slice(0, count);
+}
+
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("ko-KR", {
     year: "numeric",
@@ -189,6 +279,8 @@ export default async function PostDetail({
   const imageAlt = post._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || post.title.rendered;
   const catTerms = post._embedded?.["wp:term"]?.[0] ?? [];
   const firstCat = catTerms[0];
+
+  const relatedPosts = await getRelatedPosts(post.id, post.categories);
 
   const postUrl = `${SITE_URL}/blog/${post.slug}`;
   const faqItems = parseFaqFromHtml(post.content.rendered);
@@ -359,6 +451,59 @@ export default async function PostDetail({
           {/* 우측: 사이드바 */}
           <BlogSidebar />
         </div>
+
+        {/* 연관 포스팅 섹션 */}
+        {relatedPosts.length > 0 && (
+          <section className="mt-14">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-1 h-6 bg-[#1A237E] rounded-full" />
+              <h2 className="text-xl font-bold text-[#1a1a2e]">함께 읽으면 좋은 글</h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              {relatedPosts.map((p) => (
+                <Link
+                  key={p.id}
+                  href={`/blog/${p.slug}`}
+                  className="group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
+                >
+                  {/* 썸네일 */}
+                  <div className="relative aspect-[16/9] bg-slate-100 overflow-hidden">
+                    {p.imageUrl ? (
+                      <Image
+                        src={p.imageUrl}
+                        alt={p.imageAlt}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        sizes="(max-width: 640px) 100vw, 33vw"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-[#1A237E]/10 to-slate-200 flex items-center justify-center">
+                        <span className="text-4xl opacity-25">📝</span>
+                      </div>
+                    )}
+                    {p.categoryName && (
+                      <span className="absolute top-2 left-2 bg-[#FF7F00] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                        {p.categoryName}
+                      </span>
+                    )}
+                  </div>
+                  {/* 텍스트 */}
+                  <div className="p-4 flex flex-col flex-1">
+                    <h3 className="text-sm font-bold text-[#1a1a2e] leading-snug mb-2 line-clamp-2 group-hover:text-[#1A237E] transition-colors">
+                      {p.title}
+                    </h3>
+                    {p.excerpt && (
+                      <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 mb-3">
+                        {p.excerpt}
+                      </p>
+                    )}
+                    <time className="mt-auto text-[10px] text-slate-400">{p.date}</time>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
 
       <Footer />
