@@ -85,6 +85,45 @@ function buildSeoDescription(post: Post): string {
   return content.length > 150 ? content.slice(0, 149) + "…" : content;
 }
 
+function extractTextBlocks(html: string): string[] {
+  const blockRe =
+    /<(?:p|h[1-6]|li|div|dt|dd|blockquote)(?:\s[^>]*)?>([\s\S]*?)<\/(?:p|h[1-6]|li|div|dt|dd|blockquote)>/gi;
+  const blocks: string[] = [];
+  let m: RegExpExecArray | null;
+  while ((m = blockRe.exec(html)) !== null) {
+    const text = decodeEntities(stripHTML(m[1])).replace(/\s+/g, " ").trim();
+    if (text) blocks.push(text);
+  }
+  return blocks;
+}
+
+function parseFaqFromHtml(html: string): Array<{ question: string; answer: string }> {
+  const Q_RE = /^(Q\s*[.．。]\s*|질문\s*[:：]\s*)/i;
+  const A_RE = /^(A\s*[.．。]\s*|답변\s*[:：]\s*)/i;
+  const blocks = extractTextBlocks(html);
+  const faqs: Array<{ question: string; answer: string }> = [];
+  let currentQ: string | null = null;
+  let answerParts: string[] = [];
+  const flush = () => {
+    if (currentQ !== null && answerParts.length > 0) {
+      faqs.push({ question: currentQ, answer: answerParts.join(" ").trim() });
+    }
+    currentQ = null;
+    answerParts = [];
+  };
+  for (const block of blocks) {
+    if (Q_RE.test(block)) {
+      flush();
+      currentQ = block.replace(Q_RE, "").trim();
+    } else if (currentQ !== null) {
+      const text = A_RE.test(block) ? block.replace(A_RE, "").trim() : block;
+      if (text) answerParts.push(text);
+    }
+  }
+  flush();
+  return faqs;
+}
+
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("ko-KR", {
     year: "numeric",
@@ -152,6 +191,20 @@ export default async function PostDetail({
   const firstCat = catTerms[0];
 
   const postUrl = `${SITE_URL}/blog/${post.slug}`;
+  const faqItems = parseFaqFromHtml(post.content.rendered);
+  const faqJsonLd =
+    faqItems.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqItems.map(({ question, answer }) => ({
+            "@type": "Question",
+            name: question,
+            acceptedAnswer: { "@type": "Answer", text: answer },
+          })),
+        }
+      : null;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -182,6 +235,12 @@ export default async function PostDetail({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <SiteHeader />
 
       {/* 히어로 */}
