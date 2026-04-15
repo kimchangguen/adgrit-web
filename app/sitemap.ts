@@ -1,23 +1,39 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://adgrit.co.kr";
-const WP_BASE  = process.env.WP_BASE ?? "";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.adgritcore.com";
+/* WP_BASE 는 서버 전용 환경변수. 빈 문자열 폴백 대신 실제 엔드포인트를 명시해
+   프로덕션에서 WP_BASE 미설정 시 상대경로 fetch 실패를 방지한다. */
+const WP_BASE  =
+  process.env.WP_BASE ??
+  "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2";
 
 /* ─── WordPress 타입 (필요한 필드만) ──────────────────── */
 type WPPost     = { slug: string; date: string; modified: string };
 type WPCategory = { slug: string; count: number };
 
-async function fetchPosts(): Promise<WPPost[]> {
-  try {
-    const res = await fetch(
-      `${WP_BASE}/posts?per_page=100&orderby=date&_fields=slug,date,modified`,
-      { next: { revalidate: 3600 } }
-    );
-    if (!res.ok) return [];
-    return res.json();
-  } catch {
-    return [];
+/** 100개 초과 포스트를 처리하기 위해 페이지네이션으로 전체 목록을 수집한다. */
+async function fetchAllPosts(): Promise<WPPost[]> {
+  const allPosts: WPPost[] = [];
+  let page = 1;
+
+  while (true) {
+    try {
+      const res = await fetch(
+        `${WP_BASE}/posts?per_page=100&page=${page}&orderby=date&_fields=slug,date,modified`,
+        { next: { revalidate: 3600 } }
+      );
+      if (!res.ok) break;
+      const batch: WPPost[] = await res.json();
+      if (batch.length === 0) break;
+      allPosts.push(...batch);
+      if (batch.length < 100) break; // 마지막 페이지
+      page++;
+    } catch {
+      break;
+    }
   }
+
+  return allPosts;
 }
 
 async function fetchCategories(): Promise<WPCategory[]> {
@@ -55,16 +71,16 @@ const STATIC_PAGES: MetadataRoute.Sitemap = [
 
 /* ─── sitemap 메인 ───────────────────────────────────── */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, categories] = await Promise.all([fetchPosts(), fetchCategories()]);
+  const [posts, categories] = await Promise.all([fetchAllPosts(), fetchCategories()]);
 
-  const postPages: MetadataRoute.Sitemap = posts.map((post) => ({
+  const postPages: MetadataRoute.Sitemap = posts.map((post: WPPost) => ({
     url:             `${BASE_URL}/blog/${post.slug}`,
     lastModified:    new Date(post.modified ?? post.date),
     changeFrequency: "weekly",
     priority:        0.8,
   }));
 
-  const categoryPages: MetadataRoute.Sitemap = categories.map((cat) => ({
+  const categoryPages: MetadataRoute.Sitemap = categories.map((cat: WPCategory) => ({
     url:             `${BASE_URL}/blog/category/${cat.slug}`,
     lastModified:    new Date(),
     changeFrequency: "weekly",
