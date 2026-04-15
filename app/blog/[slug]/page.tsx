@@ -403,7 +403,7 @@ export default async function PostDetail({
               className="
                 blog-content
                 bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 lg:p-10
-                prose prose-slate max-w-none
+                prose prose-slate max-w-none !block
                 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[#1a1a2e] [&_h2]:mt-8 [&_h2]:mb-4
                 [&_h2]:pl-3 [&_h2]:border-l-4 [&_h2]:border-[#1A237E]
                 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-[#1a1a2e] [&_h3]:mt-6 [&_h3]:mb-3

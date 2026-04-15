@@ -240,42 +240,6 @@ header nav a {
   .scroll-indicator { animation: none; }
 }
 
-/* 블로그 본문 리스트 타이포그래피 보강
-   dangerouslySetInnerHTML 로 주입된 WordPress HTML에서
-   Tailwind Preflight + @layer base 리셋이 list-item display를 덮어쓰는 것을 방지.
-   !important 를 사용해 Preflight(user-agent reset)를 강제 재정의. */
-.blog-content ul {
-  list-style-type: disc !important;
-  list-style-position: outside !important;
-  padding-left: 2rem !important;
-  margin-bottom: 1.25rem !important;
-}
-.blog-content ol {
-  list-style-type: decimal !important;
-  list-style-position: outside !important;
-  padding-left: 2rem !important;
-  margin-bottom: 1.25rem !important;
-}
-.blog-content li {
-  display: list-item !important;
-  list-style-position: outside !important;
-  color: #334155;
-  margin-bottom: 1rem !important;
-  line-height: 1.8;
-  padding-left: 0.25rem;
-}
-.blog-content li > p {
-  display: block !important;
-  margin-bottom: 0;
-  line-height: 1.8;
-}
-.blog-content ul ul,
-.blog-content ol ol,
-.blog-content ul ol,
-.blog-content ol ul {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
 
 /* OUR CLIENTS - 끊임없이 왼쪽으로 흐르는 마키 */
 @keyframes marquee {
@@ -301,53 +265,28 @@ header nav a {
   .animate-bubbles-up { animation: none; }
 }
 
-/* =====================================================================
-   블로그 본문 리스트 최종 강제 스타일
-   @tailwindcss/typography prose 기본값 + Preflight reset 전부 씹어먹기
-   ===================================================================== */
-.prose ul,
-.blog-content ul {
-  list-style-type: disc !important;
-  list-style-position: outside !important;
-  margin-left: 1.5rem !important;
-  padding-left: 0.5rem !important;
-  margin-bottom: 1.25rem !important;
+/* ================================================================
+   블로그 본문 리스트 긴급 강제 처방
+   @layer base 는 Tailwind Preflight 와 같은 레이어 내에서
+   파일 후위에 위치하므로 Preflight list-style:none 을 역전시킴.
+   !important 는 같은 @layer base 내에서도 후위 선언이 우선.
+   ================================================================ */
+@layer base {
+  .blog-content ol,
+  .blog-content ul {
+    list-style-position: outside !important;
+    margin-left: 2rem !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  .blog-content ol { list-style-type: decimal !important; }
+  .blog-content ul { list-style-type: disc !important; }
+  .blog-content li {
+    display: list-item !important;
+    margin-bottom: 1rem !important;
+    line-height: 1.8 !important;
+    white-space: normal !important;
+  }
+  .blog-content li > p { display: inline; }
 }
-.prose ol,
-.blog-content ol {
-  list-style-type: decimal !important;
-  list-style-position: outside !important;
-  margin-left: 1.5rem !important;
-  padding-left: 0.5rem !important;
-  margin-bottom: 1.25rem !important;
-}
-.prose li,
-.blog-content li {
-  display: list-item !important;
-  list-style-position: outside !important;
-  margin-bottom: 0.75rem !important;
-  padding-left: 0.5rem !important;
-  line-height: 1.8 !important;
-  color: #334155;
-}
-.prose li > p,
-.blog-content li > p {
-  display: block !important;
-  margin-bottom: 0 !important;
-  line-height: 1.8 !important;
-}
-/* 워드프레스 본문에서 번호/기호가 텍스트에 붙어 나오는 경우 방지 */
-.prose li,
-.blog-content li {
-  white-space: pre-line !important;
-}
-/* 중첩 리스트 */
-.prose ul ul,
-.prose ol ol,
-.prose ul ol,
-.prose ol ul,
-.blog-content ul ul,
-.blog-content ol ol {
-  margin-top: 0.5rem !important;
-  margin-bottom: 0.5rem !important;
-}
+
