@@ -265,37 +265,6 @@ export async function generateMetadata({
   };
 }
 
-/**
- * WordPress 본문 HTML을 가독성 있게 정규화한다.
- * 1. <li> 안에 중첩된 <ul>/<ol> 태그를 제거하고 내용만 보존
- * 2. "2. 2." 같은 중복 수동 번호 패턴을 단일 번호로 치환
- * 3. <li> 내부에 뭉쳐 있는 " 2. ", " 3. " 패턴을 <br /><br />로 강제 분리
- */
-function formatContent(html: string): string {
-  let result = html;
-
-  // 1. <li> 안에 중첩된 <ul>/<ol> 제거 — 내부 텍스트는 보존
-  result = result.replace(/<li([^>]*)>([\s\S]*?)<\/li>/gi, (_match, attrs, content) => {
-    const cleaned = content
-      .replace(/<ul[^>]*>([\s\S]*?)<\/ul>/gi, (_m: string, inner: string) => inner)
-      .replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gi, (_m: string, inner: string) => inner);
-    return `<li${attrs}>${cleaned}</li>`;
-  });
-
-  // 2. "2. 2." 처럼 같은 번호가 연속 중복되는 패턴 제거
-  result = result.replace(/(\d+)\. \1\. /g, '$1. ');
-
-  // 3. <li> 내부에서 " 2. " 이상 수동 번호 패턴 → <br /><br />로 분리
-  result = result.replace(/<li([^>]*)>([\s\S]*?)<\/li>/gi, (_match, attrs, content) => {
-    if (!/ \d+\. /.test(content)) return _match;
-    const processed = content.replace(/ (\d+)\. /g, (_m: string, num: string) => {
-      return parseInt(num, 10) <= 1 ? _m : `<br /><br />${num}. `;
-    });
-    return `<li${attrs}>${processed}</li>`;
-  });
-
-  return result;
-}
 
 export default async function PostDetail({
   params,
@@ -352,23 +321,6 @@ export default async function PostDetail({
       ? { image: { "@type": "ImageObject", url: imageUrl, alt: imageAlt } }
       : {}),
   };
-
-  const dynamicStyles = `
-<style>
-  .adgrit-content ol { list-style-type: decimal !important; margin-left: 2rem !important; display: block !important; }
-  .adgrit-content ul { list-style-type: disc !important; margin-left: 2rem !important; display: block !important; }
-  .adgrit-content li {
-    display: list-item !important;
-    list-style-position: outside !important;
-    margin-bottom: 1.2rem !important;
-    line-height: 1.8 !important;
-    white-space: pre-line !important;
-    clear: both !important;
-  }
-  .adgrit-content li > p { display: inline !important; }
-  .adgrit-content div, .adgrit-content section { display: block !important; }
-</style>
-`;
 
   return (
     <div className="min-h-screen bg-[#f8f9fc] text-[#1a1a2e]">
@@ -450,19 +402,13 @@ export default async function PostDetail({
             {/* 본문 콘텐츠 */}
             <div
               className="
-                blog-content adgrit-content adgrit-prose
+                prose prose-lg prose-slate max-w-none
                 bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 lg:p-10
-                prose prose-lg prose-slate max-w-none !block prose-li:my-2
                 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[#1a1a2e] [&_h2]:mt-8 [&_h2]:mb-4
                 [&_h2]:pl-3 [&_h2]:border-l-4 [&_h2]:border-[#1A237E]
                 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-[#1a1a2e] [&_h3]:mt-6 [&_h3]:mb-3
                 [&_h3]:pl-3 [&_h3]:border-l-2 [&_h3]:border-[#FF7F00]
                 [&_p]:text-slate-700 [&_p]:leading-relaxed [&_p]:mb-4
-                [&_ul]:![list-style-type:disc] [&_ul]:![list-style-position:outside] [&_ul]:pl-8 [&_ul]:mb-5
-                [&_ol]:![list-style-type:decimal] [&_ol]:![list-style-position:outside] [&_ol]:pl-8 [&_ol]:mb-5
-                [&_li]:![display:list-item] [&_li]:![list-style-position:outside] [&_li]:text-slate-700 [&_li]:mb-4 [&_li]:leading-[1.8] [&_li]:pl-1
-                [&_li>p]:mb-0 [&_li>p]:![display:block] [&_li>p]:leading-[1.8]
-                [&_ul_ul]:mt-2 [&_ul_ul]:mb-2 [&_ol_ol]:mt-2 [&_ol_ol]:mb-2
                 [&_a]:text-[#1A237E] [&_a:hover]:underline
                 [&_strong]:font-bold [&_strong]:text-[#1a1a2e]
                 [&_blockquote]:border-l-4 [&_blockquote]:border-[#1A237E] [&_blockquote]:bg-slate-50
@@ -475,7 +421,7 @@ export default async function PostDetail({
                 [&_img]:rounded-xl [&_img]:w-full [&_img]:my-4
                 [&_hr]:border-slate-200 [&_hr]:my-6
               "
-              dangerouslySetInnerHTML={{ __html: dynamicStyles + formatContent(post.content.rendered) }}
+              dangerouslySetInnerHTML={{ __html: post.content.rendered }}
             />
 
             {/* 하단 내비게이션 */}
