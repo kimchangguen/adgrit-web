@@ -266,18 +266,35 @@ export async function generateMetadata({
 }
 
 /**
- * <li> 태그 내부에 "1. 내용A 2. 내용B 3. 내용C" 처럼 뭉쳐 있는 번호 목록을
- * <br /><br /> 로 강제 분리한다. 이미 정상적으로 나뉜 항목은 건드리지 않는다.
+ * WordPress 본문 HTML을 가독성 있게 정규화한다.
+ * 1. <li> 안에 중첩된 <ul>/<ol> 태그를 제거하고 내용만 보존
+ * 2. "2. 2." 같은 중복 수동 번호 패턴을 단일 번호로 치환
+ * 3. <li> 내부에 뭉쳐 있는 " 2. ", " 3. " 패턴을 <br /><br />로 강제 분리
  */
-function preprocessListContent(html: string): string {
-  return html.replace(/<li([^>]*)>([\s\S]*?)<\/li>/gi, (_match, attrs, content) => {
-    // ' 2. ' 이상의 패턴이 없으면 그대로 반환
+function formatContent(html: string): string {
+  let result = html;
+
+  // 1. <li> 안에 중첩된 <ul>/<ol> 제거 — 내부 텍스트는 보존
+  result = result.replace(/<li([^>]*)>([\s\S]*?)<\/li>/gi, (_match, attrs, content) => {
+    const cleaned = content
+      .replace(/<ul[^>]*>([\s\S]*?)<\/ul>/gi, (_m: string, inner: string) => inner)
+      .replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gi, (_m: string, inner: string) => inner);
+    return `<li${attrs}>${cleaned}</li>`;
+  });
+
+  // 2. "2. 2." 처럼 같은 번호가 연속 중복되는 패턴 제거
+  result = result.replace(/(\d+)\. \1\. /g, '$1. ');
+
+  // 3. <li> 내부에서 " 2. " 이상 수동 번호 패턴 → <br /><br />로 분리
+  result = result.replace(/<li([^>]*)>([\s\S]*?)<\/li>/gi, (_match, attrs, content) => {
     if (!/ \d+\. /.test(content)) return _match;
     const processed = content.replace(/ (\d+)\. /g, (_m: string, num: string) => {
       return parseInt(num, 10) <= 1 ? _m : `<br /><br />${num}. `;
     });
     return `<li${attrs}>${processed}</li>`;
   });
+
+  return result;
 }
 
 export default async function PostDetail({
@@ -433,9 +450,9 @@ export default async function PostDetail({
             {/* 본문 콘텐츠 */}
             <div
               className="
-                blog-content adgrit-content
+                blog-content adgrit-content adgrit-prose
                 bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 lg:p-10
-                prose prose-slate max-w-none !block
+                prose prose-lg prose-slate max-w-none !block prose-li:my-2
                 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[#1a1a2e] [&_h2]:mt-8 [&_h2]:mb-4
                 [&_h2]:pl-3 [&_h2]:border-l-4 [&_h2]:border-[#1A237E]
                 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-[#1a1a2e] [&_h3]:mt-6 [&_h3]:mb-3
@@ -458,7 +475,7 @@ export default async function PostDetail({
                 [&_img]:rounded-xl [&_img]:w-full [&_img]:my-4
                 [&_hr]:border-slate-200 [&_hr]:my-6
               "
-              dangerouslySetInnerHTML={{ __html: dynamicStyles + preprocessListContent(post.content.rendered) }}
+              dangerouslySetInnerHTML={{ __html: dynamicStyles + formatContent(post.content.rendered) }}
             />
 
             {/* 하단 내비게이션 */}

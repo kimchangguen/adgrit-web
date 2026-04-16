@@ -290,3 +290,11 @@ header nav a {
   .blog-content li > p { display: inline; }
 }
 
+/* ================================================================
+   .adgrit-prose — 블로그 본문 가독성 강제 보정
+   ================================================================ */
+.adgrit-prose ol { list-style-type: decimal !important; margin-left: 1.5rem !important; }
+.adgrit-prose ul { list-style-type: disc !important; margin-left: 1.5rem !important; }
+.adgrit-prose li { display: list-item !important; margin-bottom: 0.8rem !important; padding-left: 0.5rem !important; }
+.adgrit-prose p { margin-bottom: 1.25rem !important; line-height: 1.8 !important; }
+
