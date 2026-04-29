@@ -43,15 +43,15 @@ export function OurClientsSection() {
   return (
     <section className="relative z-10 w-full overflow-hidden border-t border-slate-200 bg-white py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {/* 헤더 - 15% 추가 확대, 검정 + 약 20+ 대형 브랜드·150+ 소상공인 브랜드만 #ff9e14 */}
+        {/* 헤더 - 15% 추가 확대, 검정 + 약 20+ 대형 브랜드·150+ 소상공인 브랜드만 #f1f5f9 */}
         <div className="text-center">
           <p className="text-[1.14rem] font-semibold uppercase tracking-widest text-black">
             OUR CLIENTS
           </p>
           <h2 className="mt-4 text-[1.96rem] font-bold leading-tight text-black sm:text-[2.44rem] lg:text-[2.92rem]">
-            <span style={{ color: "#2892d2" }}>약 20+ 대형 브랜드</span>와,
+            <span style={{ color: "#222222" }}>약 20+ 대형 브랜드</span>와,
             <br />
-            <span style={{ color: "#2892d2" }}>150+ 소상공인 브랜드</span>와 함께 성장중입니다
+            <span style={{ color: "#222222" }}>150+ 소상공인 브랜드</span>와 함께 성장중입니다
           </h2>
         </div>
 

@@ -25,11 +25,11 @@ export default async function PostDetail({ params }: { params: Promise<{ id: str
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-white text-[#1a1a2e] flex flex-col items-center justify-center">
+      <div className="min-h-screen bg-white text-[#1f1f1f] flex flex-col items-center justify-center">
         <SiteHeader />
         <div className="flex-1 flex flex-col items-center justify-center px-4">
           <h2 className="text-2xl mb-4">글을 불러올 수 없습니다. 😢</h2>
-          <Link href="/" className="text-[#1e40af] hover:underline">← 목록으로 돌아가기</Link>
+          <Link href="/" className="text-[#222222] hover:underline">← 목록으로 돌아가기</Link>
         </div>
         <Footer />
       </div>
@@ -39,20 +39,20 @@ export default async function PostDetail({ params }: { params: Promise<{ id: str
   const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
 
   return (
-    <div className="min-h-screen bg-white text-[#1a1a2e]">
+    <div className="min-h-screen bg-white text-[#1f1f1f]">
       <SiteHeader />
       <main className="py-16 sm:py-20">
         <Container>
           <article className="max-w-3xl mx-auto">
             <Link
               href="/blog"
-              className="inline-block mb-8 text-slate-600 hover:text-[#1e40af] transition-colors"
+              className="inline-block mb-8 text-slate-600 hover:text-[#222222] transition-colors"
             >
               ← 목록으로 돌아가기
             </Link>
 
             <h1
-              className="text-3xl md:text-4xl font-bold mb-6 leading-tight text-[#1a1a2e]"
+              className="text-3xl md:text-4xl font-bold mb-6 leading-tight text-[#1f1f1f]"
               dangerouslySetInnerHTML={{ __html: post.title.rendered }}
             />
 
@@ -72,7 +72,7 @@ export default async function PostDetail({ params }: { params: Promise<{ id: str
             )}
 
             <div
-              className="max-w-none leading-relaxed text-slate-600 [&_a]:text-[#1e40af] [&_a:hover]:underline [&_p]:mb-4 [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:text-xl [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6"
+              className="max-w-none leading-relaxed text-slate-600 [&_a]:text-[#222222] [&_a:hover]:underline [&_p]:mb-4 [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:text-xl [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6"
               dangerouslySetInnerHTML={{ __html: post.content.rendered }}
             />
           </article>

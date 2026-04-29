@@ -76,7 +76,7 @@ export function FloatingActions() {
           title={action.label}
           aria-label={action.label}
         >
-          <span className="absolute right-full top-1/2 -translate-y-1/2 mr-2 opacity-0 group-hover:opacity-100 whitespace-nowrap rounded-lg bg-slate-800 px-3 py-2 text-sm font-medium text-white shadow-lg transition-opacity duration-200 pointer-events-none">
+          <span className="absolute right-full top-1/2 -translate-y-1/2 mr-2 opacity-0 group-hover:opacity-100 whitespace-nowrap rounded-lg bg-[#222222] px-3 py-2 text-sm font-medium text-white shadow-lg transition-opacity duration-200 pointer-events-none">
             {action.label}
           </span>
           <span className="flex items-center justify-center w-14 h-14 rounded-full bg-white border-2 border-gray-700 text-gray-700 shadow-md transition-all group-hover:scale-105 group-hover:border-gray-600 flex-shrink-0">

@@ -3,12 +3,12 @@ import { Container } from "./Container";
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-200 bg-[#1a1a2e] text-white">
+    <footer className="border-t border-slate-200 bg-[#1f1f1f] text-white">
       <Container className="py-12 sm:py-16">
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
             <div className="text-lg font-black tracking-wider">
-              AD<span className="text-[#60a5fa]">GRIT</span>
+              AD<span className="text-white">GRIT</span>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-slate-300">
               혁신적인 마케팅 컨설팅 솔루션,

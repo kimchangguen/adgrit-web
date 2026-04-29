@@ -124,7 +124,7 @@ export default async function BlogPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-white text-[#1a1a2e]">
+    <div className="min-h-screen bg-white text-[#1f1f1f]">
       <SiteHeader />
 
       {/* ── 히어로 (클라이언트, Framer Motion 스태거) ─── */}

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Container } from "./Container";
 
 const INPUT_STYLE =
-  "w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-800 placeholder:text-slate-400 focus:border-[#2362ff] focus:outline-none focus:ring-2 focus:ring-[#2362ff]/20";
+  "w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-800 placeholder:text-slate-400 focus:border-[#222222] focus:outline-none focus:ring-2 focus:ring-[#222222]/20";
 
 export function ContactSection() {
   const [agree, setAgree] = useState(false);
@@ -12,13 +12,13 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative z-10 border-t border-slate-700 bg-[#1A253A] py-16 sm:py-20 lg:py-24"
+      className="relative z-10 border-t border-slate-700 bg-[#222222] py-16 sm:py-20 lg:py-24"
     >
       <Container className="relative">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
           {/* 왼쪽: Contact 타이틀 + 안내 문구 */}
           <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
               Contact
               <br />
               ADGRIT
@@ -141,7 +141,7 @@ export function ContactSection() {
                   type="checkbox"
                   checked={agree}
                   onChange={(e) => setAgree(e.target.checked)}
-                  className="w-4 h-4 rounded border-slate-400 text-[#2362ff] focus:ring-[#2362ff]"
+                  className="w-4 h-4 rounded border-slate-400 text-[#222222] focus:ring-[#222222]"
                 />
                 <span className="text-sm text-white">개인정보 수집 및 이용 동의 CLICK</span>
               </label>
@@ -155,7 +155,7 @@ export function ContactSection() {
 
             <button
               type="submit"
-              className="w-full rounded-lg bg-[#2362ff] py-4 text-base font-bold text-white shadow-lg transition-opacity hover:opacity-95 disabled:opacity-50"
+              className="w-full rounded-lg bg-[#222222] py-4 text-base font-bold text-white shadow-lg transition-opacity hover:opacity-95 disabled:opacity-50"
               disabled={!agree}
             >
               작성완료 CLICK

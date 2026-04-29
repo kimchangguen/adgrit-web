@@ -154,23 +154,23 @@ function StackCard({
           height: "100%",
           zIndex: index + 1,
         }}
-        className="overflow-hidden bg-blue-600"
+        className="overflow-hidden bg-[#222222]"
       >
         {/* 카드별 미세한 그라데이션 변형 (블루 계열만) */}
         <div
           className="absolute inset-0"
           style={{
             background: [
-              "linear-gradient(135deg,#2563eb,#1d4ed8)",
-              "linear-gradient(135deg,#1d4ed8,#1e40af)",
-              "linear-gradient(135deg,#3b82f6,#2563eb)",
-              "linear-gradient(135deg,#1e40af,#1d4ed8)",
-              "linear-gradient(135deg,#2563eb,#1e3a8a)",
-              "linear-gradient(135deg,#3b82f6,#1d4ed8)",
-              "linear-gradient(135deg,#1d4ed8,#1e40af)",
-              "linear-gradient(135deg,#2563eb,#1e3a8a)",
-              "linear-gradient(135deg,#3b82f6,#2563eb)",
-              "linear-gradient(135deg,#1e40af,#1e3a8a)",
+              "linear-gradient(135deg,#222222,#3a3a3a)",
+              "linear-gradient(135deg,#3a3a3a,#222222)",
+              "linear-gradient(135deg,#4b5563,#222222)",
+              "linear-gradient(135deg,#222222,#3a3a3a)",
+              "linear-gradient(135deg,#222222,#2f2f2f)",
+              "linear-gradient(135deg,#4b5563,#3a3a3a)",
+              "linear-gradient(135deg,#3a3a3a,#222222)",
+              "linear-gradient(135deg,#222222,#2f2f2f)",
+              "linear-gradient(135deg,#4b5563,#222222)",
+              "linear-gradient(135deg,#222222,#2f2f2f)",
             ][index],
           }}
         />

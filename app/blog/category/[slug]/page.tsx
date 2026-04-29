@@ -101,14 +101,14 @@ export default async function CategoryPage({
   const posts = await getPostsByCategory(category.id);
 
   return (
-    <div className="min-h-screen bg-[#f8f9fc] text-[#1a1a2e]">
+    <div className="min-h-screen bg-[#f8f9fc] text-[#1f1f1f]">
       <SiteHeader />
 
       {/* 히어로 */}
-      <section className="bg-[#1A237E] pt-28 pb-10 sm:pt-32 sm:pb-12">
+      <section className="bg-[#222222] pt-28 pb-10 sm:pt-32 sm:pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* 브레드크럼 */}
-          <nav className="flex items-center gap-2 text-xs text-blue-200 mb-4">
+          <nav className="flex items-center gap-2 text-xs text-slate-300 mb-4">
             <Link href="/" className="hover:text-white transition-colors">홈</Link>
             <span>/</span>
             <Link href="/blog" className="hover:text-white transition-colors">블로그</Link>
@@ -116,16 +116,16 @@ export default async function CategoryPage({
             <span className="text-white">{category.name}</span>
           </nav>
 
-          <p className="text-blue-200 text-sm font-semibold tracking-widest uppercase mb-2">
+          <p className="text-slate-300 text-sm font-semibold tracking-widest uppercase mb-2">
             CATEGORY
           </p>
-          <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight">
+          <h1 className="text-3xl sm:text-4xl font-black text-white leading-tight">
             {category.name}
           </h1>
           {category.description && (
-            <p className="mt-3 text-blue-100 text-base max-w-2xl">{category.description}</p>
+            <p className="mt-3 text-slate-200 text-base max-w-2xl">{category.description}</p>
           )}
-          <p className="mt-2 text-blue-200 text-sm">총 {category.count}개의 글</p>
+          <p className="mt-2 text-slate-300 text-sm">총 {category.count}개의 글</p>
         </div>
       </section>
 
@@ -163,11 +163,11 @@ export default async function CategoryPage({
                             sizes="(max-width: 640px) 100vw, 50vw"
                           />
                         ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-[#1A237E]/10 via-slate-100 to-slate-50 flex items-center justify-center">
+                          <div className="w-full h-full bg-gradient-to-br from-[#222222]/10 via-slate-100 to-slate-50 flex items-center justify-center">
                             <span className="text-4xl opacity-20">📝</span>
                           </div>
                         )}
-                        <span className="absolute top-3 left-3 bg-[#1A237E] text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+                        <span className="absolute top-3 left-3 bg-[#222222] text-white text-xs font-semibold px-2.5 py-1 rounded-full">
                           {category.name}
                         </span>
                       </div>
@@ -176,7 +176,7 @@ export default async function CategoryPage({
                       <div className="flex flex-col flex-1 p-5">
                         <time className="text-xs text-slate-400">{formatDate(post.date)}</time>
                         <h2
-                          className="mt-2 text-base font-bold text-[#1a1a2e] group-hover:text-[#1A237E] transition-colors line-clamp-2 leading-snug"
+                          className="mt-2 text-base font-black text-[#1f1f1f] group-hover:text-[#222222] transition-colors line-clamp-2 leading-snug"
                           dangerouslySetInnerHTML={{ __html: post.title.rendered }}
                         />
                         {excerpt && (
@@ -184,7 +184,7 @@ export default async function CategoryPage({
                             {excerpt}
                           </p>
                         )}
-                        <span className="mt-4 text-sm font-semibold text-[#1A237E] group-hover:underline">
+                        <span className="mt-4 text-sm font-semibold text-[#222222] group-hover:underline">
                           자세히 보기 →
                         </span>
                       </div>

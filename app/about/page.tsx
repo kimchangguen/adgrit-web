@@ -76,7 +76,7 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
     >
       <motion.div style={{ x: numX, opacity }} className="shrink-0 flex items-start sm:pt-2">
         <span
-          className="font-black text-[#2563EB] leading-none"
+          className="font-black text-slate-200 leading-none"
           style={{ fontSize: "clamp(3.5rem, 8vw, 7rem)" }}
         >
           {item.num}
@@ -123,7 +123,7 @@ export default function AboutPage() {
   const { ref: introRef, inView: introInView } = useReveal("-40px");
 
   return (
-    <div className="bg-[#1e3052] text-white min-h-screen">
+    <div className="bg-[#222222] text-white min-h-screen">
       <SiteHeader />
 
       <main className="pt-16">
@@ -140,7 +140,7 @@ export default function AboutPage() {
               className="font-black leading-none tracking-tighter select-none"
               style={{ fontSize: "clamp(3.5rem, 14vw, 12rem)" }}
             >
-              <span className="text-[#2563EB]">AD</span>
+              <span className="text-slate-200">AD</span>
               <span className="text-white">GRIT</span>
             </h1>
 

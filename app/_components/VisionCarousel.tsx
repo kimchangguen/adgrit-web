@@ -31,17 +31,17 @@ function VisionCard({
           style={{ backgroundImage: `url('${imageUrl}')` }}
         />
         <div
-          className="absolute top-2 right-2 w-24 h-24 rounded-full bg-blue-400/25 blur-2xl"
+          className="absolute top-2 right-2 w-24 h-24 rounded-full bg-slate-400/20 blur-2xl"
           aria-hidden
         />
         <div
-          className="absolute bottom-4 left-4 w-20 h-20 rounded-full bg-blue-300/20 blur-xl"
+          className="absolute bottom-4 left-4 w-20 h-20 rounded-full bg-slate-300/20 blur-xl"
           aria-hidden
         />
       </div>
       {/* 텍스트: 이미지 아래, 왼쪽 정렬, 최소 높이로 박스 크기 통일 */}
       <div className="flex min-h-[88px] flex-1 flex-col justify-start p-4 sm:p-5 text-left">
-        <h3 className="text-base sm:text-lg font-bold text-black leading-snug">
+        <h3 className="text-base sm:text-lg font-black text-[#1f1f1f] leading-snug">
           {titleEn}
         </h3>
         <p className="mt-2 text-sm sm:text-[15px] text-slate-700 leading-relaxed line-clamp-3">

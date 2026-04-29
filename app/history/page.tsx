@@ -129,7 +129,7 @@ function EntryBlock({ entry }: { entry: Entry }) {
 /* ─── 페이지 ─────────────────────────────────────────── */
 export default function HistoryPage() {
   return (
-    <div className="bg-[#1e3052] text-white min-h-screen">
+    <div className="bg-[#222222] text-white min-h-screen">
       <SiteHeader />
 
       <main className="pt-16">
@@ -137,7 +137,7 @@ export default function HistoryPage() {
         {/* ── 히어로 ─────────────────────────────────── */}
         <section className="px-6 sm:px-14 lg:px-24 pt-20 sm:pt-28 pb-10 sm:pb-16">
           <motion.p
-            className="text-[0.975rem] font-bold tracking-[0.28em] text-[#2563EB] uppercase mb-5"
+            className="text-[0.975rem] font-bold tracking-[0.28em] text-slate-200 uppercase mb-5"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
@@ -173,7 +173,7 @@ export default function HistoryPage() {
             <div key={entry.year} className="relative grid grid-cols-2 py-7">
 
               {/* 중앙 블루 점 */}
-              <div className="absolute left-1/2 top-8 -translate-x-1/2 w-[9px] h-[9px] rounded-full bg-[#2563EB] ring-4 ring-black z-10 shadow-[0_0_10px_rgba(37,99,235,0.5)]" />
+              <div className="absolute left-1/2 top-8 -translate-x-1/2 w-[9px] h-[9px] rounded-full bg-white ring-4 ring-black z-10 shadow-[0_0_10px_rgba(255,255,255,0.24)]" />
 
               {/* 왼쪽 셀: side="left" 일 때만 콘텐츠 */}
               <div className="pr-8 lg:pr-12">
@@ -193,7 +193,7 @@ export default function HistoryPage() {
           {HISTORY.map((entry) => (
             <div key={entry.year} className="relative">
               {/* 블루 점 */}
-              <div className="absolute -left-[1.3125rem] top-1.5 w-[9px] h-[9px] rounded-full bg-[#2563EB] ring-4 ring-black shadow-[0_0_8px_rgba(37,99,235,0.5)]" />
+              <div className="absolute -left-[1.3125rem] top-1.5 w-[9px] h-[9px] rounded-full bg-white ring-4 ring-black shadow-[0_0_8px_rgba(255,255,255,0.24)]" />
 
               <motion.div
                 initial={{ opacity: 0, x: -36 }}

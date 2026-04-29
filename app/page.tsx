@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -27,13 +26,13 @@ import { Section2Wrapper } from "./_components/Section2Wrapper";
 
 export default async function Home() {
   return (
-    <div className="min-h-screen bg-white text-[#1a1a2e]">
+    <div className="min-h-screen bg-white text-[#1f1f1f]">
       <SiteChrome />
     </div>
   );
 }
 
-const ACCENT_ORANGE = "#FFBD4F";
+const ACCENT_CHARCOAL = "#222222";
 
 function WorryCard({
   num,
@@ -50,10 +49,10 @@ function WorryCard({
 }) {
   return (
     <div className="relative rounded-[24px] bg-white px-6 sm:px-8 py-7 sm:py-10 shadow-sm">
-      <span className="text-lg font-bold tabular-nums" style={{ color: ACCENT_ORANGE }}>
+      <span className="text-lg font-bold tabular-nums" style={{ color: ACCENT_CHARCOAL }}>
         {num}
       </span>
-      <h3 className="mt-2 text-xl font-bold text-[#111827]">{title}</h3>
+      <h3 className="mt-2 text-xl font-black text-[#1f1f1f]">{title}</h3>
       <p className="mt-1 text-sm text-slate-500">{subtitle}</p>
       <p className="mt-4 text-[15px] leading-relaxed text-[#374151]">
         {desc.split("\n").map((line, i) => (
@@ -61,7 +60,7 @@ function WorryCard({
         ))}
       </p>
       {showArrow && (
-        <div className="absolute bottom-5 right-5" style={{ color: ACCENT_ORANGE }} aria-hidden>
+        <div className="absolute bottom-5 right-5" style={{ color: ACCENT_CHARCOAL }} aria-hidden>
           <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
           </svg>
@@ -87,7 +86,7 @@ function ProcessStep({
 
   return (
     <div className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm text-center">
-      <span className="text-sm font-bold uppercase tracking-wide text-[#1e40af]">STEP {step}</span>
+      <span className="text-sm font-bold uppercase tracking-wide text-[#222222]">STEP {step}</span>
       <div className="mt-4 mx-auto flex h-14 w-14 items-center justify-center">
         <Image
           src={iconSrc}
@@ -98,10 +97,10 @@ function ProcessStep({
           aria-hidden
         />
       </div>
-      <h3 className="mt-4 text-lg font-bold text-black">{title}</h3>
+      <h3 className="mt-4 text-lg font-black text-[#1f1f1f]">{title}</h3>
       <p className="mt-3 flex-1 text-center text-sm leading-relaxed text-slate-700 whitespace-pre-line">{desc}</p>
       {buttonText && (
-        <div className="mt-6 rounded-lg py-3 px-4 text-sm font-semibold bg-blue-100 text-[#1e40af]">
+        <div className="mt-6 rounded-lg py-3 px-4 text-sm font-semibold bg-slate-100 text-[#222222]">
           {buttonText}
         </div>
       )}
@@ -133,12 +132,12 @@ function SiteChrome() {
                 </AnimatedHeroItem>
                 <AnimatedHeroItem>
                   {/* PC: 한 줄 */}
-                  <p className="hidden md:block mt-6 text-[2.06rem] sm:text-[2.48rem] md:text-[3.3rem] font-bold tracking-tight text-[#111827] leading-[1.25]">
-                    그들은 <span className="text-[#FF7F00]">&apos;연료&apos;</span>라고 부릅니다.
+                  <p className="hidden md:block mt-6 text-[2.06rem] sm:text-[2.48rem] md:text-[3.3rem] font-black tracking-tight text-[#1f1f1f] leading-[1.25]">
+                    그들은 <span className="text-[#222222]">&apos;연료&apos;</span>라고 부릅니다.
                   </p>
                   {/* 모바일: 2줄 */}
-                  <p className="md:hidden mt-6 text-[2.06rem] sm:text-[2.48rem] font-bold tracking-tight text-[#111827] leading-[1.25]">
-                    그들은 <span className="text-[#FF7F00]">&apos;연료&apos;</span>라고
+                  <p className="md:hidden mt-6 text-[2.06rem] sm:text-[2.48rem] font-black tracking-tight text-[#1f1f1f] leading-[1.25]">
+                    그들은 <span className="text-[#222222]">&apos;연료&apos;</span>라고
                     <br />
                     부릅니다.
                   </p>
@@ -165,7 +164,7 @@ function SiteChrome() {
                 <AnimatedHeroItem>
                   <a
                     href="tel:1661-0646"
-                    className="mt-11 inline-flex items-center justify-center rounded-full bg-[#1A237E] px-11 py-[1.1rem] text-[1.1rem] font-semibold text-white hover:bg-[#283593] transition-colors"
+                    className="mt-11 inline-flex items-center justify-center rounded-full bg-[#222222] px-11 py-[1.1rem] text-[1.1rem] font-semibold text-white hover:bg-[#3a3a3a] transition-colors"
                   >
                     상담하기
                   </a>
@@ -175,7 +174,7 @@ function SiteChrome() {
 
             {/* 오른쪽: 2x2 이미지 그리드 */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4 order-1 lg:order-2">
-              <div className="rounded-2xl overflow-hidden bg-[#1e3a5f] flex items-center justify-center min-h-[140px] sm:min-h-[180px] aspect-square max-h-[200px] sm:max-h-[240px]">
+              <div className="rounded-2xl overflow-hidden bg-[#222222] flex items-center justify-center min-h-[140px] sm:min-h-[180px] aspect-square max-h-[200px] sm:max-h-[240px]">
                 <div className="text-center px-4">
                   <p className="text-white font-bold text-lg sm:text-xl tracking-wider">ADGRIT</p>
                   <p className="text-white/90 text-xs sm:text-sm tracking-widest mt-1">DEVELOPMENT & MARKETING</p>
@@ -188,7 +187,7 @@ function SiteChrome() {
                 <Image src="https://images.unsplash.com/photo-1556656793-08538906a9f8" fill alt="" className="object-cover" sizes="(max-width: 1024px) 50vw, 240px" priority />
               </div>
               <div className="relative rounded-2xl overflow-hidden aspect-square min-h-[140px] sm:min-h-[180px] max-h-[200px] sm:max-h-[240px]">
-                <Image src="https://images.unsplash.com/photo-1557672172-298e090bd0f1" fill alt="" className="object-cover" sizes="(max-width: 1024px) 50vw, 240px" priority />
+                <Image src="/hero-ai-marketing.png" fill alt="" className="object-cover" sizes="(max-width: 1024px) 50vw, 240px" priority />
               </div>
             </div>
           </div>
@@ -200,10 +199,10 @@ function SiteChrome() {
         leftContent={
           <>
             <p className="text-white text-sm font-normal tracking-wide">The Cost of Inefficiency</p>
-            <h2 className="mt-4 text-[2rem] sm:text-[2.375rem] lg:text-[3.125rem] font-bold leading-tight text-white">
+            <h2 className="mt-4 text-[2rem] sm:text-[2.375rem] lg:text-[3.125rem] font-black leading-tight text-white">
               사장님들이 겪는
               <br />
-              <span style={{ color: ACCENT_ORANGE }}>대표적 고민</span>
+              <span className="text-slate-200">대표적 고민</span>
             </h2>
             <p className="mt-6 text-white/95 text-base leading-relaxed">
               매달 광고비는 지출되는데, 실제 순수익은 제자리걸음이다?

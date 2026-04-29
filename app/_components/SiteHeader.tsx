@@ -85,8 +85,8 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                 }
                 className={`flex-shrink-0 text-sm sm:text-base font-bold whitespace-nowrap py-2 ${
                   openMobileMenu === item.label
-                    ? lightText ? "text-blue-300" : "text-[#1e3a8a]"
-                    : lightText ? "text-white/90 hover:text-white" : "text-[#1e3a8a] hover:text-[#1e40af]"
+                    ? lightText ? "text-slate-300" : "text-[#222222]"
+                    : lightText ? "text-white/90 hover:text-white" : "text-[#222222] hover:text-[#222222]"
                 }`}
               >
                 {item.label}
@@ -121,7 +121,7 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                           <Link
                             key={child.label}
                             href={child.href}
-                            className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1e40af]"
+                            className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-[#222222]"
                             onClick={() => setOpenMobileMenu(null)}
                           >
                             {child.label}
@@ -153,8 +153,8 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
               <button
                 className={`block px-2 py-2 text-lg lg:text-xl font-bold transition-colors tracking-wide text-left w-full ${
                   hoveredColumn === item.label && isMegaOpen
-                    ? lightText ? "text-blue-300" : "text-[#1e3a8a]"
-                    : lightText ? "text-white/90 hover:text-white" : "text-[#1e3a8a] hover:text-[#1e40af]"
+                    ? lightText ? "text-slate-300" : "text-[#222222]"
+                    : lightText ? "text-white/90 hover:text-white" : "text-[#222222] hover:text-[#222222]"
                 }`}
                 aria-expanded={isMegaOpen}
                 aria-haspopup="true"
@@ -180,7 +180,7 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                         key={item.label}
                         className={`min-w-[140px] px-2 transition-colors ${
                           hoveredColumn === item.label
-                            ? "bg-[#1e40af] text-white rounded"
+                            ? "bg-[#222222] text-white rounded"
                             : "bg-white"
                         }`}
                         onMouseEnter={() => setHoveredColumn(item.label)}
@@ -189,7 +189,7 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                           className={`font-bold text-base mb-3 ${
                             hoveredColumn === item.label
                               ? "text-white"
-                              : "text-[#1a1a2e]"
+                              : "text-[#1f1f1f]"
                           }`}
                         >
                           {item.label}
@@ -202,7 +202,7 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                               className={`block py-2 px-0 text-sm transition-colors ${
                                 hoveredColumn === item.label
                                   ? "text-white/90 hover:text-white hover:bg-white/10 rounded"
-                                  : "text-slate-600 hover:bg-slate-50 hover:text-[#1e40af]"
+                                  : "text-slate-600 hover:bg-slate-50 hover:text-[#222222]"
                               }`}
                               onClick={() => {
                                 setIsMegaOpen(false);

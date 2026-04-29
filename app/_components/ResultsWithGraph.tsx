@@ -44,12 +44,12 @@ const MILESTONES = [
 ];
 
 const BAR_HEIGHTS = [0.55, 0.7, 0.82, 0.92, 1];
-const BAR_COLORS = [
-  "rgb(30, 58, 138)",
-  "rgb(59, 130, 246)",
-  "rgb(96, 165, 250)",
-  "rgb(147, 197, 253)",
-  "rgb(186, 230, 253)",
+const BAR_GRADIENTS = [
+  "linear-gradient(180deg, #1D1B1F 0%, #343238 100%)",
+  "linear-gradient(180deg, #475569 0%, #64748b 100%)",
+  "linear-gradient(180deg, #64748b 0%, #94a3b8 100%)",
+  "linear-gradient(180deg, #94a3b8 0%, #cbd5e1 100%)",
+  "linear-gradient(180deg, #e2e8f0 0%, #f8fafc 100%)",
 ];
 
 export function ResultsWithGraph() {
@@ -74,7 +74,7 @@ export function ResultsWithGraph() {
           {/* 왼쪽: 텍스트 */}
           <div className="flex-shrink-0 lg:w-[38%] max-w-2xl">
             <motion.span
-              className="text-[0.86rem] sm:text-[0.99rem] font-medium uppercase tracking-[0.2em] text-black/70"
+              className="text-[0.86rem] sm:text-[0.99rem] font-bold uppercase tracking-[0.2em] text-[#1D1B1F]/55"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
@@ -83,7 +83,7 @@ export function ResultsWithGraph() {
               About Us
             </motion.span>
             <motion.h2
-              className="mt-4 text-[1.86rem] font-extrabold leading-tight text-black sm:text-[2.46rem] lg:text-[2.95rem]"
+              className="mt-4 text-[1.86rem] font-extrabold leading-tight tracking-tight text-[#1D1B1F] sm:text-[2.46rem] lg:text-[2.95rem]"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
@@ -94,7 +94,7 @@ export function ResultsWithGraph() {
               애드그릿이 앞장섭니다.
             </motion.h2>
             <motion.p
-              className="mt-6 text-[1.12rem] leading-relaxed text-black sm:text-[1.23rem]"
+              className="mt-6 text-[1.12rem] leading-relaxed text-[#1D1B1F]/75 sm:text-[1.23rem]"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
@@ -103,7 +103,7 @@ export function ResultsWithGraph() {
               산업의 마케팅을 넘어, 데이터 기반 혁신으로 나아갑니다.
             </motion.p>
             <motion.p
-              className="mt-4 text-[1.12rem] leading-relaxed text-black sm:text-[1.23rem]"
+              className="mt-4 text-[1.12rem] leading-relaxed text-[#1D1B1F]/75 sm:text-[1.23rem]"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
@@ -123,8 +123,8 @@ export function ResultsWithGraph() {
           >
             {/* 그래프 상단: 광고주 평균 ROAS 324% */}
             <div className="mb-7 flex flex-wrap items-baseline justify-between gap-4">
-              <span className="text-[1.05rem] font-medium text-slate-600">광고주 평균 ROAS</span>
-              <span className="text-[2.3rem] font-bold tabular-nums text-sky-600 sm:text-[3.45rem]">
+              <span className="text-[1.05rem] font-semibold text-[#1D1B1F]/65">광고주 평균 ROAS</span>
+              <span className="text-[2.3rem] font-bold tabular-nums text-[#1D1B1F] sm:text-[3.45rem]">
                 <AnimatedCounter to={324} suffix="%" duration={1.5} />
               </span>
             </div>
@@ -143,9 +143,10 @@ export function ResultsWithGraph() {
                   {/* 막대 영역: 고정 높이, 막대가 아래에서 올라옴 */}
                   <div className="flex h-64 sm:h-72 lg:h-80 w-full flex-col justify-end">
                     <motion.div
-                      className="w-full max-w-[4.6rem] sm:max-w-[5.2rem] mx-auto rounded-t-lg"
-                      style={{ backgroundColor: BAR_COLORS[i] }}
+                      className="mx-auto w-full max-w-[4.6rem] rounded-t-xl shadow-[0_12px_28px_rgba(15,23,42,0.08)] transition-[filter,box-shadow] duration-300 hover:brightness-90 hover:shadow-[0_18px_38px_rgba(29,27,31,0.20)] sm:max-w-[5.2rem]"
+                      style={{ backgroundImage: BAR_GRADIENTS[i] }}
                       initial={{ height: "0%" }}
+                      whileHover={{ y: -4 }}
                       animate={
                         barAnimated
                           ? { height: `${BAR_HEIGHTS[i] * 100}%` }
@@ -159,8 +160,8 @@ export function ResultsWithGraph() {
                     />
                   </div>
                   <div className="mt-5 w-full min-w-0 text-center">
-                    <p className="text-[1.05rem] font-semibold text-slate-700">{item.year}</p>
-                    <p className="mt-1.5 text-sm leading-snug text-slate-600 line-clamp-2 sm:line-clamp-3">
+                    <p className="text-[1.05rem] font-bold text-[#1D1B1F]">{item.year}</p>
+                    <p className="mt-1.5 text-sm leading-snug text-[#1D1B1F]/60 line-clamp-2 sm:line-clamp-3">
                       {item.text}
                     </p>
                   </div>

@@ -31,7 +31,7 @@ export function BlogFeaturedSlider({ posts }: { posts: SliderPost[] }) {
   const post = posts[current];
 
   return (
-    <div className="relative w-full h-[320px] sm:h-[420px] lg:h-[480px] overflow-hidden rounded-2xl bg-slate-800 select-none">
+    <div className="relative w-full h-[320px] sm:h-[420px] lg:h-[480px] overflow-hidden rounded-2xl bg-[#222222] select-none">
       {/* 모든 슬라이드 이미지를 미리 쌓아두고 opacity로 전환 → 리마운트 없이 크로스페이드 */}
       {posts.map((p, i) =>
         p.imageUrl ? (
@@ -50,7 +50,7 @@ export function BlogFeaturedSlider({ posts }: { posts: SliderPost[] }) {
       )}
       {/* 이미지 없는 슬라이드를 위한 그라데이션 폴백 */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br from-[#1A237E] to-slate-700 transition-opacity duration-700 ${
+        className={`absolute inset-0 bg-gradient-to-br from-[#222222] to-slate-700 transition-opacity duration-700 ${
           post.imageUrl ? "opacity-0" : "opacity-100"
         }`}
       />
@@ -71,7 +71,7 @@ export function BlogFeaturedSlider({ posts }: { posts: SliderPost[] }) {
       {/* 텍스트 콘텐츠 */}
       <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 lg:p-10">
         <Link href={`/blog/${post.slug}`} className="group">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white leading-tight group-hover:text-[#FFBD4F] transition-colors line-clamp-2 max-w-3xl">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white leading-tight group-hover:text-[#222222] transition-colors line-clamp-2 max-w-3xl">
             {post.title}
           </h2>
         </Link>

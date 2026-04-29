@@ -36,7 +36,7 @@ export default function ContactPage() {
   const { ref: heroRef, inView: heroInView } = useReveal("-20px");
 
   return (
-    <div className="bg-[#1e3052] text-white min-h-screen">
+    <div className="bg-[#222222] text-white min-h-screen">
       <SiteHeader />
 
       <main className="pt-16">
@@ -44,7 +44,7 @@ export default function ContactPage() {
         {/* ── 히어로 ──────────────────────────────── */}
         <section className="px-6 sm:px-14 lg:px-24 pt-20 sm:pt-28 pb-16 sm:pb-20">
           <motion.p
-            className="text-[0.65rem] font-bold tracking-[0.28em] text-[#2563EB] uppercase mb-5"
+            className="text-[0.65rem] font-bold tracking-[0.28em] text-slate-200 uppercase mb-5"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
@@ -73,7 +73,7 @@ export default function ContactPage() {
         {/* ── 지도 섹션 ───────────────────────────── */}
         <section
           ref={heroRef}
-          className="bg-[#1e3052] border-t border-white/[0.07] px-6 sm:px-14 lg:px-24 pt-16 pb-32 sm:pb-44"
+          className="bg-[#222222] border-t border-white/[0.07] px-6 sm:px-14 lg:px-24 pt-16 pb-32 sm:pb-44"
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
             {LOCATIONS.map(({ label, sublabel, address, mapSrc }, i) => {
@@ -90,7 +90,7 @@ export default function ContactPage() {
                 >
                   {/* 지점 정보 */}
                   <div className="space-y-1">
-                    <p className="text-[0.65rem] font-bold tracking-[0.22em] text-[#2563EB] uppercase">
+                    <p className="text-[0.65rem] font-bold tracking-[0.22em] text-slate-200 uppercase">
                       {sublabel}
                     </p>
                     <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
@@ -102,7 +102,7 @@ export default function ContactPage() {
                   </div>
 
                   {/* 지도 iframe */}
-                  <div className="rounded-2xl overflow-hidden border-2 border-blue-600 shadow-[0_0_24px_rgba(37,99,235,0.2)]">
+                  <div className="rounded-2xl overflow-hidden border-2 border-white/20 shadow-[0_0_24px_rgba(255,255,255,0.16)]">
                     <iframe
                       src={mapSrc}
                       width="100%"

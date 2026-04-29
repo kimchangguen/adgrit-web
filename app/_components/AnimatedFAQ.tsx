@@ -23,7 +23,7 @@ export function AnimatedFAQ({ q, a }: AnimatedFAQProps) {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="w-full text-left list-none text-base font-semibold text-[#1a1a2e] flex items-start justify-between gap-6 cursor-pointer"
+        className="w-full text-left list-none text-base font-semibold text-[#1f1f1f] flex items-start justify-between gap-6 cursor-pointer"
       >
         <span>{q}</span>
         <motion.span

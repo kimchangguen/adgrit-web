@@ -1,22 +1,26 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView, type UseInViewOptions } from "framer-motion";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { MoreHorizontal, UserCircle } from "lucide-react";
 import { SiteHeader } from "../_components/SiteHeader";
 import { Footer } from "../_components/Footer";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-function useReveal(margin: UseInViewOptions["margin"] = "-40px") {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin });
-  return { ref, inView };
-}
-
-/* ─── 조직도 데이터 ──────────────────────────────────── */
 const DEPARTMENTS = [
   {
-    key: "CONSULTING",
+    role: "대표",
+    name: "ADGRIT CEO",
+    avatarSrc: "",
+    summary: "전략 의사결정과 전체 조직 운영",
+    items: ["R&D 센터", "경영지원부서"],
+  },
+  {
+    role: "CONSULTING",
+    name: "Consulting Division",
+    avatarSrc: "",
+    summary: "브랜드와 시장을 분석해 캠페인의 방향을 설계합니다.",
     items: [
       "프로젝트 제안 기획",
       "브랜드 분석",
@@ -27,7 +31,10 @@ const DEPARTMENTS = [
     ],
   },
   {
-    key: "DIGITAL IMC",
+    role: "DIGITAL IMC",
+    name: "Digital IMC Division",
+    avatarSrc: "",
+    summary: "디지털 접점 전반의 통합 마케팅 실행을 담당합니다.",
     items: [
       "IMC 통합 마케팅",
       "인스타그램 통합 마케팅",
@@ -42,7 +49,10 @@ const DEPARTMENTS = [
     ],
   },
   {
-    key: "CREATIVE",
+    role: "CREATIVE",
+    name: "Creative Division",
+    avatarSrc: "",
+    summary: "콘텐츠 기획부터 이미지, 영상 제작까지 브랜드 표현을 만듭니다.",
     items: [
       "슬로건 아이덴티티 구축",
       "CRM 앤트 설계",
@@ -55,7 +65,10 @@ const DEPARTMENTS = [
     ],
   },
   {
-    key: "DEVELOPMENT",
+    role: "DEVELOPMENT",
+    name: "Development Division",
+    avatarSrc: "",
+    summary: "운영 로직과 자동화, 노출 성과를 높이는 개발을 수행합니다.",
     items: [
       "준 최적화 블로그",
       "인스타 노출 솔루션",
@@ -66,138 +79,194 @@ const DEPARTMENTS = [
     ],
   },
   {
-    key: "REPUBLISHING",
-    items: [
-      "HTML",
-      "JAVA",
-      "PHP",
-      "UI UX 컨설팅",
-      "웹 표준화 컨설팅",
-      "···",
-    ],
+    role: "REPUBLISHING",
+    name: "Republishing Division",
+    avatarSrc: "",
+    summary: "웹 구현과 UI/UX 컨설팅으로 캠페인 실행 환경을 정비합니다.",
+    items: ["HTML", "JAVA", "PHP", "UI UX 컨설팅", "웹 표준화 컨설팅", "···"],
   },
 ] as const;
 
-/* ─── 페이지 ─────────────────────────────────────────── */
-export default function OrganizationPage() {
-  const { ref: heroRef, inView: heroInView } = useReveal("-20px");
-  const { ref: ceoRef,  inView: ceoInView  } = useReveal("-40px");
+type DepartmentCardProps = {
+  department: (typeof DEPARTMENTS)[number];
+  index?: number;
+  compact?: boolean;
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 26, scale: 0.98 },
+  visible: (index = 0) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.68,
+      delay: index * 0.08,
+      ease: EASE,
+    },
+  }),
+};
+
+function Avatar({
+  src,
+  label,
+  size = "md",
+}: {
+  src: string;
+  label: string;
+  size?: "md" | "lg";
+}) {
+  const sizeClass = size === "lg" ? "h-[72px] w-[72px]" : "h-[58px] w-[58px]";
+  const iconClass = size === "lg" ? "h-[54px] w-[54px]" : "h-[42px] w-[42px]";
 
   return (
-    <div className="bg-[#1e3052] text-white min-h-screen">
+    <div
+      className={`${sizeClass} rounded-full border border-white bg-white shadow-[0_10px_24px_rgba(15,23,42,0.12)] ring-1 ring-slate-200`}
+    >
+      {src ? (
+        <Image
+          src={src}
+          alt={label}
+          width={96}
+          height={96}
+          className="h-full w-full rounded-full object-cover"
+        />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center rounded-full bg-slate-100 text-slate-500">
+          <UserCircle className={iconClass} strokeWidth={1.45} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+function DepartmentCard({ department, index = 0, compact = false }: DepartmentCardProps) {
+  return (
+    <motion.article
+      custom={index}
+      variants={cardVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.35 }}
+      whileHover={{ y: -4 }}
+      className={`relative mx-auto w-full rounded-[10px] border border-slate-200 bg-white px-5 pb-5 pt-9 text-left shadow-[0_10px_30px_rgba(15,23,42,0.05)] transition-shadow duration-300 hover:shadow-[0_16px_38px_rgba(15,23,42,0.09)] ${
+        compact ? "max-w-[310px]" : "max-w-[340px]"
+      }`}
+    >
+      <div className="absolute -top-8 left-5">
+        <Avatar
+          src={department.avatarSrc}
+          label={department.name}
+          size={department.role === "대표" ? "lg" : "md"}
+        />
+      </div>
+
+      <button
+        type="button"
+        aria-label={`${department.name} menu`}
+        className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700"
+      >
+        <MoreHorizontal className="h-4 w-4" strokeWidth={2.2} />
+      </button>
+
+      <div className="min-h-[82px] pr-8">
+        <p className="text-[11px] font-semibold uppercase text-slate-400">{department.role}</p>
+        <h2 className="mt-1 text-[17px] font-extrabold leading-tight text-slate-950">
+          {department.name}
+        </h2>
+        <p className="mt-2 text-[12px] leading-relaxed text-slate-400">{department.summary}</p>
+      </div>
+
+      <div className="mt-4 flex flex-wrap gap-2">
+        {department.items.map((item) => (
+          <span
+            key={item}
+            className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[12px] font-medium leading-none text-slate-500"
+          >
+            {item}
+          </span>
+        ))}
+      </div>
+    </motion.article>
+  );
+}
+
+export default function OrganizationPage() {
+  const [leader, ...teams] = DEPARTMENTS;
+  const firstRow = teams.slice(0, 3);
+  const secondRow = teams.slice(3);
+
+  return (
+    <div className="min-h-screen bg-[#f7f8fa] text-slate-950">
       <SiteHeader />
 
       <main className="pt-16">
-
-        {/* ── 히어로 ─────────────────────────────────── */}
-        <section className="px-6 sm:px-14 lg:px-24 pt-20 sm:pt-28 pb-16 sm:pb-20">
-          <motion.p
-            className="text-[0.975rem] font-bold tracking-[0.28em] text-[#2563EB] uppercase mb-5"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-          >
-            ADGRIT Organization
-          </motion.p>
-          <motion.h1
-            className="font-extrabold text-white leading-[1.1] tracking-tight"
-            style={{ fontSize: "clamp(2.6rem, 6vw, 5rem)" }}
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.2, ease: EASE }}
-          >
-            조직도
-          </motion.h1>
-          <motion.p
-            className="mt-5 text-lg sm:text-xl text-white/38 leading-[1.85]"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.32, ease: EASE }}
-          >
-            애드그릿의 조직 구조를 소개합니다.
-          </motion.p>
-        </section>
-
-        {/* ── 조직도 본문 ─────────────────────────────── */}
-        <section
-          ref={heroRef}
-          className="bg-[#1e3052] px-6 sm:px-14 lg:px-24 pt-20 pb-32 sm:pb-44 border-t border-white/[0.07]"
-        >
-          <div className="max-w-[1300px] mx-auto">
-          {/* CEO + 지원 조직 */}
-          <motion.div
-            ref={ceoRef}
-            initial={{ opacity: 0, y: 36 }}
-            animate={ceoInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.75, ease: EASE }}
-            className="flex flex-col items-center gap-4 mb-0"
-          >
-            <div className="w-24 h-24 rounded-full bg-[#2563EB] border-2 border-blue-400 flex items-center justify-center shadow-[0_0_24px_rgba(37,99,235,0.5)]">
-              <span className="text-white font-black text-xl tracking-wide">CEO</span>
-            </div>
-
-            <div className="flex gap-3 flex-wrap justify-center">
-              {["R&D 센터", "경영지원부서"].map((label) => (
-                <span
-                  key={label}
-                  className="px-4 py-2 rounded-lg border border-blue-600 bg-[#0d1b35] text-white text-[1.05rem] font-semibold tracking-wide"
-                >
-                  {label}
-                </span>
-              ))}
-            </div>
-
-            {/* 수직선 → 분기 노드 → 수평 바 */}
-            <div className="flex flex-col items-center w-full">
-              <div className="w-px h-5 bg-blue-600/50" />
-              <div className="w-2.5 h-2.5 rounded-full bg-blue-500 border-2 border-blue-300 shadow-[0_0_6px_rgba(37,99,235,0.6)]" />
-              <div className="w-full h-px bg-blue-600/40" />
-            </div>
-          </motion.div>
-
-          {/* 부서 카드 그리드 — 각 열에 수직 드롭 + 카드 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
-            {DEPARTMENTS.map(({ key, items }, i) => {
-              // eslint-disable-next-line react-hooks/rules-of-hooks
-              const { ref: cardRef, inView: cardInView } = useReveal("-30px");
-              return (
-                <div key={key} className="flex flex-col items-center">
-                  {/* 수직 드롭 — 모바일에서는 숨김 */}
-                  <div className="hidden xl:block w-px h-4 bg-blue-600/40 shrink-0" />
-
-                  <motion.div
-                    ref={cardRef}
-                    initial={{ opacity: 0, y: 48 }}
-                    animate={cardInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.7, delay: i * 0.09, ease: EASE }}
-                    className="w-full rounded-xl border border-blue-600 bg-[#0d1b35] overflow-hidden hover:border-blue-400 hover:shadow-[0_0_18px_rgba(37,99,235,0.25)] transition-all duration-300"
-                  >
-                    {/* 부서 헤더 */}
-                    <div className="bg-gradient-to-r from-blue-600 to-blue-500 px-4 py-3.5 flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-white/70 shrink-0" />
-                      <span className="text-white font-black text-[0.975rem] tracking-[0.15em] uppercase drop-shadow-sm">
-                        {key}
-                      </span>
-                    </div>
-
-                    <div className="px-3 py-3 flex flex-col items-stretch gap-2.5">
-                      {items.map((item) => (
-                        <div
-                          key={item}
-                          className="rounded-md border border-blue-500/30 bg-white/5 px-3 py-2 text-[1.02rem] text-white/90 leading-snug"
-                        >
-                          {item}
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                </div>
-              );
-            })}
-          </div>
+        <section className="px-5 pb-12 pt-20 sm:px-8 sm:pb-16 sm:pt-24 lg:px-12">
+          <div className="mx-auto max-w-[1180px] text-center">
+            <motion.p
+              className="text-[12px] font-bold uppercase text-slate-400"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.62, ease: EASE }}
+            >
+              ADGRIT Organization
+            </motion.p>
+            <motion.h1
+              className="mt-3 text-[38px] font-black leading-tight text-slate-950 sm:text-[54px]"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.72, delay: 0.08, ease: EASE }}
+            >
+              조직도
+            </motion.h1>
+            <motion.p
+              className="mx-auto mt-4 max-w-[560px] text-[15px] leading-7 text-slate-400 sm:text-[16px]"
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.72, delay: 0.16, ease: EASE }}
+            >
+              애드그릿의 전략, 실행, 제작, 개발 조직이 하나의 흐름으로 연결됩니다.
+            </motion.p>
           </div>
         </section>
 
+        <section className="px-5 pb-24 sm:px-8 sm:pb-32 lg:px-12">
+          <div className="mx-auto max-w-[1180px]">
+            <div className="relative flex flex-col items-center">
+              <DepartmentCard department={leader} compact />
+
+              <div className="h-10 w-px bg-slate-200" aria-hidden="true" />
+              <div className="hidden h-px w-[82%] max-w-[940px] bg-slate-200 lg:block" aria-hidden="true" />
+
+              <div className="grid w-full grid-cols-1 gap-x-6 gap-y-14 pt-10 sm:grid-cols-2 lg:grid-cols-3">
+                {firstRow.map((department, index) => (
+                  <div key={department.role} className="relative">
+                    <div
+                      className="absolute left-1/2 top-[-40px] hidden h-10 w-px -translate-x-1/2 bg-slate-200 lg:block"
+                      aria-hidden="true"
+                    />
+                    <DepartmentCard department={department} index={index + 1} />
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-14 h-10 w-px bg-slate-200" aria-hidden="true" />
+              <div className="hidden h-px w-[52%] max-w-[620px] bg-slate-200 lg:block" aria-hidden="true" />
+
+              <div className="grid w-full grid-cols-1 gap-x-6 gap-y-14 pt-10 sm:grid-cols-2 lg:w-[70%] lg:grid-cols-2">
+                {secondRow.map((department, index) => (
+                  <div key={department.role} className="relative">
+                    <div
+                      className="absolute left-1/2 top-[-40px] hidden h-10 w-px -translate-x-1/2 bg-slate-200 lg:block"
+                      aria-hidden="true"
+                    />
+                    <DepartmentCard department={department} index={index + 4} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />

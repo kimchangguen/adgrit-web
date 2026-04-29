@@ -323,7 +323,7 @@ export default async function PostDetail({
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f9fc] text-[#1a1a2e]">
+    <div className="min-h-screen bg-[#f8f9fc] text-[#1f1f1f]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -337,10 +337,10 @@ export default async function PostDetail({
       <SiteHeader />
 
       {/* 히어로 */}
-      <section className="bg-[#1A237E] pt-28 pb-10 sm:pt-32 sm:pb-12">
+      <section className="bg-[#222222] pt-28 pb-10 sm:pt-32 sm:pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* 브레드크럼 */}
-          <nav className="flex items-center gap-2 text-xs text-blue-200 mb-4 flex-wrap">
+          <nav className="flex items-center gap-2 text-xs text-slate-300 mb-4 flex-wrap">
             <Link href="/" className="hover:text-white transition-colors">홈</Link>
             <span>/</span>
             <Link href="/blog" className="hover:text-white transition-colors">블로그</Link>
@@ -361,17 +361,17 @@ export default async function PostDetail({
           {firstCat && (
             <Link
               href={`/blog/category/${firstCat.slug}`}
-              className="inline-block mb-3 bg-[#FF7F00] text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-orange-500 transition-colors"
+              className="inline-block mb-3 bg-[#222222] text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-[#3a3a3a] transition-colors"
             >
               {firstCat.name}
             </Link>
           )}
 
           <h1
-            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight max-w-4xl"
+            className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight max-w-4xl"
             dangerouslySetInnerHTML={{ __html: post.title.rendered }}
           />
-          <time className="mt-3 block text-sm text-blue-200">{formatDate(post.date)}</time>
+          <time className="mt-3 block text-sm text-slate-300">{formatDate(post.date)}</time>
         </div>
       </section>
 
@@ -394,7 +394,7 @@ export default async function PostDetail({
                 />
               </div>
             ) : (
-              <div className="w-full aspect-[16/9] rounded-2xl bg-gradient-to-br from-[#1A237E]/10 to-slate-100 mb-8 flex items-center justify-center">
+              <div className="w-full aspect-[16/9] rounded-2xl bg-gradient-to-br from-[#222222]/10 to-slate-100 mb-8 flex items-center justify-center">
                 <span className="text-6xl opacity-20">📝</span>
               </div>
             )}
@@ -404,18 +404,18 @@ export default async function PostDetail({
               className="
                 prose prose-lg prose-slate max-w-none
                 bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 lg:p-10
-                [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[#1a1a2e] [&_h2]:mt-8 [&_h2]:mb-4
-                [&_h2]:pl-3 [&_h2]:border-l-4 [&_h2]:border-[#1A237E]
-                [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-[#1a1a2e] [&_h3]:mt-6 [&_h3]:mb-3
-                [&_h3]:pl-3 [&_h3]:border-l-2 [&_h3]:border-[#FF7F00]
+                [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[#1f1f1f] [&_h2]:mt-8 [&_h2]:mb-4
+                [&_h2]:pl-3 [&_h2]:border-l-4 [&_h2]:border-[#222222]
+                [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-[#1f1f1f] [&_h3]:mt-6 [&_h3]:mb-3
+                [&_h3]:pl-3 [&_h3]:border-l-2 [&_h3]:border-[#222222]
                 [&_p]:text-slate-700 [&_p]:leading-relaxed [&_p]:mb-4
-                [&_a]:text-[#1A237E] [&_a:hover]:underline
-                [&_strong]:font-bold [&_strong]:text-[#1a1a2e]
-                [&_blockquote]:border-l-4 [&_blockquote]:border-[#1A237E] [&_blockquote]:bg-slate-50
+                [&_a]:text-[#222222] [&_a:hover]:underline
+                [&_strong]:font-bold [&_strong]:text-[#1f1f1f]
+                [&_blockquote]:border-l-4 [&_blockquote]:border-[#222222] [&_blockquote]:bg-slate-50
                 [&_blockquote]:pl-4 [&_blockquote]:py-3 [&_blockquote]:my-4 [&_blockquote]:rounded-r-lg
                 [&_blockquote]:text-slate-600 [&_blockquote]:italic
                 [&_table]:w-full [&_table]:border-collapse [&_table]:my-4
-                [&_th]:bg-[#1A237E] [&_th]:text-white [&_th]:px-3 [&_th]:py-2 [&_th]:text-sm [&_th]:font-semibold
+                [&_th]:bg-[#222222] [&_th]:text-white [&_th]:px-3 [&_th]:py-2 [&_th]:text-sm [&_th]:font-semibold
                 [&_td]:border [&_td]:border-slate-200 [&_td]:px-3 [&_td]:py-2 [&_td]:text-sm [&_td]:text-slate-700
                 [&_tr:nth-child(even)_td]:bg-slate-50
                 [&_img]:rounded-xl [&_img]:w-full [&_img]:my-4
@@ -428,14 +428,14 @@ export default async function PostDetail({
             <div className="mt-8 flex items-center justify-between">
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-[#1A237E] transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-[#222222] transition-colors"
               >
                 ← 목록으로
               </Link>
               {firstCat && (
                 <Link
                   href={`/blog/category/${firstCat.slug}`}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#1A237E] hover:underline"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#222222] hover:underline"
                 >
                   {firstCat.name} 글 더보기 →
                 </Link>
@@ -451,8 +451,8 @@ export default async function PostDetail({
         {relatedPosts.length > 0 && (
           <section className="mt-14">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-1 h-6 bg-[#1A237E] rounded-full" />
-              <h2 className="text-xl font-bold text-[#1a1a2e]">함께 읽으면 좋은 글</h2>
+              <div className="w-1 h-6 bg-[#222222] rounded-full" />
+              <h2 className="text-xl font-black text-[#1f1f1f]">함께 읽으면 좋은 글</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
               {relatedPosts.map((p) => (
@@ -472,19 +472,19 @@ export default async function PostDetail({
                         sizes="(max-width: 640px) 100vw, 33vw"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-[#1A237E]/10 to-slate-200 flex items-center justify-center">
+                      <div className="w-full h-full bg-gradient-to-br from-[#222222]/10 to-slate-200 flex items-center justify-center">
                         <span className="text-4xl opacity-25">📝</span>
                       </div>
                     )}
                     {p.categoryName && (
-                      <span className="absolute top-2 left-2 bg-[#FF7F00] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      <span className="absolute top-2 left-2 bg-[#222222] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                         {p.categoryName}
                       </span>
                     )}
                   </div>
                   {/* 텍스트 */}
                   <div className="p-4 flex flex-col flex-1">
-                    <h3 className="text-sm font-bold text-[#1a1a2e] leading-snug mb-2 line-clamp-2 group-hover:text-[#1A237E] transition-colors">
+                    <h3 className="text-sm font-black text-[#1f1f1f] leading-snug mb-2 line-clamp-2 group-hover:text-[#222222] transition-colors">
                       {p.title}
                     </h3>
                     {p.excerpt && (

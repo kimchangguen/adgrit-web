@@ -25,9 +25,9 @@ export function BlogAnimatedHero() {
           className="absolute right-0 top-0 h-full w-full opacity-[0.055]"
           preserveAspectRatio="xMaxYMid slice"
         >
-          <ellipse cx="490" cy="210" rx="360" ry="290" fill="#1A237E" />
-          <ellipse cx="410" cy="70"  rx="200" ry="155" fill="#FF7F00" />
-          <ellipse cx="550" cy="370" rx="170" ry="130" fill="#1A237E" />
+          <ellipse cx="490" cy="210" rx="360" ry="290" fill="#222222" />
+          <ellipse cx="410" cy="70"  rx="200" ry="155" fill="#222222" />
+          <ellipse cx="550" cy="370" rx="170" ry="130" fill="#222222" />
         </svg>
         <svg
           viewBox="0 0 600 440"
@@ -38,7 +38,7 @@ export function BlogAnimatedHero() {
             <path
               key={offset}
               d={`M -60 ${210 + offset} Q 150 ${135 + offset} 310 ${210 + offset} T 660 ${210 + offset}`}
-              stroke="#1A237E"
+              stroke="#222222"
               strokeWidth="1.5"
               fill="none"
             />
@@ -49,18 +49,18 @@ export function BlogAnimatedHero() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.p
           {...fadeUp(0.05)}
-          className="text-xs font-bold tracking-[0.18em] text-[#FF7F00] uppercase mb-4"
+          className="text-xs font-bold tracking-[0.18em] text-[#222222] uppercase mb-4"
         >
           ADGRIT BLOG
         </motion.p>
 
         <motion.h1
           {...fadeUp(0.15)}
-          className="text-3xl sm:text-4xl lg:text-[3.25rem] font-extrabold text-[#1a1a2e] leading-[1.15] tracking-tight"
+          className="text-3xl sm:text-4xl lg:text-[3.25rem] font-extrabold text-[#1f1f1f] leading-[1.15] tracking-tight"
         >
           마케팅의 모든 것,
           <br />
-          <span className="text-[#1A237E]">애드그릿 블로그</span>
+          <span className="text-[#222222]">애드그릿 블로그</span>
         </motion.h1>
 
         <motion.p
@@ -81,7 +81,7 @@ export function BlogAnimatedHero() {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 380, damping: 22 }}
-            className="inline-flex items-center gap-2 bg-[#1A237E] text-white text-sm font-semibold px-6 py-3 rounded-full shadow-md shadow-[#1A237E]/20 hover:bg-[#283593] transition-colors"
+            className="inline-flex items-center gap-2 bg-[#222222] text-white text-sm font-semibold px-6 py-3 rounded-full shadow-md shadow-[#222222]/20 hover:bg-[#3a3a3a] transition-colors"
           >
             글 둘러보기
           </motion.a>
@@ -92,7 +92,7 @@ export function BlogAnimatedHero() {
           >
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 border border-slate-200 text-slate-600 text-sm font-semibold px-6 py-3 rounded-full hover:border-[#1A237E] hover:text-[#1A237E] transition-colors"
+              className="inline-flex items-center gap-2 border border-slate-200 text-slate-600 text-sm font-semibold px-6 py-3 rounded-full hover:border-[#222222] hover:text-[#222222] transition-colors"
             >
               무료 상담
             </Link>

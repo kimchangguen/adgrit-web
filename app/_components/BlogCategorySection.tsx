@@ -58,15 +58,15 @@ export function BlogCategorySection({ category, posts, index }: Props) {
       transition={{ duration: 0.72, delay: index * 0.09, ease: EASE }}
     >
       {/* ── 섹션 헤더 ────────────────────────────────── */}
-      <div className="flex items-center justify-between pb-3 border-b-2 border-[#1A237E]">
-        <h2 className="flex items-center gap-2 text-base sm:text-[1.0625rem] font-bold text-[#1a1a2e]">
-          <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#FF7F00] shrink-0" />
+      <div className="flex items-center justify-between pb-3 border-b-2 border-[#222222]">
+        <h2 className="flex items-center gap-2 text-base sm:text-[1.0625rem] font-black text-[#1f1f1f]">
+          <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#222222] shrink-0" />
           {category.name}
         </h2>
         <motion.div whileHover={{ x: 3 }} transition={SPRING}>
           <Link
             href={`/blog/category/${category.slug}`}
-            className="text-xs sm:text-sm text-slate-400 hover:text-[#1A237E] transition-colors flex items-center gap-0.5 font-medium"
+            className="text-xs sm:text-sm text-slate-400 hover:text-[#222222] transition-colors flex items-center gap-0.5 font-medium"
           >
             더보기 <span aria-hidden className="text-base leading-none">›</span>
           </Link>
@@ -98,15 +98,15 @@ export function BlogCategorySection({ category, posts, index }: Props) {
                       sizes="(max-width: 1280px) 15vw, 180px"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1A237E]/8 to-slate-100">
-                      <Icon size={22} className="text-[#1A237E]/40" strokeWidth={1.5} />
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#222222]/8 to-slate-100">
+                      <Icon size={22} className="text-[#222222]/40" strokeWidth={1.5} />
                     </div>
                   )}
                 </div>
 
                 {/* 제목 */}
                 <div className="p-2.5">
-                  <p className="text-[0.75rem] font-medium text-[#1a1a2e] group-hover:text-[#1A237E] transition-colors line-clamp-2 leading-snug">
+                  <p className="text-[0.75rem] font-medium text-[#1f1f1f] group-hover:text-[#222222] transition-colors line-clamp-2 leading-snug">
                     {post.title}
                   </p>
                 </div>
@@ -149,18 +149,18 @@ export function BlogCategorySection({ category, posts, index }: Props) {
                       sizes="200px"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1A237E]/8 to-slate-100">
-                      <Icon size={28} className="text-[#1A237E]/35" strokeWidth={1.5} />
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#222222]/8 to-slate-100">
+                      <Icon size={28} className="text-[#222222]/35" strokeWidth={1.5} />
                     </div>
                   )}
                 </div>
 
                 {/* 카드 텍스트 */}
                 <div className="p-3">
-                  <p className="text-[0.8125rem] font-semibold text-[#1a1a2e] line-clamp-2 leading-snug">
+                  <p className="text-[0.8125rem] font-semibold text-[#1f1f1f] line-clamp-2 leading-snug">
                     {post.title}
                   </p>
-                  <span className="mt-2 inline-block text-[0.75rem] font-medium text-[#1A237E]">
+                  <span className="mt-2 inline-block text-[0.75rem] font-medium text-[#222222]">
                     읽기 →
                   </span>
                 </div>
@@ -179,7 +179,7 @@ export function BlogCategorySection({ category, posts, index }: Props) {
         >
           <Link
             href={`/blog/category/${category.slug}`}
-            className="flex flex-col items-center gap-2 text-slate-400 hover:text-[#1A237E] transition-colors"
+            className="flex flex-col items-center gap-2 text-slate-400 hover:text-[#222222] transition-colors"
           >
             <div className="w-10 h-10 rounded-full border-2 border-slate-200 flex items-center justify-center text-lg">
               ›

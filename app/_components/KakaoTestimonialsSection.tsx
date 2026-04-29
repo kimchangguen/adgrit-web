@@ -2,33 +2,59 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight, MessageCircle, Star } from "lucide-react";
 import { Container } from "./Container";
 
 // public/kakao-screens/ 에 kakao-1.jpg ~ kakao-10.jpg (또는 .png) 로 넣어주세요.
 const KAKAO_IMAGES = Array.from({ length: 10 }, (_, i) => `/kakao-screens/kakao-${i + 1}.jpg`);
 
-const CARD_WIDTH = 384; // 320 * 1.2
-const GAP = 29;
+const FALLBACK_SLIDE_STEP = 260;
 const AUTO_PLAY_INTERVAL = 2500; // 2.5초로 단축
 
 export function KakaoTestimonialsSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [scrollPageCount, setScrollPageCount] = useState(KAKAO_IMAGES.length);
   const startX = useRef(0);
   const scrollLeftStart = useRef(0);
   const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isProgrammaticScrollRef = useRef(false);
   const animationFrameRef = useRef<number | null>(null);
 
-  const maxIndex = KAKAO_IMAGES.length - 1;
+  const getSlideMetrics = useCallback(() => {
+    const el = scrollRef.current;
+    const firstCard = el?.firstElementChild as HTMLElement | null;
+
+    if (!el || !firstCard) {
+      return { gap: 24, step: FALLBACK_SLIDE_STEP };
+    }
+
+    const styles = window.getComputedStyle(el);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap || "24") || 24;
+    const cardWidth = firstCard.getBoundingClientRect().width;
+
+    return { gap, step: cardWidth + gap };
+  }, []);
+
+  const getMaxIndex = useCallback(() => {
+    const el = scrollRef.current;
+
+    if (!el) return KAKAO_IMAGES.length - 1;
+
+    const { gap, step } = getSlideMetrics();
+    const visibleCards = Math.max(1, Math.floor((el.clientWidth + gap) / step));
+
+    return Math.max(0, KAKAO_IMAGES.length - visibleCards);
+  }, [getSlideMetrics]);
 
   const scrollToIndex = useCallback((idx: number) => {
     const el = scrollRef.current;
     if (!el) return;
     isProgrammaticScrollRef.current = true;
 
-    const target = idx * (CARD_WIDTH + GAP);
+    const targetIndex = Math.max(0, Math.min(idx, getMaxIndex()));
+    const target = targetIndex * getSlideMetrics().step;
     const start = el.scrollLeft;
     const change = target - start;
     const startTime = performance.now();
@@ -56,13 +82,20 @@ export function KakaoTestimonialsSection() {
     };
 
     animationFrameRef.current = requestAnimationFrame(animateScroll);
-  }, []);
+  }, [getMaxIndex, getSlideMetrics]);
 
   const goTo = useCallback((index: number) => {
-    const idx = Math.max(0, Math.min(index, maxIndex));
+    const idx = Math.max(0, Math.min(index, getMaxIndex()));
     setCurrentIndex(idx);
     scrollToIndex(idx);
-  }, [maxIndex, scrollToIndex]);
+  }, [getMaxIndex, scrollToIndex]);
+
+  const updateScrollPageCount = useCallback(() => {
+    const maxIndex = getMaxIndex();
+
+    setScrollPageCount(maxIndex + 1);
+    setCurrentIndex((index) => Math.min(index, maxIndex));
+  }, [getMaxIndex]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!scrollRef.current) return;
@@ -90,12 +123,12 @@ export function KakaoTestimonialsSection() {
     if (!isDragging || !scrollRef.current) return;
     setIsDragging(false);
     const scrollLeft = scrollRef.current.scrollLeft;
-    const idx = Math.round(scrollLeft / (CARD_WIDTH + GAP));
-    const clamped = Math.max(0, Math.min(idx, maxIndex));
+    const idx = Math.round(scrollLeft / getSlideMetrics().step);
+    const clamped = Math.max(0, Math.min(idx, getMaxIndex()));
     setCurrentIndex(clamped);
     scrollToIndex(clamped);
     autoPlayRef.current = setInterval(() => {
-      setCurrentIndex((i) => (i + 1) % KAKAO_IMAGES.length);
+      setCurrentIndex((i) => (i >= getMaxIndex() ? 0 : i + 1));
     }, AUTO_PLAY_INTERVAL);
   };
 
@@ -105,13 +138,13 @@ export function KakaoTestimonialsSection() {
 
   useEffect(() => {
     autoPlayRef.current = setInterval(() => {
-      setCurrentIndex((i) => (i + 1) % KAKAO_IMAGES.length);
+      setCurrentIndex((i) => (i >= getMaxIndex() ? 0 : i + 1));
     }, AUTO_PLAY_INTERVAL);
     return () => {
       if (autoPlayRef.current) clearInterval(autoPlayRef.current);
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
-  }, []);
+  }, [getMaxIndex]);
 
   useEffect(() => {
     if (!scrollRef.current || isDragging) return;
@@ -119,66 +152,71 @@ export function KakaoTestimonialsSection() {
   }, [currentIndex, isDragging, scrollToIndex]);
 
   useEffect(() => {
+    const update = () => window.requestAnimationFrame(updateScrollPageCount);
+    const frame = update();
+
+    window.addEventListener("resize", update);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("resize", update);
+    };
+  }, [updateScrollPageCount]);
+
+  useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
     const onScroll = () => {
       if (isProgrammaticScrollRef.current) return;
-      const idx = Math.round(el.scrollLeft / (CARD_WIDTH + GAP));
-      setCurrentIndex(Math.max(0, Math.min(idx, maxIndex)));
+      const idx = Math.round(el.scrollLeft / getSlideMetrics().step);
+      setCurrentIndex(Math.max(0, Math.min(idx, getMaxIndex())));
     };
     el.addEventListener("scroll", onScroll, { passive: true });
     return () => el.removeEventListener("scroll", onScroll);
-  }, [maxIndex]);
+  }, [getMaxIndex, getSlideMetrics]);
 
   return (
     <section
       id="kakao-testimonials"
-      className="relative z-10 border-t border-slate-100 bg-white py-[4.8rem] sm:py-[6rem]"
+      className="relative z-10 border-t border-slate-100 bg-white py-20 sm:py-24 lg:py-28"
     >
       <Container>
-        {/* 상단 헤더 - 20% 확대 */}
         <div className="text-center">
-          <h2 className="text-[1.8rem] sm:text-[2.25rem] lg:text-[2.7rem] font-black tracking-tight">
-            <span className="text-[#1a1a2e]">클라이언트</span>
-            <span className="text-orange-500"> 만족후기</span>
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#1D1B1F]/45">
+            Client Success Reviews
+          </p>
+          <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-bold tracking-tighter text-[#1D1B1F] sm:text-5xl">
+            클라이언트 만족후기
           </h2>
-          <p className="mt-5 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#1D1B1F]/65 sm:text-lg">
             애드그릿은 사장님과 꾸준한소통으로
             <br />
             매장의 안정화된 매출성장을 위해 소통과 개발을 합니다.
           </p>
         </div>
 
-        {/* 카카오톡 화면 가로 캐러셀 - 20% 확대 */}
-        <div className="mt-14 sm:mt-[4.2rem] relative">
-          {/* 좌측 화살표 */}
+        <div className="relative mt-14 sm:mt-16">
           <button
             type="button"
             onClick={() => goTo(currentIndex - 1)}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-4 z-10 w-14 h-14 rounded-full bg-white border border-slate-200 shadow-lg flex items-center justify-center text-[#1e40af] hover:bg-slate-50 transition-colors"
+            className="absolute left-0 top-1/2 z-10 flex h-14 w-14 -translate-x-2 -translate-y-1/2 items-center justify-center rounded-full border border-slate-100 bg-white text-[#1D1B1F] shadow-[0_18px_50px_rgba(15,23,42,0.10)] transition-all duration-300 hover:scale-105 hover:border-[#1D1B1F] hover:bg-[#1D1B1F] hover:text-white sm:-translate-x-4"
             aria-label="이전"
           >
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
+            <ChevronLeft className="h-7 w-7" strokeWidth={1.8} />
           </button>
 
-          {/* 우측 화살표 */}
           <button
             type="button"
             onClick={() => goTo(currentIndex + 1)}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-4 z-10 w-14 h-14 rounded-full bg-white border border-slate-200 shadow-lg flex items-center justify-center text-[#1e40af] hover:bg-slate-50 transition-colors"
+            className="absolute right-0 top-1/2 z-10 flex h-14 w-14 -translate-y-1/2 translate-x-2 items-center justify-center rounded-full border border-slate-100 bg-white text-[#1D1B1F] shadow-[0_18px_50px_rgba(15,23,42,0.10)] transition-all duration-300 hover:scale-105 hover:border-[#1D1B1F] hover:bg-[#1D1B1F] hover:text-white sm:translate-x-4"
             aria-label="다음"
           >
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+            <ChevronRight className="h-7 w-7" strokeWidth={1.8} />
           </button>
 
-          {/* 스크롤 영역 */}
           <div
             ref={scrollRef}
-            className={`flex gap-7 overflow-x-auto py-5 px-2 cursor-grab active:cursor-grabbing select-none [&::-webkit-scrollbar]:hidden ${
+            className={`flex cursor-grab select-none gap-6 overflow-x-auto px-2 py-6 active:cursor-grabbing [&::-webkit-scrollbar]:hidden ${
               isDragging ? "cursor-grabbing" : ""
             }`}
             style={{ scrollbarWidth: "none", scrollSnapType: "x mandatory" }}
@@ -190,20 +228,37 @@ export function KakaoTestimonialsSection() {
             {KAKAO_IMAGES.map((src, i) => (
               <div
                 key={src}
-                className="flex-shrink-0 rounded-2xl overflow-hidden border border-slate-200 shadow-lg bg-white"
-                style={{
-                  width: CARD_WIDTH,
-                  scrollSnapAlign: "center",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-                }}
+                className="group w-[84vw] flex-shrink-0 overflow-hidden rounded-3xl border border-slate-100 bg-white p-3 text-[#1D1B1F] shadow-[0_18px_60px_rgba(15,23,42,0.06)] transition-all duration-500 ease-in-out hover:scale-[1.02] hover:border-[#1D1B1F] hover:bg-[#1D1B1F] hover:text-white hover:shadow-[0_24px_80px_rgba(0,0,0,0.18)] sm:w-[calc((100%_-_1.5rem)/2)] lg:w-[calc((100%_-_6rem)/5)] lg:p-3.5"
+                style={{ scrollSnapAlign: "center" }}
               >
-                <div className="relative w-full aspect-[9/16] max-h-[624px] select-none">
+                <div className="mb-3 flex items-center justify-between gap-2 lg:mb-3">
+                  <div className="flex min-w-0 items-center gap-2">
+                    <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-2xl bg-slate-50 text-[#1D1B1F] transition-all duration-500 group-hover:bg-white/10 group-hover:text-white">
+                      <MessageCircle className="h-[18px] w-[18px]" strokeWidth={1.9} />
+                    </span>
+                    <div className="min-w-0">
+                      <p className="truncate text-[13px] font-bold tracking-tight transition-colors duration-500 group-hover:text-white">
+                        성공 사례 {String(i + 1).padStart(2, "0")}
+                      </p>
+                      <p className="mt-0.5 truncate text-[11px] font-medium text-[#1D1B1F]/55 transition-colors duration-500 group-hover:text-white/60">
+                        Client Review
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-shrink-0 gap-0.5 text-[#8A7A56] transition-colors duration-500 group-hover:text-white">
+                    {[0, 1, 2, 3, 4].map((star) => (
+                      <Star key={star} className="h-3 w-3 fill-current" strokeWidth={1.6} />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="relative aspect-[9/16] max-h-[624px] w-full overflow-hidden rounded-[1.35rem] border border-slate-100 bg-slate-50 transition-colors duration-500 group-hover:border-white/10 group-hover:bg-white/10">
                   <Image
                     src={src}
                     alt={`클라이언트 만족후기 ${i + 1}`}
                     fill
-                    className="object-cover object-top pointer-events-none"
-                    sizes="384px"
+                    className="pointer-events-none object-cover object-top grayscale transition-all duration-500 group-hover:opacity-90"
+                    sizes="(min-width: 1024px) 20vw, (min-width: 640px) 50vw, 84vw"
                     draggable={false}
                   />
                 </div>
@@ -211,17 +266,16 @@ export function KakaoTestimonialsSection() {
             ))}
           </div>
 
-          {/* 페이지네이션 */}
-          <div className="flex justify-center gap-2 mt-7 flex-wrap max-w-full">
-            {KAKAO_IMAGES.map((_, i) => (
+          <div className="mt-7 flex max-w-full flex-wrap justify-center gap-2">
+            {Array.from({ length: scrollPageCount }).map((_, i) => (
               <button
                 key={i}
                 type="button"
                 onClick={() => goTo(i)}
-                className={`w-2.5 h-2.5 rounded-full transition-colors flex-shrink-0 ${
-                  i === currentIndex ? "bg-[#1e40af] scale-110" : "bg-slate-300 hover:bg-slate-400"
+                className={`h-2.5 w-2.5 flex-shrink-0 rounded-full transition-all duration-300 ${
+                  i === currentIndex ? "scale-125 bg-[#1D1B1F]" : "bg-slate-300 hover:bg-[#1D1B1F]/45"
                 }`}
-                aria-label={`${i + 1}번째로 이동`}
+                aria-label={`${i + 1}번째 후기 화면으로 이동`}
               />
             ))}
           </div>

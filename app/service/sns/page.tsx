@@ -68,7 +68,7 @@ export default function SnsPage() {
   const ctaSection = useReveal();
 
   return (
-    <div className="bg-[#1e3052] text-white min-h-screen">
+    <div className="bg-[#222222] text-white min-h-screen">
       <SiteHeader />
 
       <main className="pt-16">
@@ -78,7 +78,7 @@ export default function SnsPage() {
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(37,99,235,0.18) 0%, transparent 70%)",
+                "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 70%)",
             }}
           />
 
@@ -96,7 +96,7 @@ export default function SnsPage() {
               className="font-black leading-none tracking-tighter"
               style={{ fontSize: "clamp(2.6rem, 10vw, 9rem)" }}
             >
-              <span className="text-[#2563EB]">SNS</span>
+              <span className="text-slate-200">SNS</span>
               <span className="text-white"> 채널관리</span>
             </h1>
 
@@ -119,7 +119,7 @@ export default function SnsPage() {
             >
               <Link
                 href="/contact"
-                className="inline-block bg-[#2563EB] hover:bg-[#1d4ed8] text-white font-bold px-8 py-4 rounded-xl text-base transition-colors"
+                className="inline-block bg-white hover:bg-slate-200 text-[#222222] font-black px-8 py-4 rounded-xl text-base transition-colors"
               >
                 SNS 운영 상담 →
               </Link>
@@ -182,7 +182,7 @@ export default function SnsPage() {
             transition={{ duration: 0.7, ease: EASE }}
             className="mb-12 text-center"
           >
-            <span className="text-[#2563EB] text-sm font-semibold tracking-[0.2em] uppercase">
+            <span className="text-slate-200 text-sm font-semibold tracking-[0.2em] uppercase">
               Channels We Manage
             </span>
             <h2
@@ -200,7 +200,7 @@ export default function SnsPage() {
                 initial={{ opacity: 0, y: 28 }}
                 animate={channelsSection.inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.08, ease: EASE }}
-                className="border border-white/[0.08] rounded-2xl p-6 bg-white/[0.03] hover:bg-white/[0.06] hover:border-[#2563EB]/30 transition-all"
+                className="border border-white/[0.08] rounded-2xl p-6 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/30 transition-all"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-2xl">{c.icon}</span>
@@ -223,7 +223,7 @@ export default function SnsPage() {
             transition={{ duration: 0.7, ease: EASE }}
             className="mb-12 text-center"
           >
-            <span className="text-[#2563EB] text-sm font-semibold tracking-[0.2em] uppercase">
+            <span className="text-slate-200 text-sm font-semibold tracking-[0.2em] uppercase">
               What We Do
             </span>
             <h2
@@ -241,7 +241,7 @@ export default function SnsPage() {
                 initial={{ opacity: 0, y: 28 }}
                 animate={featuresSection.inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.08, ease: EASE }}
-                className="border border-white/[0.08] rounded-2xl p-6 bg-white/[0.03] hover:bg-white/[0.06] hover:border-[#2563EB]/30 transition-all"
+                className="border border-white/[0.08] rounded-2xl p-6 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/30 transition-all"
               >
                 <div className="text-3xl mb-4">{f.icon}</div>
                 <h3 className="text-base font-bold text-white mb-2">{f.title}</h3>
@@ -262,7 +262,7 @@ export default function SnsPage() {
             transition={{ duration: 0.7, ease: EASE }}
             className="mb-12 text-center"
           >
-            <span className="text-[#2563EB] text-sm font-semibold tracking-[0.2em] uppercase">
+            <span className="text-slate-200 text-sm font-semibold tracking-[0.2em] uppercase">
               Expected Outcomes
             </span>
             <h2
@@ -280,7 +280,7 @@ export default function SnsPage() {
                 initial={{ opacity: 0, y: 28 }}
                 animate={outcomesSection.inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: EASE }}
-                className="border-l-2 border-[#2563EB] pl-5"
+                className="border-l-2 border-white/35 pl-5"
               >
                 <h3 className="text-base font-bold text-white mb-2">{o.title}</h3>
                 <p className="text-white/40 text-sm leading-relaxed">{o.desc}</p>
@@ -300,7 +300,7 @@ export default function SnsPage() {
             transition={{ duration: 0.7, ease: EASE }}
             className="mb-14 text-center"
           >
-            <span className="text-[#2563EB] text-sm font-semibold tracking-[0.2em] uppercase">
+            <span className="text-slate-200 text-sm font-semibold tracking-[0.2em] uppercase">
               Our Process
             </span>
             <h2
@@ -323,7 +323,7 @@ export default function SnsPage() {
                 {i < PROCESS.length - 1 && (
                   <div className="hidden lg:block absolute top-6 left-full w-full h-px bg-white/10 -translate-x-4" />
                 )}
-                <div className="text-[#2563EB] font-black text-4xl leading-none mb-4">{p.num}</div>
+                <div className="text-slate-200 font-black text-4xl leading-none mb-4">{p.num}</div>
                 <h3 className="text-lg font-bold text-white mb-2">{p.title}</h3>
                 <p className="text-white/40 text-sm leading-relaxed">{p.desc}</p>
               </motion.div>
@@ -342,7 +342,7 @@ export default function SnsPage() {
             transition={{ duration: 0.9, ease: EASE }}
             className="max-w-2xl mx-auto text-center"
           >
-            <p className="text-[#2563EB] text-sm font-semibold tracking-[0.2em] uppercase mb-4">
+            <p className="text-slate-200 text-sm font-semibold tracking-[0.2em] uppercase mb-4">
               Grow Your Audience
             </p>
             <h2
@@ -359,7 +359,7 @@ export default function SnsPage() {
             </p>
             <Link
               href="/contact"
-              className="inline-block mt-10 bg-[#2563EB] hover:bg-[#1d4ed8] text-white font-bold px-10 py-5 rounded-xl text-lg transition-colors"
+              className="inline-block mt-10 bg-white hover:bg-slate-200 text-[#222222] font-black px-10 py-5 rounded-xl text-lg transition-colors"
             >
               SNS 운영 상담 신청 →
             </Link>

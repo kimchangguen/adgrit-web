@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { Container } from "./Container";
 
-const CARD_BLUE = "#2362ff";
-const CARD_BLUE_DARK = "#1d51d9";
-const CARD_BLUE_LAYER = "#1a47b8";
+const CARD_BLUE = "#222222";
+const CARD_BLUE_DARK = "#3a3a3a";
+const CARD_BLUE_LAYER = "#2f2f2f";
 
 export function WhyAdgritSection() {
   return (
@@ -15,12 +15,12 @@ export function WhyAdgritSection() {
     >
       <Container>
         <div className="text-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#1f1f1f]">
             애드그릿의 다양한 마케팅 상품
           </h2>
           <Link
             href="#why-adgrit"
-            className="mt-4 inline-flex items-center justify-center rounded-full border-2 border-[#2362ff] px-5 py-2.5 text-sm font-medium text-[#2362ff] hover:bg-[#2362ff] hover:text-white transition-colors"
+            className="mt-4 inline-flex items-center justify-center rounded-full border-2 border-[#222222] px-5 py-2.5 text-sm font-medium text-[#222222] hover:bg-[#222222] hover:text-white transition-colors"
           >
             펼쳐서 보기
           </Link>
@@ -47,8 +47,8 @@ export function WhyAdgritSection() {
               <div className="flex-1 flex justify-center lg:justify-end">
                 <div className="relative w-full max-w-[320px] aspect-[4/3] flex items-center justify-center">
                   {/* 모니터 */}
-                  <div className="relative w-32 h-24 sm:w-40 sm:h-28 rounded-lg bg-sky-100 border-2 border-white/50 shadow-lg flex items-center justify-center">
-                    <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sky-600" aria-hidden>
+                  <div className="relative w-32 h-24 sm:w-40 sm:h-28 rounded-lg bg-slate-100 border-2 border-white/50 shadow-lg flex items-center justify-center">
+                    <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#222222]" aria-hidden>
                       <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M13 5l7 7-7 7V5z M5 5l7 7-7 7V5z" />
                       </svg>
@@ -58,7 +58,7 @@ export function WhyAdgritSection() {
                   <span className="absolute top-2 left-4 w-8 h-8 rounded-full bg-slate-700/90 flex items-center justify-center text-white" aria-hidden>
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                   </span>
-                  <span className="absolute top-2 right-6 w-9 h-9 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm" aria-hidden>
+                  <span className="absolute top-2 right-6 w-9 h-9 rounded-full bg-[#222222] flex items-center justify-center text-white font-bold text-sm" aria-hidden>
                     $
                   </span>
                   <span className="absolute bottom-4 right-2 w-8 h-8 rounded-full bg-slate-700/90 flex items-center justify-center text-white" aria-hidden>
