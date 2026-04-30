@@ -14,13 +14,13 @@ export function SloganWithEffects() {
   return (
     <div
       ref={sectionRef}
-      className="relative w-full flex items-center justify-center h-[800px] py-10 overflow-hidden bg-white"
+      className="relative w-full flex items-center justify-center h-[800px] py-10 overflow-hidden bg-neutral"
     >
       <Container className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10 lg:gap-12">
         {/* 왼쪽: 텍스트 (검정색) */}
         <div className="max-w-2xl">
           <motion.h2
-            className="text-black text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl font-bold leading-[1.35] tracking-tight text-left"
+            className="text-primary text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl font-bold leading-[1.35] tracking-tight text-left"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
@@ -29,11 +29,11 @@ export function SloganWithEffects() {
             <br />
             집어 치우고
             <br />
-            <span style={{ color: "#222222" }}>광고 양</span>으로 승부 하세요
+            <span className="text-secondary">광고 양</span>으로 승부 하세요
           </motion.h2>
 
           <motion.p
-            className="mt-6 text-black text-base sm:text-lg font-normal tracking-wide text-left"
+            className="mt-6 text-primary text-base sm:text-lg font-normal tracking-wide text-left"
             initial={{ opacity: 0, y: 12 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.4, delay: 0.1 }}
@@ -58,7 +58,7 @@ export function SloganWithEffects() {
       </Container>
 
       {/* 하단 스크롤 인디케이터 */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-400 z-10">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-secondary z-10">
         <svg
           className="w-6 h-6 animate-bounce"
           fill="none"

@@ -23,7 +23,7 @@ function VisionCard({
   desc: string;
 }) {
   return (
-    <div className="flex h-full w-full flex-shrink-0 flex-col overflow-hidden rounded-xl bg-white border border-slate-100 shadow-sm">
+    <div className="flex h-full w-full flex-shrink-0 flex-col overflow-hidden rounded-xl bg-neutral border border-tertiary shadow-sm">
       {/* 이미지: 컬러 + 연한 파란 오버레이 (비율 고정) */}
       <div className="relative aspect-[4/3] w-full flex-shrink-0 overflow-hidden rounded-t-xl">
         <div
@@ -31,20 +31,20 @@ function VisionCard({
           style={{ backgroundImage: `url('${imageUrl}')` }}
         />
         <div
-          className="absolute top-2 right-2 w-24 h-24 rounded-full bg-slate-400/20 blur-2xl"
+          className="absolute top-2 right-2 w-24 h-24 rounded-full bg-secondary/20 blur-2xl"
           aria-hidden
         />
         <div
-          className="absolute bottom-4 left-4 w-20 h-20 rounded-full bg-slate-300/20 blur-xl"
+          className="absolute bottom-4 left-4 w-20 h-20 rounded-full bg-tertiary/40 blur-xl"
           aria-hidden
         />
       </div>
       {/* 텍스트: 이미지 아래, 왼쪽 정렬, 최소 높이로 박스 크기 통일 */}
       <div className="flex min-h-[88px] flex-1 flex-col justify-start p-4 sm:p-5 text-left">
-        <h3 className="text-base sm:text-lg font-black text-[#1f1f1f] leading-snug">
+        <h3 className="text-base sm:text-lg font-black text-primary leading-snug">
           {titleEn}
         </h3>
-        <p className="mt-2 text-sm sm:text-[15px] text-slate-700 leading-relaxed line-clamp-3">
+        <p className="mt-2 text-sm sm:text-[15px] text-primary/70 leading-relaxed line-clamp-3">
           {desc}
         </p>
       </div>
@@ -109,7 +109,7 @@ export function VisionCarousel({
     <div className="flex flex-col gap-8 sm:gap-10">
       {/* 상단: 2줄 제목 가운데 정렬, 이전/다음만 (POINT 라벨 없음) */}
       <div className="flex flex-col items-center gap-3 text-center">
-        <h2 className="text-[1.725rem] sm:text-[2.16rem] lg:text-[2.59rem] font-bold tracking-tight text-black leading-tight">
+        <h2 className="text-[1.725rem] sm:text-[2.16rem] lg:text-[2.59rem] font-bold tracking-tight text-primary leading-tight">
           {line1}
           {line2 != null && (
             <>
@@ -118,11 +118,11 @@ export function VisionCarousel({
             </>
           )}
         </h2>
-        <div className="flex items-center gap-3 text-slate-600 mt-2">
+        <div className="flex items-center gap-3 text-primary/70 mt-2">
           <button
             type="button"
             onClick={prev}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 hover:border-slate-400 hover:bg-slate-50 transition-colors"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-tertiary hover:border-secondary hover:bg-tertiary transition-colors"
             aria-label="이전"
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -132,7 +132,7 @@ export function VisionCarousel({
           <button
             type="button"
             onClick={next}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 hover:border-slate-400 hover:bg-slate-50 transition-colors"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-tertiary hover:border-secondary hover:bg-tertiary transition-colors"
             aria-label="다음"
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

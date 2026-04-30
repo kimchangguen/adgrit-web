@@ -45,11 +45,11 @@ const MILESTONES = [
 
 const BAR_HEIGHTS = [0.55, 0.7, 0.82, 0.92, 1];
 const BAR_GRADIENTS = [
-  "linear-gradient(180deg, #1D1B1F 0%, #343238 100%)",
-  "linear-gradient(180deg, #475569 0%, #64748b 100%)",
-  "linear-gradient(180deg, #64748b 0%, #94a3b8 100%)",
-  "linear-gradient(180deg, #94a3b8 0%, #cbd5e1 100%)",
-  "linear-gradient(180deg, #e2e8f0 0%, #f8fafc 100%)",
+  "linear-gradient(180deg, var(--adgrit-primary) 0%, var(--adgrit-primary) 100%)",
+  "linear-gradient(180deg, var(--adgrit-primary) 0%, var(--adgrit-secondary) 100%)",
+  "linear-gradient(180deg, var(--adgrit-secondary) 0%, var(--adgrit-tertiary) 100%)",
+  "linear-gradient(180deg, var(--adgrit-tertiary) 0%, var(--adgrit-neutral) 100%)",
+  "linear-gradient(180deg, var(--adgrit-neutral) 0%, var(--adgrit-tertiary) 100%)",
 ];
 
 export function ResultsWithGraph() {
@@ -67,14 +67,14 @@ export function ResultsWithGraph() {
     <section
       ref={sectionRef}
       id="results"
-      className="relative z-10 w-full overflow-hidden bg-white py-20 sm:py-24 lg:py-28"
+      className="relative z-10 w-full overflow-hidden bg-neutral py-20 sm:py-24 lg:py-28"
     >
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-14 lg:flex-row lg:items-stretch lg:gap-20">
           {/* 왼쪽: 텍스트 */}
           <div className="flex-shrink-0 lg:w-[38%] max-w-2xl">
             <motion.span
-              className="text-[0.86rem] sm:text-[0.99rem] font-bold uppercase tracking-[0.2em] text-[#1D1B1F]/55"
+              className="text-[0.86rem] sm:text-[0.99rem] font-bold uppercase tracking-[0.2em] text-primary/55"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
@@ -83,7 +83,7 @@ export function ResultsWithGraph() {
               About Us
             </motion.span>
             <motion.h2
-              className="mt-4 text-[1.86rem] font-extrabold leading-tight tracking-tight text-[#1D1B1F] sm:text-[2.46rem] lg:text-[2.95rem]"
+              className="mt-4 text-[1.86rem] font-extrabold leading-tight tracking-tight text-primary sm:text-[2.46rem] lg:text-[2.95rem]"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
@@ -94,7 +94,7 @@ export function ResultsWithGraph() {
               애드그릿이 앞장섭니다.
             </motion.h2>
             <motion.p
-              className="mt-6 text-[1.12rem] leading-relaxed text-[#1D1B1F]/75 sm:text-[1.23rem]"
+              className="mt-6 text-[1.12rem] leading-relaxed text-primary/75 sm:text-[1.23rem]"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
@@ -103,7 +103,7 @@ export function ResultsWithGraph() {
               산업의 마케팅을 넘어, 데이터 기반 혁신으로 나아갑니다.
             </motion.p>
             <motion.p
-              className="mt-4 text-[1.12rem] leading-relaxed text-[#1D1B1F]/75 sm:text-[1.23rem]"
+              className="mt-4 text-[1.12rem] leading-relaxed text-primary/75 sm:text-[1.23rem]"
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.2, once: true }}
@@ -123,8 +123,8 @@ export function ResultsWithGraph() {
           >
             {/* 그래프 상단: 광고주 평균 ROAS 324% */}
             <div className="mb-7 flex flex-wrap items-baseline justify-between gap-4">
-              <span className="text-[1.05rem] font-semibold text-[#1D1B1F]/65">광고주 평균 ROAS</span>
-              <span className="text-[2.3rem] font-bold tabular-nums text-[#1D1B1F] sm:text-[3.45rem]">
+              <span className="text-[1.05rem] font-semibold text-primary/65">광고주 평균 ROAS</span>
+              <span className="text-[2.3rem] font-bold tabular-nums text-primary sm:text-[3.45rem]">
                 <AnimatedCounter to={324} suffix="%" duration={1.5} />
               </span>
             </div>
@@ -160,8 +160,8 @@ export function ResultsWithGraph() {
                     />
                   </div>
                   <div className="mt-5 w-full min-w-0 text-center">
-                    <p className="text-[1.05rem] font-bold text-[#1D1B1F]">{item.year}</p>
-                    <p className="mt-1.5 text-sm leading-snug text-[#1D1B1F]/60 line-clamp-2 sm:line-clamp-3">
+                    <p className="text-[1.05rem] font-bold text-primary">{item.year}</p>
+                    <p className="mt-1.5 text-sm leading-snug text-primary/60 line-clamp-2 sm:line-clamp-3">
                       {item.text}
                     </p>
                   </div>
@@ -173,7 +173,7 @@ export function ResultsWithGraph() {
 
         {/* 05 섹션 아래: 3열 통계 (흰 배경) */}
         <motion.div
-          className="mt-20 sm:mt-24 lg:mt-28 pt-16 sm:pt-20 lg:pt-24 border-t border-slate-200"
+          className="mt-20 sm:mt-24 lg:mt-28 pt-16 sm:pt-20 lg:pt-24 border-t border-tertiary"
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ amount: 0.2, once: true }}
@@ -181,25 +181,25 @@ export function ResultsWithGraph() {
         >
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-14 sm:gap-16 lg:gap-20">
             <div className="text-center">
-              <p className="text-base font-medium text-slate-500">광고주 평균 ROAS</p>
-              <p className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tabular-nums text-slate-900">
+              <p className="text-base font-medium text-primary/60">광고주 평균 ROAS</p>
+              <p className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tabular-nums text-primary">
                 <AnimatedCounter to={324} suffix="%" duration={1.5} />
               </p>
-              <p className="mt-3 text-base text-slate-500">업계 평균 대비 3.5배 높은 성과</p>
+              <p className="mt-3 text-base text-primary/60">업계 평균 대비 3.5배 높은 성과</p>
             </div>
             <div className="text-center">
-              <p className="text-base font-medium text-slate-500">누적 광고 집행 금액</p>
-              <p className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tabular-nums text-slate-900">
+              <p className="text-base font-medium text-primary/60">누적 광고 집행 금액</p>
+              <p className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tabular-nums text-primary">
                 <AnimatedCounter to={172} suffix="억+" duration={1.5} />
               </p>
-              <p className="mt-3 text-base text-slate-500">데이터로 검증된 집행 노하우</p>
+              <p className="mt-3 text-base text-primary/60">데이터로 검증된 집행 노하우</p>
             </div>
             <div className="text-center">
-              <p className="text-base font-medium text-slate-500">월 구글 애즈 집행 예산</p>
-              <p className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tabular-nums text-slate-900">
+              <p className="text-base font-medium text-primary/60">월 구글 애즈 집행 예산</p>
+              <p className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tabular-nums text-primary">
                 <AnimatedCounter to={7.2} suffix="억" decimals={1} duration={1.5} />
               </p>
-              <p className="mt-3 text-base text-slate-500">대규모 예산 운영 최적화</p>
+              <p className="mt-3 text-base text-primary/60">대규모 예산 운영 최적화</p>
             </div>
           </div>
         </motion.div>

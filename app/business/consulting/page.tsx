@@ -78,14 +78,14 @@ const RESULTS = [
 ];
 
 export default function ConsultingPage() {
-  const intro = useReveal();
-  const featuresSection = useReveal();
-  const processSection = useReveal();
-  const resultsSection = useReveal();
-  const ctaSection = useReveal();
+  const { ref: introRef, inView: introInView } = useReveal();
+  const { ref: featuresSectionRef, inView: featuresSectionInView } = useReveal();
+  const { ref: processSectionRef, inView: processSectionInView } = useReveal();
+  const { ref: resultsSectionRef, inView: resultsSectionInView } = useReveal();
+  const { ref: ctaSectionRef, inView: ctaSectionInView } = useReveal();
 
   return (
-    <div className="bg-[#222222] text-white min-h-screen">
+    <div className="bg-primary text-neutral min-h-screen">
       <SiteHeader />
 
       <main className="pt-16">
@@ -95,7 +95,7 @@ export default function ConsultingPage() {
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 70%)",
+                "radial-gradient(ellipse 80% 60% at 50% 0%, color-mix(in srgb, var(--adgrit-secondary) 22%, transparent) 0%, transparent 70%)",
             }}
           />
 
@@ -105,7 +105,7 @@ export default function ConsultingPage() {
             transition={{ duration: 0.9, ease: EASE }}
             className="relative z-10"
           >
-            <span className="inline-block border border-white/15 text-white/40 text-xs sm:text-sm px-5 py-2 rounded-full tracking-[0.22em] uppercase mb-8">
+            <span className="inline-block border border-tertiary/30 text-tertiary/70 text-xs sm:text-sm px-5 py-2 rounded-full tracking-[0.22em] uppercase mb-8">
               Business · Consulting
             </span>
 
@@ -113,15 +113,15 @@ export default function ConsultingPage() {
               className="font-black leading-none tracking-tighter"
               style={{ fontSize: "clamp(2.8rem, 10vw, 8.5rem)" }}
             >
-              <span className="text-slate-200">CON</span>
-              <span className="text-white">SULTING</span>
+              <span className="text-secondary">CON</span>
+              <span className="text-neutral">SULTING</span>
             </h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
-              className="mt-6 text-lg sm:text-2xl text-white/60 font-medium max-w-xl mx-auto leading-relaxed"
+              className="mt-6 text-lg sm:text-2xl text-tertiary/80 font-medium max-w-xl mx-auto leading-relaxed"
             >
               데이터와 경험으로 설계한
               <br />
@@ -136,13 +136,13 @@ export default function ConsultingPage() {
             >
               <Link
                 href="/contact"
-                className="inline-block bg-white hover:bg-slate-200 text-[#222222] font-black px-8 py-4 rounded-xl text-base transition-colors"
+                className="inline-block bg-secondary hover:bg-secondary/90 text-neutral font-black px-8 py-4 rounded-xl text-base transition-colors"
               >
                 무료 컨설팅 신청 →
               </Link>
               <a
                 href="#features"
-                className="inline-block border border-white/20 hover:border-white/40 text-white/70 hover:text-white font-semibold px-8 py-4 rounded-xl text-base transition-colors"
+                className="inline-block border border-tertiary/40 hover:border-secondary text-tertiary/80 hover:text-neutral font-semibold px-8 py-4 rounded-xl text-base transition-colors"
               >
                 서비스 살펴보기
               </a>
@@ -155,31 +155,31 @@ export default function ConsultingPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.4 }}
           >
-            <span className="text-xs tracking-[0.22em] text-white/20 uppercase">scroll</span>
+            <span className="text-xs tracking-[0.22em] text-tertiary/50 uppercase">scroll</span>
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-              className="w-px h-8 bg-gradient-to-b from-white/20 to-transparent"
+              className="w-px h-8 bg-gradient-to-b from-tertiary/40 to-transparent"
             />
           </motion.div>
         </section>
 
         {/* ── 소개 ─────────────────────────────────────── */}
-        <section className="px-6 sm:px-14 lg:px-24 py-24 border-t border-white/[0.07]">
+        <section className="px-6 sm:px-14 lg:px-24 py-24 border-t border-tertiary/20">
           <motion.div
-            ref={intro.ref}
+            ref={introRef}
             initial={{ opacity: 0, y: 40 }}
-            animate={intro.inView ? { opacity: 1, y: 0 } : {}}
+            animate={introInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, ease: EASE }}
             className="max-w-3xl mx-auto text-center space-y-6"
           >
             <p
-              className="font-extrabold text-white leading-[1.5]"
+              className="font-extrabold text-neutral leading-[1.5]"
               style={{ fontSize: "clamp(1.4rem, 2.8vw, 2rem)" }}
             >
               성장은 운이 아니라 설계입니다.
             </p>
-            <p className="text-lg text-white/45 leading-[1.9]">
+            <p className="text-lg text-tertiary/75 leading-[1.9]">
               ADGRIT 컨설팅은 수백 개 브랜드의 성장을 직접 실행한 경험을 바탕으로,
               귀사의 현황을 정밀 진단하고 최단 경로의 성장 전략을 설계합니다.
               막연한 방향 제시가 아닌, 실행까지 책임지는 컨설팅입니다.
@@ -189,25 +189,25 @@ export default function ConsultingPage() {
 
         {/* ── 성과 수치 ────────────────────────────────── */}
         <section
-          ref={resultsSection.ref}
-          className="px-6 sm:px-14 lg:px-24 py-16 border-t border-white/[0.07]"
+          ref={resultsSectionRef}
+          className="px-6 sm:px-14 lg:px-24 py-16 border-t border-tertiary/20"
         >
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
             {RESULTS.map((r, i) => (
               <motion.div
                 key={r.label}
                 initial={{ opacity: 0, y: 24 }}
-                animate={resultsSection.inView ? { opacity: 1, y: 0 } : {}}
+                animate={resultsSectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: EASE }}
                 className="text-center"
               >
                 <div
-                  className="font-black text-slate-200 leading-none"
+                  className="font-black text-secondary leading-none"
                   style={{ fontSize: "clamp(2rem, 5vw, 3.2rem)" }}
                 >
                   {r.num}
                 </div>
-                <div className="mt-2 text-sm text-white/40 font-medium">{r.label}</div>
+                <div className="mt-2 text-sm text-tertiary/70 font-medium">{r.label}</div>
               </motion.div>
             ))}
           </div>
@@ -216,20 +216,20 @@ export default function ConsultingPage() {
         {/* ── 기능 그리드 ──────────────────────────────── */}
         <section
           id="features"
-          className="px-6 sm:px-14 lg:px-24 py-24 border-t border-white/[0.07]"
-          ref={featuresSection.ref}
+          className="px-6 sm:px-14 lg:px-24 py-24 border-t border-tertiary/20"
+          ref={featuresSectionRef}
         >
           <motion.div
             initial={{ opacity: 0, y: 24 }}
-            animate={featuresSection.inView ? { opacity: 1, y: 0 } : {}}
+            animate={featuresSectionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE }}
             className="mb-12 text-center"
           >
-            <span className="text-slate-200 text-sm font-semibold tracking-[0.2em] uppercase">
+            <span className="text-secondary text-sm font-semibold tracking-[0.2em] uppercase">
               Consulting Areas
             </span>
             <h2
-              className="mt-3 font-extrabold text-white leading-tight"
+              className="mt-3 font-extrabold text-neutral leading-tight"
               style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)" }}
             >
               전략 컨설팅 6대 영역
@@ -241,13 +241,13 @@ export default function ConsultingPage() {
               <motion.div
                 key={f.title}
                 initial={{ opacity: 0, y: 28 }}
-                animate={featuresSection.inView ? { opacity: 1, y: 0 } : {}}
+                animate={featuresSectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.08, ease: EASE }}
-                className="border border-white/[0.08] rounded-2xl p-6 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/30 transition-all"
+                className="border border-tertiary/20 rounded-2xl p-6 bg-tertiary/10 hover:bg-tertiary/20 hover:border-secondary/60 transition-all"
               >
                 <div className="text-3xl mb-4">{f.icon}</div>
-                <h3 className="text-lg font-bold text-white mb-2">{f.title}</h3>
-                <p className="text-white/45 text-sm leading-relaxed">{f.desc}</p>
+                <h3 className="text-lg font-bold text-neutral mb-2">{f.title}</h3>
+                <p className="text-tertiary/75 text-sm leading-relaxed">{f.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -255,20 +255,20 @@ export default function ConsultingPage() {
 
         {/* ── 프로세스 ─────────────────────────────────── */}
         <section
-          className="px-6 sm:px-14 lg:px-24 py-24 border-t border-white/[0.07]"
-          ref={processSection.ref}
+          className="px-6 sm:px-14 lg:px-24 py-24 border-t border-tertiary/20"
+          ref={processSectionRef}
         >
           <motion.div
             initial={{ opacity: 0, y: 24 }}
-            animate={processSection.inView ? { opacity: 1, y: 0 } : {}}
+            animate={processSectionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE }}
             className="mb-14 text-center"
           >
-            <span className="text-slate-200 text-sm font-semibold tracking-[0.2em] uppercase">
+            <span className="text-secondary text-sm font-semibold tracking-[0.2em] uppercase">
               Our Process
             </span>
             <h2
-              className="mt-3 font-extrabold text-white leading-tight"
+              className="mt-3 font-extrabold text-neutral leading-tight"
               style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)" }}
             >
               컨설팅 4단계 프로세스
@@ -280,16 +280,16 @@ export default function ConsultingPage() {
               <motion.div
                 key={p.num}
                 initial={{ opacity: 0, y: 28 }}
-                animate={processSection.inView ? { opacity: 1, y: 0 } : {}}
+                animate={processSectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: EASE }}
                 className="relative"
               >
                 {i < PROCESS.length - 1 && (
-                  <div className="hidden lg:block absolute top-6 left-full w-full h-px bg-white/10 -translate-x-4" />
+                  <div className="hidden lg:block absolute top-6 left-full w-full h-px bg-tertiary/25 -translate-x-4" />
                 )}
-                <div className="text-slate-200 font-black text-4xl leading-none mb-4">{p.num}</div>
-                <h3 className="text-lg font-bold text-white mb-2">{p.title}</h3>
-                <p className="text-white/40 text-sm leading-relaxed">{p.desc}</p>
+                <div className="text-secondary font-black text-4xl leading-none mb-4">{p.num}</div>
+                <h3 className="text-lg font-bold text-neutral mb-2">{p.title}</h3>
+                <p className="text-tertiary/70 text-sm leading-relaxed">{p.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -297,31 +297,31 @@ export default function ConsultingPage() {
 
         {/* ── CTA ──────────────────────────────────────── */}
         <section
-          className="px-6 sm:px-14 lg:px-24 py-28 border-t border-white/[0.07]"
-          ref={ctaSection.ref}
+          className="px-6 sm:px-14 lg:px-24 py-28 border-t border-tertiary/20"
+          ref={ctaSectionRef}
         >
           <motion.div
             initial={{ opacity: 0, y: 32 }}
-            animate={ctaSection.inView ? { opacity: 1, y: 0 } : {}}
+            animate={ctaSectionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, ease: EASE }}
             className="max-w-2xl mx-auto text-center"
           >
-            <p className="text-slate-200 text-sm font-semibold tracking-[0.2em] uppercase mb-4">
+            <p className="text-secondary text-sm font-semibold tracking-[0.2em] uppercase mb-4">
               Free Consulting
             </p>
             <h2
-              className="font-extrabold text-white leading-[1.2]"
+              className="font-extrabold text-neutral leading-[1.2]"
               style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}
             >
               지금 신청하면
               <br />첫 진단은 무료입니다.
             </h2>
-            <p className="mt-6 text-white/45 text-lg leading-relaxed">
+            <p className="mt-6 text-tertiary/75 text-lg leading-relaxed">
               현황 진단부터 전략 방향 제시까지 — 비용 부담 없이 ADGRIT 전문가의 시각을 먼저 경험해보세요.
             </p>
             <Link
               href="/contact"
-              className="inline-block mt-10 bg-white hover:bg-slate-200 text-[#222222] font-black px-10 py-5 rounded-xl text-lg transition-colors"
+              className="inline-block mt-10 bg-secondary hover:bg-secondary/90 text-neutral font-black px-10 py-5 rounded-xl text-lg transition-colors"
             >
               무료 컨설팅 신청하기 →
             </Link>

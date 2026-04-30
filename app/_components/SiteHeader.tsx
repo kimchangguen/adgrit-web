@@ -61,7 +61,7 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
       className={`fixed left-0 right-0 top-0 z-[9999] w-full ${
         transparent
           ? "bg-transparent backdrop-blur-[2px]"
-          : "border-b border-slate-200 bg-white/95 backdrop-blur-sm shadow-sm"
+          : "border-b border-tertiary bg-neutral/95 backdrop-blur-sm shadow-sm"
       }`}
     >
       <Container className="relative grid h-14 sm:h-16 grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4">
@@ -85,8 +85,8 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                 }
                 className={`flex-shrink-0 text-sm sm:text-base font-bold whitespace-nowrap py-2 ${
                   openMobileMenu === item.label
-                    ? lightText ? "text-slate-300" : "text-[#222222]"
-                    : lightText ? "text-white/90 hover:text-white" : "text-[#222222] hover:text-[#222222]"
+                    ? lightText ? "text-tertiary" : "text-primary"
+                    : lightText ? "text-neutral/90 hover:text-neutral" : "text-primary hover:text-primary"
                 }`}
               >
                 {item.label}
@@ -112,7 +112,7 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                 transition={{ duration: 0.2 }}
                 className="absolute right-0 left-0 top-full pt-2 z-50"
               >
-                <div className="rounded-lg border border-slate-200 bg-white py-3 shadow-lg">
+                <div className="rounded-lg border border-tertiary bg-neutral py-3 shadow-lg">
                   {navItems
                     .filter((item) => item.label === openMobileMenu)
                     .map((item) => (
@@ -121,7 +121,7 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                           <Link
                             key={child.label}
                             href={child.href}
-                            className="block px-5 py-2.5 text-sm text-slate-700 hover:bg-slate-50 hover:text-[#222222]"
+                            className="block px-5 py-2.5 text-sm text-primary/70 hover:bg-tertiary hover:text-primary"
                             onClick={() => setOpenMobileMenu(null)}
                           >
                             {child.label}
@@ -153,8 +153,8 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
               <button
                 className={`block px-2 py-2 text-lg lg:text-xl font-bold transition-colors tracking-wide text-left w-full ${
                   hoveredColumn === item.label && isMegaOpen
-                    ? lightText ? "text-slate-300" : "text-[#222222]"
-                    : lightText ? "text-white/90 hover:text-white" : "text-[#222222] hover:text-[#222222]"
+                    ? lightText ? "text-tertiary" : "text-primary"
+                    : lightText ? "text-neutral/90 hover:text-neutral" : "text-primary hover:text-primary"
                 }`}
                 aria-expanded={isMegaOpen}
                 aria-haspopup="true"
@@ -174,22 +174,22 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                 transition={{ duration: 0.2 }}
                 className="absolute left-1/2 -translate-x-1/2 top-full pt-1"
               >
-                <div className="flex rounded-lg border border-slate-200 bg-white shadow-lg overflow-hidden gap-10 lg:gap-14 xl:gap-16 py-4 px-4">
+                <div className="flex rounded-lg border border-tertiary bg-neutral shadow-lg overflow-hidden gap-10 lg:gap-14 xl:gap-16 py-4 px-4">
                   {navItems.map((item) => (
                       <div
                         key={item.label}
                         className={`min-w-[140px] px-2 transition-colors ${
                           hoveredColumn === item.label
-                            ? "bg-[#222222] text-white rounded"
-                            : "bg-white"
+                            ? "bg-primary text-neutral rounded"
+                            : "bg-neutral"
                         }`}
                         onMouseEnter={() => setHoveredColumn(item.label)}
                       >
                         <div
                           className={`font-bold text-base mb-3 ${
                             hoveredColumn === item.label
-                              ? "text-white"
-                              : "text-[#1f1f1f]"
+                              ? "text-neutral"
+                              : "text-primary"
                           }`}
                         >
                           {item.label}
@@ -201,8 +201,8 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
                               href={child.href}
                               className={`block py-2 px-0 text-sm transition-colors ${
                                 hoveredColumn === item.label
-                                  ? "text-white/90 hover:text-white hover:bg-white/10 rounded"
-                                  : "text-slate-600 hover:bg-slate-50 hover:text-[#222222]"
+                                  ? "text-neutral/90 hover:text-neutral hover:bg-neutral/10 rounded"
+                                  : "text-primary/70 hover:bg-tertiary hover:text-primary"
                               }`}
                               onClick={() => {
                                 setIsMegaOpen(false);

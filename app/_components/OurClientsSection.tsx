@@ -25,14 +25,14 @@ function ClientCard({
   logo: string;
 }) {
   return (
-    <div className="flex flex-shrink-0 w-[260px] sm:w-[280px] flex-col rounded-xl border border-slate-100 bg-white p-4 sm:p-5 shadow-sm hover:shadow-md hover:border-slate-200 transition-shadow">
-      <div className="flex h-14 sm:h-16 items-center justify-center rounded-lg bg-slate-50 text-slate-400 text-xs sm:text-sm font-semibold truncate px-2">
+    <div className="flex flex-shrink-0 w-[260px] sm:w-[280px] flex-col rounded-xl border border-tertiary bg-neutral p-4 sm:p-5 shadow-sm hover:shadow-md hover:border-secondary transition-shadow">
+      <div className="flex h-14 sm:h-16 items-center justify-center rounded-lg bg-tertiary text-primary/60 text-xs sm:text-sm font-semibold truncate px-2">
         {logo}
       </div>
-      <p className="mt-3 text-sm font-semibold text-slate-800 truncate" title={name}>
+      <p className="mt-3 text-sm font-semibold text-primary truncate" title={name}>
         {name}
       </p>
-      <p className="mt-1 text-xs text-slate-500 line-clamp-2" title={desc}>
+      <p className="mt-1 text-xs text-primary/60 line-clamp-2" title={desc}>
         {desc}
       </p>
     </div>
@@ -41,17 +41,17 @@ function ClientCard({
 
 export function OurClientsSection() {
   return (
-    <section className="relative z-10 w-full overflow-hidden border-t border-slate-200 bg-white py-16 sm:py-20 lg:py-24">
+    <section className="relative z-10 w-full overflow-hidden border-t border-tertiary bg-neutral py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {/* 헤더 - 15% 추가 확대, 검정 + 약 20+ 대형 브랜드·150+ 소상공인 브랜드만 #f1f5f9 */}
+        {/* 헤더 - 15% 추가 확대, 브랜드 수치 강조 */}
         <div className="text-center">
-          <p className="text-[1.14rem] font-semibold uppercase tracking-widest text-black">
+          <p className="text-[1.14rem] font-semibold uppercase tracking-widest text-primary">
             OUR CLIENTS
           </p>
-          <h2 className="mt-4 text-[1.96rem] font-bold leading-tight text-black sm:text-[2.44rem] lg:text-[2.92rem]">
-            <span style={{ color: "#222222" }}>약 20+ 대형 브랜드</span>와,
+          <h2 className="mt-4 text-[1.96rem] font-bold leading-tight text-primary sm:text-[2.44rem] lg:text-[2.92rem]">
+            <span className="text-secondary">약 20+ 대형 브랜드</span>와,
             <br />
-            <span style={{ color: "#222222" }}>150+ 소상공인 브랜드</span>와 함께 성장중입니다
+            <span className="text-secondary">150+ 소상공인 브랜드</span>와 함께 성장중입니다
           </h2>
         </div>
 

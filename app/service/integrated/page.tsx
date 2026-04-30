@@ -101,12 +101,12 @@ const STATS = [
 ];
 
 export default function IntegratedPage() {
-  const intro = useReveal();
-  const includesSection = useReveal();
-  const advantagesSection = useReveal();
-  const processSection = useReveal();
-  const statsSection = useReveal();
-  const ctaSection = useReveal();
+  const { ref: introRef, inView: introInView } = useReveal();
+  const { ref: includesSectionRef, inView: includesSectionInView } = useReveal();
+  const { ref: advantagesSectionRef, inView: advantagesSectionInView } = useReveal();
+  const { ref: processSectionRef, inView: processSectionInView } = useReveal();
+  const { ref: statsSectionRef, inView: statsSectionInView } = useReveal();
+  const { ref: ctaSectionRef, inView: ctaSectionInView } = useReveal();
 
   return (
     <div className="bg-[#222222] text-white min-h-screen">
@@ -191,9 +191,9 @@ export default function IntegratedPage() {
         {/* ── 소개 ─────────────────────────────────────── */}
         <section className="px-6 sm:px-14 lg:px-24 py-24 border-t border-white/[0.07]">
           <motion.div
-            ref={intro.ref}
+            ref={introRef}
             initial={{ opacity: 0, y: 40 }}
-            animate={intro.inView ? { opacity: 1, y: 0 } : {}}
+            animate={introInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, ease: EASE }}
             className="max-w-3xl mx-auto text-center space-y-6"
           >
@@ -213,7 +213,7 @@ export default function IntegratedPage() {
 
         {/* ── 성과 수치 ────────────────────────────────── */}
         <section
-          ref={statsSection.ref}
+          ref={statsSectionRef}
           className="px-6 sm:px-14 lg:px-24 py-16 border-t border-white/[0.07]"
         >
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
@@ -221,7 +221,7 @@ export default function IntegratedPage() {
               <motion.div
                 key={r.label}
                 initial={{ opacity: 0, y: 24 }}
-                animate={statsSection.inView ? { opacity: 1, y: 0 } : {}}
+                animate={statsSectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: EASE }}
                 className="text-center"
               >
@@ -241,11 +241,11 @@ export default function IntegratedPage() {
         <section
           id="includes"
           className="px-6 sm:px-14 lg:px-24 py-24 border-t border-white/[0.07]"
-          ref={includesSection.ref}
+          ref={includesSectionRef}
         >
           <motion.div
             initial={{ opacity: 0, y: 24 }}
-            animate={includesSection.inView ? { opacity: 1, y: 0 } : {}}
+            animate={includesSectionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE }}
             className="mb-12 text-center"
           >
@@ -268,7 +268,7 @@ export default function IntegratedPage() {
               <motion.div
                 key={item.title}
                 initial={{ opacity: 0, y: 28 }}
-                animate={includesSection.inView ? { opacity: 1, y: 0 } : {}}
+                animate={includesSectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.08, ease: EASE }}
                 className="border border-white/[0.08] rounded-2xl p-6 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/40 transition-all group"
               >
@@ -287,11 +287,11 @@ export default function IntegratedPage() {
         {/* ── 통합의 이점 ──────────────────────────────── */}
         <section
           className="px-6 sm:px-14 lg:px-24 py-24 border-t border-white/[0.07]"
-          ref={advantagesSection.ref}
+          ref={advantagesSectionRef}
         >
           <motion.div
             initial={{ opacity: 0, y: 24 }}
-            animate={advantagesSection.inView ? { opacity: 1, y: 0 } : {}}
+            animate={advantagesSectionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE }}
             className="mb-14 text-center"
           >
@@ -311,7 +311,7 @@ export default function IntegratedPage() {
               <motion.div
                 key={a.num}
                 initial={{ opacity: 0, y: 28 }}
-                animate={advantagesSection.inView ? { opacity: 1, y: 0 } : {}}
+                animate={advantagesSectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: EASE }}
                 className="flex gap-5"
               >
@@ -330,11 +330,11 @@ export default function IntegratedPage() {
         {/* ── 프로세스 ─────────────────────────────────── */}
         <section
           className="px-6 sm:px-14 lg:px-24 py-24 border-t border-white/[0.07]"
-          ref={processSection.ref}
+          ref={processSectionRef}
         >
           <motion.div
             initial={{ opacity: 0, y: 24 }}
-            animate={processSection.inView ? { opacity: 1, y: 0 } : {}}
+            animate={processSectionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE }}
             className="mb-14 text-center"
           >
@@ -354,7 +354,7 @@ export default function IntegratedPage() {
               <motion.div
                 key={p.num}
                 initial={{ opacity: 0, y: 28 }}
-                animate={processSection.inView ? { opacity: 1, y: 0 } : {}}
+                animate={processSectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: EASE }}
                 className="relative"
               >
@@ -417,11 +417,11 @@ export default function IntegratedPage() {
         {/* ── CTA ──────────────────────────────────────── */}
         <section
           className="px-6 sm:px-14 lg:px-24 py-28 border-t border-white/[0.07]"
-          ref={ctaSection.ref}
+          ref={ctaSectionRef}
         >
           <motion.div
             initial={{ opacity: 0, y: 32 }}
-            animate={ctaSection.inView ? { opacity: 1, y: 0 } : {}}
+            animate={ctaSectionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, ease: EASE }}
             className="max-w-2xl mx-auto text-center"
           >

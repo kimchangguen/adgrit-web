@@ -60,12 +60,12 @@ const PROCESS = [
 ];
 
 export default function SnsPage() {
-  const intro = useReveal();
-  const channelsSection = useReveal();
-  const featuresSection = useReveal();
-  const outcomesSection = useReveal();
-  const processSection = useReveal();
-  const ctaSection = useReveal();
+  const { ref: introRef, inView: introInView } = useReveal();
+  const { ref: channelsSectionRef, inView: channelsSectionInView } = useReveal();
+  const { ref: featuresSectionRef, inView: featuresSectionInView } = useReveal();
+  const { ref: outcomesSectionRef, inView: outcomesSectionInView } = useReveal();
+  const { ref: processSectionRef, inView: processSectionInView } = useReveal();
+  const { ref: ctaSectionRef, inView: ctaSectionInView } = useReveal();
 
   return (
     <div className="bg-[#222222] text-white min-h-screen">
@@ -150,9 +150,9 @@ export default function SnsPage() {
         {/* ── 소개 ─────────────────────────────────────── */}
         <section className="px-6 sm:px-14 lg:px-24 py-24 border-t border-white/[0.07]">
           <motion.div
-            ref={intro.ref}
+            ref={introRef}
             initial={{ opacity: 0, y: 40 }}
-            animate={intro.inView ? { opacity: 1, y: 0 } : {}}
+            animate={introInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, ease: EASE }}
             className="max-w-3xl mx-auto text-center space-y-6"
           >
@@ -174,11 +174,11 @@ export default function SnsPage() {
         <section
           id="channels"
           className="px-6 sm:px-14 lg:px-24 py-24 border-t border-white/[0.07]"
-          ref={channelsSection.ref}
+          ref={channelsSectionRef}
         >
           <motion.div
             initial={{ opacity: 0, y: 24 }}
-            animate={channelsSection.inView ? { opacity: 1, y: 0 } : {}}
+            animate={channelsSectionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE }}
             className="mb-12 text-center"
           >
@@ -198,7 +198,7 @@ export default function SnsPage() {
               <motion.div
                 key={c.name}
                 initial={{ opacity: 0, y: 28 }}
-                animate={channelsSection.inView ? { opacity: 1, y: 0 } : {}}
+                animate={channelsSectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.08, ease: EASE }}
                 className="border border-white/[0.08] rounded-2xl p-6 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/30 transition-all"
               >
@@ -215,11 +215,11 @@ export default function SnsPage() {
         {/* ── 운영 서비스 ──────────────────────────────── */}
         <section
           className="px-6 sm:px-14 lg:px-24 py-24 border-t border-white/[0.07]"
-          ref={featuresSection.ref}
+          ref={featuresSectionRef}
         >
           <motion.div
             initial={{ opacity: 0, y: 24 }}
-            animate={featuresSection.inView ? { opacity: 1, y: 0 } : {}}
+            animate={featuresSectionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE }}
             className="mb-12 text-center"
           >
@@ -239,7 +239,7 @@ export default function SnsPage() {
               <motion.div
                 key={f.title}
                 initial={{ opacity: 0, y: 28 }}
-                animate={featuresSection.inView ? { opacity: 1, y: 0 } : {}}
+                animate={featuresSectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.08, ease: EASE }}
                 className="border border-white/[0.08] rounded-2xl p-6 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/30 transition-all"
               >
@@ -254,11 +254,11 @@ export default function SnsPage() {
         {/* ── 기대 효과 ────────────────────────────────── */}
         <section
           className="px-6 sm:px-14 lg:px-24 py-24 border-t border-white/[0.07]"
-          ref={outcomesSection.ref}
+          ref={outcomesSectionRef}
         >
           <motion.div
             initial={{ opacity: 0, y: 24 }}
-            animate={outcomesSection.inView ? { opacity: 1, y: 0 } : {}}
+            animate={outcomesSectionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE }}
             className="mb-12 text-center"
           >
@@ -278,7 +278,7 @@ export default function SnsPage() {
               <motion.div
                 key={o.title}
                 initial={{ opacity: 0, y: 28 }}
-                animate={outcomesSection.inView ? { opacity: 1, y: 0 } : {}}
+                animate={outcomesSectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: EASE }}
                 className="border-l-2 border-white/35 pl-5"
               >
@@ -292,11 +292,11 @@ export default function SnsPage() {
         {/* ── 프로세스 ─────────────────────────────────── */}
         <section
           className="px-6 sm:px-14 lg:px-24 py-24 border-t border-white/[0.07]"
-          ref={processSection.ref}
+          ref={processSectionRef}
         >
           <motion.div
             initial={{ opacity: 0, y: 24 }}
-            animate={processSection.inView ? { opacity: 1, y: 0 } : {}}
+            animate={processSectionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE }}
             className="mb-14 text-center"
           >
@@ -316,7 +316,7 @@ export default function SnsPage() {
               <motion.div
                 key={p.num}
                 initial={{ opacity: 0, y: 28 }}
-                animate={processSection.inView ? { opacity: 1, y: 0 } : {}}
+                animate={processSectionInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: EASE }}
                 className="relative"
               >
@@ -334,11 +334,11 @@ export default function SnsPage() {
         {/* ── CTA ──────────────────────────────────────── */}
         <section
           className="px-6 sm:px-14 lg:px-24 py-28 border-t border-white/[0.07]"
-          ref={ctaSection.ref}
+          ref={ctaSectionRef}
         >
           <motion.div
             initial={{ opacity: 0, y: 32 }}
-            animate={ctaSection.inView ? { opacity: 1, y: 0 } : {}}
+            animate={ctaSectionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, ease: EASE }}
             className="max-w-2xl mx-auto text-center"
           >

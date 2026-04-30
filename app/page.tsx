@@ -26,13 +26,11 @@ import { Section2Wrapper } from "./_components/Section2Wrapper";
 
 export default async function Home() {
   return (
-    <div className="min-h-screen bg-white text-[#1f1f1f]">
+    <div className="min-h-screen bg-neutral text-primary">
       <SiteChrome />
     </div>
   );
 }
-
-const ACCENT_CHARCOAL = "#222222";
 
 function WorryCard({
   num,
@@ -48,19 +46,19 @@ function WorryCard({
   showArrow?: boolean;
 }) {
   return (
-    <div className="relative rounded-[24px] bg-white px-6 sm:px-8 py-7 sm:py-10 shadow-sm">
-      <span className="text-lg font-bold tabular-nums" style={{ color: ACCENT_CHARCOAL }}>
+    <div className="relative rounded-[24px] bg-neutral px-6 sm:px-8 py-7 sm:py-10 shadow-sm">
+      <span className="text-lg font-bold tabular-nums text-secondary">
         {num}
       </span>
-      <h3 className="mt-2 text-xl font-black text-[#1f1f1f]">{title}</h3>
-      <p className="mt-1 text-sm text-slate-500">{subtitle}</p>
-      <p className="mt-4 text-[15px] leading-relaxed text-[#374151]">
+      <h3 className="mt-2 text-xl font-black text-primary">{title}</h3>
+      <p className="mt-1 text-sm text-primary/60">{subtitle}</p>
+      <p className="mt-4 text-[15px] leading-relaxed text-primary/80">
         {desc.split("\n").map((line, i) => (
           <span key={i}>{i > 0 && <br />}{line}</span>
         ))}
       </p>
       {showArrow && (
-        <div className="absolute bottom-5 right-5" style={{ color: ACCENT_CHARCOAL }} aria-hidden>
+        <div className="absolute bottom-5 right-5 text-secondary" aria-hidden>
           <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
           </svg>
@@ -85,8 +83,8 @@ function ProcessStep({
   const iconSrc = `/process-iocons/step-${stepNum}.png`;
 
   return (
-    <div className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm text-center">
-      <span className="text-sm font-bold uppercase tracking-wide text-[#222222]">STEP {step}</span>
+    <div className="flex h-full flex-col rounded-xl border border-tertiary bg-neutral p-6 shadow-sm text-center">
+      <span className="text-sm font-bold uppercase tracking-wide text-secondary">STEP {step}</span>
       <div className="mt-4 mx-auto flex h-14 w-14 items-center justify-center">
         <Image
           src={iconSrc}
@@ -97,10 +95,10 @@ function ProcessStep({
           aria-hidden
         />
       </div>
-      <h3 className="mt-4 text-lg font-black text-[#1f1f1f]">{title}</h3>
-      <p className="mt-3 flex-1 text-center text-sm leading-relaxed text-slate-700 whitespace-pre-line">{desc}</p>
+      <h3 className="mt-4 text-lg font-black text-primary">{title}</h3>
+      <p className="mt-3 flex-1 text-center text-sm leading-relaxed text-primary/70 whitespace-pre-line">{desc}</p>
       {buttonText && (
-        <div className="mt-6 rounded-lg py-3 px-4 text-sm font-semibold bg-slate-100 text-[#222222]">
+        <div className="mt-6 rounded-lg py-3 px-4 text-sm font-semibold bg-tertiary text-primary">
           {buttonText}
         </div>
       )}
@@ -120,11 +118,11 @@ function SiteChrome() {
               <AnimatedHero>
                 <AnimatedHeroItem>
                   {/* PC: 한 줄 */}
-                  <p className="hidden md:block text-[1.1rem] text-[#374151] leading-relaxed">
+                  <p className="hidden md:block text-[1.1rem] text-primary/80 leading-relaxed">
                     성공한 사장님들은 마케팅을 &apos;비용&apos;이라 부르지 않습니다.
                   </p>
                   {/* 모바일: 2줄 */}
-                  <p className="md:hidden text-[1.1rem] text-[#374151] leading-relaxed">
+                  <p className="md:hidden text-[1.1rem] text-primary/80 leading-relaxed">
                     성공한 사장님들은 마케팅을 &apos;비용&apos;이라
                     <br />
                     부르지 않습니다.
@@ -132,18 +130,18 @@ function SiteChrome() {
                 </AnimatedHeroItem>
                 <AnimatedHeroItem>
                   {/* PC: 한 줄 */}
-                  <p className="hidden md:block mt-6 text-[2.06rem] sm:text-[2.48rem] md:text-[3.3rem] font-black tracking-tight text-[#1f1f1f] leading-[1.25]">
-                    그들은 <span className="text-[#222222]">&apos;연료&apos;</span>라고 부릅니다.
+                  <p className="hidden md:block mt-6 text-[2.06rem] sm:text-[2.48rem] md:text-[3.3rem] font-black tracking-tight text-primary leading-[1.25]">
+                    그들은 <span className="text-secondary">&apos;연료&apos;</span>라고 부릅니다.
                   </p>
                   {/* 모바일: 2줄 */}
-                  <p className="md:hidden mt-6 text-[2.06rem] sm:text-[2.48rem] font-black tracking-tight text-[#1f1f1f] leading-[1.25]">
-                    그들은 <span className="text-[#222222]">&apos;연료&apos;</span>라고
+                  <p className="md:hidden mt-6 text-[2.06rem] sm:text-[2.48rem] font-black tracking-tight text-primary leading-[1.25]">
+                    그들은 <span className="text-secondary">&apos;연료&apos;</span>라고
                     <br />
                     부릅니다.
                   </p>
                 </AnimatedHeroItem>
                 <AnimatedHeroItem>
-                  <p className="mt-6 text-[1.1rem] text-[#374151] leading-relaxed">
+                  <p className="mt-6 text-[1.1rem] text-primary/80 leading-relaxed">
                     실패했던 건 사장님 탓이 아닙니다.
                     <br />
                     &apos;방법&apos;이 틀렸고 파트너를 잘못 만나서 입니다.
@@ -151,11 +149,11 @@ function SiteChrome() {
                 </AnimatedHeroItem>
                 <AnimatedHeroItem>
                   {/* PC: 한 줄 */}
-                  <p className="hidden md:block mt-6 text-[1.1rem] text-[#374151] leading-relaxed">
+                  <p className="hidden md:block mt-6 text-[1.1rem] text-primary/80 leading-relaxed">
                     이제는 개발실행사와 직접 제대로된 <span className="font-semibold">AI CORE Marketing</span> 하세요
                   </p>
                   {/* 모바일: 2줄 */}
-                  <p className="md:hidden mt-6 text-[1.1rem] text-[#374151] leading-relaxed">
+                  <p className="md:hidden mt-6 text-[1.1rem] text-primary/80 leading-relaxed">
                     이제는 개발실행사와 직접 제대로된
                     <br />
                     <span className="font-semibold">AI CORE Marketing</span> 하세요
@@ -164,7 +162,7 @@ function SiteChrome() {
                 <AnimatedHeroItem>
                   <a
                     href="tel:1661-0646"
-                    className="mt-11 inline-flex items-center justify-center rounded-full bg-[#222222] px-11 py-[1.1rem] text-[1.1rem] font-semibold text-white hover:bg-[#3a3a3a] transition-colors"
+                    className="mt-11 inline-flex items-center justify-center rounded-full bg-primary px-11 py-[1.1rem] text-[1.1rem] font-semibold text-neutral hover:bg-primary/90 transition-colors"
                   >
                     상담하기
                   </a>
@@ -174,10 +172,10 @@ function SiteChrome() {
 
             {/* 오른쪽: 2x2 이미지 그리드 */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4 order-1 lg:order-2">
-              <div className="rounded-2xl overflow-hidden bg-[#222222] flex items-center justify-center min-h-[140px] sm:min-h-[180px] aspect-square max-h-[200px] sm:max-h-[240px]">
+              <div className="rounded-2xl overflow-hidden bg-primary flex items-center justify-center min-h-[140px] sm:min-h-[180px] aspect-square max-h-[200px] sm:max-h-[240px]">
                 <div className="text-center px-4">
-                  <p className="text-white font-bold text-lg sm:text-xl tracking-wider">ADGRIT</p>
-                  <p className="text-white/90 text-xs sm:text-sm tracking-widest mt-1">DEVELOPMENT & MARKETING</p>
+                  <p className="text-neutral font-bold text-lg sm:text-xl tracking-wider">ADGRIT</p>
+                  <p className="text-neutral/90 text-xs sm:text-sm tracking-widest mt-1">DEVELOPMENT & MARKETING</p>
                 </div>
               </div>
               <div className="relative rounded-2xl overflow-hidden aspect-square min-h-[140px] sm:min-h-[180px] max-h-[200px] sm:max-h-[240px]">
@@ -198,13 +196,13 @@ function SiteChrome() {
       <Section2Wrapper
         leftContent={
           <>
-            <p className="text-white text-sm font-normal tracking-wide">The Cost of Inefficiency</p>
-            <h2 className="mt-4 text-[2rem] sm:text-[2.375rem] lg:text-[3.125rem] font-black leading-tight text-white">
+            <p className="text-neutral text-sm font-normal tracking-wide">The Cost of Inefficiency</p>
+            <h2 className="mt-4 text-[2rem] sm:text-[2.375rem] lg:text-[3.125rem] font-black leading-tight text-neutral">
               사장님들이 겪는
               <br />
-              <span className="text-slate-200">대표적 고민</span>
+              <span className="text-tertiary">대표적 고민</span>
             </h2>
-            <p className="mt-6 text-white/95 text-base leading-relaxed">
+            <p className="mt-6 text-neutral/95 text-base leading-relaxed">
               매달 광고비는 지출되는데, 실제 순수익은 제자리걸음이다?
               <br />
               이건 노출 부족이 아니라, 고객을 구매로 전환시키지 못하는
@@ -236,7 +234,7 @@ function SiteChrome() {
       {/* 슬로건 - 세번째 섹션: 흰 배경, 좌 텍스트(검정), 우 노트북 이미지(오른쪽 반 블러) */}
       <section
         id="section3"
-        className="relative z-10 flex h-[800px] w-full items-center justify-center overflow-hidden bg-white"
+        className="relative z-10 flex h-[800px] w-full items-center justify-center overflow-hidden bg-neutral"
       >
         <SloganWithEffects />
       </section>
@@ -244,7 +242,7 @@ function SiteChrome() {
       {/* Vision - 네번째 섹션 */}
       <section
         id="about"
-        className="relative z-10 flex w-full max-w-[1920px] mx-auto items-center border-t border-slate-100 bg-white px-6 py-8 sm:px-10 sm:py-10"
+        className="relative z-10 flex w-full max-w-[1920px] mx-auto items-center border-t border-tertiary bg-neutral px-6 py-8 sm:px-10 sm:py-10"
       >
         <div className="mx-auto w-full max-w-[1920px]">
           <VisionCarousel
@@ -279,13 +277,13 @@ function SiteChrome() {
       <MarketingProductsSection />
 
       {/* Process - 아홉번째 섹션 (참고 이미지 레이아웃, 내용 유지) */}
-      <section className="relative z-10 border-t border-slate-100 bg-white py-16 sm:py-20">
+      <section className="relative z-10 border-t border-tertiary bg-neutral py-16 sm:py-20">
         <Container>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-black">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-primary">
               프로세스
             </h2>
-            <p className="mt-3 text-[1.04rem] sm:text-[1.17rem] text-slate-600">
+            <p className="mt-3 text-[1.04rem] sm:text-[1.17rem] text-primary/70">
               단 세 단계로 완성하는 성공적인 컨설팅 프로세스
             </p>
           </div>

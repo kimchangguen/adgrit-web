@@ -178,17 +178,17 @@ export function KakaoTestimonialsSection() {
   return (
     <section
       id="kakao-testimonials"
-      className="relative z-10 border-t border-slate-100 bg-white py-20 sm:py-24 lg:py-28"
+      className="relative z-10 border-t border-tertiary bg-neutral py-20 sm:py-24 lg:py-28"
     >
       <Container>
         <div className="text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#1D1B1F]/45">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-primary/45">
             Client Success Reviews
           </p>
-          <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-bold tracking-tighter text-[#1D1B1F] sm:text-5xl">
+          <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-bold tracking-tighter text-primary sm:text-5xl">
             클라이언트 만족후기
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#1D1B1F]/65 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-primary/65 sm:text-lg">
             애드그릿은 사장님과 꾸준한소통으로
             <br />
             매장의 안정화된 매출성장을 위해 소통과 개발을 합니다.
@@ -199,7 +199,7 @@ export function KakaoTestimonialsSection() {
           <button
             type="button"
             onClick={() => goTo(currentIndex - 1)}
-            className="absolute left-0 top-1/2 z-10 flex h-14 w-14 -translate-x-2 -translate-y-1/2 items-center justify-center rounded-full border border-slate-100 bg-white text-[#1D1B1F] shadow-[0_18px_50px_rgba(15,23,42,0.10)] transition-all duration-300 hover:scale-105 hover:border-[#1D1B1F] hover:bg-[#1D1B1F] hover:text-white sm:-translate-x-4"
+            className="absolute left-0 top-1/2 z-10 flex h-14 w-14 -translate-x-2 -translate-y-1/2 items-center justify-center rounded-full border border-tertiary bg-neutral text-primary shadow-[0_18px_50px_rgba(15,23,42,0.10)] transition-all duration-300 hover:scale-105 hover:border-primary hover:bg-primary hover:text-neutral sm:-translate-x-4"
             aria-label="이전"
           >
             <ChevronLeft className="h-7 w-7" strokeWidth={1.8} />
@@ -208,7 +208,7 @@ export function KakaoTestimonialsSection() {
           <button
             type="button"
             onClick={() => goTo(currentIndex + 1)}
-            className="absolute right-0 top-1/2 z-10 flex h-14 w-14 -translate-y-1/2 translate-x-2 items-center justify-center rounded-full border border-slate-100 bg-white text-[#1D1B1F] shadow-[0_18px_50px_rgba(15,23,42,0.10)] transition-all duration-300 hover:scale-105 hover:border-[#1D1B1F] hover:bg-[#1D1B1F] hover:text-white sm:translate-x-4"
+            className="absolute right-0 top-1/2 z-10 flex h-14 w-14 -translate-y-1/2 translate-x-2 items-center justify-center rounded-full border border-tertiary bg-neutral text-primary shadow-[0_18px_50px_rgba(15,23,42,0.10)] transition-all duration-300 hover:scale-105 hover:border-primary hover:bg-primary hover:text-neutral sm:translate-x-4"
             aria-label="다음"
           >
             <ChevronRight className="h-7 w-7" strokeWidth={1.8} />
@@ -228,31 +228,31 @@ export function KakaoTestimonialsSection() {
             {KAKAO_IMAGES.map((src, i) => (
               <div
                 key={src}
-                className="group w-[84vw] flex-shrink-0 overflow-hidden rounded-3xl border border-slate-100 bg-white p-3 text-[#1D1B1F] shadow-[0_18px_60px_rgba(15,23,42,0.06)] transition-all duration-500 ease-in-out hover:scale-[1.02] hover:border-[#1D1B1F] hover:bg-[#1D1B1F] hover:text-white hover:shadow-[0_24px_80px_rgba(0,0,0,0.18)] sm:w-[calc((100%_-_1.5rem)/2)] lg:w-[calc((100%_-_6rem)/5)] lg:p-3.5"
+                className="group w-[84vw] flex-shrink-0 overflow-hidden rounded-3xl border border-tertiary bg-neutral p-3 text-primary shadow-[0_18px_60px_rgba(15,23,42,0.06)] transition-all duration-500 ease-in-out hover:scale-[1.02] hover:border-primary hover:bg-primary hover:text-neutral hover:shadow-[0_24px_80px_rgba(0,0,0,0.18)] sm:w-[calc((100%_-_1.5rem)/2)] lg:w-[calc((100%_-_6rem)/5)] lg:p-3.5"
                 style={{ scrollSnapAlign: "center" }}
               >
                 <div className="mb-3 flex items-center justify-between gap-2 lg:mb-3">
                   <div className="flex min-w-0 items-center gap-2">
-                    <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-2xl bg-slate-50 text-[#1D1B1F] transition-all duration-500 group-hover:bg-white/10 group-hover:text-white">
+                    <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-2xl bg-tertiary text-primary transition-all duration-500 group-hover:bg-neutral/10 group-hover:text-neutral">
                       <MessageCircle className="h-[18px] w-[18px]" strokeWidth={1.9} />
                     </span>
                     <div className="min-w-0">
-                      <p className="truncate text-[13px] font-bold tracking-tight transition-colors duration-500 group-hover:text-white">
+                      <p className="truncate text-[13px] font-bold tracking-tight transition-colors duration-500 group-hover:text-neutral">
                         성공 사례 {String(i + 1).padStart(2, "0")}
                       </p>
-                      <p className="mt-0.5 truncate text-[11px] font-medium text-[#1D1B1F]/55 transition-colors duration-500 group-hover:text-white/60">
+                      <p className="mt-0.5 truncate text-[11px] font-medium text-primary/55 transition-colors duration-500 group-hover:text-neutral/60">
                         Client Review
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-shrink-0 gap-0.5 text-[#8A7A56] transition-colors duration-500 group-hover:text-white">
+                  <div className="flex flex-shrink-0 gap-0.5 text-secondary transition-colors duration-500 group-hover:text-neutral">
                     {[0, 1, 2, 3, 4].map((star) => (
                       <Star key={star} className="h-3 w-3 fill-current" strokeWidth={1.6} />
                     ))}
                   </div>
                 </div>
 
-                <div className="relative aspect-[9/16] max-h-[624px] w-full overflow-hidden rounded-[1.35rem] border border-slate-100 bg-slate-50 transition-colors duration-500 group-hover:border-white/10 group-hover:bg-white/10">
+                <div className="relative aspect-[9/16] max-h-[624px] w-full overflow-hidden rounded-[1.35rem] border border-tertiary bg-tertiary transition-colors duration-500 group-hover:border-neutral/10 group-hover:bg-neutral/10">
                   <Image
                     src={src}
                     alt={`클라이언트 만족후기 ${i + 1}`}
@@ -273,7 +273,7 @@ export function KakaoTestimonialsSection() {
                 type="button"
                 onClick={() => goTo(i)}
                 className={`h-2.5 w-2.5 flex-shrink-0 rounded-full transition-all duration-300 ${
-                  i === currentIndex ? "scale-125 bg-[#1D1B1F]" : "bg-slate-300 hover:bg-[#1D1B1F]/45"
+                  i === currentIndex ? "scale-125 bg-primary" : "bg-tertiary hover:bg-primary/45"
                 }`}
                 aria-label={`${i + 1}번째 후기 화면으로 이동`}
               />

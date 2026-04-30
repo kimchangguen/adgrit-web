@@ -33,22 +33,20 @@ const MESSAGES = [
 const BOTTOM_MESSAGE =
   "애드그릿은 광고 솔루션을 직접개발하여 소유하고 있는 온라인광고 업계 개발 실행사 입니다. 이래도 광고상품을 유통하고만 있으면서 마케팅이라는 대행도 아닌 유통하는 회사와 업무를 하실껀가요?";
 
-const BUBBLE_BLUE = "#222222";
-
 export function WithoutAdgritSection() {
   return (
     <section
       id="without-adgrit"
-      className="relative z-10 border-t border-slate-800 bg-[#222222] py-[4.4rem] sm:py-[5.5rem] overflow-hidden"
+      className="relative z-10 border-t border-primary bg-primary py-[4.4rem] sm:py-[5.5rem] overflow-hidden"
     >
       <Container>
         <div className="flex flex-col items-center">
           {/* 상단: 제목 + 부제 - 말풍선 위, 중앙정렬 */}
           <div className="text-center w-full max-w-3xl">
-            <h2 className="text-[1.73rem] sm:text-[2.3rem] lg:text-[2.76rem] font-black leading-tight text-white">
+            <h2 className="text-[1.73rem] sm:text-[2.3rem] lg:text-[2.76rem] font-black leading-tight text-neutral">
               애드그릿과 하지 않는다면
             </h2>
-            <p className="mt-5 text-[1.15rem] sm:text-[1.44rem] text-white/95 leading-relaxed">
+            <p className="mt-5 text-[1.15rem] sm:text-[1.44rem] text-neutral/95 leading-relaxed">
               다음의 상태가 당신의 상태가 될 수 있습니다.
             </p>
           </div>
@@ -66,10 +64,9 @@ export function WithoutAdgritSection() {
                 <motion.div
                   key={`bubble-${i}`}
                   variants={itemVariants}
-                  className="flex items-center gap-3 rounded-full px-6 py-[1.1rem] w-full min-w-full text-white text-[1.2rem] leading-snug shadow-lg"
-                  style={{ backgroundColor: BUBBLE_BLUE }}
+                  className="flex items-center gap-3 rounded-full bg-secondary px-6 py-[1.1rem] w-full min-w-full text-primary text-[1.2rem] leading-snug shadow-lg"
                 >
-                  <span className="flex-shrink-0 text-white/90" aria-hidden>
+                  <span className="flex-shrink-0 text-primary/90" aria-hidden>
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z" />
                     </svg>
@@ -82,8 +79,8 @@ export function WithoutAdgritSection() {
         </div>
 
         {/* 하단 안내 문구 - 글자 얇게, 3pt 작게 */}
-        <div className="mt-[4.4rem] sm:mt-[5.5rem] pt-[3.3rem] border-t border-slate-600/50">
-          <p className="text-base sm:text-lg lg:text-xl font-normal leading-relaxed text-white text-center max-w-4xl mx-auto">
+        <div className="mt-[4.4rem] sm:mt-[5.5rem] pt-[3.3rem] border-t border-tertiary/30">
+          <p className="text-base sm:text-lg lg:text-xl font-normal leading-relaxed text-neutral text-center max-w-4xl mx-auto">
             {BOTTOM_MESSAGE}
           </p>
         </div>

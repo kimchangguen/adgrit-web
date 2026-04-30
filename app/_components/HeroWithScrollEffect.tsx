@@ -77,7 +77,7 @@ export function HeroWithScrollEffect({
           >
             <path
               d="M0 120V70C360 20 1080 20 1440 70v50H0z"
-              fill="white"
+              fill="var(--adgrit-neutral)"
             />
           </svg>
         </div>

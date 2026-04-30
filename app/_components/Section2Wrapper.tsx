@@ -11,10 +11,10 @@ type Section2WrapperProps = {
 
 export function Section2Wrapper({ leftContent, rightContent }: Section2WrapperProps) {
   return (
-    <div className="w-full bg-white px-4 sm:px-6 mt-12">
+    <div className="w-full bg-neutral px-4 sm:px-6 mt-12">
       <motion.section
         id="section2"
-        className="section2 section-two relative z-10 mx-auto w-full max-w-[1200px] rounded-[2rem] sm:rounded-[3rem] bg-[#222222] py-20 sm:py-24 lg:py-28"
+        className="section2 section-two relative z-10 mx-auto w-full max-w-[1200px] rounded-[2rem] sm:rounded-[3rem] bg-primary py-20 sm:py-24 lg:py-28"
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
