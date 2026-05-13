@@ -77,7 +77,7 @@ export default function MarketingPage() {
   const { ref: ctaSectionRef, inView: ctaSectionInView } = useReveal();
 
   return (
-    <div className="bg-[#222222] text-white min-h-screen">
+    <div className="bg-[#2E4033] text-white min-h-screen">
       <SiteHeader />
 
       <main className="pt-16">

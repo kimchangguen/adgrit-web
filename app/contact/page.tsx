@@ -36,7 +36,7 @@ export default function ContactPage() {
   const { ref: heroRef, inView: heroInView } = useReveal("-20px");
 
   return (
-    <div className="bg-[#222222] text-white min-h-screen">
+    <div className="bg-[#2E4033] text-white min-h-screen">
       <SiteHeader />
 
       <main className="pt-16">
@@ -73,7 +73,7 @@ export default function ContactPage() {
         {/* ── 지도 섹션 ───────────────────────────── */}
         <section
           ref={heroRef}
-          className="bg-[#222222] border-t border-white/[0.07] px-6 sm:px-14 lg:px-24 pt-16 pb-32 sm:pb-44"
+          className="bg-[#2E4033] border-t border-white/[0.07] px-6 sm:px-14 lg:px-24 pt-16 pb-32 sm:pb-44"
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
             {LOCATIONS.map(({ label, sublabel, address, mapSrc }, i) => {
