@@ -15,6 +15,29 @@ type WPPost = {
   excerpt: { rendered: string };
 };
 
+function stripHTML(html: string) {
+  return html.replace(/<[^>]+>/g, "").trim();
+}
+
+function decodeEntities(str: string): string {
+  return str
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&#\d+;/g, "")
+    .replace(/&[a-z]+;/g, "");
+}
+
+function cleanText(html: string): string {
+  if (!html) return "";
+  const stripped = stripHTML(html);
+  const decoded = decodeEntities(stripped);
+  return decoded.replace(/\s+/g, " ").trim();
+}
+
 export async function GET() {
   try {
     const res = await fetch(
@@ -29,14 +52,23 @@ export async function GET() {
     const posts: WPPost[] = await res.json();
 
     const items = posts
-      .map((post) => `
+      .map((post) => {
+        // 네이버 서치어드바이저 가독성 및 호환성을 위해 한글 슬러그 디코딩
+        const decodedSlug = decodeURIComponent(post.slug);
+        const postUrl = `${BASE_URL}/blog/${decodedSlug}`;
+        
+        const cleanTitle = cleanText(post.title.rendered);
+        const cleanDesc = cleanText(post.excerpt?.rendered || "");
+
+        return `
     <item>
-      <title><![CDATA[${post.title.rendered}]]></title>
-      <link>${BASE_URL}/blog/${post.slug}</link>
-      <guid>${BASE_URL}/blog/${post.slug}</guid>
+      <title><![CDATA[${cleanTitle}]]></title>
+      <link>${postUrl}</link>
+      <guid isPermaLink="true">${postUrl}</guid>
       <pubDate>${new Date(post.date).toUTCString()}</pubDate>
-      <description><![CDATA[${post.excerpt?.rendered || ""}]]></description>
-    </item>`)
+      <description><![CDATA[${cleanDesc}]]></description>
+    </item>`;
+      })
       .join("");
 
     const rss = `<?xml version="1.0" encoding="UTF-8" ?>
