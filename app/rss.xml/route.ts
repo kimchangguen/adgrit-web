@@ -28,6 +28,17 @@ export async function GET() {
 
     const posts: WPPost[] = await res.json();
 
+    const items = posts
+      .map((post) => `
+    <item>
+      <title><![CDATA[${post.title.rendered}]]></title>
+      <link>${BASE_URL}/blog/${post.slug}</link>
+      <guid isPermaLink="true">${BASE_URL}/blog/${post.slug}</guid>
+      <pubDate>${new Date(post.date).toUTCString()}</pubDate>
+      <description><![CDATA[${post.excerpt?.rendered || ""}]]></description>
+    </item>`)
+      .join("");
+
     const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -36,18 +47,7 @@ export async function GET() {
     <description>Google Ads, SEO &amp; GEO, 워드프레스, 퍼포먼스 마케팅을 하나의 성장 엔진으로 설계합니다.</description>
     <language>ko</language>
     <atom:link href="${BASE_URL}/rss.xml" rel="self" type="application/rss+xml" />
-    ${posts
-      .map((post) => {
-        return \`
-    <item>
-      <title><![CDATA[\${post.title.rendered}]]></title>
-      <link>\${BASE_URL}/blog/\${post.slug}</link>
-      <guid isPermaLink="true">\${BASE_URL}/blog/\${post.slug}</guid>
-      <pubDate>\${new Date(post.date).toUTCString()}</pubDate>
-      <description><![CDATA[\${post.excerpt.rendered}]]></description>
-    </item>\`;
-      })
-      .join("")}
+    ${items}
   </channel>
 </rss>`;
 
