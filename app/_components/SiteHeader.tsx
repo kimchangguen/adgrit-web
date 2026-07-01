@@ -58,19 +58,23 @@ export function SiteHeader({ transparent = false, lightText = false }: SiteHeade
 
   return (
     <header
-      className={`fixed left-0 right-0 top-0 z-[9999] w-full ${
+      className={`fixed left-0 right-0 top-0 z-[9999] w-full transition-all duration-300 ${
         transparent
           ? "bg-transparent backdrop-blur-[2px]"
-          : "border-b border-tertiary bg-neutral/95 backdrop-blur-sm shadow-sm"
+          : "backdrop-blur-sm"
       }`}
+      style={!transparent ? {
+        background: "linear-gradient(to bottom, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.95) 60%, rgba(255,255,255,0.7) 80%, rgba(255,255,255,0) 100%)",
+        height: "100px",
+      } : { height: "100px" }}
     >
-      <Container className="relative grid h-14 sm:h-16 grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4">
+      <Container className="relative grid h-full grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4 translate-x-[50px]">
         <Link
           href="/"
           className="flex-shrink-0 justify-self-start select-none flex items-center"
           aria-label="홈으로 이동"
         >
-          <Image src="/adgrit-logo-v2.png" alt="ADGRIT 로고" height={22} width={81} className="h-6 w-auto object-contain" priority />
+          <Image src="/adgrit-logo-v3.png" alt="ADGRIT 로고" height={50} width={220} className="w-[220px] h-auto object-contain" priority />
         </Link>
 
         {/* 모바일: 메인 메뉴 + 탭 시 서브메뉴 드롭다운 */}
