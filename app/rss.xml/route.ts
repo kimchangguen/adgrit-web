@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.adgritcore.com";
+const BASE_URL = "https://www.adgritcore.com";
 const WP_BASE =
   process.env.WP_BASE ??
   "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2";

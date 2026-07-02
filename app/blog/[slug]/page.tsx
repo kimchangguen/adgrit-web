@@ -7,7 +7,7 @@ import { Footer } from "../../_components/Footer";
 import { BlogSidebar } from "../../_components/BlogSidebar";
 
 const WP_BASE   = process.env.WP_BASE ?? "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2";
-const SITE_URL  = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.adgritcore.com";
+const SITE_URL  = "https://www.adgritcore.com";
 const LOGO_URL  = `${SITE_URL}/adgrit-logo-v2.png`;
 
 type Post = {
@@ -242,7 +242,7 @@ export async function generateMetadata({
     // absolute 사용: root layout template("%s | ADGRIT")을 무시하고 직접 제목 제어
     title: { absolute: seoTitle },
     description,
-    alternates: { canonical: `/blog/${slug}` },
+    alternates: { canonical: postUrl },
     openGraph: {
       title: seoTitle,
       description,

@@ -2,13 +2,16 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { FloatingActions } from "./_components/FloatingActions";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.adgritcore.com";
+const BASE_URL = "https://www.adgritcore.com";
 const DEFAULT_TITLE = "ADGRIT | 성과로 증명하는 광고대행";
 const DEFAULT_DESC =
   "Google Ads, SEO & GEO, 워드프레스, 퍼포먼스 마케팅을 하나의 성장 엔진으로 설계합니다.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
+  alternates: {
+    canonical: BASE_URL,
+  },
   title: {
     default: DEFAULT_TITLE,
     template: "%s | ADGRIT",

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.adgritcore.com";
+const BASE_URL = "https://www.adgritcore.com";
 /* WP_BASE 는 서버 전용 환경변수. 빈 문자열 폴백 대신 실제 엔드포인트를 명시해
    프로덕션에서 WP_BASE 미설정 시 상대경로 fetch 실패를 방지한다. */
 const WP_BASE  =

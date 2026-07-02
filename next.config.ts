@@ -17,6 +17,17 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'adgritcore.com',
+          },
+        ],
+        destination: 'https://www.adgritcore.com/:path*',
+        permanent: true,
+      },
+      {
         source: "/posts/:id",
         destination: "/blog",
         permanent: true,
