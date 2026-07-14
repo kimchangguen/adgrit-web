@@ -14,6 +14,7 @@ import { Container } from "./_components/Container";
 import { Footer } from "./_components/Footer";
 import { ShortformReachSection } from "./_components/ShortformReachSection";
 import { AccountGrowthSection } from "./_components/AccountGrowthSection";
+import { RankingExposureSection } from "./_components/RankingExposureSection";
 import { ResultsWithGraph } from "./_components/ResultsWithGraph";
 import { OurClientsSection } from "./_components/OurClientsSection";
 import { ClientGrowthSection } from "./_components/ClientGrowthSection";
@@ -199,13 +200,14 @@ function SiteChrome() {
 
       <AccountGrowthSection />
 
+      <RankingExposureSection />
+
       {/* 헤더 메뉴 앵커: 계정육성 */}
 
       {/* Results - 다섯번째 섹션 */}
       <ResultsWithGraph />
 
       {/* 헤더 메뉴 앵커: 상위노출 */}
-      <div id="ranking" aria-hidden />
 
       {/* OUR CLIENTS - 05 섹션 밑 */}
       <OurClientsSection />
