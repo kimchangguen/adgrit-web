@@ -13,7 +13,7 @@ import {
 import { Container } from "./_components/Container";
 import { Footer } from "./_components/Footer";
 import { SloganWithEffects } from "./_components/SloganWithEffects";
-import { VisionCarousel } from "./_components/VisionCarousel";
+import { ShortformReachSection } from "./_components/ShortformReachSection";
 import { ResultsWithGraph } from "./_components/ResultsWithGraph";
 import { OurClientsSection } from "./_components/OurClientsSection";
 import { ClientGrowthSection } from "./_components/ClientGrowthSection";
@@ -202,28 +202,7 @@ function SiteChrome() {
         <SloganWithEffects />
       </section>
 
-      {/* Vision - 네번째 섹션 */}
-      <section
-        id="about"
-        className="ig-section relative z-10 flex w-full items-center px-6 py-8 sm:px-10 sm:py-10"
-      >
-        <SectionBackdrop variant="s4" />
-        <div className="ig-content mx-auto w-full max-w-[1920px]">
-          <VisionCarousel
-            titleLine1="애드그릿과 함께"
-            titleLine2="낮은 견적 · 빠르고 정확한 계획"
-            title="낮은 견적 · 빠르고 정확한 계획"
-            items={[
-              { iconKey: "badge", titleEn: "No Hidden Fees", desc: "영업사원 수수료 견적에 없습니다. 많은 양의 배포를 할 수 있는 강력한 이점이 있습니다.", imageUrl: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=80" },
-              { iconKey: "document", titleEn: "Massive Distribution", desc: "많은 양의 배포를 할 수 있는 강력한 이점이 있습니다.", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" },
-              { iconKey: "sparkles", titleEn: "Quality Content", desc: "예쁜 기만인 쓰레기 콘텐츠는 만들지 않습니다.", imageUrl: "/image/3333.png" },
-              { iconKey: "cpu", titleEn: "Algorithm Expertise", desc: "알고리즘 문제시 최전선에서 빠르게 대처가 가능합니다.", imageUrl: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&q=80" },
-              { iconKey: "chat", titleEn: "Honest & Direct", desc: "안 되는 건 안 된다고 솔직히 말하며 수정 요청에 반영합니다.", imageUrl: "/image/5555.png" },
-              { iconKey: "chart", titleEn: "Marketing Success", desc: "마케팅에 적합한 콘텐츠로 성공을 만들어 드려요.", imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" },
-            ]}
-          />
-        </div>
-      </section>
+      <ShortformReachSection />
 
       {/* 헤더 메뉴 앵커: 계정육성 */}
       <div id="account-growth" aria-hidden />

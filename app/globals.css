@@ -704,9 +704,9 @@ header nav a {
 
 /* 모든 공통 박스를 Section 2 카드와 동일한 Dark Frosted Glass로 통일한다. */
 .ig-glass-card,
-.ig-glass-panel-lg,
+.ig-glass-panel-lg:not(.ig-glass-panel-lg--overlay),
 .ig-glass-card:hover,
-.ig-glass-panel-lg:hover {
+.ig-glass-panel-lg:not(.ig-glass-panel-lg--overlay):hover {
   @apply backdrop-blur-[20px] backdrop-saturate-[120%];
   position: relative;
   overflow: hidden;
@@ -718,14 +718,14 @@ header nav a {
 }
 
 .ig-glass-card::before,
-.ig-glass-panel-lg::before {
+.ig-glass-panel-lg:not(.ig-glass-panel-lg--overlay)::before {
   background: none;
   filter: none;
   opacity: 0;
 }
 
 .ig-glass-card::after,
-.ig-glass-panel-lg::after {
+.ig-glass-panel-lg:not(.ig-glass-panel-lg--overlay)::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -738,7 +738,7 @@ header nav a {
 }
 
 .ig-glass-card > *,
-.ig-glass-panel-lg > * {
+.ig-glass-panel-lg:not(.ig-glass-panel-lg--overlay) > * {
   position: relative;
   z-index: 2;
   opacity: 1;
@@ -749,11 +749,13 @@ header nav a {
 /* Section 2 only: Semi Opaque Frosted Glass Film.
    Hero의 색감은 확산시키고 세부 형태는 억제하며, 콘텐츠에는 투명도나 필터를 전달하지 않는다. */
 #section2 .ig-glass-panel-lg {
-  background: rgba(20, 20, 30, 0.58);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  position: absolute;
+  inset: 0;
+  background: rgba(185, 188, 198, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    0 18px 48px rgba(0, 0, 0, 0.2);
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 18px 48px rgba(0, 0, 0, 0.16);
 }
 
 #section2 .ig-glass-panel-lg::before {
@@ -790,9 +792,9 @@ header nav a {
 
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   #section2 .ig-glass-panel-lg {
-    background: rgba(20, 20, 30, 0.58);
-    backdrop-filter: blur(28px) saturate(110%);
-    -webkit-backdrop-filter: blur(28px) saturate(110%);
+    background: rgba(185, 188, 198, 0.38);
+    backdrop-filter: blur(28px) saturate(80%) contrast(88%);
+    -webkit-backdrop-filter: blur(28px) saturate(80%) contrast(88%);
   }
 }
 
@@ -801,10 +803,10 @@ header nav a {
 #section2 .ig-glass-card:hover {
   position: relative;
   overflow: hidden;
-  background: rgba(20, 20, 30, 0.45);
+  background: rgba(112, 115, 126, 0.48);
   backdrop-filter: blur(20px) saturate(120%);
   -webkit-backdrop-filter: blur(20px) saturate(120%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 #section2 .ig-glass-card::before {

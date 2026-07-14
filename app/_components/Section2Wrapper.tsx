@@ -25,8 +25,8 @@ export function Section2Wrapper({ leftContent, rightContent }: Section2WrapperPr
         <div
           className="ig-glass-panel-lg ig-glass-panel-lg--overlay pointer-events-none"
           style={{
-            backdropFilter: "blur(28px) saturate(110%)",
-            WebkitBackdropFilter: "blur(28px) saturate(110%)",
+            backdropFilter: "blur(28px) saturate(80%) contrast(88%)",
+            WebkitBackdropFilter: "blur(28px) saturate(80%) contrast(88%)",
           }}
           aria-hidden
         />
