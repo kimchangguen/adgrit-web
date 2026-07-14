@@ -192,18 +192,18 @@ export function ResultsWithGraph() {
               <p className="mt-3 text-base text-white/60">업계 평균 대비 3.5배 높은 성과</p>
             </div>
             <div className="ig-glass-card rounded-2xl px-6 py-8 sm:px-8 sm:py-10 text-center">
-              <p className="text-base font-medium text-white/60">누적 광고 집행 금액</p>
+              <p className="text-base font-medium text-white/60">6년간 인스타그램 집행 누적</p>
               <p className="ig-gradient-text mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tabular-nums">
                 <AnimatedCounter to={172} suffix="억+" duration={1.5} />
               </p>
-              <p className="mt-3 text-base text-white/60">데이터로 검증된 집행 노하우</p>
+              <p className="mt-3 text-base text-white/60">클라이언트와 함께 검증한 노하우</p>
             </div>
             <div className="ig-glass-card rounded-2xl px-6 py-8 sm:px-8 sm:py-10 text-center">
-              <p className="text-base font-medium text-white/60">월 구글 애즈 집행 예산</p>
+              <p className="text-base font-medium text-white/60">월 인스타그램 집행 예산 (타겟광고 제외)</p>
               <p className="ig-gradient-text mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tabular-nums">
-                <AnimatedCounter to={7.2} suffix="억" decimals={1} duration={1.5} />
+                <AnimatedCounter to={3.4} suffix="억+" decimals={1} duration={1.5} />
               </p>
-              <p className="mt-3 text-base text-white/60">대규모 예산 운영 최적화</p>
+              <p className="mt-3 text-base text-white/60">국내 최대 인스타 마케팅 집행회사</p>
             </div>
           </div>
         </motion.div>
