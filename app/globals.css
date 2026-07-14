@@ -10,7 +10,7 @@
 
   --section1-bg: #ffffff;
 
-  --background: #ffffff;
+  --background: #07030f;
   --foreground: #1f1f1f;
   --muted: #64748b;
   --muted-foreground: #94a3b8;
@@ -20,6 +20,8 @@
   --card-hover: #f1f5f9;
   --border: #e2e8f0;
   --accent: #222222;
+
+  --header-height: 118px;
 }
 
 @theme inline {
@@ -34,15 +36,18 @@
 html {
   scroll-behavior: smooth;
   font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #07030f;
 }
 
 /* 고정 헤더 높이만큼 앵커 링크 스크롤 여백 */
 [id] {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: calc(var(--header-height) + 25px);
 }
 
 body {
-  background: var(--background);
+  min-height: 100vh;
+  isolation: isolate;
+  background: transparent;
   color: var(--foreground);
   font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -92,6 +97,236 @@ header nav a {
   font-weight: 600;
   font-size: 15px;
   letter-spacing: -0.02em;
+}
+
+/* ===== 신규 글로벌 내비게이션 (인스타그램 그라데이션 톤) =====
+   헤더 자체는 위치만 담당(항상 fixed, 스크롤에 따라 이동/은닉 절대 금지).
+   배경 농도는 .header-background 레이어가 담당하며 scroll 상태(transparent prop)에 따라
+   is-over-hero / is-over-content 클래스만 토글된다. 하단 경계는 선이 아닌 ::after 페이드로 처리 */
+.gnav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: var(--header-height);
+  z-index: 9999;
+  transform: none !important;
+  opacity: 1;
+  visibility: visible;
+  isolation: isolate;
+  border: none;
+  box-shadow: none;
+}
+.gnav-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -35px;
+  height: 35px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 3, 15, 0.72) 0%,
+    rgba(7, 3, 15, 0.32) 45%,
+    rgba(7, 3, 15, 0) 100%
+  );
+}
+
+/* 헤더 배경 레이어: 메뉴 아이콘/텍스트 뒤에서 콘텐츠 비침을 차단하는 역할만 수행 */
+.header-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  transition: background 0.4s ease;
+}
+.header-background.is-over-hero {
+  background: linear-gradient(
+    180deg,
+    rgba(7, 3, 15, 0.35) 0%,
+    rgba(7, 3, 15, 0.18) 70%,
+    rgba(7, 3, 15, 0) 100%
+  );
+}
+.header-background.is-over-content {
+  background: linear-gradient(
+    180deg,
+    rgba(7, 3, 15, 0.98) 0%,
+    rgba(7, 3, 15, 0.96) 70%,
+    rgba(7, 3, 15, 0.68) 88%,
+    rgba(7, 3, 15, 0) 100%
+  );
+}
+
+/* 헤더 실제 콘텐츠(로고/메뉴): 배경 레이어보다 항상 위에 렌더링 */
+.header-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+}
+
+.gnav-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.gnav-item__icon {
+  color: #ff2da1;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.gnav-item__label {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.83rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+.gnav-item__underline {
+  width: 22px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff2da1, #d632ff, #7b3cff, #ff7139, #ffb21c);
+  opacity: 0;
+  transform: scaleX(0.4);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.gnav-item:hover .gnav-item__icon,
+.gnav-item:focus-visible .gnav-item__icon,
+.gnav-item--active .gnav-item__icon {
+  transform: translateY(-3px);
+  filter: drop-shadow(0 0 8px rgba(255, 45, 161, 0.7));
+}
+.gnav-item:hover .gnav-item__label,
+.gnav-item:focus-visible .gnav-item__label,
+.gnav-item--active .gnav-item__label {
+  color: #ffffff;
+}
+.gnav-item:hover .gnav-item__underline,
+.gnav-item:focus-visible .gnav-item__underline,
+.gnav-item--active .gnav-item__underline {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* 대각선 빛 반사 효과 */
+.gnav-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 55%;
+  height: 100%;
+  transform: skewX(-20deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.55),
+    rgba(255, 45, 161, 0.25),
+    transparent
+  );
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+.gnav-item:hover::before,
+.gnav-item:focus-visible::before {
+  left: 140%;
+}
+
+/* About Us 드롭다운 */
+.gnav-dropdown {
+  background: rgba(12, 7, 30, 0.96);
+  border: 1px solid rgba(220, 50, 255, 0.3);
+  border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45), 0 0 30px rgba(210, 40, 255, 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.gnav-dropdown__link {
+  position: relative;
+  display: block;
+  padding: 10px 16px 10px 22px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.875rem;
+  border-radius: 8px;
+  transition: color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+.gnav-dropdown__link::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  width: 3px;
+  height: 0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ff2da1, #7b3cff);
+  transform: translateY(-50%);
+  transition: height 0.25s ease;
+}
+.gnav-dropdown__link:hover,
+.gnav-dropdown__link:focus-visible {
+  color: #fff;
+  background: linear-gradient(90deg, rgba(255, 45, 161, 0.14), rgba(123, 60, 255, 0.1));
+  transform: translateX(4px);
+}
+.gnav-dropdown__link:hover::before,
+.gnav-dropdown__link:focus-visible::before {
+  height: 60%;
+}
+
+/* 모바일 메뉴 항목 */
+.gnav-mobile-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 14px;
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.gnav-mobile-item:hover,
+.gnav-mobile-item:focus-visible {
+  background: rgba(255, 45, 161, 0.1);
+  color: #fff;
+}
+.gnav-mobile-item .gnav-item__icon {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gnav-item::before {
+    display: none;
+  }
+  .gnav-item__icon,
+  .gnav-item__label,
+  .gnav-item__underline,
+  .gnav-dropdown__link {
+    transition: none !important;
+  }
+  .gnav-item:hover .gnav-item__icon,
+  .gnav-item:focus-visible .gnav-item__icon,
+  .gnav-item--active .gnav-item__icon {
+    transform: none;
+  }
 }
 
 /* 사장님 고민 섹션 타이포그래피 - 좌우 통일 */
@@ -197,11 +432,15 @@ header nav a {
   background-size: 90px 90px;
 }
 
-/* 히어로 섹션 - 흰 배경 (이미지 레이아웃용) */
+/* 히어로 섹션 - public/image/000.png를 히어로 자체 배경으로 직접 고정 */
 .hero {
   position: relative;
-  min-height: 80vh;
-  background: #ffffff;
+  min-height: 100vh;
+  background-image: url(/image/000.png);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 .hero > * {
   position: relative;
@@ -272,6 +511,300 @@ header nav a {
 }
 @media (prefers-reduced-motion: reduce) {
   .animate-bubbles-up { animation: none; }
+}
+
+/* =========================================================================
+   Instagram Premium Creative Agency — 섹션2~푸터 배경 디자인 시스템
+   핑크 / 보라 / 주황 / 검정 4색 팔레트, Aurora Ribbon, Mesh Gradient,
+   Glow Blob, Film Grain, Glass Card, Gradient Text/Button
+   ========================================================================= */
+:root {
+  --ig-pink: #ff2d95;
+  --ig-hot-pink: #ff3d7f;
+  --ig-orange: #ff8a1e;
+  --ig-warm-orange: #ffa13d;
+  --ig-gold: #ffb347;
+  --ig-purple: #a238ff;
+  --ig-navy: #09051b;
+  --ig-black: #07030f;
+}
+
+/* ----- 사이트 공통 고정 배경: 히어로에서 쓰는 이미지 하나를 전 섹션이 공유 -----
+   body의 독립 stacking context 안에서 모든 콘텐츠 뒤에 고정한다. */
+.site-fixed-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: #07030f;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* ----- 섹션 공통 베이스: 별도 오버레이 없이 완전히 투명 ----- */
+.ig-section {
+  position: relative;
+  isolation: isolate;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.82);
+}
+.ig-section::before {
+  content: none;
+}
+
+/* 배경 장식 레이어 전용 클리핑 래퍼.
+   overflow:hidden을 .ig-section 자체에 두면 내부의 position:sticky 요소가
+   깨지므로(2번째 섹션 좌측 sticky 텍스트), 클리핑을 이 형제 래퍼로 분리한다. */
+.ig-bg-clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  /* 섹션 상단이 각지게 잘려 보이지 않도록 배경 장식 레이어만 위쪽 28px을 서서히 페이드인.
+     실제 텍스트/카드(.ig-content)에는 적용하지 않는다 */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, black 28px, black 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, black 28px, black 100%);
+}
+
+/* 별도의 Aurora / Glow / Mesh / Ring / Grain 장식은 사용하지 않는다. */
+
+/* ----- 레이어 7: 콘텐츠(항상 최상단) ----- */
+.ig-content {
+  position: relative;
+  z-index: 3;
+}
+
+/* ----- Acid Etched Glass / White Frost Film -----
+   표면 질감은 pseudo-element에만 두고 콘텐츠는 별도 최상위 레이어에서 100% 불투명하게 유지한다. */
+.ig-glass-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.94) 0%,
+    rgba(255, 255, 255, 0.9) 52%,
+    rgba(255, 255, 255, 0.84) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42), 0 18px 50px rgba(0, 0, 0, 0.15);
+  transition: transform 0.35s ease, background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.ig-glass-card > * {
+  position: relative;
+  z-index: 2;
+}
+.ig-glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='3' seed='8' stitchTiles='stitchTiles'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='.48'/%3E%3C/svg%3E");
+  background-size: 96px 96px;
+  mix-blend-mode: soft-light;
+  opacity: 0.16;
+}
+.ig-glass-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent 44%);
+}
+.ig-glass-card:hover {
+  transform: translateY(-4px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.86));
+  border-color: rgba(255, 255, 255, 0.48);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48), 0 24px 65px rgba(0, 0, 0, 0.18);
+}
+
+/* 대형 패널도 소형 카드와 동일한 Acid Etched Glass 재질을 공유한다. */
+.ig-glass-panel-lg {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.94) 0%,
+    rgba(255, 255, 255, 0.9) 52%,
+    rgba(255, 255, 255, 0.84) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 28px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 18px 50px rgba(0, 0, 0, 0.15);
+  transition: transform 0.35s ease, background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.ig-glass-panel-lg > * {
+  position: relative;
+  z-index: 2;
+}
+.ig-glass-panel-lg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='3' seed='8' stitchTiles='stitchTiles'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='.48'/%3E%3C/svg%3E");
+  background-size: 96px 96px;
+  mix-blend-mode: soft-light;
+  opacity: 0.16;
+}
+.ig-glass-panel-lg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent 44%);
+}
+.ig-glass-panel-lg:hover {
+  border-color: rgba(255, 255, 255, 0.48);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48), 0 24px 65px rgba(0, 0, 0, 0.18);
+}
+/* .ig-section처럼 자체 ::after(필름 그레인)를 쓰는 요소 위에 겹쳐 씌우는 오버레이 전용 변형 */
+.ig-glass-panel-lg--overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+/* 지원 환경: Hero의 색과 빛만 남도록 강한 blur와 저채도 milky-white 막을 적용한다. */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .ig-glass-card,
+  .ig-glass-panel-lg {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.45),
+      rgba(255, 255, 255, 0.36),
+      rgba(255, 255, 255, 0.3)
+    );
+    backdrop-filter: blur(36px) saturate(80%) brightness(1.08);
+    -webkit-backdrop-filter: blur(36px) saturate(80%) brightness(1.08);
+  }
+  .ig-glass-card:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.49),
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.34)
+    );
+  }
+}
+
+/* Section 2 only: Semi Opaque Frosted Glass Film.
+   Hero의 색감은 확산시키고 세부 형태는 억제하며, 콘텐츠에는 투명도나 필터를 전달하지 않는다. */
+#section2 .ig-glass-card,
+#section2 .ig-glass-panel-lg {
+  background: rgba(255, 255, 255, 0.21);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 18px 48px rgba(0, 0, 0, 0.14);
+}
+
+#section2 .ig-glass-card::before,
+#section2 .ig-glass-panel-lg::before {
+  background:
+    radial-gradient(
+      ellipse at 20% 30%,
+      rgba(255, 255, 255, 0.12),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 78% 68%,
+      rgba(160, 165, 180, 0.08),
+      transparent 48%
+    );
+  filter: blur(8px);
+  mix-blend-mode: normal;
+  opacity: 1;
+}
+
+#section2 .ig-glass-card::after,
+#section2 .ig-glass-panel-lg::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' seed='8' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='.72'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
+  background-repeat: repeat;
+  mix-blend-mode: soft-light;
+  opacity: 0.055;
+}
+
+#section2 .ig-glass-card > *,
+#section2 .ig-glass-panel-lg > * {
+  z-index: 3;
+  opacity: 1;
+  filter: none;
+  mix-blend-mode: normal;
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  #section2 .ig-glass-card,
+  #section2 .ig-glass-panel-lg,
+  #section2 .ig-glass-card:hover {
+    background: rgba(255, 255, 255, 0.21);
+    backdrop-filter: blur(28px) saturate(80%) contrast(85%);
+    -webkit-backdrop-filter: blur(28px) saturate(80%) contrast(85%);
+  }
+}
+
+/* ----- Glass Icon (아이콘/로고 박스) ----- */
+.ig-glass-icon {
+  position: relative;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* ----- Gradient Text (강조 키워드): Pink → Orange 메인, 보라는 끝부분에만 소량 ----- */
+.ig-gradient-text {
+  background: linear-gradient(90deg, #ff2d95 0%, #ff8a1e 55%, #ffb347 82%, #a238ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ----- 버튼: Orange → Pink 메인, 보라는 끝부분에만 소량 ----- */
+.ig-btn-gradient {
+  background: linear-gradient(90deg, #ff8a1e 0%, #ff2d95 62%, #ff2d95 82%, #a238ff 100%);
+  box-shadow: 0 10px 30px rgba(255, 45, 149, 0.2), 0 8px 24px rgba(255, 138, 30, 0.18);
+  color: #ffffff;
+}
+.ig-btn-glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ----- 아이콘 glow ----- */
+.ig-icon-glow {
+  filter: drop-shadow(0 0 8px rgba(255, 45, 149, 0.3)) drop-shadow(0 0 14px rgba(255, 138, 30, 0.2));
+}
+
+/* ----- 모션 감소 환경: 카드 hover 애니메이션 비활성화 ----- */
+@media (prefers-reduced-motion: reduce) {
+  .ig-glass-card,
+  .ig-glass-panel-lg {
+    transition: none;
+  }
+  .ig-glass-card:hover,
+  .ig-glass-panel-lg:hover {
+    transform: none;
+  }
 }
 
 

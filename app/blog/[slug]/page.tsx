@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "../../_components/SiteHeader";
 import { Footer } from "../../_components/Footer";
 import { BlogSidebar } from "../../_components/BlogSidebar";
+import { SectionBackdrop } from "../../_components/backgrounds/SectionBackdrop";
 
 const WP_BASE   = process.env.WP_BASE ?? "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2";
 const SITE_URL  = "https://www.adgritcore.com";
@@ -323,7 +324,7 @@ export default async function PostDetail({
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f9fc] text-[#1f1f1f]">
+    <div className="min-h-screen text-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -337,10 +338,11 @@ export default async function PostDetail({
       <SiteHeader />
 
       {/* 히어로 */}
-      <section className="bg-[#222222] pt-28 pb-10 sm:pt-32 sm:pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="ig-section pt-28 pb-10 sm:pt-32 sm:pb-12">
+        <SectionBackdrop variant="s3" />
+        <div className="ig-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* 브레드크럼 */}
-          <nav className="flex items-center gap-2 text-xs text-slate-300 mb-4 flex-wrap">
+          <nav className="flex items-center gap-2 text-xs text-white/50 mb-4 flex-wrap">
             <Link href="/" className="hover:text-white transition-colors">홈</Link>
             <span>/</span>
             <Link href="/blog" className="hover:text-white transition-colors">블로그</Link>
@@ -361,7 +363,7 @@ export default async function PostDetail({
           {firstCat && (
             <Link
               href={`/blog/category/${firstCat.slug}`}
-              className="inline-block mb-3 bg-[#222222] text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-[#3a3a3a] transition-colors"
+              className="ig-btn-gradient inline-block mb-3 text-xs font-bold px-3 py-1 rounded-full"
             >
               {firstCat.name}
             </Link>
@@ -371,12 +373,14 @@ export default async function PostDetail({
             className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight max-w-4xl"
             dangerouslySetInnerHTML={{ __html: post.title.rendered }}
           />
-          <time className="mt-3 block text-sm text-slate-300">{formatDate(post.date)}</time>
+          <time className="mt-3 block text-sm text-white/50">{formatDate(post.date)}</time>
         </div>
       </section>
 
       {/* 본문 */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <section className="ig-section">
+        <SectionBackdrop variant="s7b" />
+        <main className="ig-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         <div className="flex flex-col lg:flex-row gap-10">
 
           {/* 왼쪽: 아티클 */}
@@ -384,7 +388,7 @@ export default async function PostDetail({
 
             {/* 대표 이미지 */}
             {imageUrl ? (
-              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-slate-100 mb-8">
+              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-white/5 mb-8">
                 <Image
                   src={imageUrl}
                   alt={imageAlt}
@@ -394,32 +398,32 @@ export default async function PostDetail({
                 />
               </div>
             ) : (
-              <div className="w-full aspect-[16/9] rounded-2xl bg-gradient-to-br from-[#222222]/10 to-slate-100 mb-8 flex items-center justify-center">
-                <span className="text-6xl opacity-20">📝</span>
+              <div className="w-full aspect-[16/9] rounded-2xl bg-gradient-to-br from-[var(--ig-pink)]/15 to-[var(--ig-orange)]/10 mb-8 flex items-center justify-center">
+                <span className="text-6xl opacity-30">📝</span>
               </div>
             )}
 
             {/* 본문 콘텐츠 */}
             <div
               className="
-                prose prose-lg prose-slate max-w-none
-                bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 lg:p-10
-                [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[#1f1f1f] [&_h2]:mt-8 [&_h2]:mb-4
-                [&_h2]:pl-3 [&_h2]:border-l-4 [&_h2]:border-[#222222]
-                [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-[#1f1f1f] [&_h3]:mt-6 [&_h3]:mb-3
-                [&_h3]:pl-3 [&_h3]:border-l-2 [&_h3]:border-[#222222]
-                [&_p]:text-slate-700 [&_p]:leading-relaxed [&_p]:mb-4
-                [&_a]:text-[#222222] [&_a:hover]:underline
-                [&_strong]:font-bold [&_strong]:text-[#1f1f1f]
-                [&_blockquote]:border-l-4 [&_blockquote]:border-[#222222] [&_blockquote]:bg-slate-50
+                ig-glass-card prose prose-lg prose-invert max-w-none
+                rounded-2xl p-6 sm:p-8 lg:p-10
+                [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-white [&_h2]:mt-8 [&_h2]:mb-4
+                [&_h2]:pl-3 [&_h2]:border-l-4 [&_h2]:border-[var(--ig-pink)]
+                [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-white [&_h3]:mt-6 [&_h3]:mb-3
+                [&_h3]:pl-3 [&_h3]:border-l-2 [&_h3]:border-[var(--ig-orange)]
+                [&_p]:text-white/70 [&_p]:leading-relaxed [&_p]:mb-4
+                [&_a]:text-[var(--ig-pink)] [&_a:hover]:underline
+                [&_strong]:font-bold [&_strong]:text-white
+                [&_blockquote]:border-l-4 [&_blockquote]:border-[var(--ig-orange)] [&_blockquote]:bg-white/5
                 [&_blockquote]:pl-4 [&_blockquote]:py-3 [&_blockquote]:my-4 [&_blockquote]:rounded-r-lg
-                [&_blockquote]:text-slate-600 [&_blockquote]:italic
+                [&_blockquote]:text-white/60 [&_blockquote]:italic
                 [&_table]:w-full [&_table]:border-collapse [&_table]:my-4
-                [&_th]:bg-[#222222] [&_th]:text-white [&_th]:px-3 [&_th]:py-2 [&_th]:text-sm [&_th]:font-semibold
-                [&_td]:border [&_td]:border-slate-200 [&_td]:px-3 [&_td]:py-2 [&_td]:text-sm [&_td]:text-slate-700
-                [&_tr:nth-child(even)_td]:bg-slate-50
+                [&_th]:bg-white/10 [&_th]:text-white [&_th]:px-3 [&_th]:py-2 [&_th]:text-sm [&_th]:font-semibold
+                [&_td]:border [&_td]:border-white/10 [&_td]:px-3 [&_td]:py-2 [&_td]:text-sm [&_td]:text-white/70
+                [&_tr:nth-child(even)_td]:bg-white/5
                 [&_img]:rounded-xl [&_img]:w-full [&_img]:my-4
-                [&_hr]:border-slate-200 [&_hr]:my-6
+                [&_hr]:border-white/10 [&_hr]:my-6
               "
               dangerouslySetInnerHTML={{ __html: post.content.rendered }}
             />
@@ -428,14 +432,14 @@ export default async function PostDetail({
             <div className="mt-8 flex items-center justify-between">
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-[#222222] transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-white/65 hover:text-white transition-colors"
               >
                 ← 목록으로
               </Link>
               {firstCat && (
                 <Link
                   href={`/blog/category/${firstCat.slug}`}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#222222] hover:underline"
+                  className="ig-gradient-text inline-flex items-center gap-2 text-sm font-semibold hover:underline"
                 >
                   {firstCat.name} 글 더보기 →
                 </Link>
@@ -451,18 +455,18 @@ export default async function PostDetail({
         {relatedPosts.length > 0 && (
           <section className="mt-14">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-1 h-6 bg-[#222222] rounded-full" />
-              <h2 className="text-xl font-black text-[#1f1f1f]">함께 읽으면 좋은 글</h2>
+              <div className="w-1 h-6 bg-[var(--ig-pink)] rounded-full" />
+              <h2 className="text-xl font-black text-white">함께 읽으면 좋은 글</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
               {relatedPosts.map((p) => (
                 <Link
                   key={p.id}
                   href={`/blog/${p.slug}`}
-                  className="group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
+                  className="ig-glass-card group rounded-2xl overflow-hidden hover:-translate-y-0.5 transition-all duration-200 flex flex-col hover:border-white/35"
                 >
                   {/* 썸네일 */}
-                  <div className="relative aspect-[16/9] bg-slate-100 overflow-hidden">
+                  <div className="relative aspect-[16/9] bg-white/5 overflow-hidden">
                     {p.imageUrl ? (
                       <Image
                         src={p.imageUrl}
@@ -472,34 +476,35 @@ export default async function PostDetail({
                         sizes="(max-width: 640px) 100vw, 33vw"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-[#222222]/10 to-slate-200 flex items-center justify-center">
-                        <span className="text-4xl opacity-25">📝</span>
+                      <div className="w-full h-full bg-gradient-to-br from-[var(--ig-pink)]/15 to-[var(--ig-orange)]/10 flex items-center justify-center">
+                        <span className="text-4xl opacity-30">📝</span>
                       </div>
                     )}
                     {p.categoryName && (
-                      <span className="absolute top-2 left-2 bg-[#222222] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      <span className="ig-btn-gradient absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 rounded-full">
                         {p.categoryName}
                       </span>
                     )}
                   </div>
                   {/* 텍스트 */}
                   <div className="p-4 flex flex-col flex-1">
-                    <h3 className="text-sm font-black text-[#1f1f1f] leading-snug mb-2 line-clamp-2 group-hover:text-[#222222] transition-colors">
+                    <h3 className="text-sm font-black text-white leading-snug mb-2 line-clamp-2 group-hover:text-[var(--ig-pink)] transition-colors">
                       {p.title}
                     </h3>
                     {p.excerpt && (
-                      <p className="text-xs text-slate-500 leading-relaxed line-clamp-2 mb-3">
+                      <p className="text-xs text-white/55 leading-relaxed line-clamp-2 mb-3">
                         {p.excerpt}
                       </p>
                     )}
-                    <time className="mt-auto text-[10px] text-slate-400">{p.date}</time>
+                    <time className="mt-auto text-[10px] text-white/40">{p.date}</time>
                   </div>
                 </Link>
               ))}
             </div>
           </section>
         )}
-      </main>
+        </main>
+      </section>
 
       <Footer />
     </div>

@@ -1,5 +1,7 @@
 "use client";
 
+import { SectionBackdrop } from "./backgrounds/SectionBackdrop";
+
 const CLIENTS = [
   { name: "아트웨이브", desc: "전국 예체능 입시 전문학원", logo: "아트웨이브스튜디오" },
   { name: "법무법인 로앤그레이", desc: "형사·기업 전문 로펌", logo: "로앤그레이" },
@@ -25,14 +27,14 @@ function ClientCard({
   logo: string;
 }) {
   return (
-    <div className="flex flex-shrink-0 w-[260px] sm:w-[280px] flex-col rounded-xl border border-tertiary bg-neutral p-4 sm:p-5 shadow-sm hover:shadow-md hover:border-secondary transition-shadow">
-      <div className="flex h-14 sm:h-16 items-center justify-center rounded-lg bg-tertiary text-primary/60 text-xs sm:text-sm font-semibold truncate px-2">
+    <div className="ig-glass-card flex flex-shrink-0 w-[260px] sm:w-[280px] flex-col rounded-xl p-4 sm:p-5">
+      <div className="ig-glass-icon flex h-14 sm:h-16 items-center justify-center rounded-lg text-white/75 text-xs sm:text-sm font-semibold truncate px-2">
         {logo}
       </div>
-      <p className="mt-3 text-sm font-semibold text-primary truncate" title={name}>
+      <p className="mt-3 text-sm font-semibold text-white truncate" title={name}>
         {name}
       </p>
-      <p className="mt-1 text-xs text-primary/60 line-clamp-2" title={desc}>
+      <p className="mt-1 text-xs text-white/60 line-clamp-2" title={desc}>
         {desc}
       </p>
     </div>
@@ -41,17 +43,18 @@ function ClientCard({
 
 export function OurClientsSection() {
   return (
-    <section className="relative z-10 w-full overflow-hidden border-t border-tertiary bg-neutral py-16 sm:py-20 lg:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <section className="ig-section relative z-10 w-full py-16 sm:py-20 lg:py-24">
+      <SectionBackdrop variant="s5b" />
+      <div className="ig-content mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* 헤더 - 15% 추가 확대, 브랜드 수치 강조 */}
         <div className="text-center">
-          <p className="text-[1.14rem] font-semibold uppercase tracking-widest text-primary">
+          <p className="text-[1.14rem] font-semibold uppercase tracking-widest text-white">
             OUR CLIENTS
           </p>
-          <h2 className="mt-4 text-[1.96rem] font-bold leading-tight text-primary sm:text-[2.44rem] lg:text-[2.92rem]">
-            <span className="text-secondary">약 20+ 대형 브랜드</span>와,
+          <h2 className="mt-4 text-[1.96rem] font-bold leading-tight text-white sm:text-[2.44rem] lg:text-[2.92rem]">
+            <span className="ig-gradient-text">약 20+ 대형 브랜드</span>와,
             <br />
-            <span className="text-secondary">150+ 소상공인 브랜드</span>와 함께 성장중입니다
+            <span className="ig-gradient-text">150+ 소상공인 브랜드</span>와 함께 성장중입니다
           </h2>
         </div>
 

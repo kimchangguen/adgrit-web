@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { SiteHeader } from "../_components/SiteHeader";
 import { Footer } from "../_components/Footer";
+import { SectionBackdrop } from "../_components/backgrounds/SectionBackdrop";
 
 /* ─── 모션 ───────────────────────────────────────────── */
 const SPRING   = { type: "spring", stiffness: 300, damping: 28, mass: 0.9 } as const;
@@ -152,23 +153,25 @@ function EntryBlock({ entry }: { entry: Entry }) {
       viewport={VIEWPORT}
       transition={SPRING}
     >
-      {/* 연도 */}
-      <h2 className="text-[2rem] font-bold text-white leading-none tracking-tight mb-4">
-        {entry.year}
-      </h2>
+      <div className={`ig-glass-card inline-block w-full max-w-[420px] rounded-2xl px-6 py-6 sm:px-7 sm:py-7 ${isLeft ? "text-right" : "text-left"}`}>
+        {/* 연도 */}
+        <h2 className="ig-gradient-text text-[2rem] font-bold leading-none tracking-tight mb-4">
+          {entry.year}
+        </h2>
 
-      {/* 항목 */}
-      <div className="space-y-2">
-        {entry.items.map((item, i) => (
-          <p
-            key={i}
-            className={`text-[1.17rem] leading-relaxed ${
-              item.bold ? "font-bold text-white" : "text-white/50"
-            }`}
-          >
-            {item.text}
-          </p>
-        ))}
+        {/* 항목 */}
+        <div className="space-y-2">
+          {entry.items.map((item, i) => (
+            <p
+              key={i}
+              className={`text-[1.05rem] leading-relaxed ${
+                item.bold ? "font-bold text-white" : "text-white/55"
+              }`}
+            >
+              {item.text}
+            </p>
+          ))}
+        </div>
       </div>
     </motion.div>
   );
@@ -177,96 +180,109 @@ function EntryBlock({ entry }: { entry: Entry }) {
 /* ─── 페이지 ─────────────────────────────────────────── */
 export default function HistoryPage() {
   return (
-    <div className="bg-[#2E4033] text-white min-h-screen">
+    <div className="text-white min-h-screen">
       <SiteHeader />
 
       <main className="pt-16">
 
         {/* ── 히어로 ─────────────────────────────────── */}
-        <section className="px-6 sm:px-14 lg:px-24 pt-20 sm:pt-28 pb-10 sm:pb-16">
-          <motion.p
-            className="text-[0.975rem] font-bold tracking-[0.28em] text-slate-200 uppercase mb-5"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-          >
-            ADGRIT HISTORY
-          </motion.p>
-          <motion.h1
-            className="font-extrabold text-white leading-[1.1] tracking-tight"
-            style={{ fontSize: "clamp(2.6rem, 6vw, 5rem)" }}
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.2, ease: EASE }}
-          >
-            회사연혁
-          </motion.h1>
-          <motion.p
-            className="mt-5 text-lg sm:text-xl text-white/38 leading-[1.85]"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.32, ease: EASE }}
-          >
-            애드그릿의 도전과 성장의 기록입니다.
-          </motion.p>
+        <section className="ig-section px-6 sm:px-14 lg:px-24 pt-20 sm:pt-28 pb-10 sm:pb-16">
+          <SectionBackdrop variant="s2" />
+          <div className="ig-content">
+            <motion.p
+              className="text-[0.975rem] font-bold tracking-[0.28em] text-white/45 uppercase mb-5"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
+            >
+              ADGRIT HISTORY
+            </motion.p>
+            <motion.h1
+              className="font-extrabold text-white leading-[1.1] tracking-tight"
+              style={{ fontSize: "clamp(2.6rem, 6vw, 5rem)" }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.2, ease: EASE }}
+            >
+              <span className="ig-gradient-text">회사연혁</span>
+            </motion.h1>
+            <motion.p
+              className="mt-5 text-lg sm:text-xl text-white/50 leading-[1.85]"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.32, ease: EASE }}
+            >
+              애드그릿의 도전과 성장의 기록입니다.
+            </motion.p>
+          </div>
         </section>
 
-        {/* ── 지그재그 타임라인 (데스크톱) ────────────── */}
-        <section className="hidden sm:block relative px-6 lg:px-16 xl:px-28 pb-36">
+        {/* ── 지그재그 타임라인 ────────────────────────── */}
+        <section className="ig-section relative">
+          <SectionBackdrop variant="s6" />
+          <div className="ig-content">
 
-          {/* 중앙 수직선 */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/[0.08] -translate-x-1/2 pointer-events-none" />
+            {/* 데스크톱 */}
+            <div className="hidden sm:block relative px-6 lg:px-16 xl:px-28 pb-36">
 
-          {HISTORY.map((entry) => (
-            <div key={entry.year} className="relative grid grid-cols-2 py-7">
+              {/* 중앙 수직선 */}
+              <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/[0.1] -translate-x-1/2 pointer-events-none" />
 
-              {/* 중앙 블루 점 */}
-              <div className="absolute left-1/2 top-8 -translate-x-1/2 w-[9px] h-[9px] rounded-full bg-white ring-4 ring-black z-10 shadow-[0_0_10px_rgba(255,255,255,0.24)]" />
+              {HISTORY.map((entry) => (
+                <div key={entry.year} className="relative grid grid-cols-2 py-7">
 
-              {/* 왼쪽 셀: side="left" 일 때만 콘텐츠 */}
-              <div className="pr-8 lg:pr-12">
-                {entry.side === "left" && <EntryBlock entry={entry} />}
-              </div>
+                  {/* 중앙 점 */}
+                  <div className="absolute left-1/2 top-8 -translate-x-1/2 w-[9px] h-[9px] rounded-full bg-[var(--ig-pink)] ring-4 ring-[#07030f] z-10 shadow-[0_0_10px_rgba(255,45,149,0.45)]" />
 
-              {/* 오른쪽 셀: side="right" 일 때만 콘텐츠 */}
-              <div className="pl-8 lg:pl-12">
-                {entry.side === "right" && <EntryBlock entry={entry} />}
-              </div>
-            </div>
-          ))}
-        </section>
+                  {/* 왼쪽 셀: side="left" 일 때만 콘텐츠 */}
+                  <div className="pr-8 lg:pr-12 flex justify-end">
+                    {entry.side === "left" && <EntryBlock entry={entry} />}
+                  </div>
 
-        {/* ── 지그재그 타임라인 (모바일 — 단일 열) ───── */}
-        <section className="sm:hidden relative ml-5 pl-5 border-l border-white/[0.08] pb-28 space-y-8">
-          {HISTORY.map((entry) => (
-            <div key={entry.year} className="relative">
-              {/* 블루 점 */}
-              <div className="absolute -left-[1.3125rem] top-1.5 w-[9px] h-[9px] rounded-full bg-white ring-4 ring-black shadow-[0_0_8px_rgba(255,255,255,0.24)]" />
-
-              <motion.div
-                initial={{ opacity: 0, x: -36 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={VIEWPORT}
-                transition={SPRING}
-              >
-                <h2 className="text-[1.8rem] font-bold text-white tracking-tight leading-none mb-3">
-                  {entry.year}
-                </h2>
-                <div className="space-y-2">
-                  {entry.items.map((item, i) => (
-                    <p
-                      key={i}
-                      className={`text-[1.125rem] leading-relaxed ${
-                        item.bold ? "font-bold text-white" : "text-white/50"
-                      }`}
-                    >
-                      {item.text}
-                    </p>
-                  ))}
+                  {/* 오른쪽 셀: side="right" 일 때만 콘텐츠 */}
+                  <div className="pl-8 lg:pl-12">
+                    {entry.side === "right" && <EntryBlock entry={entry} />}
+                  </div>
                 </div>
-              </motion.div>
+              ))}
             </div>
-          ))}
+
+            {/* 모바일 — 단일 열 */}
+            <div className="sm:hidden relative ml-5 pl-5 border-l border-white/[0.1] pb-28 space-y-6 px-6">
+              {HISTORY.map((entry) => (
+                <div key={entry.year} className="relative">
+                  {/* 점 */}
+                  <div className="absolute -left-[1.3125rem] top-1.5 w-[9px] h-[9px] rounded-full bg-[var(--ig-pink)] ring-4 ring-[#07030f] shadow-[0_0_8px_rgba(255,45,149,0.45)]" />
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -36 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={VIEWPORT}
+                    transition={SPRING}
+                  >
+                    <div className="ig-glass-card rounded-2xl px-5 py-6">
+                      <h2 className="ig-gradient-text text-[1.8rem] font-bold tracking-tight leading-none mb-3">
+                        {entry.year}
+                      </h2>
+                      <div className="space-y-2">
+                        {entry.items.map((item, i) => (
+                          <p
+                            key={i}
+                            className={`text-[1rem] leading-relaxed ${
+                              item.bold ? "font-bold text-white" : "text-white/55"
+                            }`}
+                          >
+                            {item.text}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              ))}
+            </div>
+
+          </div>
         </section>
 
       </main>

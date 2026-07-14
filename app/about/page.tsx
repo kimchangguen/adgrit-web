@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 import { SiteHeader } from "../_components/SiteHeader";
 import { Footer } from "../_components/Footer";
+import { SectionBackdrop, type SectionVariant } from "../_components/backgrounds/SectionBackdrop";
 
 /* ─── 공통 설정 ──────────────────────────────────────── */
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -52,7 +53,15 @@ const SECTIONS = [
 ] as const;
 
 /* ─── 번호 섹션 컴포넌트 ─────────────────────────────── */
-function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[number]; reverse?: boolean }) {
+function NumberedSection({
+  item,
+  reverse = false,
+  variant,
+}: {
+  item: typeof SECTIONS[number];
+  reverse?: boolean;
+  variant: SectionVariant;
+}) {
   const ref = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -72,48 +81,53 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
   return (
     <section
       ref={ref}
-      className={`overflow-hidden flex flex-col ${reverse ? "sm:flex-row-reverse" : "sm:flex-row"} sm:justify-center sm:items-start gap-6 sm:gap-20 lg:gap-28 px-6 sm:px-14 lg:px-24 py-24 sm:py-32 border-t border-white/[0.07]`}
+      className="ig-section overflow-hidden"
     >
-      <motion.div style={{ x: numX, opacity }} className="shrink-0 flex items-start sm:pt-2">
-        <span
-          className="font-black text-slate-200 leading-none"
-          style={{ fontSize: "clamp(3.5rem, 8vw, 7rem)" }}
-        >
-          {item.num}
-        </span>
-      </motion.div>
+      <SectionBackdrop variant={variant} />
+      <div
+        className={`ig-content flex flex-col ${reverse ? "sm:flex-row-reverse" : "sm:flex-row"} sm:justify-center sm:items-start gap-6 sm:gap-20 lg:gap-28 px-6 sm:px-14 lg:px-24 py-24 sm:py-32`}
+      >
+        <motion.div style={{ x: numX, opacity }} className="shrink-0 flex items-start sm:pt-2">
+          <span
+            className="ig-gradient-text font-black leading-none"
+            style={{ fontSize: "clamp(3.5rem, 8vw, 7rem)" }}
+          >
+            {item.num}
+          </span>
+        </motion.div>
 
-      <motion.div style={{ x: textX, opacity }} className="min-w-0 sm:max-w-[420px] space-y-6 sm:pt-2">
-        <p className="text-[1rem] font-semibold tracking-[0.22em] text-white/30 uppercase">
-          {item.en}
-        </p>
-
-        <h2>
-          {item.headline.split("\n").map((line, i) => (
-            <span
-              key={i}
-              className="block font-extrabold text-white leading-[1.15] tracking-tight"
-              style={{ fontSize: "clamp(2.1rem, 3.9vw, 3.3rem)" }}
-            >
-              {line}
-            </span>
-          ))}
-        </h2>
-
-        {item.body ? (
-          <p className="text-lg text-white/45 leading-[1.9] max-w-xl">
-            {item.body}
+        <motion.div style={{ x: textX, opacity }} className="min-w-0 sm:max-w-[420px] space-y-6 sm:pt-2">
+          <p className="text-[1rem] font-semibold tracking-[0.22em] text-white/40 uppercase">
+            {item.en}
           </p>
-        ) : (
-          <ul className="space-y-3">
-            {item.bullets?.map((b, i) => (
-              <li key={i} className="text-lg text-white/45 leading-[1.8]">
-                — {b}
-              </li>
+
+          <h2>
+            {item.headline.split("\n").map((line, i) => (
+              <span
+                key={i}
+                className="block font-extrabold text-white leading-[1.15] tracking-tight"
+                style={{ fontSize: "clamp(2.1rem, 3.9vw, 3.3rem)" }}
+              >
+                {line}
+              </span>
             ))}
-          </ul>
-        )}
-      </motion.div>
+          </h2>
+
+          {item.body ? (
+            <p className="text-lg text-white/60 leading-[1.9] max-w-xl">
+              {item.body}
+            </p>
+          ) : (
+            <ul className="space-y-3">
+              {item.bullets?.map((b, i) => (
+                <li key={i} className="text-lg text-white/60 leading-[1.8]">
+                  — {b}
+                </li>
+              ))}
+            </ul>
+          )}
+        </motion.div>
+      </div>
     </section>
   );
 }
@@ -122,16 +136,19 @@ function NumberedSection({ item, reverse = false }: { item: typeof SECTIONS[numb
 export default function AboutPage() {
   const { ref: introRef, inView: introInView } = useReveal("-40px");
 
+  const NUMBERED_VARIANTS: SectionVariant[] = ["s3", "s6", "s8"];
+
   return (
-    <div className="bg-[#2E4033] text-white min-h-screen">
+    <div className="text-white min-h-screen">
       <SiteHeader />
 
-      <main className="pt-16">
+      <main>
 
         {/* ══ 히어로: 거대 ADGRIT 텍스트 ════════════════════ */}
-        <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6">
+        <section className="ig-section relative min-h-screen flex flex-col items-center justify-center px-6">
+          <SectionBackdrop variant="s2" />
           <motion.div
-            className="text-center"
+            className="ig-content text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, ease: EASE }}
@@ -140,8 +157,8 @@ export default function AboutPage() {
               className="font-black leading-none tracking-tighter select-none"
               style={{ fontSize: "clamp(3.5rem, 14vw, 12rem)" }}
             >
-              <span className="text-slate-200">AD</span>
-              <span className="text-white">GRIT</span>
+              <span className="text-white">AD</span>
+              <span className="ig-gradient-text">GRIT</span>
             </h1>
 
             <motion.div
@@ -150,43 +167,44 @@ export default function AboutPage() {
               transition={{ duration: 0.9, delay: 0.6, ease: EASE }}
               className="mt-10"
             >
-              <span className="inline-block border border-white/15 text-white/40 text-sm sm:text-base px-6 py-3 rounded-full tracking-widest uppercase">
+              <span className="ig-btn-glass inline-block text-sm sm:text-base px-6 py-3 rounded-full tracking-widest uppercase">
                 AD(성과, 광고, 도전) + GRIT(투지, 불굴의 의지)
               </span>
             </motion.div>
           </motion.div>
 
           <motion.div
-            className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+            className="ig-content absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.4, ease: EASE }}
           >
-            <span className="text-[0.975rem] tracking-[0.22em] text-white/25 uppercase">scroll</span>
+            <span className="text-[0.975rem] tracking-[0.22em] text-white/40 uppercase">scroll</span>
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-              className="w-px h-10 bg-gradient-to-b from-white/25 to-transparent"
+              className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent"
             />
           </motion.div>
         </section>
 
         {/* ══ 소개 문단 ════════════════════════════════════ */}
-        <section className="px-6 sm:px-14 lg:px-24 py-28 sm:py-36 border-t border-white/[0.07]">
+        <section className="ig-section px-6 sm:px-14 lg:px-24 py-28 sm:py-36">
+          <SectionBackdrop variant="s7b" />
           <motion.div
             ref={introRef}
             initial={{ opacity: 0, y: 52 }}
             animate={introInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.0, ease: EASE }}
-            className="max-w-3xl mx-auto text-center space-y-5"
+            className="ig-content max-w-3xl mx-auto text-center space-y-5"
           >
             <p
               className="font-bold text-white leading-[1.6]"
               style={{ fontSize: "clamp(1.5rem, 2.85vw, 2rem)" }}
             >
-              ADGRIT은 혁신적인 성과를 만드는 AI 마케팅 컴퍼니입니다.
+              ADGRIT은 혁신적인 성과를 만드는 <span className="ig-gradient-text">AI 마케팅 컴퍼니</span>입니다.
             </p>
-            <p className="text-lg sm:text-xl text-white/45 leading-[1.9]">
+            <p className="text-lg sm:text-xl text-white/60 leading-[1.9]">
               분석, 전략, 운영, 크리에이티브, 브랜딩, 기술 등 각 분야에 전문화된 구성원을 중심으로
               <br className="hidden sm:block" />
               디지털 마케팅에 특화된 고객 맞춤형 퍼포먼스를 제공합니다.
@@ -195,8 +213,13 @@ export default function AboutPage() {
         </section>
 
         {/* ══ 01 / 02 / 03 번호 섹션 ══════════════════════ */}
-        {SECTIONS.map((item) => (
-          <NumberedSection key={item.num} item={item} reverse={item.num === "02"} />
+        {SECTIONS.map((item, i) => (
+          <NumberedSection
+            key={item.num}
+            item={item}
+            reverse={item.num === "02"}
+            variant={NUMBERED_VARIANTS[i]}
+          />
         ))}
 
       </main>

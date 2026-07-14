@@ -1,22 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { SiteHeader } from "./SiteHeader";
 
 type HeroWithScrollEffectProps = {
   children: React.ReactNode;
-  /** CSS background-image (url(...) 또는 linear-gradient(...)) */
-  backgroundImage?: string;
-  /** 배경이 그라데이션일 때 오버레이 조정 (기본: 어두운 배경용) */
+  /** 배경이 이미지/어두운 배경일 때 텍스트 가독성용 오버레이 */
   darkOverlay?: boolean;
+  /** 콘텐츠 정렬 방향 (기본: 왼쪽) */
+  align?: "start" | "center";
 };
 
 export function HeroWithScrollEffect({
   children,
-  backgroundImage,
   darkOverlay = false,
+  align = "start",
 }: HeroWithScrollEffectProps) {
   const [scrolled, setScrolled] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -27,22 +29,59 @@ export function HeroWithScrollEffect({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return (
-    <div className="hero min-h-screen w-full">
-      <div className="hero__inner">
-        <SiteHeader transparent={!scrolled} lightText={false} />
+  // 히어로 구간을 스크롤하는 동안 중앙 문구를 위로 이동 + 페이드아웃시키기 위한 진행도(0~1).
+  // heroRef는 hero 전체(약 200vh: 본문 100vh + 하단 스크롤 여백 100vh)를 감싸므로
+  // progress 0~0.5 구간(≈ 뷰포트 1개 높이만큼 스크롤)에서 완전히 사라지도록 잡아
+  // 두 번째 섹션이 나타날 때는 히어로 텍스트가 남아있지 않게 한다.
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const contentY = useTransform(scrollYProgress, [0, 0.5], [0, -160]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const contentPointerEvents = useTransform(scrollYProgress, (v) =>
+    v > 0.4 ? "none" : "auto"
+  );
 
-        {/* 고정된 첫번째 섹션 - 왼쪽 정렬, 여백 강화 */}
-        <div className="fixed inset-0 z-[5] pointer-events-none flex flex-col items-start justify-center">
-        <div className="relative pointer-events-auto w-full flex-1 flex flex-col items-start justify-between min-h-screen pt-16">
-          <div className="flex-1 flex items-center justify-start w-full px-6 sm:px-10 lg:px-12">
+  const alignClass = align === "center" ? "items-center" : "items-start";
+  const justifyClass = align === "center" ? "justify-center" : "justify-start";
+
+  return (
+    <div ref={heroRef} className="hero min-h-screen w-full">
+      <div className="hero__inner">
+        {/* 배경 이미지는 layout.tsx의 site-fixed-background(공통 레이어) 하나만 사용한다.
+            히어로에서 중복으로 렌더링하지 않음 - 텍스트 가독성용 옅은 오버레이만 유지. */}
+        {darkOverlay && (
+          <div
+            className="fixed inset-0 z-[2] pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(7,3,15,0.12) 0%, rgba(7,3,15,0.02) 40%, rgba(7,3,15,0.02) 60%, rgba(7,3,15,0.12) 100%)",
+            }}
+            aria-hidden
+          />
+        )}
+        <SiteHeader transparent={!scrolled} lightText={!scrolled && darkOverlay} />
+
+        {/* 고정된 첫번째 섹션 - 정렬 방향은 align prop으로 제어.
+            스크롤 시 opacity가 0에 닿으면 pointer-events도 함께 꺼서
+            아래 섹션 클릭을 가로채지 않게 한다. */}
+        <motion.div
+          className={`fixed inset-0 z-[5] flex flex-col ${alignClass} justify-center`}
+          style={{ opacity: contentOpacity, pointerEvents: contentPointerEvents }}
+        >
+        <div className={`relative w-full flex-1 flex flex-col ${alignClass} justify-between min-h-screen pt-16`}>
+          <motion.div
+            className={`flex-1 flex items-center ${justifyClass} w-full px-6 sm:px-10 lg:px-12`}
+            style={{ y: contentY }}
+          >
             {children}
-          </div>
+          </motion.div>
           {/* SCROLL 인디케이터 - absolute 기준을 위해 부모에 relative */}
           <button
             type="button"
             onClick={() => document.getElementById("section2")?.scrollIntoView({ behavior: "smooth" })}
-            className="scroll-indicator absolute left-1/2 bottom-7 -translate-x-1/2 z-10 pointer-events-auto transition-colors"
+            className="scroll-indicator absolute left-1/2 bottom-7 -translate-x-1/2 z-10 transition-colors"
             aria-label="다음 섹션으로 스크롤"
           >
             <span className="scroll-indicator__text text-xs font-medium tracking-widest">SCROLL</span>
@@ -64,23 +103,7 @@ export function HeroWithScrollEffect({
             </svg>
           </button>
         </div>
-        </div>
-
-        {/* 하단 곡선 디바이더 - 첫 섹션만 (다음 섹션과 부드럽게 연결) */}
-        <div className="fixed bottom-0 left-0 right-0 z-[4] pointer-events-none" aria-hidden>
-          <svg
-            className="w-full h-auto block"
-            viewBox="0 0 1440 120"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M0 120V70C360 20 1080 20 1440 70v50H0z"
-              fill="var(--adgrit-neutral)"
-            />
-          </svg>
-        </div>
+        </motion.div>
 
         {/* 스크롤 영역 확보용 빈 공간 */}
         <div className="min-h-screen" aria-hidden />

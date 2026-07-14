@@ -71,7 +71,7 @@ export function BlogFeaturedSlider({ posts }: { posts: SliderPost[] }) {
       {/* 텍스트 콘텐츠 */}
       <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 lg:p-10">
         <Link href={`/blog/${post.slug}`} className="group">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white leading-tight group-hover:text-[#222222] transition-colors line-clamp-2 max-w-3xl">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white leading-tight group-hover:text-[var(--ig-pink)] transition-colors line-clamp-2 max-w-3xl">
             {post.title}
           </h2>
         </Link>

@@ -1,230 +1,284 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  Building2,
+  ChevronDown,
+  Clapperboard,
+  Lightbulb,
+  Menu,
+  Newspaper,
+  Sparkles,
+  SquarePlay,
+  Target,
+  UserRoundPlus,
+  X,
+  ChartNoAxesCombined,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Container } from "./Container";
 
-const navItems: Array<{
+const ICON_PROPS = {
+  size: 26,
+  strokeWidth: 1.8,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+};
+
+function AboutIcon({ className }: { className?: string }) {
+  return <Building2 {...ICON_PROPS} className={className} />;
+}
+function ShortformIcon({ className }: { className?: string }) {
+  return <Clapperboard {...ICON_PROPS} className={className} />;
+}
+function GrowthIcon({ className }: { className?: string }) {
+  return <UserRoundPlus {...ICON_PROPS} className={className} />;
+}
+function RankingIcon({ className }: { className?: string }) {
+  return <ChartNoAxesCombined {...ICON_PROPS} className={className} />;
+}
+function ReelsSparkIcon({ className }: { className?: string }) {
+  return (
+    <span className={`relative inline-flex ${className ?? ""}`}>
+      <SquarePlay {...ICON_PROPS} />
+      <Sparkles
+        size={13}
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="absolute -top-1 -right-1.5"
+      />
+    </span>
+  );
+}
+function TargetAdIcon({ className }: { className?: string }) {
+  return <Target {...ICON_PROPS} className={className} />;
+}
+function ConsultingIcon({ className }: { className?: string }) {
+  return <Lightbulb {...ICON_PROPS} className={className} />;
+}
+function BlogIcon({ className }: { className?: string }) {
+  return <Newspaper {...ICON_PROPS} className={className} />;
+}
+
+type NavChild = { href: string; label: string };
+type NavItem = {
   label: string;
-  children: Array<{ href: string; label: string }>;
-}> = [
-  {
-    label: "About Us",
-    children: [
-      { href: "/about", label: "회사소개" },
-      { href: "/history", label: "회사연혁" },
-      { href: "/organization", label: "조직도" },
-      { href: "/contact", label: "오시는길" },
-    ],
-  },
-  {
-    label: "Business",
-    children: [
-      { href: "/business/automation", label: "Automation" },
-      { href: "/business/consulting", label: "Consulting" },
-      { href: "/business/development", label: "Development" },
-    ],
-  },
-  {
-    label: "Service",
-    children: [
-      { href: "/service/marketing", label: "마케팅전략" },
-      { href: "/service/google", label: "구글노출" },
-      { href: "/service/sns", label: "SNS채널관리" },
-      { href: "/service/performance", label: "퍼포먼스" },
-      { href: "/service/content", label: "콘텐츠제작" },
-      { href: "/service/integrated", label: "통합솔루션" },
-    ],
-  },
-  {
-    label: "Grit View",
-    children: [{ href: "/blog", label: "블로그" }],
-  },
+  icon: React.ComponentType<{ className?: string }>;
+  href?: string;
+  children?: NavChild[];
+};
+
+const ABOUT_CHILDREN: NavChild[] = [
+  { href: "/about", label: "회사소개" },
+  { href: "/history", label: "회사연혁" },
+  { href: "/organization", label: "조직도" },
+  { href: "/contact", label: "오시는길" },
+];
+
+const navItems: NavItem[] = [
+  { label: "About Us", icon: AboutIcon, children: ABOUT_CHILDREN },
+  { label: "숏폼제작", icon: ShortformIcon, href: "/#shortform" },
+  { label: "계정육성", icon: GrowthIcon, href: "/#account-growth" },
+  { label: "상위노출", icon: RankingIcon, href: "/#ranking" },
+  { label: "릴스파크", icon: ReelsSparkIcon, href: "/#reelspark" },
+  { label: "타겟광고", icon: TargetAdIcon, href: "/#target-ads" },
+  { label: "기획·컨설팅", icon: ConsultingIcon, href: "/#consulting" },
+  { label: "블로그", icon: BlogIcon, href: "/blog" },
 ];
 
 type SiteHeaderProps = {
-  /** Hero 영역용 - 배경 투명 (같은 배경 노출) */
+  /** true: 히어로 최상단(투명), false: 스크롤 이후/기본 페이지(약한 그라데이션) */
   transparent?: boolean;
-  /** 어두운 배경 시 라이트 텍스트 */
+  /** 기존 호출부(HeroWithScrollEffect) 호환을 위해 타입만 유지, 현재 미사용 */
   lightText?: boolean;
 };
 
-export function SiteHeader({ transparent = false, lightText = false }: SiteHeaderProps) {
-  const [isMegaOpen, setIsMegaOpen] = useState(false);
-  const [hoveredColumn, setHoveredColumn] = useState<string | null>(null);
-  const [openMobileMenu, setOpenMobileMenu] = useState<string | null>(null);
+export function SiteHeader({ transparent = false }: SiteHeaderProps) {
+  const pathname = usePathname();
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
+
+  const isItemActive = (item: NavItem) =>
+    item.href
+      ? pathname === item.href
+      : (item.children?.some((child) => pathname === child.href) ?? false);
+
+  const closeMobile = () => {
+    setMobileOpen(false);
+    setMobileAboutOpen(false);
+  };
 
   return (
-    <header
-      className={`fixed left-0 right-0 top-0 z-[9999] w-full transition-all duration-300 ${
-        transparent
-          ? "bg-transparent backdrop-blur-[2px]"
-          : "backdrop-blur-sm"
-      }`}
-      style={!transparent ? {
-        background: "linear-gradient(to bottom, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.95) 60%, rgba(255,255,255,0.7) 80%, rgba(255,255,255,0) 100%)",
-        height: "100px",
-      } : { height: "100px" }}
-    >
-      <Container className="relative grid h-full grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4 translate-x-[50px]">
-        <Link
-          href="/"
-          className="flex-shrink-0 justify-self-start select-none flex items-center"
-          aria-label="홈으로 이동"
-        >
-          <Image src="/adgrit-logo-v3.png" alt="ADGRIT 로고" height={50} width={220} className="w-[220px] h-auto object-contain" priority />
-        </Link>
+    <header className="gnav-header">
+      <div
+        className={`header-background ${transparent ? "is-over-hero" : "is-over-content"}`}
+        aria-hidden
+      />
 
-        {/* 모바일: 메인 메뉴 + 탭 시 서브메뉴 드롭다운 */}
-        <div className="flex md:hidden col-start-2 flex-col min-w-0 relative justify-self-center">
-          <nav className="flex items-center justify-center gap-4 sm:gap-6 overflow-x-auto">
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                type="button"
-                onClick={() =>
-                  setOpenMobileMenu((prev) => (prev === item.label ? null : item.label))
-                }
-                className={`flex-shrink-0 text-sm sm:text-base font-bold whitespace-nowrap py-2 ${
-                  openMobileMenu === item.label
-                    ? lightText ? "text-tertiary" : "text-primary"
-                    : lightText ? "text-neutral/90 hover:text-neutral" : "text-primary hover:text-primary"
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </nav>
-          {/* 모바일: 드롭다운 바깥 클릭 시 닫기 */}
-          {openMobileMenu && (
-            <button
-              type="button"
-              aria-label="메뉴 닫기"
-              className="fixed inset-0 z-40"
-              onClick={() => setOpenMobileMenu(null)}
+      <div className="header-content">
+        <div className="mx-auto grid h-full w-full max-w-[1800px] grid-cols-[auto_1fr_auto] lg:grid-cols-[220px_1fr_220px] items-center gap-4 px-6 lg:px-10">
+          <Link
+            href="/"
+            className="flex-shrink-0 select-none flex items-center"
+            aria-label="홈으로 이동"
+          >
+            <Image
+              src="/adgrit-logo-v3.png"
+              alt="ADGRIT 로고"
+              height={50}
+              width={220}
+              className="w-[170px] lg:w-[210px] h-auto object-contain"
+              priority
             />
-          )}
-          {/* 모바일 서브메뉴 드롭다운 */}
-          <AnimatePresence initial={false}>
-            {openMobileMenu && (
-              <motion.div
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.2 }}
-                className="absolute right-0 left-0 top-full pt-2 z-50"
-              >
-                <div className="rounded-lg border border-tertiary bg-neutral py-3 shadow-lg">
-                  {navItems
-                    .filter((item) => item.label === openMobileMenu)
-                    .map((item) => (
-                      <div key={item.label} className="flex flex-col">
+          </Link>
+
+          {/* 데스크톱 내비게이션 */}
+          <nav className="hidden lg:flex items-center justify-center gap-1 xl:gap-3 2xl:gap-5">
+            {navItems.map((item) =>
+              item.children ? (
+                <div
+                  key={item.label}
+                  className="relative"
+                  onMouseEnter={() => setIsAboutOpen(true)}
+                  onMouseLeave={() => setIsAboutOpen(false)}
+                  onFocus={() => setIsAboutOpen(true)}
+                  onBlur={(e) => {
+                    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                      setIsAboutOpen(false);
+                    }
+                  }}
+                >
+                  <button
+                    type="button"
+                    className={`gnav-item ${isAboutOpen ? "gnav-item--active" : ""}`}
+                    aria-haspopup="true"
+                    aria-expanded={isAboutOpen}
+                  >
+                    <item.icon className="gnav-item__icon" />
+                    <span className="gnav-item__label">{item.label}</span>
+                    <span className="gnav-item__underline" aria-hidden />
+                  </button>
+                  <AnimatePresence>
+                    {isAboutOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.2 }}
+                        className="gnav-dropdown absolute left-1/2 top-full min-w-[190px] -translate-x-1/2 p-2 pt-2"
+                      >
                         {item.children.map((child) => (
                           <Link
-                            key={child.label}
+                            key={child.href}
                             href={child.href}
-                            className="block px-5 py-2.5 text-sm text-primary/70 hover:bg-tertiary hover:text-primary"
-                            onClick={() => setOpenMobileMenu(null)}
+                            className="gnav-dropdown__link"
                           >
                             {child.label}
                           </Link>
                         ))}
-                      </div>
-                    ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              </motion.div>
+              ) : (
+                <Link
+                  key={item.label}
+                  href={item.href!}
+                  className={`gnav-item ${isItemActive(item) ? "gnav-item--active" : ""}`}
+                >
+                  <item.icon className="gnav-item__icon" />
+                  <span className="gnav-item__label">{item.label}</span>
+                  <span className="gnav-item__underline" aria-hidden />
+                </Link>
+              )
             )}
-          </AnimatePresence>
+          </nav>
+
+          {/* 모바일 햄버거 버튼 */}
+          <button
+            type="button"
+            className="lg:hidden col-start-3 justify-self-end text-white p-2"
+            onClick={() => setMobileOpen((prev) => !prev)}
+            aria-label={mobileOpen ? "메뉴 닫기" : "메뉴 열기"}
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
         </div>
 
-        {/* 데스크톱: 메가 메뉴 - 센터 정렬 */}
-        <nav
-          className="hidden md:flex col-start-2 col-end-3 justify-center items-center gap-10 lg:gap-14 xl:gap-16 relative justify-self-center"
-          onMouseEnter={() => setIsMegaOpen(true)}
-          onMouseLeave={() => {
-            setIsMegaOpen(false);
-            setHoveredColumn(null);
-          }}
-        >
-          {navItems.map((item) => (
-            <div
-              key={item.label}
-              className="relative"
-              onMouseEnter={() => setHoveredColumn(item.label)}
+        {/* 모바일 메뉴 패널 */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25 }}
+              className="lg:hidden gnav-dropdown mx-4 mt-2 overflow-hidden"
             >
-              <button
-                className={`block px-2 py-2 text-lg lg:text-xl font-bold transition-colors tracking-wide text-left w-full ${
-                  hoveredColumn === item.label && isMegaOpen
-                    ? lightText ? "text-tertiary" : "text-primary"
-                    : lightText ? "text-neutral/90 hover:text-neutral" : "text-primary hover:text-primary"
-                }`}
-                aria-expanded={isMegaOpen}
-                aria-haspopup="true"
-              >
-                {item.label}
-              </button>
-            </div>
-          ))}
-
-          {/* 메가 메뉴 - 메인 메뉴와 동일한 gap/센터 정렬 */}
-          <AnimatePresence>
-            {isMegaOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.2 }}
-                className="absolute left-1/2 -translate-x-1/2 top-full pt-1"
-              >
-                <div className="flex rounded-lg border border-tertiary bg-neutral shadow-lg overflow-hidden gap-10 lg:gap-14 xl:gap-16 py-4 px-4">
-                  {navItems.map((item) => (
-                      <div
-                        key={item.label}
-                        className={`min-w-[140px] px-2 transition-colors ${
-                          hoveredColumn === item.label
-                            ? "bg-primary text-neutral rounded"
-                            : "bg-neutral"
-                        }`}
-                        onMouseEnter={() => setHoveredColumn(item.label)}
+              <div className="max-h-[70vh] overflow-y-auto p-2">
+                {navItems.map((item) =>
+                  item.children ? (
+                    <div key={item.label}>
+                      <button
+                        type="button"
+                        className="gnav-mobile-item justify-between"
+                        onClick={() => setMobileAboutOpen((prev) => !prev)}
+                        aria-expanded={mobileAboutOpen}
                       >
-                        <div
-                          className={`font-bold text-base mb-3 ${
-                            hoveredColumn === item.label
-                              ? "text-neutral"
-                              : "text-primary"
-                          }`}
-                        >
+                        <span className="flex items-center gap-3">
+                          <item.icon className="gnav-item__icon" />
                           {item.label}
-                        </div>
-                        <div className="space-y-1">
-                          {item.children.map((child) => (
-                            <Link
-                              key={child.label}
-                              href={child.href}
-                              className={`block py-2 px-0 text-sm transition-colors ${
-                                hoveredColumn === item.label
-                                  ? "text-neutral/90 hover:text-neutral hover:bg-neutral/10 rounded"
-                                  : "text-primary/70 hover:bg-tertiary hover:text-primary"
-                              }`}
-                              onClick={() => {
-                                setIsMegaOpen(false);
-                                setHoveredColumn(null);
-                              }}
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </nav>
-      </Container>
+                        </span>
+                        <ChevronDown
+                          size={18}
+                          className={`transition-transform duration-200 ${mobileAboutOpen ? "rotate-180" : ""}`}
+                        />
+                      </button>
+                      <AnimatePresence>
+                        {mobileAboutOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="overflow-hidden pl-10"
+                          >
+                            {item.children.map((child) => (
+                              <Link
+                                key={child.href}
+                                href={child.href}
+                                className="gnav-dropdown__link block"
+                                onClick={closeMobile}
+                              >
+                                {child.label}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    <Link
+                      key={item.label}
+                      href={item.href!}
+                      className="gnav-mobile-item"
+                      onClick={closeMobile}
+                    >
+                      <item.icon className="gnav-item__icon" />
+                      {item.label}
+                    </Link>
+                  )
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </header>
   );
 }

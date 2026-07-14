@@ -20,15 +20,15 @@ import { ClientGrowthSection } from "./_components/ClientGrowthSection";
 import { ContactSection } from "./_components/ContactSection";
 import { WithoutAdgritSection } from "./_components/WithoutAdgritSection";
 import { KakaoTestimonialsSection } from "./_components/KakaoTestimonialsSection";
-import { MarketingProductsSection } from "./_components/MarketingProductsSection";
 import { Section2CardList } from "./_components/Section2CardList";
 import { Section2Wrapper } from "./_components/Section2Wrapper";
+import { SectionBackdrop } from "./_components/backgrounds/SectionBackdrop";
 
 export default async function Home() {
   return (
-    <div className="min-h-screen bg-neutral text-primary">
+    <main className="relative z-[1] min-h-screen text-white">
       <SiteChrome />
-    </div>
+    </main>
   );
 }
 
@@ -46,19 +46,19 @@ function WorryCard({
   showArrow?: boolean;
 }) {
   return (
-    <div className="relative rounded-[24px] bg-neutral px-6 sm:px-8 py-7 sm:py-10 shadow-sm">
-      <span className="text-lg font-bold tabular-nums text-secondary">
+    <div className="ig-glass-card relative rounded-[24px] px-6 sm:px-8 py-7 sm:py-10">
+      <span className="ig-gradient-text text-lg font-bold tabular-nums">
         {num}
       </span>
-      <h3 className="mt-2 text-xl font-black text-primary">{title}</h3>
-      <p className="mt-1 text-sm text-primary/60">{subtitle}</p>
-      <p className="mt-4 text-[15px] leading-relaxed text-primary/80">
+      <h3 className="mt-2 text-xl font-black text-white">{title}</h3>
+      <p className="mt-1 text-sm text-white/60">{subtitle}</p>
+      <p className="mt-4 text-[15px] leading-relaxed text-white/80">
         {desc.split("\n").map((line, i) => (
           <span key={i}>{i > 0 && <br />}{line}</span>
         ))}
       </p>
       {showArrow && (
-        <div className="absolute bottom-5 right-5 text-secondary" aria-hidden>
+        <div className="absolute bottom-5 right-5 text-[var(--ig-orange)]" aria-hidden>
           <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
           </svg>
@@ -83,22 +83,22 @@ function ProcessStep({
   const iconSrc = `/process-iocons/step-${stepNum}.png`;
 
   return (
-    <div className="flex h-full flex-col rounded-xl border border-tertiary bg-neutral p-6 shadow-sm text-center">
-      <span className="text-sm font-bold uppercase tracking-wide text-secondary">STEP {step}</span>
+    <div className="ig-glass-card flex h-full flex-col rounded-xl p-6 text-center">
+      <span className="ig-gradient-text text-sm font-bold uppercase tracking-wide">STEP {step}</span>
       <div className="mt-4 mx-auto flex h-14 w-14 items-center justify-center">
         <Image
           src={iconSrc}
           alt=""
           width={56}
           height={56}
-          className="h-14 w-14 object-contain"
+          className="ig-icon-glow h-14 w-14 object-contain"
           aria-hidden
         />
       </div>
-      <h3 className="mt-4 text-lg font-black text-primary">{title}</h3>
-      <p className="mt-3 flex-1 text-center text-sm leading-relaxed text-primary/70 whitespace-pre-line">{desc}</p>
+      <h3 className="mt-4 text-lg font-black text-white">{title}</h3>
+      <p className="mt-3 flex-1 text-center text-sm leading-relaxed text-white/70 whitespace-pre-line">{desc}</p>
       {buttonText && (
-        <div className="mt-6 rounded-lg py-3 px-4 text-sm font-semibold bg-tertiary text-primary">
+        <div className="ig-btn-glass mt-6 rounded-lg py-3 px-4 text-sm font-semibold text-white">
           {buttonText}
         </div>
       )}
@@ -109,85 +109,42 @@ function ProcessStep({
 function SiteChrome() {
   return (
     <>
-      {/* 헤더 + 첫번째 섹션: 흰 배경, 좌우 2단(텍스트+CTA / 2x2 그리드) */}
-      <HeroWithScrollEffect>
+      {/* 헤더 + 첫번째 섹션: 배경은 .hero 클래스(globals.css)에서 public/image/000.png를 직접 고정 배경으로 사용, 중앙 정렬 카피 */}
+      <HeroWithScrollEffect
+        darkOverlay
+        align="center"
+      >
         <Container className="relative w-full py-16 sm:py-20 lg:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center max-w-6xl mx-auto">
-            {/* 왼쪽: 카피 + CTA */}
-            <div className="text-left font-worry order-2 lg:order-1">
-              <AnimatedHero>
-                <AnimatedHeroItem>
-                  {/* PC: 한 줄 */}
-                  <p className="hidden md:block text-[1.1rem] text-primary/80 leading-relaxed">
-                    성공한 사장님들은 마케팅을 &apos;비용&apos;이라 부르지 않습니다.
-                  </p>
-                  {/* 모바일: 2줄 */}
-                  <p className="md:hidden text-[1.1rem] text-primary/80 leading-relaxed">
-                    성공한 사장님들은 마케팅을 &apos;비용&apos;이라
-                    <br />
-                    부르지 않습니다.
-                  </p>
-                </AnimatedHeroItem>
-                <AnimatedHeroItem>
-                  {/* PC: 한 줄 */}
-                  <p className="hidden md:block mt-6 text-[2.06rem] sm:text-[2.48rem] md:text-[3.3rem] font-black tracking-tight text-primary leading-[1.25]">
-                    그들은 <span className="text-secondary">&apos;연료&apos;</span>라고 부릅니다.
-                  </p>
-                  {/* 모바일: 2줄 */}
-                  <p className="md:hidden mt-6 text-[2.06rem] sm:text-[2.48rem] font-black tracking-tight text-primary leading-[1.25]">
-                    그들은 <span className="text-secondary">&apos;연료&apos;</span>라고
-                    <br />
-                    부릅니다.
-                  </p>
-                </AnimatedHeroItem>
-                <AnimatedHeroItem>
-                  <p className="mt-6 text-[1.1rem] text-primary/80 leading-relaxed">
-                    실패했던 건 사장님 탓이 아닙니다.
-                    <br />
-                    &apos;방법&apos;이 틀렸고 파트너를 잘못 만나서 입니다.
-                  </p>
-                </AnimatedHeroItem>
-                <AnimatedHeroItem>
-                  {/* PC: 한 줄 */}
-                  <p className="hidden md:block mt-6 text-[1.1rem] text-primary/80 leading-relaxed">
-                    이제는 개발실행사와 직접 제대로된 <span className="font-semibold">AI CORE Marketing</span> 하세요
-                  </p>
-                  {/* 모바일: 2줄 */}
-                  <p className="md:hidden mt-6 text-[1.1rem] text-primary/80 leading-relaxed">
-                    이제는 개발실행사와 직접 제대로된
-                    <br />
-                    <span className="font-semibold">AI CORE Marketing</span> 하세요
-                  </p>
-                </AnimatedHeroItem>
-                <AnimatedHeroItem>
-                  <a
-                    href="tel:1661-0646"
-                    className="mt-11 inline-flex items-center justify-center rounded-full bg-primary px-11 py-[1.1rem] text-[1.1rem] font-semibold text-neutral hover:bg-primary/90 transition-colors"
-                  >
-                    상담하기
-                  </a>
-                </AnimatedHeroItem>
-              </AnimatedHero>
-            </div>
-
-            {/* 오른쪽: 2x2 이미지 그리드 */}
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 order-1 lg:order-2">
-              <div className="rounded-2xl overflow-hidden bg-primary flex items-center justify-center min-h-[140px] sm:min-h-[180px] aspect-square max-h-[200px] sm:max-h-[240px]">
-                <div className="text-center px-4">
-                  <p className="text-neutral font-bold text-lg sm:text-xl tracking-wider">ADGRIT</p>
-                  <p className="text-neutral/90 text-xs sm:text-sm tracking-widest mt-1">DEVELOPMENT & MARKETING</p>
-                </div>
-              </div>
-              <div className="relative rounded-2xl overflow-hidden aspect-square min-h-[140px] sm:min-h-[180px] max-h-[200px] sm:max-h-[240px]">
-                <Image src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97" fill alt="" className="object-cover" sizes="(max-width: 1024px) 50vw, 240px" priority />
-              </div>
-              <div className="relative rounded-2xl overflow-hidden aspect-square min-h-[140px] sm:min-h-[180px] max-h-[200px] sm:max-h-[240px]">
-                <Image src="https://images.unsplash.com/photo-1556656793-08538906a9f8" fill alt="" className="object-cover" sizes="(max-width: 1024px) 50vw, 240px" priority />
-              </div>
-              <div className="relative rounded-2xl overflow-hidden aspect-square min-h-[140px] sm:min-h-[180px] max-h-[200px] sm:max-h-[240px]">
-                <Image src="/hero-ai-marketing.png" fill alt="" className="object-cover" sizes="(max-width: 1024px) 50vw, 240px" priority />
-              </div>
-            </div>
+          <div className="mx-auto max-w-4xl text-center font-worry">
+            <AnimatedHero>
+              <AnimatedHeroItem>
+                <p className="text-sm sm:text-base font-semibold tracking-widest text-neutral/90">
+                  대한민국 No.1 인스타그램 마케팅 전문기업
+                </p>
+              </AnimatedHeroItem>
+              <AnimatedHeroItem>
+                <p className="mt-6 text-[1.9rem] sm:text-[2.6rem] md:text-[3.2rem] font-black tracking-tight text-neutral leading-[1.3]">
+                  국내 인스타그램 솔루션을 만드는 회사
+                  <br />
+                  국내 인스타 솔루션 70%를 점유 한 회사
+                </p>
+              </AnimatedHeroItem>
+              <AnimatedHeroItem>
+                <p className="mt-8 text-[1.05rem] sm:text-[1.15rem] text-neutral/85 leading-relaxed">
+                  전략부터 개발 실행 분석 운영까지
+                  <br />
+                  국내 인스타그램 1등 대표 애드그릿에 문의하세요
+                </p>
+              </AnimatedHeroItem>
+              <AnimatedHeroItem>
+                <a
+                  href="tel:1661-0646"
+                  className="mt-11 inline-flex items-center justify-center rounded-full bg-neutral px-11 py-[1.1rem] text-[1.1rem] font-semibold text-primary hover:bg-neutral/90 transition-colors"
+                >
+                  상담하기
+                </a>
+              </AnimatedHeroItem>
+            </AnimatedHero>
           </div>
         </Container>
       </HeroWithScrollEffect>
@@ -196,13 +153,13 @@ function SiteChrome() {
       <Section2Wrapper
         leftContent={
           <>
-            <p className="text-neutral text-sm font-normal tracking-wide">The Cost of Inefficiency</p>
-            <h2 className="mt-4 text-[2rem] sm:text-[2.375rem] lg:text-[3.125rem] font-black leading-tight text-neutral">
+            <p className="text-white/64 text-sm font-normal tracking-wide">The Cost of Inefficiency</p>
+            <h2 className="mt-4 text-[2rem] sm:text-[2.375rem] lg:text-[3.125rem] font-black leading-tight text-white">
               사장님들이 겪는
               <br />
-              <span className="text-tertiary">대표적 고민</span>
+              <span className="ig-gradient-text">대표적 고민</span>
             </h2>
-            <p className="mt-6 text-neutral/95 text-base leading-relaxed">
+            <p className="mt-6 text-white/82 text-base leading-relaxed">
               매달 광고비는 지출되는데, 실제 순수익은 제자리걸음이다?
               <br />
               이건 노출 부족이 아니라, 고객을 구매로 전환시키지 못하는
@@ -231,20 +188,24 @@ function SiteChrome() {
         }
       />
 
-      {/* 슬로건 - 세번째 섹션: 흰 배경, 좌 텍스트(검정), 우 노트북 이미지(오른쪽 반 블러) */}
+      {/* 슬로건 - 세번째 섹션 */}
       <section
         id="section3"
-        className="relative z-10 flex h-[800px] w-full items-center justify-center overflow-hidden bg-neutral"
+        className="relative z-10 flex h-[800px] w-full items-center justify-center overflow-hidden"
       >
         <SloganWithEffects />
       </section>
 
+      {/* 헤더 메뉴 앵커: 숏폼제작 */}
+      <div id="shortform" aria-hidden />
+
       {/* Vision - 네번째 섹션 */}
       <section
         id="about"
-        className="relative z-10 flex w-full max-w-[1920px] mx-auto items-center border-t border-tertiary bg-neutral px-6 py-8 sm:px-10 sm:py-10"
+        className="ig-section relative z-10 flex w-full items-center px-6 py-8 sm:px-10 sm:py-10"
       >
-        <div className="mx-auto w-full max-w-[1920px]">
+        <SectionBackdrop variant="s4" />
+        <div className="ig-content mx-auto w-full max-w-[1920px]">
           <VisionCarousel
             titleLine1="애드그릿과 함께"
             titleLine2="낮은 견적 · 빠르고 정확한 계획"
@@ -261,29 +222,42 @@ function SiteChrome() {
         </div>
       </section>
 
+      {/* 헤더 메뉴 앵커: 계정육성 */}
+      <div id="account-growth" aria-hidden />
+
       {/* Results - 다섯번째 섹션 */}
       <ResultsWithGraph />
+
+      {/* 헤더 메뉴 앵커: 상위노출 */}
+      <div id="ranking" aria-hidden />
 
       {/* OUR CLIENTS - 05 섹션 밑 */}
       <OurClientsSection />
 
+      {/* 헤더 메뉴 앵커: 릴스파크 */}
+      <div id="reelspark" aria-hidden />
+
       {/* 애드그릿과 하지 않는다면 - 여섯번째 섹션 */}
       <WithoutAdgritSection />
+
+      {/* 헤더 메뉴 앵커: 타겟광고 */}
+      <div id="target-ads" aria-hidden />
 
       {/* 클라이언트 만족후기 (카카오톡) - 일곱번째 섹션 */}
       <KakaoTestimonialsSection />
 
-      {/* 애드그릿의 다양한 마케팅 상품 - 여덟번째 섹션 */}
-      <MarketingProductsSection />
+      {/* 헤더 메뉴 앵커: 기획·컨설팅 */}
+      <div id="consulting" aria-hidden />
 
       {/* Process - 아홉번째 섹션 (참고 이미지 레이아웃, 내용 유지) */}
-      <section className="relative z-10 border-t border-tertiary bg-neutral py-16 sm:py-20">
-        <Container>
+      <section className="ig-section relative z-10 py-16 sm:py-20">
+        <SectionBackdrop variant="s7b" />
+        <Container className="ig-content">
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-primary">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white">
               프로세스
             </h2>
-            <p className="mt-3 text-[1.04rem] sm:text-[1.17rem] text-primary/70">
+            <p className="mt-3 text-[1.04rem] sm:text-[1.17rem] text-white/70">
               단 세 단계로 완성하는 성공적인 컨설팅 프로세스
             </p>
           </div>

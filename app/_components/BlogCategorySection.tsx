@@ -58,15 +58,15 @@ export function BlogCategorySection({ category, posts, index }: Props) {
       transition={{ duration: 0.72, delay: index * 0.09, ease: EASE }}
     >
       {/* ── 섹션 헤더 ────────────────────────────────── */}
-      <div className="flex items-center justify-between pb-3 border-b-2 border-[#222222]">
-        <h2 className="flex items-center gap-2 text-base sm:text-[1.0625rem] font-black text-[#1f1f1f]">
-          <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#222222] shrink-0" />
+      <div className="flex items-center justify-between pb-3">
+        <h2 className="flex items-center gap-2 text-base sm:text-[1.0625rem] font-black text-white">
+          <span className="inline-block w-2.5 h-2.5 rounded-full bg-[var(--ig-pink)] shrink-0" />
           {category.name}
         </h2>
         <motion.div whileHover={{ x: 3 }} transition={SPRING}>
           <Link
             href={`/blog/category/${category.slug}`}
-            className="text-xs sm:text-sm text-slate-400 hover:text-[#222222] transition-colors flex items-center gap-0.5 font-medium"
+            className="text-xs sm:text-sm text-white/50 hover:text-[var(--ig-pink)] transition-colors flex items-center gap-0.5 font-medium"
           >
             더보기 <span aria-hidden className="text-base leading-none">›</span>
           </Link>
@@ -85,10 +85,10 @@ export function BlogCategorySection({ category, posts, index }: Props) {
             <motion.div whileHover={{ y: -3 }} transition={SPRING}>
               <Link
                 href={`/blog/${post.slug}`}
-                className="flex flex-col rounded-xl overflow-hidden bg-white border border-slate-100 shadow-sm hover:shadow-md transition-shadow group"
+                className="ig-glass-card flex flex-col rounded-xl overflow-hidden transition-colors hover:border-white/35 group"
               >
                 {/* 썸네일 */}
-                <div className="relative w-full aspect-[4/3] bg-slate-50 overflow-hidden">
+                <div className="relative w-full aspect-[4/3] bg-white/5 overflow-hidden">
                   {post.imageUrl ? (
                     <Image
                       src={post.imageUrl}
@@ -98,15 +98,15 @@ export function BlogCategorySection({ category, posts, index }: Props) {
                       sizes="(max-width: 1280px) 15vw, 180px"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#222222]/8 to-slate-100">
-                      <Icon size={22} className="text-[#222222]/40" strokeWidth={1.5} />
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--ig-pink)]/15 to-[var(--ig-orange)]/10">
+                      <Icon size={22} className="text-white/50" strokeWidth={1.5} />
                     </div>
                   )}
                 </div>
 
                 {/* 제목 */}
                 <div className="p-2.5">
-                  <p className="text-[0.75rem] font-medium text-[#1f1f1f] group-hover:text-[#222222] transition-colors line-clamp-2 leading-snug">
+                  <p className="text-[0.75rem] font-medium text-white/85 group-hover:text-white transition-colors line-clamp-2 leading-snug">
                     {post.title}
                   </p>
                 </div>
@@ -136,10 +136,10 @@ export function BlogCategorySection({ category, posts, index }: Props) {
             >
               <Link
                 href={`/blog/${post.slug}`}
-                className="flex flex-col rounded-2xl overflow-hidden bg-white border border-slate-100 shadow-sm active:shadow-none transition-shadow"
+                className="ig-glass-card flex flex-col rounded-2xl overflow-hidden"
               >
                 {/* 카드 이미지 영역 */}
-                <div className="relative w-full aspect-[16/10] bg-slate-50">
+                <div className="relative w-full aspect-[16/10] bg-white/5">
                   {post.imageUrl ? (
                     <Image
                       src={post.imageUrl}
@@ -149,18 +149,18 @@ export function BlogCategorySection({ category, posts, index }: Props) {
                       sizes="200px"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#222222]/8 to-slate-100">
-                      <Icon size={28} className="text-[#222222]/35" strokeWidth={1.5} />
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--ig-pink)]/15 to-[var(--ig-orange)]/10">
+                      <Icon size={28} className="text-white/45" strokeWidth={1.5} />
                     </div>
                   )}
                 </div>
 
                 {/* 카드 텍스트 */}
                 <div className="p-3">
-                  <p className="text-[0.8125rem] font-semibold text-[#1f1f1f] line-clamp-2 leading-snug">
+                  <p className="text-[0.8125rem] font-semibold text-white/85 line-clamp-2 leading-snug">
                     {post.title}
                   </p>
-                  <span className="mt-2 inline-block text-[0.75rem] font-medium text-[#222222]">
+                  <span className="ig-gradient-text mt-2 inline-block text-[0.75rem] font-medium">
                     읽기 →
                   </span>
                 </div>
@@ -179,9 +179,9 @@ export function BlogCategorySection({ category, posts, index }: Props) {
         >
           <Link
             href={`/blog/category/${category.slug}`}
-            className="flex flex-col items-center gap-2 text-slate-400 hover:text-[#222222] transition-colors"
+            className="flex flex-col items-center gap-2 text-white/50 hover:text-[var(--ig-pink)] transition-colors"
           >
-            <div className="w-10 h-10 rounded-full border-2 border-slate-200 flex items-center justify-center text-lg">
+            <div className="ig-btn-glass w-10 h-10 rounded-full flex items-center justify-center text-lg">
               ›
             </div>
             <span className="text-xs font-medium">더보기</span>

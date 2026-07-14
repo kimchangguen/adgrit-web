@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "../../../_components/SiteHeader";
 import { Footer } from "../../../_components/Footer";
 import { BlogSidebar } from "../../../_components/BlogSidebar";
+import { SectionBackdrop } from "../../../_components/backgrounds/SectionBackdrop";
 
 const WP_BASE = process.env.WP_BASE ?? "";
 
@@ -101,14 +102,15 @@ export default async function CategoryPage({
   const posts = await getPostsByCategory(category.id);
 
   return (
-    <div className="min-h-screen bg-[#f8f9fc] text-[#1f1f1f]">
+    <div className="min-h-screen text-white">
       <SiteHeader />
 
       {/* 히어로 */}
-      <section className="bg-[#222222] pt-28 pb-10 sm:pt-32 sm:pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="ig-section pt-28 pb-10 sm:pt-32 sm:pb-12">
+        <SectionBackdrop variant="s3" />
+        <div className="ig-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* 브레드크럼 */}
-          <nav className="flex items-center gap-2 text-xs text-slate-300 mb-4">
+          <nav className="flex items-center gap-2 text-xs text-white/50 mb-4">
             <Link href="/" className="hover:text-white transition-colors">홈</Link>
             <span>/</span>
             <Link href="/blog" className="hover:text-white transition-colors">블로그</Link>
@@ -116,27 +118,29 @@ export default async function CategoryPage({
             <span className="text-white">{category.name}</span>
           </nav>
 
-          <p className="text-slate-300 text-sm font-semibold tracking-widest uppercase mb-2">
+          <p className="text-white/50 text-sm font-semibold tracking-widest uppercase mb-2">
             CATEGORY
           </p>
           <h1 className="text-3xl sm:text-4xl font-black text-white leading-tight">
-            {category.name}
+            <span className="ig-gradient-text">{category.name}</span>
           </h1>
           {category.description && (
-            <p className="mt-3 text-slate-200 text-base max-w-2xl">{category.description}</p>
+            <p className="mt-3 text-white/70 text-base max-w-2xl">{category.description}</p>
           )}
-          <p className="mt-2 text-slate-300 text-sm">총 {category.count}개의 글</p>
+          <p className="mt-2 text-white/50 text-sm">총 {category.count}개의 글</p>
         </div>
       </section>
 
       {/* 본문 */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <section className="ig-section">
+        <SectionBackdrop variant="s7b" />
+        <main className="ig-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         <div className="flex flex-col lg:flex-row gap-10">
 
           {/* 왼쪽: 포스트 그리드 */}
           <div className="flex-1 min-w-0">
             {posts.length === 0 ? (
-              <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center text-slate-500">
+              <div className="ig-glass-card rounded-2xl p-12 text-center text-white/60">
                 이 카테고리에 등록된 글이 없습니다.
               </div>
             ) : (
@@ -150,10 +154,10 @@ export default async function CategoryPage({
                     <Link
                       key={post.id}
                       href={`/blog/${post.slug}`}
-                      className="group flex flex-col bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                      className="ig-glass-card group flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-white/35"
                     >
                       {/* 썸네일 */}
-                      <div className="relative w-full aspect-[16/9] bg-slate-100 overflow-hidden">
+                      <div className="relative w-full aspect-[16/9] bg-white/5 overflow-hidden">
                         {thumb ? (
                           <Image
                             src={thumb}
@@ -163,28 +167,28 @@ export default async function CategoryPage({
                             sizes="(max-width: 640px) 100vw, 50vw"
                           />
                         ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-[#222222]/10 via-slate-100 to-slate-50 flex items-center justify-center">
-                            <span className="text-4xl opacity-20">📝</span>
+                          <div className="w-full h-full bg-gradient-to-br from-[var(--ig-pink)]/15 via-[var(--ig-orange)]/10 to-transparent flex items-center justify-center">
+                            <span className="text-4xl opacity-30">📝</span>
                           </div>
                         )}
-                        <span className="absolute top-3 left-3 bg-[#222222] text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+                        <span className="ig-btn-gradient absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full">
                           {category.name}
                         </span>
                       </div>
 
                       {/* 카드 본문 */}
                       <div className="flex flex-col flex-1 p-5">
-                        <time className="text-xs text-slate-400">{formatDate(post.date)}</time>
+                        <time className="text-xs text-white/40">{formatDate(post.date)}</time>
                         <h2
-                          className="mt-2 text-base font-black text-[#1f1f1f] group-hover:text-[#222222] transition-colors line-clamp-2 leading-snug"
+                          className="mt-2 text-base font-black text-white group-hover:text-[var(--ig-pink)] transition-colors line-clamp-2 leading-snug"
                           dangerouslySetInnerHTML={{ __html: post.title.rendered }}
                         />
                         {excerpt && (
-                          <p className="mt-2 text-sm text-slate-500 line-clamp-2 leading-relaxed flex-1">
+                          <p className="mt-2 text-sm text-white/55 line-clamp-2 leading-relaxed flex-1">
                             {excerpt}
                           </p>
                         )}
-                        <span className="mt-4 text-sm font-semibold text-[#222222] group-hover:underline">
+                        <span className="ig-gradient-text mt-4 text-sm font-semibold group-hover:underline">
                           자세히 보기 →
                         </span>
                       </div>
@@ -198,7 +202,8 @@ export default async function CategoryPage({
           {/* 우측: 사이드바 */}
           <BlogSidebar activeCategorySlug={slug} />
         </div>
-      </main>
+        </main>
+      </section>
 
       <Footer />
     </div>

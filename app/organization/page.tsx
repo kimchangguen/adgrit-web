@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { MoreHorizontal, UserCircle } from "lucide-react";
 import { SiteHeader } from "../_components/SiteHeader";
 import { Footer } from "../_components/Footer";
+import { SectionBackdrop } from "../_components/backgrounds/SectionBackdrop";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -121,7 +122,7 @@ function Avatar({
 
   return (
     <div
-      className={`${sizeClass} rounded-full border border-white bg-white shadow-[0_10px_24px_rgba(15,23,42,0.12)] ring-1 ring-slate-200`}
+      className={`ig-glass-icon ${sizeClass} rounded-full`}
     >
       {src ? (
         <Image
@@ -132,7 +133,7 @@ function Avatar({
           className="h-full w-full rounded-full object-cover"
         />
       ) : (
-        <div className="flex h-full w-full items-center justify-center rounded-full bg-slate-100 text-slate-500">
+        <div className="flex h-full w-full items-center justify-center rounded-full text-white/70">
           <UserCircle className={iconClass} strokeWidth={1.45} />
         </div>
       )}
@@ -148,12 +149,11 @@ function DepartmentCard({ department, index = 0, compact = false }: DepartmentCa
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.35 }}
-      whileHover={{ y: -4 }}
-      className={`relative mx-auto w-full rounded-[10px] border border-slate-200 bg-white px-5 pb-5 pt-9 text-left shadow-[0_10px_30px_rgba(15,23,42,0.05)] transition-shadow duration-300 hover:shadow-[0_16px_38px_rgba(15,23,42,0.09)] ${
+      className={`ig-glass-panel-lg relative mx-auto w-full rounded-2xl px-5 pb-5 pt-9 text-left ${
         compact ? "max-w-[310px]" : "max-w-[340px]"
       }`}
     >
-      <div className="absolute -top-8 left-5">
+      <div className="absolute -top-8 left-5 z-[3]">
         <Avatar
           src={department.avatarSrc}
           label={department.name}
@@ -164,24 +164,24 @@ function DepartmentCard({ department, index = 0, compact = false }: DepartmentCa
       <button
         type="button"
         aria-label={`${department.name} menu`}
-        className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700"
+        className="absolute right-4 top-4 z-[3] flex h-7 w-7 items-center justify-center rounded-full text-white/40 transition-colors hover:bg-white/10 hover:text-white/80"
       >
         <MoreHorizontal className="h-4 w-4" strokeWidth={2.2} />
       </button>
 
       <div className="min-h-[82px] pr-8">
-        <p className="text-[11px] font-semibold uppercase text-slate-400">{department.role}</p>
-        <h2 className="mt-1 text-[17px] font-extrabold leading-tight text-slate-950">
+        <p className="text-[11px] font-semibold uppercase text-white/45">{department.role}</p>
+        <h2 className="mt-1 text-[17px] font-extrabold leading-tight text-white">
           {department.name}
         </h2>
-        <p className="mt-2 text-[12px] leading-relaxed text-slate-400">{department.summary}</p>
+        <p className="mt-2 text-[12px] leading-relaxed text-white/55">{department.summary}</p>
       </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
         {department.items.map((item) => (
           <span
             key={item}
-            className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[12px] font-medium leading-none text-slate-500"
+            className="ig-glass-icon rounded-full px-3 py-1.5 text-[12px] font-medium leading-none text-white/70"
           >
             {item}
           </span>
@@ -197,14 +197,15 @@ export default function OrganizationPage() {
   const secondRow = teams.slice(3);
 
   return (
-    <div className="min-h-screen bg-[#f7f8fa] text-slate-950">
+    <div className="min-h-screen text-white">
       <SiteHeader />
 
       <main className="pt-16">
-        <section className="px-5 pb-12 pt-20 sm:px-8 sm:pb-16 sm:pt-24 lg:px-12">
-          <div className="mx-auto max-w-[1180px] text-center">
+        <section className="ig-section px-5 pb-12 pt-20 sm:px-8 sm:pb-16 sm:pt-24 lg:px-12">
+          <SectionBackdrop variant="s2" />
+          <div className="ig-content mx-auto max-w-[1180px] text-center">
             <motion.p
-              className="text-[12px] font-bold uppercase text-slate-400"
+              className="text-[12px] font-bold uppercase text-white/45"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.62, ease: EASE }}
@@ -212,15 +213,15 @@ export default function OrganizationPage() {
               ADGRIT Organization
             </motion.p>
             <motion.h1
-              className="mt-3 text-[38px] font-black leading-tight text-slate-950 sm:text-[54px]"
+              className="mt-3 text-[38px] font-black leading-tight sm:text-[54px]"
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.72, delay: 0.08, ease: EASE }}
             >
-              조직도
+              <span className="ig-gradient-text">조직도</span>
             </motion.h1>
             <motion.p
-              className="mx-auto mt-4 max-w-[560px] text-[15px] leading-7 text-slate-400 sm:text-[16px]"
+              className="mx-auto mt-4 max-w-[560px] text-[15px] leading-7 text-white/55 sm:text-[16px]"
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.72, delay: 0.16, ease: EASE }}
@@ -230,19 +231,20 @@ export default function OrganizationPage() {
           </div>
         </section>
 
-        <section className="px-5 pb-24 sm:px-8 sm:pb-32 lg:px-12">
-          <div className="mx-auto max-w-[1180px]">
+        <section className="ig-section px-5 pb-24 sm:px-8 sm:pb-32 lg:px-12">
+          <SectionBackdrop variant="s6" />
+          <div className="ig-content mx-auto max-w-[1180px]">
             <div className="relative flex flex-col items-center">
               <DepartmentCard department={leader} compact />
 
-              <div className="h-10 w-px bg-slate-200" aria-hidden="true" />
-              <div className="hidden h-px w-[82%] max-w-[940px] bg-slate-200 lg:block" aria-hidden="true" />
+              <div className="h-10 w-px bg-white/15" aria-hidden="true" />
+              <div className="hidden h-px w-[82%] max-w-[940px] bg-white/15 lg:block" aria-hidden="true" />
 
               <div className="grid w-full grid-cols-1 gap-x-6 gap-y-14 pt-10 sm:grid-cols-2 lg:grid-cols-3">
                 {firstRow.map((department, index) => (
                   <div key={department.role} className="relative">
                     <div
-                      className="absolute left-1/2 top-[-40px] hidden h-10 w-px -translate-x-1/2 bg-slate-200 lg:block"
+                      className="absolute left-1/2 top-[-40px] hidden h-10 w-px -translate-x-1/2 bg-white/15 lg:block"
                       aria-hidden="true"
                     />
                     <DepartmentCard department={department} index={index + 1} />
@@ -250,14 +252,14 @@ export default function OrganizationPage() {
                 ))}
               </div>
 
-              <div className="mt-14 h-10 w-px bg-slate-200" aria-hidden="true" />
-              <div className="hidden h-px w-[52%] max-w-[620px] bg-slate-200 lg:block" aria-hidden="true" />
+              <div className="mt-14 h-10 w-px bg-white/15" aria-hidden="true" />
+              <div className="hidden h-px w-[52%] max-w-[620px] bg-white/15 lg:block" aria-hidden="true" />
 
               <div className="grid w-full grid-cols-1 gap-x-6 gap-y-14 pt-10 sm:grid-cols-2 lg:w-[70%] lg:grid-cols-2">
                 {secondRow.map((department, index) => (
                   <div key={department.role} className="relative">
                     <div
-                      className="absolute left-1/2 top-[-40px] hidden h-10 w-px -translate-x-1/2 bg-slate-200 lg:block"
+                      className="absolute left-1/2 top-[-40px] hidden h-10 w-px -translate-x-1/2 bg-white/15 lg:block"
                       aria-hidden="true"
                     />
                     <DepartmentCard department={department} index={index + 4} />

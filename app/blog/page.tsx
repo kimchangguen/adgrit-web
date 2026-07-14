@@ -4,6 +4,7 @@ import { Footer } from "../_components/Footer";
 import { BlogFeaturedSlider, type SliderPost } from "../_components/BlogFeaturedSlider";
 import { BlogAnimatedHero } from "../_components/BlogAnimatedHero";
 import { BlogCategorySection, type CategoryPostItem } from "../_components/BlogCategorySection";
+import { SectionBackdrop } from "../_components/backgrounds/SectionBackdrop";
 
 export const metadata: Metadata = {
   title: "Grit View 블로그",
@@ -124,34 +125,35 @@ export default async function BlogPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-white text-[#1f1f1f]">
+    <div className="min-h-screen text-white">
       <SiteHeader />
 
       {/* ── 히어로 (클라이언트, Framer Motion 스태거) ─── */}
       <BlogAnimatedHero />
 
-      {/* ── 슬라이더 ─────────────────────────────────── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16">
-        <BlogFeaturedSlider posts={sliderPosts} />
-      </div>
-
-      {/* ── 카테고리별 포스트 그리드 ─────────────────── */}
-      <div
-        id="categories"
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 sm:pb-28"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-14">
-          {categorySections.map(({ category, posts: catPosts }, i) => (
-            <BlogCategorySection
-              key={category.id}
-              category={category}
-              posts={catPosts}
-              index={i}
-            />
-          ))}
+      {/* ── 슬라이더 + 카테고리 그리드 ───────────────── */}
+      <section className="ig-section pt-4">
+        <SectionBackdrop variant="s7b" />
+        <div className="ig-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16">
+          <BlogFeaturedSlider posts={sliderPosts} />
         </div>
 
-      </div>
+        <div
+          id="categories"
+          className="ig-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 sm:pb-28"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-14">
+            {categorySections.map(({ category, posts: catPosts }, i) => (
+              <BlogCategorySection
+                key={category.id}
+                category={category}
+                posts={catPosts}
+                index={i}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>

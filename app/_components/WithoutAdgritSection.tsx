@@ -2,6 +2,7 @@
 
 import { Container } from "./Container";
 import { motion } from "framer-motion";
+import { SectionBackdrop } from "./backgrounds/SectionBackdrop";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -37,23 +38,24 @@ export function WithoutAdgritSection() {
   return (
     <section
       id="without-adgrit"
-      className="relative z-10 border-t border-primary bg-primary py-[4.4rem] sm:py-[5.5rem] overflow-hidden"
+      className="ig-section relative z-10 py-[4.4rem] sm:py-[5.5rem]"
     >
-      <Container>
+      <SectionBackdrop variant="s6" />
+      <Container className="ig-content">
         <div className="flex flex-col items-center">
           {/* 상단: 제목 + 부제 - 말풍선 위, 중앙정렬 */}
           <div className="text-center w-full max-w-3xl">
-            <h2 className="text-[1.73rem] sm:text-[2.3rem] lg:text-[2.76rem] font-black leading-tight text-neutral">
+            <h2 className="text-[1.73rem] sm:text-[2.3rem] lg:text-[2.76rem] font-black leading-tight text-white">
               애드그릿과 하지 않는다면
             </h2>
-            <p className="mt-5 text-[1.15rem] sm:text-[1.44rem] text-neutral/95 leading-relaxed">
+            <p className="mt-5 text-[1.15rem] sm:text-[1.44rem] text-white/85 leading-relaxed">
               다음의 상태가 당신의 상태가 될 수 있습니다.
             </p>
           </div>
 
           {/* 말풍선 리스트 (순차 등장 스태거 애니메이션) */}
           <div className="mt-11 sm:mt-16 w-full max-w-[49.5rem] mx-auto flex justify-center">
-            <motion.div 
+            <motion.div
               className="flex flex-col gap-[1.1rem] w-full"
               variants={containerVariants}
               initial="hidden"
@@ -64,9 +66,9 @@ export function WithoutAdgritSection() {
                 <motion.div
                   key={`bubble-${i}`}
                   variants={itemVariants}
-                  className="flex items-center gap-3 rounded-full bg-secondary px-6 py-[1.1rem] w-full min-w-full text-primary text-[1.2rem] leading-snug shadow-lg"
+                  className="ig-glass-card flex items-center gap-3 rounded-full px-6 py-[1.1rem] w-full min-w-full text-white text-[1.2rem] leading-snug"
                 >
-                  <span className="flex-shrink-0 text-primary/90" aria-hidden>
+                  <span className="flex-shrink-0 text-[var(--ig-orange)]" aria-hidden>
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z" />
                     </svg>
@@ -79,8 +81,8 @@ export function WithoutAdgritSection() {
         </div>
 
         {/* 하단 안내 문구 - 글자 얇게, 3pt 작게 */}
-        <div className="mt-[4.4rem] sm:mt-[5.5rem] pt-[3.3rem] border-t border-tertiary/30">
-          <p className="text-base sm:text-lg lg:text-xl font-normal leading-relaxed text-neutral text-center max-w-4xl mx-auto">
+        <div className="mt-[4.4rem] sm:mt-[5.5rem] pt-[3.3rem]">
+          <p className="text-base sm:text-lg lg:text-xl font-normal leading-relaxed text-white/70 text-center max-w-4xl mx-auto">
             {BOTTOM_MESSAGE}
           </p>
         </div>

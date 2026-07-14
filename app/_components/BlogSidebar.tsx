@@ -56,30 +56,30 @@ export async function BlogSidebar({ activeCategorySlug }: { activeCategorySlug?:
     <aside className="w-full lg:w-[300px] xl:w-[320px] shrink-0 space-y-6">
 
       {/* CTA 배너 */}
-      <div className="rounded-2xl bg-[#222222] p-6 text-white text-center">
-        <p className="text-xs font-semibold tracking-widest text-slate-300 uppercase mb-2">
+      <div className="ig-btn-gradient rounded-2xl p-6 text-center">
+        <p className="text-xs font-semibold tracking-widest text-white/80 uppercase mb-2">
           FREE CONSULTING
         </p>
-        <h3 className="text-lg font-bold leading-snug mb-3">
+        <h3 className="text-lg font-bold leading-snug mb-3 text-white">
           마케팅 고민,<br />
           지금 바로 해결하세요
         </h3>
-        <p className="text-sm text-slate-200 mb-5 leading-relaxed">
+        <p className="text-sm text-white/85 mb-5 leading-relaxed">
           매출 성장을 위한 맞춤 전략을<br />
           무료로 상담해 드립니다.
         </p>
         <a
           href="tel:1661-0646"
-          className="block w-full rounded-xl bg-[#222222] py-3 text-sm font-bold text-white hover:bg-[#3a3a3a] transition-colors"
+          className="block w-full rounded-xl bg-black/25 py-3 text-sm font-bold text-white hover:bg-black/35 transition-colors"
         >
           무료 상담 신청 →
         </a>
       </div>
 
       {/* 카테고리 위젯 */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-5">
-        <h4 className="text-sm font-black text-[#1f1f1f] mb-4 pb-3 border-b border-slate-100 flex items-center gap-2">
-          <span className="inline-block w-1 h-4 rounded bg-[#222222]" />
+      <div className="ig-glass-card rounded-2xl p-5">
+        <h4 className="text-sm font-black text-white mb-4 pb-3 flex items-center gap-2">
+          <span className="inline-block w-1 h-4 rounded bg-[var(--ig-pink)]" />
           카테고리
         </h4>
         <ul className="space-y-1">
@@ -88,12 +88,12 @@ export async function BlogSidebar({ activeCategorySlug }: { activeCategorySlug?:
               href="/blog"
               className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors ${
                 !activeCategorySlug
-                  ? "bg-[#222222] text-white font-semibold"
-                  : "text-slate-600 hover:bg-slate-50 hover:text-[#222222]"
+                  ? "ig-btn-gradient font-semibold"
+                  : "text-white/65 hover:bg-white/10 hover:text-white"
               }`}
             >
               <span>전체</span>
-              <span className={`text-xs ${!activeCategorySlug ? "text-slate-300" : "text-slate-400"}`}>
+              <span className={`text-xs ${!activeCategorySlug ? "text-white/80" : "text-white/40"}`}>
                 {categories.reduce((acc, c) => acc + c.count, 0)}
               </span>
             </Link>
@@ -104,12 +104,12 @@ export async function BlogSidebar({ activeCategorySlug }: { activeCategorySlug?:
                 href={`/blog/category/${cat.slug}`}
                 className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors ${
                   activeCategorySlug === cat.slug
-                    ? "bg-[#222222] text-white font-semibold"
-                    : "text-slate-600 hover:bg-slate-50 hover:text-[#222222]"
+                    ? "ig-btn-gradient font-semibold"
+                    : "text-white/65 hover:bg-white/10 hover:text-white"
                 }`}
               >
                 <span>{cat.name}</span>
-                <span className={`text-xs ${activeCategorySlug === cat.slug ? "text-slate-300" : "text-slate-400"}`}>
+                <span className={`text-xs ${activeCategorySlug === cat.slug ? "text-white/80" : "text-white/40"}`}>
                   {cat.count}
                 </span>
               </Link>
@@ -119,9 +119,9 @@ export async function BlogSidebar({ activeCategorySlug }: { activeCategorySlug?:
       </div>
 
       {/* 최근 글 위젯 */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-5">
-        <h4 className="text-sm font-black text-[#1f1f1f] mb-4 pb-3 border-b border-slate-100 flex items-center gap-2">
-          <span className="inline-block w-1 h-4 rounded bg-[#222222]" />
+      <div className="ig-glass-card rounded-2xl p-5">
+        <h4 className="text-sm font-black text-white mb-4 pb-3 flex items-center gap-2">
+          <span className="inline-block w-1 h-4 rounded bg-[var(--ig-orange)]" />
           최근 글
         </h4>
         <ul className="space-y-4">
@@ -134,7 +134,7 @@ export async function BlogSidebar({ activeCategorySlug }: { activeCategorySlug?:
                   className="flex gap-3 group items-start"
                 >
                   {/* 썸네일 */}
-                  <div className="shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-slate-100">
+                  <div className="shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-white/5">
                     {thumb ? (
                       <Image
                         src={thumb}
@@ -144,15 +144,15 @@ export async function BlogSidebar({ activeCategorySlug }: { activeCategorySlug?:
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-[#222222]/10 to-slate-100" />
+                      <div className="w-full h-full bg-gradient-to-br from-[var(--ig-pink)]/15 to-[var(--ig-orange)]/10" />
                     )}
                   </div>
                   {/* 텍스트 */}
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-[#1f1f1f] group-hover:text-[#222222] transition-colors line-clamp-2 leading-snug">
+                    <p className="text-sm font-medium text-white/85 group-hover:text-white transition-colors line-clamp-2 leading-snug">
                       {stripHTML(post.title.rendered)}
                     </p>
-                    <time className="mt-1 text-xs text-slate-400">
+                    <time className="mt-1 text-xs text-white/40">
                       {new Date(post.date).toLocaleDateString("ko-KR")}
                     </time>
                   </div>

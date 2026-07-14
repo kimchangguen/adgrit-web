@@ -59,6 +59,13 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
+        {/* 사이트 공통 고정 배경: 히어로에서 쓰는 이미지 하나를 모든 섹션이 공유.
+            position:fixed라 스크롤/페이지 전환과 무관하게 항상 뒤에 고정된다. */}
+        <div
+          className="site-fixed-background"
+          style={{ backgroundImage: "url(/image/000.png)" }}
+          aria-hidden
+        />
         {children}
         <FloatingActions />
       </body>

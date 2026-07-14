@@ -9,7 +9,7 @@ type Section2LeftColumnProps = {
 
 export function Section2LeftColumn({ children }: Section2LeftColumnProps) {
   return (
-    <div className="lg:sticky lg:top-36 lg:pt-8 lg:w-[54%] lg:flex-shrink-0 h-max text-left">
+    <div className="lg:sticky lg:top-[calc(var(--header-height)+60px)] lg:self-start lg:pt-8 lg:w-[54%] lg:flex-shrink-0 h-fit text-left">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
