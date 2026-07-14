@@ -73,11 +73,17 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 export function AccountGrowthSection() {
   return (
     <section className="relative z-10 px-4 py-10 sm:px-6 sm:py-14 lg:py-20">
-      <div className="mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-violet-100/80 bg-[linear-gradient(145deg,#fbfaff_0%,#f5f2fc_52%,#faf9fd_100%)] px-5 py-12 text-slate-950 shadow-[0_24px_70px_rgba(78,61,130,0.12)] sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+      <div
+        className="shortform-section-container relative mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-white/[0.08] bg-[rgba(20,20,30,0.45)] px-5 py-12 text-white shadow-[0_24px_80px_rgba(10,8,24,0.28)] sm:px-8 sm:py-16 lg:px-12 lg:py-20"
+        style={{
+          backdropFilter: "blur(20px) saturate(120%)",
+          WebkitBackdropFilter: "blur(20px) saturate(120%)",
+        }}
+      >
         <header id="account-growth" className="mx-auto max-w-4xl scroll-mt-32 text-center lg:scroll-mt-36">
           <span className="inline-flex rounded-full bg-[#6b4fe8] px-5 py-2 text-sm font-bold text-white shadow-[0_8px_20px_rgba(107,79,232,0.25)] sm:text-base">ADGRIT 계정육성 서비스</span>
-          <h2 className="mt-7 text-[2rem] font-black leading-[1.14] tracking-[-0.045em] sm:text-[2.65rem] lg:text-5xl">팔로워를 고객으로,<br />계정을 <span className="text-[#6b4fe8]">매출로 연결</span>합니다.</h2>
-          <p className="mt-6 text-[15px] font-medium leading-7 text-slate-500 sm:text-lg sm:leading-8">콘텐츠 제작은 사장님이, 전략과 성장은 저희가 함께합니다.<br className="hidden sm:block" />최적화된 계정으로 성장 <span className="font-bold text-[#6b4fe8]">→</span> 고객 유입 <span className="font-bold text-[#6b4fe8]">→</span> 실질적 매출 연결</p>
+          <h2 className="mt-7 text-[2rem] font-black leading-[1.14] tracking-[-0.045em] text-white sm:text-[2.65rem] lg:text-5xl">팔로워를 고객으로,<br />계정을 <span className="bg-gradient-to-r from-orange-400 via-pink-500 to-violet-400 bg-clip-text text-transparent">매출로 연결</span>합니다.</h2>
+          <p className="mt-6 text-[15px] font-medium leading-7 text-white/75 sm:text-lg sm:leading-8">콘텐츠 제작은 사장님이, 전략과 성장은 저희가 함께합니다.<br className="hidden sm:block" />최적화된 계정으로 성장 <span className="font-bold text-violet-300">→</span> 고객 유입 <span className="font-bold text-violet-300">→</span> 실질적 매출 연결</p>
         </header>
 
         <div className="mt-10 rounded-[24px] border border-violet-200/80 bg-violet-50/75 px-5 py-8 shadow-[0_14px_40px_rgba(91,65,161,0.08)] sm:px-8 sm:py-10 lg:mt-14 lg:px-10">

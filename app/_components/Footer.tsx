@@ -7,6 +7,7 @@ export function Footer() {
     <footer className="ig-section relative">
       <SectionBackdrop variant="footer" />
       <Container className="ig-content py-12 sm:py-16">
+        <div className="ig-glass-panel-lg rounded-[28px] p-6 sm:p-8 lg:p-10">
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
             <div className="text-lg font-black tracking-wider text-white">
@@ -54,6 +55,7 @@ export function Footer() {
             <span>개인정보처리방침</span>
             <span>이용약관</span>
           </div>
+        </div>
         </div>
       </Container>
     </footer>

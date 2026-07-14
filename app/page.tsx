@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -26,7 +25,6 @@ import { WithoutAdgritSection } from "./_components/WithoutAdgritSection";
 import { KakaoTestimonialsSection } from "./_components/KakaoTestimonialsSection";
 import { Section2CardList } from "./_components/Section2CardList";
 import { Section2Wrapper } from "./_components/Section2Wrapper";
-import { SectionBackdrop } from "./_components/backgrounds/SectionBackdrop";
 
 export default async function Home() {
   return (
@@ -72,44 +70,6 @@ function WorryCard({
           <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
           </svg>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ProcessStep({
-  step,
-  title,
-  desc,
-  buttonText,
-}: {
-  step: string;
-  title: string;
-  desc: string;
-  buttonText?: string;
-}) {
-  const stepNum = parseInt(step, 10);
-  const iconSrc = `/process-iocons/step-${stepNum}.png`;
-
-  return (
-    <div className="ig-glass-card flex h-full flex-col rounded-xl p-6 text-center">
-      <span className="ig-gradient-text text-sm font-bold uppercase tracking-wide">STEP {step}</span>
-      <div className="mt-4 mx-auto flex h-14 w-14 items-center justify-center">
-        <Image
-          src={iconSrc}
-          alt=""
-          width={56}
-          height={56}
-          className="ig-icon-glow h-14 w-14 object-contain"
-          aria-hidden
-        />
-      </div>
-      <h3 className="mt-4 text-lg font-black text-white">{title}</h3>
-      <p className="mt-3 flex-1 text-center text-sm leading-relaxed text-white/70 whitespace-pre-line">{desc}</p>
-      {buttonText && (
-        <div className="ig-btn-glass mt-6 rounded-lg py-3 px-4 text-sm font-semibold text-white">
-          {buttonText}
         </div>
       )}
     </div>
@@ -229,50 +189,6 @@ function SiteChrome() {
 
       {/* 클라이언트 만족후기 (카카오톡) - 일곱번째 섹션 */}
       <KakaoTestimonialsSection />
-
-      {/* 헤더 메뉴 앵커: 기획·컨설팅 */}
-
-      {/* Process - 아홉번째 섹션 (참고 이미지 레이아웃, 내용 유지) */}
-      <section className="ig-section relative z-10 py-16 sm:py-20">
-        <SectionBackdrop variant="s7b" />
-        <Container className="ig-content">
-          <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white">
-              프로세스
-            </h2>
-            <p className="mt-3 text-[1.04rem] sm:text-[1.17rem] text-white/70">
-              단 세 단계로 완성하는 성공적인 컨설팅 프로세스
-            </p>
-          </div>
-
-          <div className="mt-10 grid gap-6 md:grid-cols-3 md:items-stretch">
-            {[
-              {
-                step: "01",
-                title: "Discovery 진단단계",
-                desc: "고객사의 비즈니스 환경과 과제를 이해합니다.\n맞춤 상담을 통해 목표와 문제, 기회를 파악합니다.",
-                buttonText: "상담 접수 24시간 내",
-              },
-              {
-                step: "02",
-                title: "Development 전략단계",
-                desc: "수집된 인사이트를 바탕으로 맞춤형 전략을 수립합니다.\n데이터 기반으로 목표에 최적화된 실행 계획을 설계합니다.",
-                buttonText: "상담 후 2주 소요",
-              },
-              {
-                step: "03",
-                title: "Implementation 실행단계",
-                desc: "설계된 전략을 현장에 적용하고 지속적으로 모니터링합니다.\n빠른 실험과 개선으로 성과를 극대화합니다.",
-                buttonText: "지속적으로 모니터링",
-              },
-            ].map((p, i) => (
-              <AnimatedCard key={p.step} index={i}>
-                <ProcessStep step={p.step} title={p.title} desc={p.desc} buttonText={p.buttonText} />
-              </AnimatedCard>
-            ))}
-          </div>
-        </Container>
-      </section>
 
       {/* 클라이언트 성장 + 무료 상담 CTA - 마지막 섹션 바로 위 */}
       <ClientGrowthSection />

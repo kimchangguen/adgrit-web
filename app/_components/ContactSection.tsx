@@ -17,7 +17,7 @@ export function ContactSection() {
     >
       <SectionBackdrop variant="s8b" />
       <Container className="ig-content relative">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
+        <div className="ig-glass-panel-lg grid grid-cols-1 gap-12 rounded-[28px] p-6 sm:p-8 lg:grid-cols-2 lg:items-start lg:gap-16 lg:p-10">
           {/* 왼쪽: Contact 타이틀 + 안내 문구 */}
           <div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">

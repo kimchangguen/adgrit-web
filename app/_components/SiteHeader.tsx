@@ -85,7 +85,7 @@ const navItems: NavItem[] = [
   { label: "릴스파크", icon: ReelsSparkIcon, href: "/#reelspark" },
   { label: "타겟광고", icon: TargetAdIcon, href: "/#target-ads" },
   { label: "전략기획", icon: ConsultingIcon, href: "/#consulting" },
-  { label: "블로그", icon: BlogIcon, href: "/blog" },
+  { label: "꿀팁비법", icon: BlogIcon, href: "/blog" },
 ];
 
 type SiteHeaderProps = {
