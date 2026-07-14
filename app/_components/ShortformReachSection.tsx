@@ -36,7 +36,13 @@ const CHECKLIST = [
 export function ShortformReachSection() {
   return (
     <section id="about" className="relative z-10 px-4 py-10 sm:px-6 sm:py-14 lg:py-20">
-      <div className="mx-auto w-full max-w-7xl rounded-[28px] border border-slate-200/80 bg-white px-5 py-10 text-[#171730] shadow-[0_24px_80px_rgba(40,36,75,0.14)] sm:px-8 sm:py-14 lg:px-12 lg:py-16">
+      <div
+        className="shortform-section-container relative mx-auto w-full max-w-7xl overflow-hidden rounded-[28px] border border-white/[0.08] bg-[rgba(20,20,30,0.45)] px-5 py-10 text-white shadow-[0_24px_80px_rgba(10,8,24,0.28)] sm:px-8 sm:py-14 lg:px-12 lg:py-16"
+        style={{
+          backdropFilter: "blur(20px) saturate(120%)",
+          WebkitBackdropFilter: "blur(20px) saturate(120%)",
+        }}
+      >
         <div className="text-center">
           <div className="inline-flex rounded-full bg-gradient-to-r from-violet-500 via-pink-400 to-orange-400 p-[1.5px]">
             <div className="flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold sm:px-7 sm:text-base">
@@ -47,13 +53,13 @@ export function ShortformReachSection() {
             </div>
           </div>
 
-          <h2 className="mt-6 text-[2rem] font-black leading-[1.08] tracking-[-0.05em] text-[#171730] sm:text-5xl sm:tracking-[-0.045em] lg:text-[3.5rem]">
+          <h2 className="mt-6 text-[2rem] font-black leading-[1.08] tracking-[-0.05em] text-white sm:text-5xl sm:tracking-[-0.045em] lg:text-[3.5rem]">
             숏폼 하나가
             <br />
             손님을 <span className="bg-gradient-to-r from-orange-500 via-rose-500 to-pink-600 bg-clip-text text-transparent">데려오는</span> 시대
           </h2>
 
-          <p className="mt-5 text-base font-medium leading-relaxed text-slate-500 sm:text-lg">
+          <p className="mt-5 text-base font-medium leading-relaxed text-slate-300 sm:text-lg">
             기획부터 업로드, 32개 채널 확산까지
             <br />
             사장님은 음식만 만드세요!
@@ -107,7 +113,7 @@ export function ShortformReachSection() {
           </a>
         </div>
 
-        <div className="mt-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center text-sm font-semibold text-slate-600">
+        <div className="mt-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center text-sm font-semibold text-slate-200">
           {CHECKLIST.map((item, index) => (
             <div key={item} className="flex items-center gap-2">
               {index > 0 && <span className="hidden text-slate-300 sm:inline" aria-hidden>|</span>}

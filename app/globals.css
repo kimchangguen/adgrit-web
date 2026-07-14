@@ -746,6 +746,29 @@ header nav a {
   mix-blend-mode: normal;
 }
 
+.shortform-section-container {
+  position: relative;
+  overflow: hidden;
+  background: rgba(20, 20, 30, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.shortform-section-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.shortform-section-container > * {
+  position: relative;
+  z-index: 2;
+}
+
 /* Section 2 only: Semi Opaque Frosted Glass Film.
    Hero의 색감은 확산시키고 세부 형태는 억제하며, 콘텐츠에는 투명도나 필터를 전달하지 않는다. */
 #section2 .ig-glass-panel-lg {
