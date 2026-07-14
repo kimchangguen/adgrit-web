@@ -22,7 +22,14 @@ export function Section2Wrapper({ leftContent, rightContent }: Section2WrapperPr
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <SectionBackdrop variant="s2" />
-        <div className="ig-glass-panel-lg ig-glass-panel-lg--overlay pointer-events-none" aria-hidden />
+        <div
+          className="ig-glass-panel-lg ig-glass-panel-lg--overlay pointer-events-none"
+          style={{
+            backdropFilter: "blur(28px) saturate(110%)",
+            WebkitBackdropFilter: "blur(28px) saturate(110%)",
+          }}
+          aria-hidden
+        />
         <div className="ig-content mx-auto w-full px-6 md:px-10 lg:px-14">
           <div className="flex flex-col lg:flex-row lg:items-start gap-12 lg:gap-16">
             <Section2LeftColumn>
