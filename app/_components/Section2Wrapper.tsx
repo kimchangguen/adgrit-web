@@ -15,7 +15,7 @@ export function Section2Wrapper({ leftContent, rightContent }: Section2WrapperPr
     <div className="w-full px-4 sm:px-6 mt-12">
       <motion.section
         id="section2"
-        className="ig-section section2 section-two relative z-10 mx-auto w-full max-w-[1200px] rounded-[2rem] sm:rounded-[3rem] py-20 sm:py-24 lg:py-28"
+        className="ig-section section2 section-two relative z-10 mx-auto w-full max-w-7xl rounded-[2rem] sm:rounded-[3rem] py-20 sm:py-24 lg:py-28"
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
@@ -25,8 +25,8 @@ export function Section2Wrapper({ leftContent, rightContent }: Section2WrapperPr
         <div
           className="ig-glass-panel-lg ig-glass-panel-lg--overlay pointer-events-none"
           style={{
-            backdropFilter: "blur(28px) saturate(80%) contrast(88%)",
-            WebkitBackdropFilter: "blur(28px) saturate(80%) contrast(88%)",
+            backdropFilter: "blur(20px) saturate(120%)",
+            WebkitBackdropFilter: "blur(20px) saturate(120%)",
           }}
           aria-hidden
         />
