@@ -115,7 +115,7 @@ export function WithoutAdgritSection() {
               <motion.article
                 key={index}
                 variants={itemVariants}
-                className="warning-item grid min-h-[184px] grid-cols-[48px_62px_1fr] items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.012] px-3 py-6 sm:min-h-[218px] sm:grid-cols-[56px_72px_1fr] sm:gap-4 sm:px-5 sm:py-7"
+                className="warning-item grid min-h-[184px] grid-cols-[48px_62px_1fr] items-center gap-2.5 rounded-xl border border-white/[0.07] bg-white/[0.012] px-3 py-5 sm:min-h-[218px] sm:grid-cols-[56px_72px_1fr] sm:gap-3 sm:px-5 sm:py-6"
               >
                 <span className={`self-start pt-1 text-2xl font-black tabular-nums sm:text-[1.7rem] ${rose ? "text-rose-400" : "text-violet-400"}`}>
                   {String(index + 1).padStart(2, "0")}
@@ -123,7 +123,7 @@ export function WithoutAdgritSection() {
                 <span className={`warning-icon flex h-14 w-14 items-center justify-center rounded-full border bg-white/[0.025] sm:h-16 sm:w-16 ${rose ? "border-rose-400/25 text-rose-400" : "border-violet-400/25 text-violet-400"}`}>
                   <Icon className="h-8 w-8 sm:h-9 sm:w-9" strokeWidth={1.7} aria-hidden />
                 </span>
-                <p className="warning-text text-[clamp(0.9rem,2.3vw,1.1875rem)] font-normal leading-[1.72] text-white/85">
+                <p className="warning-text text-[clamp(1.17rem,2.99vw,1.54375rem)] font-normal leading-[1.72] text-white/85">
                   {lead} <strong className={`font-bold ${rose ? "text-rose-400" : "text-fuchsia-400"}`}>{highlight}</strong>
                 </p>
               </motion.article>
