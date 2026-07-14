@@ -33,16 +33,16 @@ const LOCATIONS = [
 
 /* ─── 페이지 ─────────────────────────────────────── */
 export default function ContactPage() {
-  const { ref: heroRef, inView: heroInView } = useReveal("-20px");
+  const { ref: heroRef } = useReveal("-20px");
 
   return (
-    <div className="bg-[#2E4033] text-white min-h-screen">
+    <div className="min-h-screen bg-transparent text-white">
       <SiteHeader />
 
       <main className="pt-16">
 
         {/* ── 히어로 ──────────────────────────────── */}
-        <section className="px-6 sm:px-14 lg:px-24 pt-20 sm:pt-28 pb-16 sm:pb-20">
+        <section className="px-6 sm:px-14 lg:px-24 pt-20 sm:pt-28 pb-16 sm:pb-20 text-center">
           <motion.p
             className="text-[0.65rem] font-bold tracking-[0.28em] text-slate-200 uppercase mb-5"
             initial={{ opacity: 0, y: 16 }}
@@ -73,7 +73,7 @@ export default function ContactPage() {
         {/* ── 지도 섹션 ───────────────────────────── */}
         <section
           ref={heroRef}
-          className="bg-[#2E4033] border-t border-white/[0.07] px-6 sm:px-14 lg:px-24 pt-16 pb-32 sm:pb-44"
+          className="border-t border-white/[0.07] bg-transparent px-6 pt-16 pb-32 sm:px-14 sm:pb-44 lg:px-24"
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
             {LOCATIONS.map(({ label, sublabel, address, mapSrc }, i) => {

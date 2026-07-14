@@ -188,7 +188,7 @@ export default function HistoryPage() {
         {/* ── 히어로 ─────────────────────────────────── */}
         <section className="ig-section px-6 sm:px-14 lg:px-24 pt-20 sm:pt-28 pb-10 sm:pb-16">
           <SectionBackdrop variant="s2" />
-          <div className="ig-content">
+          <div className="ig-content text-center">
             <motion.p
               className="text-[0.975rem] font-bold tracking-[0.28em] text-white/45 uppercase mb-5"
               initial={{ opacity: 0, y: 16 }}
