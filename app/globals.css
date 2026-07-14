@@ -467,6 +467,7 @@ header nav a {
   -webkit-backdrop-filter: blur(6px);
 
   animation: scroll-bounce 1.2s infinite;
+  transform: translateX(-50%);
 }
 .scroll-indicator:hover {
   background: rgba(0, 0, 0, 0.58);

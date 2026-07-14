@@ -81,7 +81,7 @@ export function HeroWithScrollEffect({
           <button
             type="button"
             onClick={() => document.getElementById("section2")?.scrollIntoView({ behavior: "smooth" })}
-            className="scroll-indicator absolute left-1/2 bottom-7 -translate-x-1/2 z-10 transition-colors"
+            className="scroll-indicator absolute left-1/2 bottom-7 z-10 transition-colors"
             aria-label="다음 섹션으로 스크롤"
           >
             <span className="scroll-indicator__text text-xs font-medium tracking-widest">SCROLL</span>
