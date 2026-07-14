@@ -64,7 +64,7 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex items-center justify-center gap-4 sm:gap-6">
       <span className="h-px w-8 bg-violet-300 sm:w-20" aria-hidden />
-      <h3 className="whitespace-nowrap text-lg font-extrabold tracking-[-0.025em] text-slate-900 sm:text-xl">{children}</h3>
+      <h3 className="whitespace-nowrap text-lg font-extrabold tracking-[-0.025em] text-white sm:text-xl">{children}</h3>
       <span className="h-px w-8 bg-violet-300 sm:w-20" aria-hidden />
     </div>
   );
@@ -86,7 +86,7 @@ export function AccountGrowthSection() {
           <p className="mt-6 text-[15px] font-medium leading-7 text-white/75 sm:text-lg sm:leading-8">콘텐츠 제작은 사장님이, 전략과 성장은 저희가 함께합니다.<br className="hidden sm:block" />최적화된 계정으로 성장 <span className="font-bold text-violet-300">→</span> 고객 유입 <span className="font-bold text-violet-300">→</span> 실질적 매출 연결</p>
         </header>
 
-        <div className="mt-10 rounded-[24px] border border-violet-200/80 bg-violet-50/75 px-5 py-8 shadow-[0_14px_40px_rgba(91,65,161,0.08)] sm:px-8 sm:py-10 lg:mt-14 lg:px-10">
+        <div className="middle-box mt-10 px-5 py-8 shadow-[0_14px_40px_rgba(0,0,0,0.08)] sm:px-8 sm:py-10 lg:mt-14 lg:px-10">
           <SectionTitle>계정육성 핵심 원칙</SectionTitle>
           <div className="mt-8 grid gap-5 md:grid-cols-3 lg:gap-7">
             {PRINCIPLES.map(({ title, description, note, Icon, ...item }) => (
@@ -100,7 +100,7 @@ export function AccountGrowthSection() {
           </div>
         </div>
 
-        <div className="mt-8 rounded-[24px] border border-violet-100 bg-white/80 px-5 py-9 shadow-[0_14px_40px_rgba(91,65,161,0.07)] sm:px-8 sm:py-11 lg:px-10">
+        <div className="middle-box mt-8 px-5 py-9 shadow-[0_14px_40px_rgba(0,0,0,0.08)] sm:px-8 sm:py-11 lg:px-10">
           <SectionTitle>계정육성 프로세스</SectionTitle>
           <div className="mt-10 flex flex-col items-stretch md:flex-row md:items-start md:justify-between">
             {PROCESS.map(({ title, description, Icon, ...item }, index) => (
@@ -111,8 +111,8 @@ export function AccountGrowthSection() {
                     <Icon className="h-9 w-9" strokeWidth={1.7} aria-hidden />
                     {"coins" in item && item.coins && <Coins className="absolute bottom-2 right-2 h-4 w-4" strokeWidth={2} aria-hidden />}
                   </div>
-                  <h4 className="mt-4 text-[15px] font-extrabold leading-5 text-slate-900">{title}</h4>
-                  <p className="mt-2 max-w-[190px] text-[13px] leading-5 text-slate-500">{description}</p>
+                  <h4 className="mt-4 text-[15px] font-extrabold leading-5 text-white">{title}</h4>
+                  <p className="mt-2 max-w-[190px] text-[13px] leading-5 text-white/65">{description}</p>
                 </article>
                 {index < PROCESS.length - 1 && <div className="flex h-12 items-center justify-center text-violet-300 md:h-[72px] md:w-7"><ArrowDown className="h-5 w-5 md:hidden" aria-hidden /><ArrowRight className="hidden h-5 w-5 md:block" aria-hidden /></div>}
               </div>
@@ -120,20 +120,20 @@ export function AccountGrowthSection() {
           </div>
         </div>
 
-        <div className="mt-8 rounded-[24px] border border-violet-100 bg-white/80 px-5 py-9 shadow-[0_14px_40px_rgba(91,65,161,0.07)] sm:px-8 sm:py-11 lg:px-10">
+        <div className="middle-box mt-8 px-5 py-9 shadow-[0_14px_40px_rgba(0,0,0,0.08)] sm:px-8 sm:py-11 lg:px-10">
           <SectionTitle>계정육성의 효과</SectionTitle>
           <div className="mt-9 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-5 lg:gap-7">
             {EFFECTS.map(({ title, description, Icon }) => (
               <article key={title} className="flex flex-col items-center text-center last:col-span-2 md:last:col-span-1">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-violet-100 text-[#6b4fe8]"><Icon className="h-8 w-8" strokeWidth={1.65} aria-hidden /></div>
-                <h4 className="mt-4 text-[15px] font-extrabold text-slate-900">{title}</h4>
-                <p className="mt-2 text-[13px] leading-5 text-slate-500">{description}</p>
+                <h4 className="mt-4 text-[15px] font-extrabold text-white">{title}</h4>
+                <p className="mt-2 text-[13px] leading-5 text-white/65">{description}</p>
               </article>
             ))}
           </div>
         </div>
 
-        <div className="mt-8 rounded-[24px] border border-violet-200/80 bg-violet-50/75 px-5 py-9 shadow-[0_14px_40px_rgba(91,65,161,0.08)] sm:px-8 sm:py-11 lg:px-10">
+        <div className="middle-box mt-8 px-5 py-9 shadow-[0_14px_40px_rgba(0,0,0,0.08)] sm:px-8 sm:py-11 lg:px-10">
           <SectionTitle>두 가지 계정육성 서비스</SectionTitle>
           <div className="mt-9 grid gap-6 lg:grid-cols-2">
             {SERVICES.map(({ badge, title, description, Icon, tags }, index) => (

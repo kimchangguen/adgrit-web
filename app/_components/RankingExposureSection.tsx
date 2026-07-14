@@ -63,22 +63,28 @@ const SERVICES = [
   },
 ] as const;
 
-function SectionHeading({ children }: { children: React.ReactNode }) {
-  return <div className="flex items-center justify-center gap-4 sm:gap-6"><span className="h-px w-8 bg-pink-200 sm:w-20" /><h3 className="text-center text-xl font-extrabold tracking-[-0.025em] text-slate-900 sm:text-2xl">{children}</h3><span className="h-px w-8 bg-pink-200 sm:w-20" /></div>;
+function SectionHeading({ children, onDark = false }: { children: React.ReactNode; onDark?: boolean }) {
+  return <div className="flex items-center justify-center gap-4 sm:gap-6"><span className="h-px w-8 bg-pink-200 sm:w-20" /><h3 className={`text-center text-xl font-extrabold tracking-[-0.025em] sm:text-2xl ${onDark ? "text-white" : "text-slate-900"}`}>{children}</h3><span className="h-px w-8 bg-pink-200 sm:w-20" /></div>;
 }
 
 export function RankingExposureSection() {
   return (
     <section className="relative z-10 px-4 py-10 sm:px-6 sm:py-14 lg:py-20">
-      <div className="mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-pink-100 bg-[linear-gradient(145deg,#fff_0%,#fafaf8_45%,#f9f5fa_100%)] px-5 py-12 text-slate-950 shadow-[0_24px_70px_rgba(111,62,99,0.1)] sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+      <div
+        className="shortform-section-container relative mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-white/[0.08] bg-[rgba(20,20,30,0.45)] px-5 py-12 text-white shadow-[0_24px_80px_rgba(10,8,24,0.28)] sm:px-8 sm:py-16 lg:px-12 lg:py-20"
+        style={{
+          backdropFilter: "blur(20px) saturate(120%)",
+          WebkitBackdropFilter: "blur(20px) saturate(120%)",
+        }}
+      >
         <header id="ranking" className="mx-auto max-w-4xl scroll-mt-32 text-center lg:scroll-mt-36">
-          <div className="flex items-center justify-center gap-3 text-sm font-bold text-slate-600 sm:text-base"><span className="h-px w-8 bg-pink-300" /><span>ADGRIT <span className="bg-gradient-to-r from-[#ff7a3d] via-[#ec4899] to-[#7c3aed] bg-clip-text text-transparent">상위노출</span> 서비스</span><span className="h-px w-8 bg-pink-300" /></div>
-          <h2 className="mt-7 text-[2rem] font-black leading-[1.14] tracking-[-0.045em] text-slate-950 sm:text-[2.75rem] lg:text-[3.25rem]">인스타그램 상위노출,<br /><span className="bg-gradient-to-r from-[#ff7a3d] via-[#ec4899] to-[#7c3aed] bg-clip-text text-transparent">최적화 계정</span>만이 노출됩니다.</h2>
-          <p className="mt-6 text-[15px] font-normal leading-7 text-[#6b6b78] sm:text-lg sm:leading-8">검색부터 추천탭, 계정탭까지 최적 위치에 노출되어<br className="hidden sm:block" />더 많은 고객이 찾아오고, 매출로 연결됩니다.</p>
+          <div className="flex items-center justify-center gap-3 text-sm font-bold text-white/80 sm:text-base"><span className="h-px w-8 bg-pink-300" /><span>ADGRIT <span className="bg-gradient-to-r from-[#ff7a3d] via-[#ec4899] to-[#7c3aed] bg-clip-text text-transparent">상위노출</span> 서비스</span><span className="h-px w-8 bg-pink-300" /></div>
+          <h2 className="mt-7 text-[2rem] font-black leading-[1.14] tracking-[-0.045em] text-white sm:text-[2.75rem] lg:text-[3.25rem]">인스타그램 상위노출,<br /><span className="bg-gradient-to-r from-[#ff7a3d] via-[#ec4899] to-[#7c3aed] bg-clip-text text-transparent">최적화 계정</span>만이 노출됩니다.</h2>
+          <p className="mt-6 text-[15px] font-normal leading-7 text-white/75 sm:text-lg sm:leading-8">검색부터 추천탭, 계정탭까지 최적 위치에 노출되어<br className="hidden sm:block" />더 많은 고객이 찾아오고, 매출로 연결됩니다.</p>
         </header>
 
         <div className="mt-12">
-          <SectionHeading>상위노출은 어디에서 이루어질까요?</SectionHeading>
+          <SectionHeading onDark>상위노출은 어디에서 이루어질까요?</SectionHeading>
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
             {EXPOSURE_CARDS.map(({ number, title, suffix, description, caption, captionClass, items }) => (
               <article key={title} className="flex min-h-[390px] flex-col overflow-hidden rounded-[22px] border border-pink-100 bg-white shadow-[0_14px_35px_rgba(167,72,121,0.09)]">
@@ -95,8 +101,8 @@ export function RankingExposureSection() {
           </div>
         </div>
 
-        <div className="mt-12 rounded-[24px] border border-pink-100 bg-[#faf8f8] px-5 py-9 sm:px-8 sm:py-11">
-          <SectionHeading>두 가지 상위노출 서비스</SectionHeading>
+        <div className="middle-box mt-12 px-5 py-9 sm:px-8 sm:py-11">
+          <SectionHeading onDark>두 가지 상위노출 서비스</SectionHeading>
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
             {SERVICES.map(({ badge, title, description, tags, Icon, iconClass }) => (
               <article key={badge} className="rounded-[22px] border border-pink-100 bg-white p-6 shadow-[0_12px_30px_rgba(167,72,121,0.08)] sm:p-8">

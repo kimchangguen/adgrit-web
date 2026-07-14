@@ -792,6 +792,13 @@ header nav a {
   z-index: 2;
 }
 
+/* Layer 2 inside dark glass sections: tonal separation without a second blur. */
+.middle-box {
+  background: rgba(10, 10, 18, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+}
+
 /* Section 2 only: Semi Opaque Frosted Glass Film.
    Hero의 색감은 확산시키고 세부 형태는 억제하며, 콘텐츠에는 투명도나 필터를 전달하지 않는다. */
 #section2 .ig-glass-panel-lg {

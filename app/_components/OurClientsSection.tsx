@@ -1,26 +1,74 @@
 "use client";
 
 import Image from "next/image";
+import type { CSSProperties } from "react";
+import type { LucideIcon } from "lucide-react";
+import {
+  BadgeDollarSign,
+  Banknote,
+  Building2,
+  Camera,
+  CarFront,
+  CircleDot,
+  Coffee,
+  CreditCard,
+  Factory,
+  Film,
+  Gem,
+  Landmark,
+  Music2,
+  Play,
+  Search,
+  Shirt,
+  ShoppingBag,
+  Sparkles,
+  Store,
+  Trophy,
+  Utensils,
+} from "lucide-react";
 import { SectionBackdrop } from "./backgrounds/SectionBackdrop";
 
 type BrandLogo = {
   name: string;
   logoUrl?: string;
+  Icon?: LucideIcon;
+  wordmarkStyle?: CSSProperties;
 };
 
 // logoUrl에 공식 SVG/PNG 경로를 추가하면 워드마크가 자동으로 이미지로 교체됩니다.
 const LOGOS: BrandLogo[] = [
-  { name: "SAMSUNG" }, { name: "HYUNDAI" }, { name: "LG" },
-  { name: "SK" }, { name: "LOTTE" }, { name: "POSCO" },
-  { name: "NAVER" }, { name: "kakao" }, { name: "Google" },
-  { name: "YouTube" }, { name: "Instagram" }, { name: "TikTok" },
-  { name: "신세계" }, { name: "이마트" }, { name: "GS" },
-  { name: "현대백화점" }, { name: "KB국민은행" }, { name: "신한은행" },
-  { name: "하나은행" }, { name: "우리은행" }, { name: "NH농협은행" },
-  { name: "NIKE" }, { name: "adidas" }, { name: "MUSINSA" },
-  { name: "배달의민족" }, { name: "야놀자" }, { name: "SOCAR" },
-  { name: "GS25" }, { name: "7-ELEVEN" }, { name: "EDIYA COFFEE" },
-  { name: "STARBUCKS" }, { name: "CGV" },
+  { name: "SAMSUNG", wordmarkStyle: { letterSpacing: "0.08em", fontWeight: 900 } },
+  { name: "HYUNDAI", Icon: CarFront, wordmarkStyle: { letterSpacing: "-0.03em", fontStyle: "italic", fontWeight: 800 } },
+  { name: "LG", Icon: CircleDot, wordmarkStyle: { fontSize: "1.12em", fontWeight: 900 } },
+  { name: "SK", Icon: Sparkles, wordmarkStyle: { fontSize: "1.08em", fontStyle: "italic", fontWeight: 900 } },
+  { name: "LOTTE", Icon: Gem, wordmarkStyle: { letterSpacing: "0.05em", fontWeight: 900 } },
+  { name: "POSCO", Icon: Factory, wordmarkStyle: { letterSpacing: "0.02em", fontWeight: 600 } },
+  { name: "NAVER", wordmarkStyle: { letterSpacing: "-0.04em", fontWeight: 900 } },
+  { name: "kakao", wordmarkStyle: { letterSpacing: "-0.05em", fontWeight: 500 } },
+  { name: "Google", Icon: Search, wordmarkStyle: { letterSpacing: "-0.05em", fontWeight: 600 } },
+  { name: "YouTube", Icon: Play, wordmarkStyle: { letterSpacing: "-0.05em", fontWeight: 800 } },
+  { name: "Instagram", Icon: Camera, wordmarkStyle: { fontStyle: "italic", fontWeight: 700 } },
+  { name: "TikTok", Icon: Music2, wordmarkStyle: { letterSpacing: "-0.05em", fontWeight: 800 } },
+  { name: "신세계", Icon: Sparkles, wordmarkStyle: { fontWeight: 800 } },
+  { name: "이마트", Icon: ShoppingBag, wordmarkStyle: { fontWeight: 900 } },
+  { name: "GS", Icon: CircleDot, wordmarkStyle: { fontSize: "1.08em", fontWeight: 900 } },
+  { name: "현대백화점", Icon: Building2, wordmarkStyle: { fontWeight: 700 } },
+  { name: "KB국민은행", Icon: Landmark, wordmarkStyle: { letterSpacing: "-0.05em", fontWeight: 700 } },
+  { name: "신한은행", Icon: Banknote, wordmarkStyle: { letterSpacing: "-0.05em", fontWeight: 700 } },
+  { name: "하나은행", Icon: Landmark, wordmarkStyle: { letterSpacing: "-0.05em", fontWeight: 700 } },
+  { name: "우리은행", Icon: CreditCard, wordmarkStyle: { letterSpacing: "-0.05em", fontWeight: 700 } },
+  { name: "NH농협은행", Icon: BadgeDollarSign, wordmarkStyle: { letterSpacing: "-0.05em", fontWeight: 700 } },
+  { name: "NIKE", Icon: Trophy, wordmarkStyle: { letterSpacing: "-0.06em", fontStyle: "italic", fontWeight: 900 } },
+  { name: "adidas", Icon: Shirt, wordmarkStyle: { letterSpacing: "-0.06em", fontWeight: 900 } },
+  { name: "MUSINSA", wordmarkStyle: { letterSpacing: "0.04em", fontWeight: 700 } },
+  { name: "배달의민족", Icon: Utensils, wordmarkStyle: { letterSpacing: "-0.08em", fontWeight: 900 } },
+  { name: "야놀자", Icon: Store, wordmarkStyle: { letterSpacing: "-0.07em", fontWeight: 900 } },
+  { name: "SOCAR", Icon: CarFront, wordmarkStyle: { letterSpacing: "0.06em", fontWeight: 800 } },
+  { name: "GS25", Icon: Store, wordmarkStyle: { letterSpacing: "-0.04em", fontWeight: 900 } },
+  { name: "7-ELEVEN", Icon: Store, wordmarkStyle: { letterSpacing: "-0.04em", fontStyle: "italic", fontWeight: 900 } },
+  { name: "EDIYA", Icon: Coffee, wordmarkStyle: { letterSpacing: "0.02em", fontWeight: 900 } },
+  { name: "STARBUCKS", Icon: Coffee, wordmarkStyle: { fontSize: "0.9em", letterSpacing: "0.03em", fontWeight: 800 } },
+  { name: "CGV", Icon: Film, wordmarkStyle: { fontStyle: "italic", fontWeight: 900 } },
 ];
 
 const ROWS = [
@@ -33,6 +81,8 @@ const ROWS = [
 const DURATIONS = ["28s", "32s", "26s", "30s"];
 
 function LogoCard({ logo }: { logo: BrandLogo }) {
+  const Icon = logo.Icon;
+
   return (
     <div className="flex h-[50px] min-w-[132px] shrink-0 items-center justify-center rounded-[9px] border border-violet-400/15 bg-[rgba(20,15,30,0.6)] px-5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.025)] sm:h-[56px] sm:min-w-[158px] sm:px-6">
       {logo.logoUrl ? (
@@ -44,9 +94,15 @@ function LogoCard({ logo }: { logo: BrandLogo }) {
           className="max-h-7 w-auto max-w-[118px] object-contain brightness-0 invert sm:max-h-8 sm:max-w-[138px]"
         />
       ) : (
-        <span className="whitespace-nowrap text-[13px] font-extrabold tracking-[-0.02em] text-white/90 sm:text-[15px]">
-          {logo.name}
-        </span>
+        <div className="flex min-w-0 items-center justify-center gap-2.5 text-white/95">
+          {Icon && <Icon className="h-[21px] w-[21px] shrink-0 sm:h-6 sm:w-6" strokeWidth={1.9} aria-hidden />}
+          <span
+            className="whitespace-nowrap text-[13px] leading-none sm:text-[15px]"
+            style={logo.wordmarkStyle}
+          >
+            {logo.name}
+          </span>
+        </div>
       )}
     </div>
   );

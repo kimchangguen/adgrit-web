@@ -69,7 +69,7 @@ export function ShortformReachSection() {
           </p>
         </div>
 
-        <div className="scrollbar-hide mt-8 overflow-x-auto rounded-[24px] border border-slate-100 bg-white px-4 py-6 shadow-[0_14px_40px_rgba(51,45,90,0.09)] sm:px-6 lg:overflow-visible lg:px-8">
+        <div className="middle-box scrollbar-hide mt-8 overflow-x-auto px-4 py-6 shadow-[0_14px_40px_rgba(0,0,0,0.08)] sm:px-6 lg:overflow-visible lg:px-8">
           <div className="mx-auto flex min-w-[820px] items-start justify-between gap-3 lg:min-w-0">
             {PROCESS_STEPS.map(({ label, Icon, tone }, index) => (
               <div key={label} className="contents">
@@ -77,21 +77,21 @@ export function ShortformReachSection() {
                   <div className={`flex h-16 w-16 items-center justify-center rounded-full border ${tone}`}>
                     <Icon className="h-8 w-8" strokeWidth={1.8} aria-hidden />
                   </div>
-                  <span className="mt-3 whitespace-nowrap text-sm font-bold text-slate-800 sm:text-[15px]">{label}</span>
+                  <span className="mt-3 whitespace-nowrap text-sm font-bold text-white/85 sm:text-[15px]">{label}</span>
                 </div>
                 {index < PROCESS_STEPS.length - 1 && (
-                  <ChevronRight className="mt-5 h-5 w-5 flex-none text-slate-300" strokeWidth={1.7} aria-hidden />
+                  <ChevronRight className="mt-5 h-5 w-5 flex-none text-white/25" strokeWidth={1.7} aria-hidden />
                 )}
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-5 grid grid-cols-2 overflow-hidden rounded-[24px] border border-slate-100 bg-white shadow-[0_14px_40px_rgba(51,45,90,0.09)] lg:grid-cols-4">
-          <Stat icon={<UserRoundCheck />} value="32" suffix="개 채널" label="동시 확산" tone="text-violet-600" />
-          <Stat icon={<UsersRound />} value="240" suffix="만명" label="실제 팔로워 도달" tone="text-pink-500" />
-          <Stat icon={<ShieldCheck />} value="100%" label="결과 없으면 환불" tone="text-blue-600" />
-          <Stat icon={<TrendingUp />} value="플레이스" label="상승 효과" tone="text-violet-600" />
+        <div className="middle-box mt-5 grid grid-cols-2 overflow-hidden shadow-[0_14px_40px_rgba(0,0,0,0.08)] lg:grid-cols-4">
+          <Stat icon={<UserRoundCheck />} value="32" suffix="개 채널" label="동시 확산" tone="text-violet-400" />
+          <Stat icon={<UsersRound />} value="240" suffix="만명" label="실제 팔로워 도달" tone="text-pink-400" />
+          <Stat icon={<ShieldCheck />} value="100%" label="결과 없으면 환불" tone="text-blue-400" />
+          <Stat icon={<TrendingUp />} value="플레이스" label="상승 효과" tone="text-violet-400" />
         </div>
 
         <div className="mt-5 grid gap-4 md:grid-cols-2">
@@ -132,13 +132,13 @@ export function ShortformReachSection() {
 
 function Stat({ icon, value, suffix, label, tone }: { icon: ReactNode; value: string; suffix?: string; label: string; tone: string }) {
   return (
-    <div className="relative flex min-h-[176px] flex-col items-center justify-center border-slate-200 px-3 py-6 text-center even:border-l lg:border-l lg:first:border-l-0">
+    <div className="relative flex min-h-[176px] flex-col items-center justify-center border-white/10 px-3 py-6 text-center even:border-l lg:border-l lg:first:border-l-0">
       <span className={`${tone} [&>svg]:h-8 [&>svg]:w-8`} aria-hidden>{icon}</span>
       <div className={`mt-2 font-black tracking-[-0.035em] ${tone}`}>
         <span className={value === "플레이스" ? "text-2xl sm:text-3xl" : "text-4xl sm:text-[2.75rem]"}>{value}</span>
         {suffix && <span className="ml-1 text-sm font-bold sm:text-base">{suffix}</span>}
       </div>
-      <p className="mt-2 text-sm font-semibold text-slate-600 sm:text-base">{label}</p>
+      <p className="mt-2 text-sm font-semibold text-white/70 sm:text-base">{label}</p>
     </div>
   );
 }
