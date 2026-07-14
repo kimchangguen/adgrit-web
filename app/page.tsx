@@ -125,7 +125,7 @@ function SiteChrome() {
         align="center"
       >
         <Container className="relative w-full py-16 sm:py-20 lg:py-24">
-          <div className="mx-auto max-w-4xl text-center font-worry">
+          <div className="mx-auto max-w-6xl text-center font-worry">
             <AnimatedHero>
               <AnimatedHeroItem>
                 <p className="text-sm sm:text-base font-semibold tracking-widest text-neutral/90">
@@ -133,10 +133,10 @@ function SiteChrome() {
                 </p>
               </AnimatedHeroItem>
               <AnimatedHeroItem>
-                <p className="mt-6 text-[1.9rem] sm:text-[2.6rem] md:text-[3.2rem] font-black tracking-tight text-neutral leading-[1.3]">
-                  국내 인스타그램 솔루션을 만드는 회사
+                <p className="mt-6 text-[clamp(1.65rem,4.2vw,4.5rem)] font-black leading-[1.18] tracking-[-0.04em] text-neutral">
+                  <span className="sm:whitespace-nowrap">국내 인스타그램 솔루션을 <span className="ig-gradient-text">만드는</span> 회사</span>
                   <br />
-                  국내 인스타 솔루션 70%를 점유 한 회사
+                  <span className="sm:whitespace-nowrap">국내 인스타 솔루션 <span className="ig-gradient-text">70%</span>를 점유 한 회사</span>
                 </p>
               </AnimatedHeroItem>
               <AnimatedHeroItem>
