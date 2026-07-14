@@ -1,28 +1,118 @@
-import { ArrowLeft, ArrowRight, Bookmark, Camera as Instagram, Grid3X3, Heart, MessageCircle, Play, Search, Send, Target } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  Crown,
+  Handshake,
+  ImageIcon,
+  ListVideo,
+  Play,
+  Search,
+  TrendingUp,
+  UserPlus,
+  UserRound,
+} from "lucide-react";
 
-const FOOD = ["from-orange-200 to-rose-400","from-amber-100 to-orange-300","from-emerald-200 to-lime-400","from-pink-200 to-red-400","from-yellow-100 to-amber-400","from-sky-200 to-indigo-400"];
-const NAIL = ["from-pink-100 to-fuchsia-300","from-violet-100 to-purple-300","from-rose-100 to-pink-300","from-indigo-100 to-violet-300","from-fuchsia-100 to-rose-300","from-purple-100 to-indigo-300"];
+const GRADIENT = "bg-gradient-to-r from-[#ff7a3d] via-[#ec4899] to-[#7c3aed]";
 
-function Phone({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <div className={`relative h-[330px] w-[164px] flex-none overflow-hidden rounded-[30px] border-[5px] border-slate-900 bg-white shadow-[0_18px_35px_rgba(35,27,62,0.25)] ${className}`}><div className="absolute left-1/2 top-1.5 z-20 h-4 w-16 -translate-x-1/2 rounded-full bg-slate-950" /><div className="relative h-full overflow-hidden pt-7 text-slate-900">{children}</div></div>;
-}
+const EXPOSURE_CARDS = [
+  {
+    number: "01.",
+    title: "추천탭 노출",
+    suffix: "(콘텐츠 노출)",
+    description: "릴스, 이미지, 카드뉴스 등 콘텐츠가 추천탭에 노출되어 더 많은 사람에게 도달합니다.",
+    caption: "콘텐츠 노출 → 도달 → 관심 → 방문",
+    captionClass: "from-[#ff7a3d] to-[#ec4899]",
+    items: [
+      { label: "릴스", Icon: Play, tone: "from-orange-50 to-pink-100 text-[#ff7a3d]" },
+      { label: "이미지", Icon: ImageIcon, tone: "from-pink-50 to-rose-100 text-[#ec4899]" },
+      { label: "카드뉴스", Icon: ListVideo, tone: "from-orange-50 to-pink-100 text-[#ec4899]" },
+    ],
+  },
+  {
+    number: "02.",
+    title: "계정탭 노출",
+    suffix: "(계정 노출)",
+    description: "매장, 전문가, 서비스 등 비주얼 상품이 아닌 경우 계정탭 상위에 노출되어 선택받는 계정으로 만듭니다.",
+    caption: "계정 노출 → 방문 → 선택 → 매출",
+    captionClass: "from-[#ec4899] to-[#7c3aed]",
+    items: [
+      { label: "검색", Icon: Search, tone: "from-orange-50 to-pink-100 text-[#ff7a3d]" },
+      { label: "계정탭", Icon: UserRound, tone: "from-pink-50 to-rose-100 text-[#ec4899]" },
+      { label: "선택", Icon: Crown, tone: "from-pink-50 to-purple-100 text-[#ec4899]" },
+      { label: "매출", Icon: BarChart3, tone: "from-pink-50 to-purple-100 text-[#7c3aed]" },
+    ],
+  },
+] as const;
 
-function Tiles({ tones, play = false }: { tones: string[]; play?: boolean }) {
-  return <div className="grid grid-cols-2 gap-1 p-2">{tones.map((tone, i) => <div key={tone} className={`relative aspect-square rounded-md bg-gradient-to-br ${tone}`}><div className="absolute inset-x-3 bottom-2 h-2 rounded-full bg-white/45" />{play && i % 2 === 0 && <Play className="absolute bottom-2 right-2 h-3 w-3 fill-white text-white" />}</div>)}</div>;
-}
+const SERVICES = [
+  {
+    badge: "01. 신규 계정 최적화 육성",
+    title: "0부터 시작하는 파급력 있는 계정 만들기",
+    description: "신규 계정도 최적화된 세팅과 체계적인 운영으로 영향력 있는 계정으로 빠르게 성장시킵니다.",
+    tags: ["프로필 최적화", "콘텐츠 전략", "초기 세팅", "성장 운영", "성과 분석"],
+    Icon: UserPlus,
+    iconClass: "from-[#ff7a3d] to-[#ec4899]",
+  },
+  {
+    badge: "02. 기존 계정 인수인계 육성",
+    title: "이미 육성된 계정으로 빠르게 최적화 운영",
+    description: "이미 육성된 계정을 인수인계하여 빠른 시간 안에 최적화된 운영이 가능합니다.",
+    tags: ["계정 인수인계", "계정 진단", "최적화 개선", "운영 전략", "성과 극대화"],
+    Icon: Handshake,
+    iconClass: "from-[#ec4899] to-[#7c3aed]",
+  },
+] as const;
 
-function RecommendationPhones() {
-  return <div className="flex h-[370px] items-center justify-center"><Phone className="translate-x-5 -rotate-3"><div className="flex items-center justify-between border-b px-3 pb-2 text-[10px] font-black"><span>추천</span><Grid3X3 className="h-3.5 w-3.5" /></div><Tiles tones={FOOD} play /></Phone><Phone className="-translate-x-3 translate-y-5 rotate-3"><div className="absolute inset-0 bg-gradient-to-b from-orange-200 via-rose-300 to-slate-900" /><ArrowLeft className="absolute left-3 top-8 z-10 h-4 w-4 text-white" /><div className="absolute bottom-16 left-3 z-10 text-[10px] font-bold leading-4 text-white">매장 분위기 좋은<br />브런치 맛집 5곳</div><div className="absolute bottom-4 left-3 z-10 flex items-center gap-1 text-white"><span className="h-5 w-5 rounded-full bg-violet-500" /><span className="text-[8px]">adgrit.food</span></div><div className="absolute bottom-5 right-2 z-10 flex flex-col gap-3 text-white"><Heart className="h-4 w-4" /><MessageCircle className="h-4 w-4" /><Send className="h-4 w-4" /><Bookmark className="h-4 w-4" /></div></Phone></div>;
-}
-
-function AccountPhones() {
-  return <div className="flex h-[370px] items-center justify-center"><Phone className="translate-x-5 -rotate-3"><div className="mx-2 flex items-center gap-1 rounded-lg bg-slate-100 px-2 py-1.5 text-[8px]"><Search className="h-3 w-3" />네일샵 강남</div><div className="mt-2 flex justify-around border-b pb-1 text-[6px] text-slate-400"><span>추천</span><span className="font-bold text-violet-600">계정</span><span>오디오</span><span>태그</span><span>장소</span></div><div className="m-2 flex items-center gap-2 rounded-lg border-2 border-violet-500 bg-violet-50 p-2"><span className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-600 text-[10px] font-black text-white">A</span><span><strong className="block text-[8px]">adgrit.nail</strong><small className="text-[6px] text-slate-500">강남 프리미엄 네일</small></span></div>{[1,2,3,4].map(i=><div key={i} className="mx-3 my-3 flex items-center gap-2 opacity-35"><span className="h-7 w-7 rounded-full bg-slate-300" /><span className="space-y-1"><i className="block h-1.5 w-16 rounded bg-slate-300" /><i className="block h-1.5 w-10 rounded bg-slate-200" /></span></div>)}</Phone><Phone className="-translate-x-3 translate-y-5 rotate-3"><div className="px-3 text-center text-[9px] font-black">adgrit.nail</div><div className="mt-3 flex items-center gap-3 px-3"><span className="flex h-12 w-12 items-center justify-center rounded-full bg-violet-600 text-lg font-black text-white">A</span><div className="grid flex-1 grid-cols-3 text-center text-[7px]"><span><b className="block">126</b>게시물</span><span><b className="block">8.4K</b>팔로워</span><span><b className="block">312</b>팔로잉</span></div></div><div className="px-3 pt-2 text-[7px] leading-3"><b>강남네일샵 | 프리미엄 네일</b><br />예약제 운영 · 맞춤 아트 전문</div><div className="mx-2 mt-2 grid grid-cols-3 gap-1 text-center text-[6px] font-bold"><span className="rounded bg-violet-600 py-1 text-white">팔로우</span><span className="rounded bg-slate-100 py-1">메시지</span><span className="rounded bg-slate-100 py-1">예약하기</span></div><Tiles tones={NAIL} /></Phone></div>;
-}
-
-function Side({ label, description, caption, children }: { label: string; description: string; caption: React.ReactNode; children: React.ReactNode }) {
-  return <article className="flex min-w-0 flex-col items-center rounded-[22px] border border-white bg-white/75 px-4 py-7 text-center shadow-[0_12px_35px_rgba(91,65,161,0.07)]"><span className="rounded-full bg-violet-100 px-4 py-2 text-sm font-extrabold text-[#6b4fe8]">{label}</span><p className="mt-4 max-w-md text-sm leading-6 text-slate-500">{description}</p>{children}<div className="rounded-full border border-violet-200 bg-white px-4 py-2 text-xs font-extrabold text-slate-700 sm:text-sm">{caption}</div></article>;
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return <div className="flex items-center justify-center gap-4 sm:gap-6"><span className="h-px w-8 bg-pink-200 sm:w-20" /><h3 className="text-center text-xl font-extrabold tracking-[-0.025em] text-slate-900 sm:text-2xl">{children}</h3><span className="h-px w-8 bg-pink-200 sm:w-20" /></div>;
 }
 
 export function RankingExposureSection() {
-  return <section className="relative z-10 px-4 py-10 sm:px-6 sm:py-14 lg:py-20"><div className="mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-violet-100/80 bg-[linear-gradient(145deg,#fbfaff_0%,#f5f2fc_52%,#faf9fd_100%)] px-5 py-12 text-slate-950 shadow-[0_24px_70px_rgba(78,61,130,0.12)] sm:px-8 sm:py-16 lg:px-12 lg:py-20"><header id="ranking" className="mx-auto max-w-4xl scroll-mt-32 text-center lg:scroll-mt-36"><span className="inline-flex rounded-full bg-[#6b4fe8] px-5 py-2 text-sm font-bold text-white shadow-lg sm:text-base">ADGRIT 상위노출 서비스</span><h2 className="mt-7 text-[2rem] font-black leading-[1.14] tracking-[-0.045em] sm:text-[2.65rem] lg:text-5xl">인스타그램 상위노출,<br /><span className="text-[#6b4fe8]">최적화 계정</span>만이 노출됩니다.</h2><p className="mt-6 text-[15px] font-medium leading-7 text-slate-500 sm:text-lg sm:leading-8">검색부터 추천탭, 계정탭까지 최적 위치에 노출되어<br className="hidden sm:block" />더 많은 고객이 찾아오고, 매출로 연결됩니다.</p></header><div className="mt-10 rounded-[24px] border border-violet-200/80 bg-violet-50/75 px-4 py-8 shadow-[0_14px_40px_rgba(91,65,161,0.08)] sm:px-8 sm:py-10 lg:mt-14"><div className="flex items-center justify-center gap-4"><span className="h-px w-8 bg-violet-300 sm:w-20" /><h3 className="whitespace-nowrap text-lg font-extrabold sm:text-xl">인스타그램 상위노출이란?</h3><span className="h-px w-8 bg-violet-300 sm:w-20" /></div><div className="mt-9 grid items-center gap-4 lg:grid-cols-[1fr_auto_1fr]"><Side label="추천탭 노출 (콘텐츠 노출)" description="릴스, 이미지 카드뉴스 등 콘텐츠를 추천탭에 노출하여 더 많은 사람에게 도달" caption={<>콘텐츠 노출 <b className="text-[#6b4fe8]">→</b> 도달 <b className="text-[#6b4fe8]">→</b> 관심</>}><RecommendationPhones /></Side><div className="flex items-center justify-center gap-2 text-[#6b4fe8]"><Target className="hidden h-6 w-6 lg:block" /><span className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 via-pink-500 to-orange-400 text-white shadow-lg"><Instagram className="h-7 w-7" /></span><ArrowRight className="h-6 w-6 rotate-90 lg:rotate-0" /></div><Side label="계정탭 노출 (계정 노출)" description="매장, 전문가, 서비스 등 비주얼 상품이 아닌 경우 계정탭 상위에 노출되어 선택받는 계정으로" caption={<>계정 노출 <b className="text-[#6b4fe8]">→</b> 방문 <b className="text-[#6b4fe8]">→</b> 선택 <b className="text-[#6b4fe8]">→</b> 매출</>}><AccountPhones /></Side></div></div></div></section>;
+  return (
+    <section className="relative z-10 px-4 py-10 sm:px-6 sm:py-14 lg:py-20">
+      <div className="mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-pink-100 bg-[linear-gradient(145deg,#fff_0%,#fafaf8_45%,#f9f5fa_100%)] px-5 py-12 text-slate-950 shadow-[0_24px_70px_rgba(111,62,99,0.1)] sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+        <header id="ranking" className="mx-auto max-w-4xl scroll-mt-32 text-center lg:scroll-mt-36">
+          <div className="flex items-center justify-center gap-3 text-sm font-bold text-slate-600 sm:text-base"><span className="h-px w-8 bg-pink-300" /><span>ADGRIT <span className="bg-gradient-to-r from-[#ff7a3d] via-[#ec4899] to-[#7c3aed] bg-clip-text text-transparent">상위노출</span> 서비스</span><span className="h-px w-8 bg-pink-300" /></div>
+          <h2 className="mt-7 text-[2rem] font-black leading-[1.14] tracking-[-0.045em] text-slate-950 sm:text-[2.75rem] lg:text-[3.25rem]">인스타그램 상위노출,<br /><span className="bg-gradient-to-r from-[#ff7a3d] via-[#ec4899] to-[#7c3aed] bg-clip-text text-transparent">최적화 계정</span>만이 노출됩니다.</h2>
+          <p className="mt-6 text-[15px] font-normal leading-7 text-[#6b6b78] sm:text-lg sm:leading-8">검색부터 추천탭, 계정탭까지 최적 위치에 노출되어<br className="hidden sm:block" />더 많은 고객이 찾아오고, 매출로 연결됩니다.</p>
+        </header>
+
+        <div className="mt-12">
+          <SectionHeading>상위노출은 어디에서 이루어질까요?</SectionHeading>
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+            {EXPOSURE_CARDS.map(({ number, title, suffix, description, caption, captionClass, items }) => (
+              <article key={title} className="flex min-h-[390px] flex-col overflow-hidden rounded-[22px] border border-pink-100 bg-white shadow-[0_14px_35px_rgba(167,72,121,0.09)]">
+                <div className="flex flex-1 flex-col px-5 py-8 sm:px-8">
+                  <h4 className="text-xl font-black tracking-[-0.025em] text-slate-900"><span className="mr-1.5 text-slate-400">{number}</span><span className="bg-gradient-to-r from-[#ff7a3d] to-[#ec4899] bg-clip-text text-transparent">{title}</span> <span className="text-base text-slate-700">{suffix}</span></h4>
+                  <p className="mt-4 max-w-xl text-sm leading-6 text-[#6b6b78]">{description}</p>
+                  <div className={`mt-8 grid flex-1 items-center gap-4 ${items.length === 3 ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"}`}>
+                    {items.map(({ label, Icon, tone }) => <div key={label} className="flex flex-col items-center text-center"><span className={`flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br ${tone}`}><Icon className="h-8 w-8" strokeWidth={1.7} /></span><span className="mt-3 text-sm font-bold text-slate-700">{label}</span></div>)}
+                  </div>
+                </div>
+                <div className={`bg-gradient-to-r ${captionClass} px-5 py-4 text-center text-sm font-extrabold text-white sm:text-base`}>{caption}</div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-12 rounded-[24px] border border-pink-100 bg-[#faf8f8] px-5 py-9 sm:px-8 sm:py-11">
+          <SectionHeading>두 가지 상위노출 서비스</SectionHeading>
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+            {SERVICES.map(({ badge, title, description, tags, Icon, iconClass }) => (
+              <article key={badge} className="rounded-[22px] border border-pink-100 bg-white p-6 shadow-[0_12px_30px_rgba(167,72,121,0.08)] sm:p-8">
+                <span className="inline-flex rounded-full bg-pink-50 px-4 py-2 text-xs font-extrabold text-[#ec4899] sm:text-sm">{badge}</span>
+                <div className="mt-6 flex flex-col gap-5 sm:flex-row sm:items-start"><span className={`flex h-20 w-20 flex-none items-center justify-center rounded-full bg-gradient-to-br ${iconClass} text-white shadow-lg`}><Icon className="h-10 w-10" strokeWidth={1.7} /></span><div><h4 className="text-xl font-black leading-7 tracking-[-0.03em] text-slate-900 sm:text-2xl">{title}</h4><p className="mt-3 text-sm leading-6 text-[#6b6b78]">{description}</p></div></div>
+                <div className="mt-7 flex flex-wrap items-center gap-x-2 gap-y-2 text-xs font-semibold text-slate-600 sm:text-sm">{tags.map((tag,index)=><span key={tag} className="inline-flex items-center gap-2">{index>0&&<ArrowRight className="h-3.5 w-3.5 text-[#ec4899]" />}{tag}</span>)}</div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className={`mt-8 flex flex-col items-center gap-5 rounded-[24px] ${GRADIENT} px-6 py-9 text-center text-white shadow-[0_18px_40px_rgba(221,66,122,0.25)] sm:px-10 md:flex-row md:text-left`}>
+          <span className="flex h-16 w-16 flex-none items-center justify-center rounded-full bg-white text-[#ec4899] shadow-lg"><TrendingUp className="h-8 w-8" strokeWidth={1.8} /></span>
+          <div><h3 className="text-xl font-black leading-8 sm:text-2xl">상위노출은 전략이 다르면 결과도 다릅니다.</h3><p className="mt-2 text-sm leading-6 text-white/90">ADGRIT와 함께 검색되는 계정에서, 선택받는 계정으로 성장하세요.</p></div>
+        </div>
+      </div>
+    </section>
+  );
 }
