@@ -15,6 +15,7 @@ import { Footer } from "./_components/Footer";
 import { ShortformReachSection } from "./_components/ShortformReachSection";
 import { AccountGrowthSection } from "./_components/AccountGrowthSection";
 import { RankingExposureSection } from "./_components/RankingExposureSection";
+import { ReelsparkSection } from "./_components/ReelsparkSection";
 import { ResultsWithGraph } from "./_components/ResultsWithGraph";
 import { OurClientsSection } from "./_components/OurClientsSection";
 import { ClientGrowthSection } from "./_components/ClientGrowthSection";
@@ -213,8 +214,7 @@ function SiteChrome() {
       {/* OUR CLIENTS - 05 섹션 밑 */}
       <OurClientsSection />
 
-      {/* 헤더 메뉴 앵커: 릴스파크 */}
-      <div id="reelspark" aria-hidden />
+      <ReelsparkSection />
 
       {/* 애드그릿과 하지 않는다면 - 여섯번째 섹션 */}
       <WithoutAdgritSection />
