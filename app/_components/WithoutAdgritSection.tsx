@@ -103,7 +103,7 @@ export function WithoutAdgritSection() {
         </header>
 
         <motion.div
-          className="relative mt-12 grid gap-2 overflow-hidden rounded-[20px] border border-violet-400/25 bg-[rgba(15,10,25,0.5)] p-2 sm:p-3 md:grid-cols-2"
+          className="relative mx-auto mt-12 grid w-full max-w-5xl gap-y-2 gap-x-4 overflow-hidden rounded-[20px] border border-violet-400/25 bg-[rgba(15,10,25,0.5)] p-2 sm:gap-x-5 sm:p-3 md:grid-cols-2"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.04 }}
@@ -115,11 +115,8 @@ export function WithoutAdgritSection() {
               <motion.article
                 key={index}
                 variants={itemVariants}
-                className="warning-item grid min-h-[184px] grid-cols-[48px_62px_1fr] items-center gap-2.5 rounded-xl border border-white/[0.07] bg-white/[0.012] px-3 py-5 sm:min-h-[218px] sm:grid-cols-[56px_72px_1fr] sm:gap-3 sm:px-5 sm:py-6"
+                className="warning-item grid min-h-[184px] grid-cols-[62px_1fr] items-center gap-2 rounded-xl border border-white/[0.07] bg-white/[0.012] px-1.5 py-5 sm:min-h-[218px] sm:grid-cols-[72px_1fr] sm:gap-2.5 sm:px-2.5 sm:py-6"
               >
-                <span className={`self-start pt-1 text-2xl font-black tabular-nums sm:text-[1.7rem] ${rose ? "text-rose-400" : "text-violet-400"}`}>
-                  {String(index + 1).padStart(2, "0")}
-                </span>
                 <span className={`warning-icon flex h-14 w-14 items-center justify-center rounded-full border bg-white/[0.025] sm:h-16 sm:w-16 ${rose ? "border-rose-400/25 text-rose-400" : "border-violet-400/25 text-violet-400"}`}>
                   <Icon className="h-8 w-8 sm:h-9 sm:w-9" strokeWidth={1.7} aria-hidden />
                 </span>
