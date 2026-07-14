@@ -196,14 +196,11 @@ function SiteChrome() {
 
       {/* 슬로건 - 세번째 섹션 */}
       <section
-        id="section3"
+        id="shortform"
         className="relative z-10 flex h-[800px] w-full items-center justify-center overflow-hidden"
       >
         <SloganWithEffects />
       </section>
-
-      {/* 헤더 메뉴 앵커: 숏폼제작 */}
-      <div id="shortform" aria-hidden />
 
       {/* Vision - 네번째 섹션 */}
       <section
