@@ -203,6 +203,8 @@ function SiteChrome() {
 
       <RankingExposureSection />
 
+      <ReelsparkSection />
+
 
       {/* 헤더 메뉴 앵커: 계정육성 */}
 
@@ -213,8 +215,6 @@ function SiteChrome() {
 
       {/* OUR CLIENTS - 05 섹션 밑 */}
       <OurClientsSection />
-
-      <ReelsparkSection />
 
       {/* 애드그릿과 하지 않는다면 - 여섯번째 섹션 */}
       <WithoutAdgritSection />
