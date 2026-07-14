@@ -179,7 +179,7 @@ function SiteChrome() {
               { num: "05", title: "절대적 시간 빈곤", subtitle: "Operational Time Poverty", desc: "장사 준비하기도 바쁜데 영상 편집에 글쓰기까지?\n사장님의 24시간을 갈아 넣어야 돌아가는 구조.", showArrow: false },
               { num: "06", title: "노동 집약적 마케팅", subtitle: "Labor-Intensive Marketing", desc: "한번 온 손님을 다시 오게 만드는 시스템이 없습니다.\n밑 빠진 독처럼 계속 신규 고객만 찾아 헤매는 중.", showArrow: false },
             ].map((item, i) => (
-              <AnimatedCard key={item.num} index={i}>
+              <AnimatedCard key={item.num} index={i} className={i === 0 ? "section2-first-card" : ""}>
                 <WorryCard num={item.num} title={item.title} subtitle={item.subtitle} desc={item.desc} showArrow={item.showArrow} />
               </AnimatedCard>
             ))}

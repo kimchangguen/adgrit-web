@@ -758,6 +758,12 @@ header nav a {
   }
 }
 
+/* 첫 번째 고민 카드만 흰색 필름 농도를 높여 배경 형태를 더 강하게 차단한다. */
+#section2 .section2-first-card .ig-glass-card,
+#section2 .section2-first-card .ig-glass-card:hover {
+  background: rgba(255, 255, 255, 0.32);
+}
+
 /* ----- Glass Icon (아이콘/로고 박스) ----- */
 .ig-glass-icon {
   position: relative;
