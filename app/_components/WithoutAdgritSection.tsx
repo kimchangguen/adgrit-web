@@ -57,15 +57,18 @@ const FAILURES: FailureItem[] = [
 ];
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 22 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.42 } },
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.42 } },
 };
 
 export function WithoutAdgritSection() {
   return (
     <section id="without-adgrit" className="relative z-10 px-4 py-10 sm:px-6 sm:py-14 lg:py-20">
       <SectionBackdrop variant="s6" />
-      <div className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-rose-400/20 bg-[linear-gradient(145deg,rgba(5,4,13,0.97),rgba(12,5,25,0.96)_55%,rgba(18,5,31,0.97))] px-5 py-12 text-white shadow-[0_24px_80px_rgba(35,5,35,0.4)] sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+      <div
+        className="shortform-section-container relative mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-white/[0.08] bg-[rgba(20,20,30,0.45)] px-5 py-12 text-white shadow-[0_24px_80px_rgba(10,8,24,0.28)] sm:px-8 sm:py-16 lg:px-12 lg:py-20"
+        style={{ backdropFilter: "blur(20px) saturate(120%)", WebkitBackdropFilter: "blur(20px) saturate(120%)" }}
+      >
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           <div className="absolute -left-20 top-12 h-72 w-72 rounded-full bg-red-700/10 blur-[100px]" />
           <div className="absolute -right-20 top-20 h-72 w-72 rounded-full bg-violet-700/10 blur-[100px]" />
@@ -92,7 +95,7 @@ export function WithoutAdgritSection() {
         </header>
 
         <motion.div
-          className="relative mt-12 grid overflow-hidden rounded-[20px] border border-violet-400/25 bg-[rgba(15,10,25,0.5)] p-2 sm:p-3 md:grid-cols-2"
+          className="relative mt-12 grid gap-2 overflow-hidden rounded-[20px] border border-violet-400/25 bg-[rgba(15,10,25,0.5)] p-2 sm:p-3 md:grid-cols-2"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.04 }}
@@ -104,15 +107,15 @@ export function WithoutAdgritSection() {
               <motion.article
                 key={index}
                 variants={itemVariants}
-                className="grid min-h-[142px] grid-cols-[42px_54px_1fr] items-center gap-3 border-b border-white/[0.07] px-3 py-5 sm:grid-cols-[48px_62px_1fr] sm:gap-4 sm:px-5"
+                className="warning-item grid min-h-[158px] grid-cols-[48px_62px_1fr] items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.012] px-3 py-5 sm:min-h-[172px] sm:grid-cols-[56px_72px_1fr] sm:gap-4 sm:px-5"
               >
-                <span className={`self-start pt-1 text-xl font-black tabular-nums sm:text-2xl ${rose ? "text-rose-400" : "text-violet-400"}`}>
+                <span className={`self-start pt-1 text-2xl font-black tabular-nums sm:text-[1.7rem] ${rose ? "text-rose-400" : "text-violet-400"}`}>
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className={`flex h-12 w-12 items-center justify-center rounded-full border bg-white/[0.025] sm:h-14 sm:w-14 ${rose ? "border-rose-400/25 text-rose-400" : "border-violet-400/25 text-violet-400"}`}>
-                  <Icon className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.7} aria-hidden />
+                <span className={`warning-icon flex h-14 w-14 items-center justify-center rounded-full border bg-white/[0.025] sm:h-16 sm:w-16 ${rose ? "border-rose-400/25 text-rose-400" : "border-violet-400/25 text-violet-400"}`}>
+                  <Icon className="h-8 w-8 sm:h-9 sm:w-9" strokeWidth={1.7} aria-hidden />
                 </span>
-                <p className="text-[13px] font-medium leading-6 text-white/82 sm:text-[15px] sm:leading-7">
+                <p className="warning-text text-[clamp(0.875rem,2.2vw,1.125rem)] font-medium leading-[1.7] text-white/82">
                   {lead} <strong className={`font-bold ${rose ? "text-rose-400" : "text-fuchsia-400"}`}>{highlight}</strong>
                 </p>
               </motion.article>

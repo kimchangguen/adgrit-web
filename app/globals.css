@@ -799,6 +799,32 @@ header nav a {
   border-radius: 20px;
 }
 
+.warning-item {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.warning-icon,
+.warning-text {
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+@media (hover: hover) {
+  .warning-item:hover {
+    z-index: 3;
+    transform: translateY(-4px) scale(1.02);
+    border-color: rgba(236, 72, 153, 0.4);
+    box-shadow: 0 8px 24px rgba(236, 72, 153, 0.25);
+  }
+
+  .warning-item:hover .warning-text {
+    color: #ffffff;
+  }
+
+  .warning-item:hover .warning-icon {
+    transform: scale(1.1);
+  }
+}
+
 /* Section 2 only: Semi Opaque Frosted Glass Film.
    Hero의 색감은 확산시키고 세부 형태는 억제하며, 콘텐츠에는 투명도나 필터를 전달하지 않는다. */
 #section2 .ig-glass-panel-lg {
