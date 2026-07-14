@@ -12,7 +12,6 @@ import {
 } from "./_components/AnimatedHero";
 import { Container } from "./_components/Container";
 import { Footer } from "./_components/Footer";
-import { SloganWithEffects } from "./_components/SloganWithEffects";
 import { ShortformReachSection } from "./_components/ShortformReachSection";
 import { ResultsWithGraph } from "./_components/ResultsWithGraph";
 import { OurClientsSection } from "./_components/OurClientsSection";
@@ -195,13 +194,6 @@ function SiteChrome() {
       />
 
       {/* 슬로건 - 세번째 섹션 */}
-      <section
-        id="shortform"
-        className="relative z-10 flex h-[800px] w-full items-center justify-center overflow-hidden"
-      >
-        <SloganWithEffects />
-      </section>
-
       <ShortformReachSection />
 
       {/* 헤더 메뉴 앵커: 계정육성 */}

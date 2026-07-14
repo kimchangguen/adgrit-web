@@ -35,7 +35,7 @@ const CHECKLIST = [
 
 export function ShortformReachSection() {
   return (
-    <section id="about" className="relative z-10 px-4 py-10 sm:px-6 sm:py-14 lg:py-20">
+    <section id="shortform" className="relative z-10 scroll-mt-20 px-4 py-10 sm:px-6 sm:py-14 lg:py-20">
       <div
         className="shortform-section-container relative mx-auto w-full max-w-7xl overflow-hidden rounded-[28px] border border-white/[0.08] bg-[rgba(20,20,30,0.45)] px-5 py-10 text-white shadow-[0_24px_80px_rgba(10,8,24,0.28)] sm:px-8 sm:py-14 lg:px-12 lg:py-16"
         style={{
