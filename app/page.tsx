@@ -13,6 +13,7 @@ import {
 import { Container } from "./_components/Container";
 import { Footer } from "./_components/Footer";
 import { ShortformReachSection } from "./_components/ShortformReachSection";
+import { AccountGrowthSection } from "./_components/AccountGrowthSection";
 import { ResultsWithGraph } from "./_components/ResultsWithGraph";
 import { OurClientsSection } from "./_components/OurClientsSection";
 import { ClientGrowthSection } from "./_components/ClientGrowthSection";
@@ -196,8 +197,9 @@ function SiteChrome() {
       {/* 슬로건 - 세번째 섹션 */}
       <ShortformReachSection />
 
+      <AccountGrowthSection />
+
       {/* 헤더 메뉴 앵커: 계정육성 */}
-      <div id="account-growth" aria-hidden />
 
       {/* Results - 다섯번째 섹션 */}
       <ResultsWithGraph />
