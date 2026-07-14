@@ -95,7 +95,7 @@ export function ShortformReachSection() {
         </div>
 
         <div className="mt-5 grid gap-4 md:grid-cols-2">
-          <a href="#contact" className="flex min-h-[112px] items-center justify-center gap-5 rounded-[24px] bg-gradient-to-r from-orange-400 via-orange-500 to-pink-500 px-6 py-5 text-white shadow-[0_14px_30px_rgba(244,80,93,0.25)] transition-transform hover:-translate-y-0.5">
+          <a href="https://open.kakao.com/o/s2RtMSei" target="_blank" rel="noopener noreferrer" className="flex min-h-[112px] items-center justify-center gap-5 rounded-[24px] bg-gradient-to-r from-orange-400 via-orange-500 to-pink-500 px-6 py-5 text-white shadow-[0_14px_30px_rgba(244,80,93,0.25)] transition-transform hover:-translate-y-0.5">
             <span className="flex h-14 w-14 flex-none items-center justify-center rounded-full bg-white text-orange-500 shadow-sm">
               <Play className="ml-1 h-7 w-7 fill-current" aria-hidden />
             </span>
@@ -105,7 +105,7 @@ export function ShortformReachSection() {
             </span>
           </a>
 
-          <a href="#contact" className="flex min-h-[112px] items-center justify-center gap-5 rounded-[24px] bg-gradient-to-r from-fuchsia-500 via-violet-600 to-blue-500 px-6 py-5 text-white shadow-[0_14px_30px_rgba(98,75,224,0.25)] transition-transform hover:-translate-y-0.5">
+          <a href="https://open.kakao.com/o/s2RtMSei" target="_blank" rel="noopener noreferrer" className="flex min-h-[112px] items-center justify-center gap-5 rounded-[24px] bg-gradient-to-r from-fuchsia-500 via-violet-600 to-blue-500 px-6 py-5 text-white shadow-[0_14px_30px_rgba(98,75,224,0.25)] transition-transform hover:-translate-y-0.5">
             <span className="flex h-14 w-14 flex-none items-center justify-center rounded-full bg-white text-violet-600 shadow-sm">
               <ShieldCheck className="h-8 w-8" aria-hidden />
             </span>

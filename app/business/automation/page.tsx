@@ -192,7 +192,9 @@ function HeroSection() {
             직접 코딩하여 구축해 드립니다.
           </p>
           <a
-            href="/contact"
+            href="https://open.kakao.com/o/s2RtMSei"
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-8 inline-flex min-h-14 items-center justify-center rounded-md bg-secondary px-8 text-base font-black text-neutral shadow-xl shadow-secondary/20 transition hover:bg-secondary/90"
           >
             우리 회사 업무 자동화 가능성 진단하기
@@ -470,7 +472,9 @@ function ClosingSection() {
             대표님은 비즈니스 성장에만 집중하세요.
           </h2>
           <a
-            href="/contact"
+            href="https://open.kakao.com/o/s2RtMSei"
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-8 inline-flex min-h-14 items-center justify-center rounded-md bg-secondary px-8 text-base font-black text-neutral shadow-xl shadow-secondary/20 transition hover:bg-secondary/90"
           >
             지금 바로 맞춤형 업무 자동화 컨설팅 신청하기

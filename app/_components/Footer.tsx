@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Container } from "./Container";
 import { SectionBackdrop } from "./backgrounds/SectionBackdrop";
 
@@ -18,12 +17,14 @@ export function Footer() {
               <br />
               검증된 성공과 성장
             </p>
-            <Link
-              href="/contact"
+            <a
+              href="https://open.kakao.com/o/s2RtMSei"
+              target="_blank"
+              rel="noopener noreferrer"
               className="ig-btn-glass mt-4 inline-flex items-center justify-center rounded-full px-5 py-2 text-sm font-semibold text-white hover:bg-white/15 transition-colors"
             >
               문의하기
-            </Link>
+            </a>
           </div>
 
           <div className="grid gap-8 sm:grid-cols-2">
@@ -35,15 +36,15 @@ export function Footer() {
                 <li>상호 : ADGRIT</li>
                 <li>대표 : 김창근</li>
                 <li>사업자 번호 : 263-23-00560</li>
-                <li>대표번호 : 1661-0646</li>
+                <li>대표번호 : <a href="tel:1661-0646" className="transition-colors hover:text-white">1661-0646</a></li>
               </ul>
             </div>
             <div>
               <div className="text-sm font-semibold text-white">Contact</div>
               <ul className="mt-3 space-y-2 text-sm text-white/55">
-                <li>T. 010-3316-7663</li>
-                <li>T. 010-6663-2336</li>
-                <li>T. 010-3300-7088</li>
+                <li>T. <a href="tel:010-3316-7663" className="transition-colors hover:text-white">010-3316-7663</a></li>
+                <li>T. <a href="tel:010-6663-2336" className="transition-colors hover:text-white">010-6663-2336</a></li>
+                <li>T. <a href="tel:010-3300-7088" className="transition-colors hover:text-white">010-3300-7088</a></li>
               </ul>
             </div>
           </div>

@@ -127,7 +127,9 @@ export default function MarketingPage() {
               className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
             >
               <Link
-                href="/contact"
+                href="https://open.kakao.com/o/s2RtMSei"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-block bg-white hover:bg-slate-200 text-[#222222] font-black px-8 py-4 rounded-xl text-base transition-colors"
               >
                 전략 수립 상담 →
@@ -325,7 +327,9 @@ export default function MarketingPage() {
               ADGRIT 전문가와 단 30분의 상담으로 귀사 마케팅의 숨겨진 기회를 발견하세요.
             </p>
             <Link
-              href="/contact"
+              href="https://open.kakao.com/o/s2RtMSei"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block mt-10 bg-white hover:bg-slate-200 text-[#222222] font-black px-10 py-5 rounded-xl text-lg transition-colors"
             >
               전략 수립 상담 신청 →

@@ -381,7 +381,7 @@ export default async function PostDetail({
       <section className="ig-section">
         <SectionBackdrop variant="s7b" />
         <main className="ig-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-        <div className="flex flex-col lg:flex-row gap-10">
+        <div className="flex flex-col gap-10 min-[1025px]:flex-row min-[1025px]:items-start">
 
           {/* 왼쪽: 아티클 */}
           <article className="flex-1 min-w-0">

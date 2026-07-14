@@ -185,7 +185,9 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
   return (
     <Link
-      href="#contact"
+      href="https://open.kakao.com/o/s2RtMSei"
+      target="_blank"
+      rel="noopener noreferrer"
       className={`group relative flex min-h-[220px] overflow-hidden rounded-[2.5rem] border border-tertiary bg-neutral ${isChartCard ? "p-8" : "p-10"} text-primary shadow-[0_18px_60px_rgba(15,23,42,0.05)] transition-all duration-500 ease-in-out hover:scale-[1.02] hover:border-primary hover:bg-primary hover:text-neutral hover:shadow-[0_24px_80px_rgba(0,0,0,0.18)] ${product.className}`}
     >
       <div className={`relative z-10 flex h-full min-h-[140px] w-full flex-col ${isChartCard ? "justify-start gap-8 lg:pb-36" : "justify-between gap-8"}`}>

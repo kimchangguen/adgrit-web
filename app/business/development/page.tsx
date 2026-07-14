@@ -106,7 +106,9 @@ function HeroSection() {
             애드그릿이 정답입니다.
           </p>
           <a
-            href="/contact"
+            href="https://open.kakao.com/o/s2RtMSei"
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-9 inline-flex min-h-14 items-center justify-center rounded-sm bg-secondary px-8 text-base font-black text-neutral shadow-xl shadow-secondary/20 transition hover:bg-secondary/90"
           >
             매출을 만드는 홈페이지 제작 상담하기
@@ -287,7 +289,9 @@ function BottomCtaSection() {
         </div>
         <div className="flex lg:justify-end">
           <a
-            href="/contact"
+            href="https://open.kakao.com/o/s2RtMSei"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex min-h-16 w-full max-w-md items-center justify-center rounded-sm bg-secondary px-8 text-lg font-black text-neutral shadow-xl shadow-secondary/20 transition hover:bg-secondary/90"
           >
             애드그릿에 프로젝트 문의하기

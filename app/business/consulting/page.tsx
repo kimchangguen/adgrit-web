@@ -135,7 +135,9 @@ export default function ConsultingPage() {
               className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
             >
               <Link
-                href="/contact"
+                href="https://open.kakao.com/o/s2RtMSei"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-block bg-secondary hover:bg-secondary/90 text-neutral font-black px-8 py-4 rounded-xl text-base transition-colors"
               >
                 무료 컨설팅 신청 →
@@ -320,7 +322,9 @@ export default function ConsultingPage() {
               현황 진단부터 전략 방향 제시까지 — 비용 부담 없이 ADGRIT 전문가의 시각을 먼저 경험해보세요.
             </p>
             <Link
-              href="/contact"
+              href="https://open.kakao.com/o/s2RtMSei"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block mt-10 bg-secondary hover:bg-secondary/90 text-neutral font-black px-10 py-5 rounded-xl text-lg transition-colors"
             >
               무료 컨설팅 신청하기 →

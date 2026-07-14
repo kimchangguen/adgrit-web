@@ -172,14 +172,18 @@ function HeroSection() {
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:max-w-md">
             <a
-              href="#contact"
+              href="https://open.kakao.com/o/s2RtMSei"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex h-14 items-center justify-between rounded-md bg-primary px-7 text-base font-black text-neutral shadow-lg shadow-primary/10 transition hover:bg-primary/90"
             >
               구글 노출 프로젝트 대기열 탑승하기
               <ChevronRight className="h-5 w-5" aria-hidden />
             </a>
             <a
-              href="#pricing"
+              href="https://open.kakao.com/o/s2RtMSei"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex h-14 items-center justify-between rounded-md bg-secondary px-7 text-base font-black text-neutral shadow-lg shadow-secondary/20 transition hover:bg-secondary/90"
             >
               무위험 6개월 플랜 상담하기
@@ -749,7 +753,7 @@ function LandingFooter() {
         <p>© 2024 Headless SEO. All rights reserved.</p>
         <div className="flex flex-wrap items-center gap-x-7 gap-y-2">
           <span>이메일: hello@headless-seo.com</span>
-          <span>전화: 070-1234-5678</span>
+          <span>전화: <a href="tel:070-1234-5678" className="transition-colors hover:text-white">070-1234-5678</a></span>
           <span className="flex gap-2">
             <span className="h-7 w-7 rounded-full bg-primary" />
             <span className="h-7 w-7 rounded-full bg-primary" />

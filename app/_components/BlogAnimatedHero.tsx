@@ -63,7 +63,9 @@ export function BlogAnimatedHero() {
             transition={{ type: "spring", stiffness: 380, damping: 22 }}
           >
             <Link
-              href="/contact"
+              href="https://open.kakao.com/o/s2RtMSei"
+              target="_blank"
+              rel="noopener noreferrer"
               className="ig-btn-glass inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-full hover:bg-white/15 transition-colors"
             >
               무료 상담

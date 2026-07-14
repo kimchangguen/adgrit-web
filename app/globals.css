@@ -821,6 +821,33 @@ header nav a {
   word-break: keep-all;
 }
 
+.blog-sidebar {
+  position: static;
+  align-self: auto;
+  max-height: none;
+  overflow-y: visible;
+}
+
+@media (min-width: 1025px) {
+  .blog-sidebar {
+    position: sticky;
+    top: calc(var(--header-height) + 16px);
+    align-self: flex-start;
+    width: 300px;
+    max-height: calc(100vh - var(--header-height) - 32px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(236, 72, 153, 0.38) transparent;
+  }
+}
+
+@media (min-width: 1280px) {
+  .blog-sidebar {
+    width: 320px;
+  }
+}
+
 @media (hover: hover) {
   .warning-item:hover {
     z-index: 3;

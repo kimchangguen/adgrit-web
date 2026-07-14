@@ -53,7 +53,7 @@ export async function BlogSidebar({ activeCategorySlug }: { activeCategorySlug?:
   const [categories, recentPosts] = await Promise.all([getCategories(), getRecentPosts()]);
 
   return (
-    <aside className="w-full lg:w-[300px] xl:w-[320px] shrink-0 space-y-6">
+    <aside className="blog-sidebar w-full shrink-0 space-y-6">
 
       {/* CTA 배너 */}
       <div className="ig-btn-gradient rounded-2xl p-6 text-center">
@@ -69,7 +69,9 @@ export async function BlogSidebar({ activeCategorySlug }: { activeCategorySlug?:
           무료로 상담해 드립니다.
         </p>
         <a
-          href="tel:1661-0646"
+          href="https://open.kakao.com/o/s2RtMSei"
+          target="_blank"
+          rel="noopener noreferrer"
           className="block w-full rounded-xl bg-black/25 py-3 text-sm font-bold text-white hover:bg-black/35 transition-colors"
         >
           무료 상담 신청 →
