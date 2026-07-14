@@ -15,7 +15,6 @@ import {
   X,
   ChartNoAxesCombined,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -85,7 +84,7 @@ const navItems: NavItem[] = [
   { label: "상위노출", icon: RankingIcon, href: "/#ranking" },
   { label: "릴스파크", icon: ReelsSparkIcon, href: "/#reelspark" },
   { label: "타겟광고", icon: TargetAdIcon, href: "/#target-ads" },
-  { label: "기획·컨설팅", icon: ConsultingIcon, href: "/#consulting" },
+  { label: "전략기획", icon: ConsultingIcon, href: "/#consulting" },
   { label: "블로그", icon: BlogIcon, href: "/blog" },
 ];
 
@@ -126,14 +125,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
             className="flex-shrink-0 select-none flex items-center"
             aria-label="홈으로 이동"
           >
-            <Image
-              src="/adgrit-logo-v3.png"
-              alt="ADGRIT 로고"
-              height={50}
-              width={220}
-              className="w-[170px] lg:w-[210px] h-auto object-contain"
-              priority
-            />
+            <span className="adgrit-brand-logo" role="img" aria-label="ADGRIT 로고" />
           </Link>
 
           {/* 데스크톱 내비게이션 */}

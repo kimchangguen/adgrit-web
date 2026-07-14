@@ -91,9 +91,11 @@ export function ResultsWithGraph() {
               viewport={{ amount: 0.2, once: true }}
               transition={{ duration: 0.4, delay: 0.05 }}
             >
-              데이터 기반 마케팅,
+              AI 데이터 기반으로
               <br />
-              <span className="ig-gradient-text">애드그릿이 앞장섭니다.</span>
+              애드그릿은
+              <br />
+              <span className="ig-gradient-text">대한민국 선두에 있습니다.</span>
             </motion.h2>
             <motion.p
               className="mt-6 text-[1.12rem] leading-relaxed text-white/75 sm:text-[1.23rem]"

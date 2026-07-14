@@ -16,6 +16,7 @@ import { ShortformReachSection } from "./_components/ShortformReachSection";
 import { AccountGrowthSection } from "./_components/AccountGrowthSection";
 import { RankingExposureSection } from "./_components/RankingExposureSection";
 import { ReelsparkSection } from "./_components/ReelsparkSection";
+import { TargetAdsSection } from "./_components/TargetAdsSection";
 import { ResultsWithGraph } from "./_components/ResultsWithGraph";
 import { OurClientsSection } from "./_components/OurClientsSection";
 import { ClientGrowthSection } from "./_components/ClientGrowthSection";
@@ -205,6 +206,8 @@ function SiteChrome() {
 
       <ReelsparkSection />
 
+      <TargetAdsSection />
+
 
       {/* 헤더 메뉴 앵커: 계정육성 */}
 
@@ -220,7 +223,6 @@ function SiteChrome() {
       <WithoutAdgritSection />
 
       {/* 헤더 메뉴 앵커: 타겟광고 */}
-      <div id="target-ads" aria-hidden />
 
       {/* 클라이언트 만족후기 (카카오톡) - 일곱번째 섹션 */}
       <KakaoTestimonialsSection />

@@ -53,10 +53,13 @@ export function ShortformReachSection() {
             </div>
           </div>
 
-          <h2 className="mt-6 text-[2rem] font-black leading-[1.08] tracking-[-0.05em] text-white sm:text-5xl sm:tracking-[-0.045em] lg:text-[3.5rem]">
-            숏폼 하나가
-            <br />
-            손님을 <span className="bg-gradient-to-r from-orange-500 via-rose-500 to-pink-600 bg-clip-text text-transparent">데려오는</span> 시대
+          <h2 className="mt-6 font-black leading-[1.08] tracking-[-0.05em] text-white sm:tracking-[-0.045em]">
+            <span className="block bg-gradient-to-r from-orange-400 via-rose-500 to-pink-500 bg-clip-text text-[2.55rem] text-transparent drop-shadow-[0_8px_22px_rgba(244,63,94,0.2)] sm:text-[3.75rem] lg:text-[4.5rem]">
+              숏폼 하나가
+            </span>
+            <span className="mt-2 block text-[1.8rem] sm:text-[2.65rem] lg:text-[3.25rem]">
+              손님을 <span className="bg-gradient-to-r from-orange-500 via-rose-500 to-pink-600 bg-clip-text text-transparent">폭발적으로 증가시키는</span> 시대
+            </span>
           </h2>
 
           <p className="mt-5 text-base font-medium leading-relaxed text-slate-300 sm:text-lg">

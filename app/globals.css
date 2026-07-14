@@ -543,6 +543,28 @@ header nav a {
   background-repeat: no-repeat;
 }
 
+.adgrit-brand-logo {
+  display: block;
+  width: 170px;
+  aspect-ratio: 1918 / 820;
+  background: linear-gradient(90deg, #ff2d95 0%, #ec4899 42%, #ff7a3d 100%);
+  -webkit-mask-image: url("/adgrit-logo-v3.png");
+  mask-image: url("/adgrit-logo-v3.png");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  filter: drop-shadow(0 0 8px rgba(236, 72, 153, 0.3));
+}
+
+@media (min-width: 1024px) {
+  .adgrit-brand-logo {
+    width: 210px;
+  }
+}
+
 /* ----- 섹션 공통 베이스: 별도 오버레이 없이 완전히 투명 ----- */
 .ig-section {
   position: relative;

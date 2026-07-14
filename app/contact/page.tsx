@@ -89,7 +89,7 @@ export default function ContactPage() {
                   className="flex flex-col gap-5"
                 >
                   {/* 지점 정보 */}
-                  <div className="space-y-1">
+                  <div className={`space-y-1 ${i === 0 ? "text-right" : "text-left"}`}>
                     <p className="text-[0.65rem] font-bold tracking-[0.22em] text-slate-200 uppercase">
                       {sublabel}
                     </p>
