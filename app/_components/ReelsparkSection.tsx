@@ -34,7 +34,10 @@ const STEPS = [
 export function ReelsparkSection() {
   return (
     <section className="relative z-10 px-4 py-10 sm:px-6 sm:py-14 lg:py-20">
-      <div className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-[28px] border border-fuchsia-400/25 bg-[linear-gradient(145deg,rgba(3,4,15,0.96)_0%,rgba(12,5,31,0.95)_55%,rgba(18,5,40,0.96)_100%)] px-5 py-12 text-white shadow-[0_24px_80px_rgba(31,8,70,0.38)] sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+      <div
+        className="shortform-section-container relative mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-white/[0.08] bg-[rgba(20,20,30,0.45)] px-5 py-12 text-white shadow-[0_24px_80px_rgba(10,8,24,0.28)] sm:px-8 sm:py-16 lg:px-12 lg:py-20"
+        style={{ backdropFilter: "blur(20px) saturate(120%)", WebkitBackdropFilter: "blur(20px) saturate(120%)" }}
+      >
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-fuchsia-500/45 to-transparent shadow-[0_0_28px_rgba(192,38,211,0.7)]" />
           <div className="absolute left-1/2 top-[14%] h-80 w-80 -translate-x-1/2 rounded-full bg-violet-700/15 blur-[100px]" />

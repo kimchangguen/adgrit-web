@@ -21,7 +21,10 @@ function Highlight({ children }: { children: React.ReactNode }) {
 export function TargetAdsSection() {
   return (
     <section className="relative z-10 px-4 py-10 sm:px-6 sm:py-14 lg:py-20">
-      <div className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-[28px] border border-violet-400/25 bg-[linear-gradient(145deg,rgba(5,4,15,0.97)_0%,rgba(11,6,27,0.96)_55%,rgba(17,5,35,0.97)_100%)] px-5 py-12 text-white shadow-[0_24px_80px_rgba(30,8,65,0.38)] sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+      <div
+        className="shortform-section-container relative mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-white/[0.08] bg-[rgba(20,20,30,0.45)] px-5 py-12 text-white shadow-[0_24px_80px_rgba(10,8,24,0.28)] sm:px-8 sm:py-16 lg:px-12 lg:py-20"
+        style={{ backdropFilter: "blur(20px) saturate(120%)", WebkitBackdropFilter: "blur(20px) saturate(120%)" }}
+      >
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           <div className="absolute left-1/2 top-[32%] h-[440px] w-[440px] -translate-x-1/2 rounded-full bg-violet-700/15 blur-[110px]" />
           <div className="absolute left-[16%] top-[10%] h-48 w-48 rounded-full bg-fuchsia-600/8 blur-[85px]" />
