@@ -1,92 +1,125 @@
 "use client";
 
-import { Container } from "./Container";
+import type { LucideIcon } from "lucide-react";
+import {
+  BadgeDollarSign,
+  Banknote,
+  BookOpen,
+  CameraOff,
+  ChartNoAxesCombined,
+  ClipboardList,
+  Clock3,
+  Dices,
+  EyeOff,
+  MegaphoneOff,
+  RefreshCcw,
+  RotateCcw,
+  SearchX,
+  ShieldOff,
+  ShieldX,
+  Trophy,
+  Unlink,
+  UserRoundX,
+  Users,
+  UsersRound,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { SectionBackdrop } from "./backgrounds/SectionBackdrop";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
+type FailureItem = {
+  lead: string;
+  highlight: string;
+  Icon: LucideIcon;
+  tone: "violet" | "rose";
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
-const MESSAGES = [
-  "기회비용 상실: 마케팅 헤매는 동안 경쟁사가 우리 잠재 고객을 다 채가서 생기는 매출 손실.",
-  "솔루션 중복 결제: 불필요한 마케팅 툴이나 프로그램 결제로 고정비 상승.",
-  "대표님의 번아웃: 낮에는 장사하고 밤에는 블로그 쓰느라 건강과 멘탈 붕괴.",
-  "학습 곡선의 함정: 마케팅 공부하다가 트렌드가 바뀌어 다시 공부해야 하는 무한 루프.",
-  "직원 교육 부담: 알바생에게 마케팅 가르쳐놨더니 그만두고 나가는 허무함.",
-  "홈페이지 이탈률 급증: 모바일 최적화 안 된 사이트로 3초 만에 고객 90% 이탈.",
-  "신뢰성 지표 부재: 전문가다운 포트폴리오나 후기가 없어 의심만 삼.",
-  "계정 비활성화(밴): 규정 모르고 무리하게 홍보하다 인스타/네이버 계정 영구 정지.",
-  "멘토의 부재: 사업 방향이 흔들릴 때 조언해 줄 러닝메이트가 없음.",
+const FAILURES: FailureItem[] = [
+  { Icon: Users, tone: "violet", lead: "마케팅을 고민하는 동안 경쟁사는 고객을 계속 데려가고 우리가게만", highlight: "뒤처집니다." },
+  { Icon: Banknote, tone: "rose", lead: "광고비는 계속 나가는데 손님은 늘지 않아", highlight: "돈만 쓰고 끝나는 마케팅이 됩니다." },
+  { Icon: ChartNoAxesCombined, tone: "violet", lead: "조회수와 좋아요는 늘어도 실제", highlight: "매출은 전혀 늘지 않는 계정이 됩니다." },
+  { Icon: MegaphoneOff, tone: "rose", lead: "좋은 제품과 서비스를 가지고도 고객에게 알려지지 않아", highlight: "선택조차 받지 못합니다." },
+  { Icon: UserRoundX, tone: "violet", lead: "대표님이 장사도 하고 마케팅도 직접 하다가 결국 둘 다", highlight: "제대로 하지 못하게 됩니다." },
+  { Icon: CameraOff, tone: "rose", lead: "잘못된 운영으로 인스타그램 계정 노출이 끊기고 점점", highlight: "아무도 보지 않는 계정이 됩니다." },
+  { Icon: SearchX, tone: "violet", lead: "손님이 우리 업종을 검색해도 경쟁업체만 보이고 우리 가게는", highlight: "끝까지 찾지 못합니다." },
+  { Icon: RefreshCcw, tone: "rose", lead: "이것저것 다 해봤지만 결과는 없어 마케팅 업체만 계속", highlight: "바꾸게 됩니다." },
+  { Icon: ShieldX, tone: "violet", lead: "홈페이지와 계정은 만들어 놓았지만 고객이 신뢰하지 않아", highlight: "문의조차 들어오지 않습니다." },
+  { Icon: BookOpen, tone: "rose", lead: "트렌드는 계속 바뀌는데 그때마다 처음부터 다시 배우느라", highlight: "시간과 돈만 낭비하게 됩니다." },
+  { Icon: ClipboardList, tone: "violet", lead: "직원에게 마케팅을 맡겼는데 퇴사하면서 노하우까지 함께", highlight: "사라집니다." },
+  { Icon: Unlink, tone: "rose", lead: "광고를 멈추는 순간 고객도 함께 끊기는 구조가 되어 매출이", highlight: "불안정해집니다." },
+  { Icon: RotateCcw, tone: "violet", lead: "잘못된 방향으로 몇 달을 운영하다가 결국 처음부터", highlight: "다시 시작하게 됩니다." },
+  { Icon: EyeOff, tone: "rose", lead: "콘텐츠는 열심히 만들었는데 알고리즘을 몰라 아무에게도", highlight: "노출되지 않습니다." },
+  { Icon: BadgeDollarSign, tone: "violet", lead: "매출이 안 오르는 이유를 모르고 계속 엉뚱한 곳에", highlight: "돈을 쓰게 됩니다." },
+  { Icon: Trophy, tone: "rose", lead: "경쟁사는 브랜드가 되는데 우리는 아직도 손님을 기다리는", highlight: "가게에 머물게 됩니다." },
+  { Icon: ShieldOff, tone: "violet", lead: "잘못된 마케팅 선택 하나가 몇 년 동안 쌓아온 브랜드 신뢰를", highlight: "무너뜨릴 수도 있습니다." },
+  { Icon: UsersRound, tone: "rose", lead: "눈앞의 광고만 하다 보니 단골과 재방문 고객이 없어 항상", highlight: "신규 고객만 찾아다니게 됩니다." },
+  { Icon: Dices, tone: "violet", lead: "전문가의 전략 없이 운영하면 운에 맡기는 마케팅을", highlight: "계속 반복하게 됩니다." },
+  { Icon: Clock3, tone: "rose", lead: "결국 가장 큰 손해는 광고비가 아니라 다시는 돌아오지 않는", highlight: "시간과 고객을 잃는 것입니다." },
 ];
 
-const BOTTOM_MESSAGE =
-  "애드그릿은 광고 솔루션을 직접개발하여 소유하고 있는 온라인광고 업계 개발 실행사 입니다. 이래도 광고상품을 유통하고만 있으면서 마케팅이라는 대행도 아닌 유통하는 회사와 업무를 하실껀가요?";
+const itemVariants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.42 } },
+};
 
 export function WithoutAdgritSection() {
   return (
-    <section
-      id="without-adgrit"
-      className="ig-section relative z-10 py-[4.4rem] sm:py-[5.5rem]"
-    >
+    <section id="without-adgrit" className="relative z-10 px-4 py-10 sm:px-6 sm:py-14 lg:py-20">
       <SectionBackdrop variant="s6" />
-      <Container className="ig-content">
-        <div className="flex flex-col items-center">
-          {/* 상단: 제목 + 부제 - 말풍선 위, 중앙정렬 */}
-          <div className="text-center w-full max-w-3xl">
-            <h2 className="text-[1.73rem] sm:text-[2.3rem] lg:text-[2.76rem] font-black leading-tight text-white">
-              애드그릿과 하지 않는다면
-            </h2>
-            <p className="mt-5 text-[1.15rem] sm:text-[1.44rem] text-white/85 leading-relaxed">
-              다음의 상태가 당신의 상태가 될 수 있습니다.
-            </p>
-          </div>
-
-          {/* 말풍선 리스트 (순차 등장 스태거 애니메이션) */}
-          <div className="mt-11 sm:mt-16 w-full max-w-[49.5rem] mx-auto flex justify-center">
-            <motion.div
-              className="flex flex-col gap-[1.1rem] w-full"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.1 }}
-            >
-              {MESSAGES.map((text, i) => (
-                <motion.div
-                  key={`bubble-${i}`}
-                  variants={itemVariants}
-                  className="ig-glass-card flex items-center gap-3 rounded-full px-6 py-[1.1rem] w-full min-w-full text-white text-[1.2rem] leading-snug"
-                >
-                  <span className="flex-shrink-0 text-[var(--ig-orange)]" aria-hidden>
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z" />
-                    </svg>
-                  </span>
-                  <span className="line-clamp-2 flex-1 min-w-0">{text}</span>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+      <div className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-rose-400/20 bg-[linear-gradient(145deg,rgba(5,4,13,0.97),rgba(12,5,25,0.96)_55%,rgba(18,5,31,0.97))] px-5 py-12 text-white shadow-[0_24px_80px_rgba(35,5,35,0.4)] sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
+          <div className="absolute -left-20 top-12 h-72 w-72 rounded-full bg-red-700/10 blur-[100px]" />
+          <div className="absolute -right-20 top-20 h-72 w-72 rounded-full bg-violet-700/10 blur-[100px]" />
+          <div className="absolute left-[7%] top-36 hidden rotate-[-8deg] text-5xl font-black tracking-widest text-red-300/[0.04] lg:block">CLOSED</div>
+          <ChartNoAxesCombined className="absolute right-[8%] top-32 hidden h-32 w-32 rotate-12 text-violet-300/[0.05] lg:block" />
         </div>
 
-        {/* 하단 안내 문구 - 글자 얇게, 3pt 작게 */}
-        <div className="mt-[4.4rem] sm:mt-[5.5rem] pt-[3.3rem]">
-          <p className="text-base sm:text-lg lg:text-xl font-normal leading-relaxed text-white/70 text-center max-w-4xl mx-auto">
-            {BOTTOM_MESSAGE}
+        <header className="relative mx-auto max-w-5xl text-center">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center sm:h-20 sm:w-20">
+            <svg viewBox="0 0 80 72" className="h-full w-full overflow-visible" aria-hidden>
+              <path d="M40 5 75 66H5L40 5Z" fill="rgba(239,68,68,.08)" stroke="#fb7185" strokeWidth="3" strokeLinejoin="round" className="drop-shadow-[0_0_9px_rgba(248,113,113,.9)]" />
+              <path d="M40 24v21" stroke="#fdba74" strokeWidth="5" strokeLinecap="round" />
+              <circle cx="40" cy="55" r="3" fill="#fdba74" />
+            </svg>
+          </div>
+          <h2 className="mt-7 text-[2.05rem] font-black leading-[1.18] tracking-[-0.045em] sm:text-[2.9rem] lg:text-[3.5rem]">
+            애드그릿과 하지 않을 경우<br />
+            하단의 <span className="bg-gradient-to-r from-fuchsia-500 via-rose-500 to-orange-400 bg-clip-text text-transparent">낭패를 볼 수 있습니다.</span>
+          </h2>
+          <p className="mt-7 text-[15px] leading-7 text-white/70 sm:text-lg sm:leading-8">
+            지금의 선택이, 몇 달 뒤 결과의 차이를 만듭니다.<br />
+            아래의 <strong className="font-extrabold text-rose-400">20가지 낭패</strong>가 당신의 현실이 될 수 있습니다.
           </p>
-        </div>
-      </Container>
+        </header>
+
+        <motion.div
+          className="relative mt-12 grid overflow-hidden rounded-[20px] border border-violet-400/25 bg-[rgba(15,10,25,0.5)] p-2 sm:p-3 md:grid-cols-2"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.04 }}
+          transition={{ staggerChildren: 0.045 }}
+        >
+          {FAILURES.map(({ lead, highlight, Icon, tone }, index) => {
+            const rose = tone === "rose";
+            return (
+              <motion.article
+                key={index}
+                variants={itemVariants}
+                className="grid min-h-[142px] grid-cols-[42px_54px_1fr] items-center gap-3 border-b border-white/[0.07] px-3 py-5 sm:grid-cols-[48px_62px_1fr] sm:gap-4 sm:px-5"
+              >
+                <span className={`self-start pt-1 text-xl font-black tabular-nums sm:text-2xl ${rose ? "text-rose-400" : "text-violet-400"}`}>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className={`flex h-12 w-12 items-center justify-center rounded-full border bg-white/[0.025] sm:h-14 sm:w-14 ${rose ? "border-rose-400/25 text-rose-400" : "border-violet-400/25 text-violet-400"}`}>
+                  <Icon className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.7} aria-hidden />
+                </span>
+                <p className="text-[13px] font-medium leading-6 text-white/82 sm:text-[15px] sm:leading-7">
+                  {lead} <strong className={`font-bold ${rose ? "text-rose-400" : "text-fuchsia-400"}`}>{highlight}</strong>
+                </p>
+              </motion.article>
+            );
+          })}
+        </motion.div>
+      </div>
     </section>
   );
 }
