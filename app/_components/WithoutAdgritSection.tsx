@@ -24,15 +24,7 @@ import {
   UsersRound,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { Hi_Melody } from "next/font/google";
 import { SectionBackdrop } from "./backgrounds/SectionBackdrop";
-
-const hiMelody = Hi_Melody({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-hi-melody",
-});
 
 type FailureItem = {
   lead: string;
@@ -74,7 +66,7 @@ export function WithoutAdgritSection() {
     <section id="without-adgrit" className="relative z-10 px-4 py-10 sm:px-6 sm:py-14 lg:py-20">
       <SectionBackdrop variant="s6" />
       <div
-        className={`${hiMelody.variable} shortform-section-container relative mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-white/[0.08] bg-[rgba(20,20,30,0.45)] px-5 py-12 text-white shadow-[0_24px_80px_rgba(10,8,24,0.28)] sm:px-8 sm:py-16 lg:px-12 lg:py-20`}
+        className="shortform-section-container relative mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-white/[0.08] bg-[rgba(20,20,30,0.45)] px-5 py-12 text-white shadow-[0_24px_80px_rgba(10,8,24,0.28)] sm:px-8 sm:py-16 lg:px-12 lg:py-20"
         style={{ backdropFilter: "blur(20px) saturate(120%)", WebkitBackdropFilter: "blur(20px) saturate(120%)" }}
       >
         <div className="pointer-events-none absolute inset-0" aria-hidden>
