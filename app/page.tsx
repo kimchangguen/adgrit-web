@@ -17,6 +17,7 @@ import { AccountGrowthSection } from "./_components/AccountGrowthSection";
 import { RankingExposureSection } from "./_components/RankingExposureSection";
 import { ReelsparkSection } from "./_components/ReelsparkSection";
 import { TargetAdsSection } from "./_components/TargetAdsSection";
+import { StrategicPlanningSection } from "./_components/StrategicPlanningSection";
 import { ResultsWithGraph } from "./_components/ResultsWithGraph";
 import { OurClientsSection } from "./_components/OurClientsSection";
 import { ClientGrowthSection } from "./_components/ClientGrowthSection";
@@ -208,6 +209,8 @@ function SiteChrome() {
 
       <TargetAdsSection />
 
+      <StrategicPlanningSection />
+
 
       {/* 헤더 메뉴 앵커: 계정육성 */}
 
@@ -228,7 +231,6 @@ function SiteChrome() {
       <KakaoTestimonialsSection />
 
       {/* 헤더 메뉴 앵커: 기획·컨설팅 */}
-      <div id="consulting" aria-hidden />
 
       {/* Process - 아홉번째 섹션 (참고 이미지 레이아웃, 내용 유지) */}
       <section className="ig-section relative z-10 py-16 sm:py-20">
