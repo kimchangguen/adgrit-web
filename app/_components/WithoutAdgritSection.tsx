@@ -24,7 +24,15 @@ import {
   UsersRound,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { Hi_Melody } from "next/font/google";
 import { SectionBackdrop } from "./backgrounds/SectionBackdrop";
+
+const hiMelody = Hi_Melody({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-hi-melody",
+});
 
 type FailureItem = {
   lead: string;
@@ -66,7 +74,7 @@ export function WithoutAdgritSection() {
     <section id="without-adgrit" className="relative z-10 px-4 py-10 sm:px-6 sm:py-14 lg:py-20">
       <SectionBackdrop variant="s6" />
       <div
-        className="shortform-section-container relative mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-white/[0.08] bg-[rgba(20,20,30,0.45)] px-5 py-12 text-white shadow-[0_24px_80px_rgba(10,8,24,0.28)] sm:px-8 sm:py-16 lg:px-12 lg:py-20"
+        className={`${hiMelody.variable} shortform-section-container relative mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-white/[0.08] bg-[rgba(20,20,30,0.45)] px-5 py-12 text-white shadow-[0_24px_80px_rgba(10,8,24,0.28)] sm:px-8 sm:py-16 lg:px-12 lg:py-20`}
         style={{ backdropFilter: "blur(20px) saturate(120%)", WebkitBackdropFilter: "blur(20px) saturate(120%)" }}
       >
         <div className="pointer-events-none absolute inset-0" aria-hidden>
@@ -115,7 +123,7 @@ export function WithoutAdgritSection() {
                 <span className={`warning-icon flex h-14 w-14 items-center justify-center rounded-full border bg-white/[0.025] sm:h-16 sm:w-16 ${rose ? "border-rose-400/25 text-rose-400" : "border-violet-400/25 text-violet-400"}`}>
                   <Icon className="h-8 w-8 sm:h-9 sm:w-9" strokeWidth={1.7} aria-hidden />
                 </span>
-                <p className="warning-text text-[clamp(0.9375rem,2.6vw,1.375rem)] font-normal leading-[1.72] tracking-[-0.015em] text-white/85">
+                <p className="warning-text text-[clamp(0.9rem,2.3vw,1.1875rem)] font-normal leading-[1.72] text-white/85">
                   {lead} <strong className={`font-bold ${rose ? "text-rose-400" : "text-fuchsia-400"}`}>{highlight}</strong>
                 </p>
               </motion.article>
