@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { sortBlogCategories } from "./blog/categories";
 
 const BASE_URL = "https://www.adgritcore.com";
 /* WP_BASE 는 서버 전용 환경변수. 빈 문자열 폴백 대신 실제 엔드포인트를 명시해
@@ -44,7 +45,7 @@ async function fetchCategories(): Promise<WPCategory[]> {
     );
     if (!res.ok) return [];
     const cats: WPCategory[] = await res.json();
-    return cats.filter((c) => c.slug !== "uncategorized" && c.count > 0);
+    return sortBlogCategories(cats);
   } catch {
     return [];
   }

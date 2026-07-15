@@ -5,6 +5,7 @@ import { BlogFeaturedSlider, type SliderPost } from "../_components/BlogFeatured
 import { BlogAnimatedHero } from "../_components/BlogAnimatedHero";
 import { BlogCategorySection, type CategoryPostItem } from "../_components/BlogCategorySection";
 import { SectionBackdrop } from "../_components/backgrounds/SectionBackdrop";
+import { BLOG_CATEGORY_SLUGS, sortBlogCategories } from "./categories";
 
 export const metadata: Metadata = {
   title: "Grit View 블로그",
@@ -54,7 +55,7 @@ async function fetchAll(): Promise<{ posts: WPPost[]; categories: WPCategory[] }
 
   return {
     posts,
-    categories: categories.filter((c) => c.slug !== "uncategorized"),
+    categories: sortBlogCategories(categories),
   };
 }
 
@@ -91,18 +92,9 @@ export default async function BlogPage() {
   });
 
   /* 카테고리 노출 순서 고정 */
-  const CATEGORY_ORDER = [
-    "industry-secrets",
-    "service-guide",
-    "marketing-tips",
-    "marketing-guide",
-    "expert-column",
-    "affiliate-marketing",
-  ];
-
   const catMap = new Map(categories.map((c) => [c.slug, c]));
 
-  const postsByCategory = CATEGORY_ORDER
+  const postsByCategory = BLOG_CATEGORY_SLUGS
     .map((slug) => {
       const cat = catMap.get(slug);
       if (!cat) return null;

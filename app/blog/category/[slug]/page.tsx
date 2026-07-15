@@ -6,6 +6,7 @@ import { SiteHeader } from "../../../_components/SiteHeader";
 import { Footer } from "../../../_components/Footer";
 import { BlogSidebar } from "../../../_components/BlogSidebar";
 import { SectionBackdrop } from "../../../_components/backgrounds/SectionBackdrop";
+import { isBlogCategorySlug } from "../../categories";
 
 const WP_BASE = process.env.WP_BASE ?? "";
 
@@ -30,6 +31,7 @@ type Post = {
 };
 
 async function getCategoryBySlug(slug: string): Promise<Category | null> {
+  if (!isBlogCategorySlug(slug)) return null;
   try {
     const res = await fetch(`${WP_BASE}/categories?slug=${encodeURIComponent(slug)}`, {
       next: { revalidate: 3600 },

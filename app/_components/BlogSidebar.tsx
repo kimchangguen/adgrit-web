@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { sortBlogCategories } from "../blog/categories";
 
 const WP_BASE = process.env.WP_BASE ?? "";
 
@@ -22,12 +23,12 @@ type RecentPost = {
 
 async function getCategories(): Promise<Category[]> {
   try {
-    const res = await fetch(`${WP_BASE}/categories?per_page=20&hide_empty=true`, {
+    const res = await fetch(`${WP_BASE}/categories?per_page=100&hide_empty=false`, {
       next: { revalidate: 3600 },
     });
     if (!res.ok) return [];
     const all: Category[] = await res.json();
-    return all.filter((c) => c.slug !== "uncategorized");
+    return sortBlogCategories(all);
   } catch {
     return [];
   }

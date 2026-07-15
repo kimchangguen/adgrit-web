@@ -6,6 +6,7 @@ import { SiteHeader } from "../../_components/SiteHeader";
 import { Footer } from "../../_components/Footer";
 import { BlogSidebar } from "../../_components/BlogSidebar";
 import { SectionBackdrop } from "../../_components/backgrounds/SectionBackdrop";
+import { isBlogCategorySlug } from "../categories";
 
 const WP_BASE   = process.env.WP_BASE ?? "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2";
 const SITE_URL  = "https://www.adgritcore.com";
@@ -139,7 +140,9 @@ type RelatedPost = {
 
 function toRelatedPost(p: Post): RelatedPost {
   const media = p._embedded?.["wp:featuredmedia"]?.[0];
-  const cat = (p._embedded?.["wp:term"]?.[0] ?? [])[0];
+  const cat = (p._embedded?.["wp:term"]?.[0] ?? []).find(({ slug }) =>
+    isBlogCategorySlug(slug)
+  );
   const excerpt = decodeEntities(stripHTML(p.excerpt.rendered))
     .replace(/\s+/g, " ")
     .trim();
@@ -280,7 +283,7 @@ export default async function PostDetail({
   const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
   const imageAlt = post._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || post.title.rendered;
   const catTerms = post._embedded?.["wp:term"]?.[0] ?? [];
-  const firstCat = catTerms[0];
+  const firstCat = catTerms.find(({ slug }) => isBlogCategorySlug(slug));
 
   const relatedPosts = await getRelatedPosts(post.id, post.categories);
 

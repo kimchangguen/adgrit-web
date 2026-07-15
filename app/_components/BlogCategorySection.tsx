@@ -10,19 +10,18 @@ import {
   Lightbulb,
   TrendingUp,
   Award,
-  Link2,
   FileText,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 /* ─── 카테고리별 아이콘 매핑 (사장님이 원하시면 아이콘 교체 가능) ─── */
 const ICONS: Record<string, LucideIcon> = {
-  "industry-secrets": Eye,
-  "service-guide":     Briefcase,
-  "marketing-tips":    Lightbulb,
-  "marketing-guide":   TrendingUp,
-  "expert-column":     Award,
-  "affiliate-marketing": Link2,
+  "instagram-daehaeng": Briefcase,
+  "instagram-marketing": TrendingUp,
+  "instagram-marketing-guide": FileText,
+  "instagram-seo-tips": Eye,
+  "instagram-growth": Award,
+  "instagram-tips": Lightbulb,
 };
 
 export type CategoryPostItem = {
