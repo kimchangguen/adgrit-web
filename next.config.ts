@@ -32,6 +32,21 @@ const nextConfig: NextConfig = {
         destination: "/blog",
         permanent: true,
       },
+      ...[
+        "/service/marketing",
+        "/service/google",
+        "/service/sns",
+        "/service/performance",
+        "/service/content",
+        "/service/integrated",
+        "/business/automation",
+        "/business/consulting",
+        "/business/development",
+      ].map((source) => ({
+        source,
+        destination: "/",
+        permanent: true,
+      })),
     ];
   },
 };
