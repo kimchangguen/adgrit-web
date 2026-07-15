@@ -34,7 +34,7 @@ async function getCategoryBySlug(slug: string): Promise<Category | null> {
   if (!isBlogCategorySlug(slug)) return null;
   try {
     const res = await fetch(`${WP_BASE}/categories?slug=${encodeURIComponent(slug)}`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 60 },
     });
     if (!res.ok) return null;
     const cats: Category[] = await res.json();

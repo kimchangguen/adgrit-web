@@ -47,7 +47,7 @@ type WPCategory = {
 async function fetchAll(): Promise<{ posts: WPPost[]; categories: WPCategory[] }> {
   const [postsRes, catsRes] = await Promise.all([
     fetch(`${WP_BASE}/posts?_embed&per_page=100&orderby=date`, { next: { revalidate: 60 } }),
-    fetch(`${WP_BASE}/categories?per_page=20&hide_empty=true`, { next: { revalidate: 3600 } }),
+    fetch(`${WP_BASE}/categories?per_page=20&hide_empty=true`, { next: { revalidate: 60 } }),
   ]);
 
   const posts: WPPost[] = postsRes.ok ? await postsRes.json() : [];

@@ -24,7 +24,7 @@ type RecentPost = {
 async function getCategories(): Promise<Category[]> {
   try {
     const res = await fetch(`${WP_BASE}/categories?per_page=100&hide_empty=false`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 60 },
     });
     if (!res.ok) return [];
     const all: Category[] = await res.json();
