@@ -1,57 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { sortBlogCategories } from "../blog/categories";
-
-const WP_BASE = process.env.WP_BASE ?? "";
-
-type Category = {
-  id: number;
-  name: string;
-  slug: string;
-  count: number;
-};
-
-type RecentPost = {
-  id: number;
-  title: { rendered: string };
-  slug: string;
-  date: string;
-  _embedded?: {
-    "wp:featuredmedia"?: Array<{ source_url: string }>;
-  };
-};
-
-async function getCategories(): Promise<Category[]> {
-  try {
-    const res = await fetch(`${WP_BASE}/categories?per_page=100&hide_empty=false`, {
-      next: { revalidate: 60 },
-    });
-    if (!res.ok) return [];
-    const all: Category[] = await res.json();
-    return sortBlogCategories(all);
-  } catch {
-    return [];
-  }
-}
-
-async function getRecentPosts(): Promise<RecentPost[]> {
-  try {
-    const res = await fetch(`${WP_BASE}/posts?_embed&per_page=5&orderby=date`, {
-      next: { revalidate: 60 },
-    });
-    if (!res.ok) return [];
-    return res.json();
-  } catch {
-    return [];
-  }
-}
+import { getAllCategories, getRecentPosts as fetchRecentPosts } from "../../lib/wordpress";
 
 function stripHTML(html: string) {
   return html.replace(/<[^>]+>/g, "").trim();
 }
 
 export async function BlogSidebar({ activeCategorySlug }: { activeCategorySlug?: string }) {
-  const [categories, recentPosts] = await Promise.all([getCategories(), getRecentPosts()]);
+  const [allCategories, recentPosts] = await Promise.all([
+    getAllCategories(),
+    fetchRecentPosts(5),
+  ]);
+  const categories = sortBlogCategories(allCategories);
 
   return (
     <aside className="blog-sidebar w-full shrink-0 space-y-6">

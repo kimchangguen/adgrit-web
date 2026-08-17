@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -7,39 +8,17 @@ import { Footer } from "../../_components/Footer";
 import { BlogSidebar } from "../../_components/BlogSidebar";
 import { SectionBackdrop } from "../../_components/backgrounds/SectionBackdrop";
 import { isBlogCategorySlug } from "../categories";
+import {
+  getPostBySlug,
+  getRelatedPosts as fetchRelatedPosts,
+  type WPPostDetail,
+  type WPPostSummary,
+} from "../../../lib/wordpress";
 
-const WP_BASE   = process.env.WP_BASE ?? "https://wordpress-1580849-6168519.cloudwaysapps.com/wp-json/wp/v2";
 const SITE_URL  = "https://www.adgritcore.com";
 const LOGO_URL  = `${SITE_URL}/adgrit-logo-v2.png`;
 
-type Post = {
-  id: number;
-  title: { rendered: string };
-  content: { rendered: string };
-  excerpt: { rendered: string };
-  date: string;
-  modified: string;
-  slug: string;
-  categories: number[];
-  _embedded?: {
-    "wp:featuredmedia"?: Array<{ source_url: string; alt_text: string }>;
-    "wp:term"?: Array<Array<{ id: number; name: string; slug: string }>>;
-  };
-};
-
-async function getPostBySlug(slug: string): Promise<Post | null> {
-  try {
-    const res = await fetch(
-      `${WP_BASE}/posts?_embed&slug=${encodeURIComponent(slug)}`,
-      { next: { revalidate: 60 } }
-    );
-    if (!res.ok) return null;
-    const posts: Post[] = await res.json();
-    return posts[0] ?? null;
-  } catch {
-    return null;
-  }
-}
+type Post = WPPostDetail;
 
 const BRAND_SUFFIX = " | 애드그릿(ADGRIT)";
 /** 포스트 제목 최대 길이 (브랜드 suffix 포함 약 56자 이내로 유지) */
@@ -138,7 +117,7 @@ type RelatedPost = {
   categorySlug: string;
 };
 
-function toRelatedPost(p: Post): RelatedPost {
+function toRelatedPost(p: WPPostSummary): RelatedPost {
   const media = p._embedded?.["wp:featuredmedia"]?.[0];
   const cat = (p._embedded?.["wp:term"]?.[0] ?? []).find(({ slug }) =>
     isBlogCategorySlug(slug)
@@ -161,61 +140,6 @@ function toRelatedPost(p: Post): RelatedPost {
     categoryName: cat?.name ?? "",
     categorySlug: cat?.slug ?? "",
   };
-}
-
-/**
- * 연관 포스팅 최대 count개 반환.
- * 1차: 동일 카테고리 최신순 (현재 글 제외)
- * 2차: 부족하면 최신 전체글로 보충
- */
-async function getRelatedPosts(
-  currentPostId: number,
-  categoryIds: number[],
-  count = 3
-): Promise<RelatedPost[]> {
-  const collected: RelatedPost[] = [];
-  const seenIds = new Set<number>([currentPostId]);
-
-  if (categoryIds.length > 0) {
-    try {
-      const res = await fetch(
-        `${WP_BASE}/posts?_embed&categories=${categoryIds[0]}&exclude=${currentPostId}&per_page=${count}&orderby=date&order=desc`,
-        { next: { revalidate: 60 } }
-      );
-      if (res.ok) {
-        const posts: Post[] = await res.json();
-        for (const p of posts) {
-          if (!seenIds.has(p.id)) {
-            seenIds.add(p.id);
-            collected.push(toRelatedPost(p));
-          }
-        }
-      }
-    } catch { /* 폴백으로 이어짐 */ }
-  }
-
-  if (collected.length < count) {
-    const needed = count - collected.length;
-    const excludeQuery = Array.from(seenIds)
-      .map((id) => `exclude[]=${id}`)
-      .join("&");
-    try {
-      const res = await fetch(
-        `${WP_BASE}/posts?_embed&${excludeQuery}&per_page=${needed}&orderby=date&order=desc`,
-        { next: { revalidate: 60 } }
-      );
-      if (res.ok) {
-        const posts: Post[] = await res.json();
-        for (const p of posts) {
-          if (!seenIds.has(p.id)) {
-            collected.push(toRelatedPost(p));
-          }
-        }
-      }
-    } catch { /* ignore */ }
-  }
-
-  return collected.slice(0, count);
 }
 
 function formatDate(dateStr: string) {
@@ -284,8 +208,6 @@ export default async function PostDetail({
   const imageAlt = post._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || post.title.rendered;
   const catTerms = post._embedded?.["wp:term"]?.[0] ?? [];
   const firstCat = catTerms.find(({ slug }) => isBlogCategorySlug(slug));
-
-  const relatedPosts = await getRelatedPosts(post.id, post.categories);
 
   const postUrl = `${SITE_URL}/blog/${post.slug}`;
   const faqItems = parseFaqFromHtml(post.content.rendered);
@@ -450,66 +372,93 @@ export default async function PostDetail({
             </div>
           </article>
 
-          {/* 우측: 사이드바 */}
-          <BlogSidebar />
+          {/* 우측: 사이드바 (독립 스트리밍 — 본문 렌더링을 막지 않음) */}
+          <Suspense fallback={<BlogSidebarFallback />}>
+            <BlogSidebar />
+          </Suspense>
         </div>
 
-        {/* 연관 포스팅 섹션 */}
-        {relatedPosts.length > 0 && (
-          <section className="mt-14">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-1 h-6 bg-[var(--ig-pink)] rounded-full" />
-              <h2 className="text-xl font-black text-white">함께 읽으면 좋은 글</h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-              {relatedPosts.map((p) => (
-                <Link
-                  key={p.id}
-                  href={`/blog/${p.slug}`}
-                  className="ig-glass-card group rounded-2xl overflow-hidden hover:-translate-y-0.5 transition-all duration-200 flex flex-col hover:border-white/35"
-                >
-                  {/* 썸네일 */}
-                  <div className="relative aspect-[16/9] bg-white/5 overflow-hidden">
-                    {p.imageUrl ? (
-                      <Image
-                        src={p.imageUrl}
-                        alt={p.imageAlt}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 640px) 100vw, 33vw"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-[var(--ig-pink)]/15 to-[var(--ig-orange)]/10 flex items-center justify-center">
-                        <span className="text-4xl opacity-30">📝</span>
-                      </div>
-                    )}
-                    {p.categoryName && (
-                      <span className="ig-btn-gradient absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 rounded-full">
-                        {p.categoryName}
-                      </span>
-                    )}
-                  </div>
-                  {/* 텍스트 */}
-                  <div className="p-4 flex flex-col flex-1">
-                    <h3 className="text-sm font-black text-white leading-snug mb-2 line-clamp-2 group-hover:text-[var(--ig-pink)] transition-colors">
-                      {p.title}
-                    </h3>
-                    {p.excerpt && (
-                      <p className="text-xs text-white/55 leading-relaxed line-clamp-2 mb-3">
-                        {p.excerpt}
-                      </p>
-                    )}
-                    <time className="mt-auto text-[10px] text-white/40">{p.date}</time>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
+        {/* 연관 포스팅 섹션 (독립 스트리밍 — 본문 렌더링을 막지 않음) */}
+        <Suspense fallback={null}>
+          <RelatedPostsSection postId={post.id} categoryIds={post.categories} />
+        </Suspense>
         </main>
       </section>
 
       <Footer />
     </div>
+  );
+}
+
+function BlogSidebarFallback() {
+  return (
+    <aside className="blog-sidebar w-full shrink-0 space-y-6">
+      <div className="ig-glass-card rounded-2xl h-64 animate-pulse bg-white/5" />
+    </aside>
+  );
+}
+
+async function RelatedPostsSection({
+  postId,
+  categoryIds,
+}: {
+  postId: number;
+  categoryIds: number[];
+}) {
+  const related = await fetchRelatedPosts(postId, categoryIds);
+  const relatedPosts = related.map(toRelatedPost);
+
+  if (relatedPosts.length === 0) return null;
+
+  return (
+    <section className="mt-14">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-1 h-6 bg-[var(--ig-pink)] rounded-full" />
+        <h2 className="text-xl font-black text-white">함께 읽으면 좋은 글</h2>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        {relatedPosts.map((p) => (
+          <Link
+            key={p.id}
+            href={`/blog/${p.slug}`}
+            className="ig-glass-card group rounded-2xl overflow-hidden hover:-translate-y-0.5 transition-all duration-200 flex flex-col hover:border-white/35"
+          >
+            {/* 썸네일 */}
+            <div className="relative aspect-[16/9] bg-white/5 overflow-hidden">
+              {p.imageUrl ? (
+                <Image
+                  src={p.imageUrl}
+                  alt={p.imageAlt}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-[var(--ig-pink)]/15 to-[var(--ig-orange)]/10 flex items-center justify-center">
+                  <span className="text-4xl opacity-30">📝</span>
+                </div>
+              )}
+              {p.categoryName && (
+                <span className="ig-btn-gradient absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                  {p.categoryName}
+                </span>
+              )}
+            </div>
+            {/* 텍스트 */}
+            <div className="p-4 flex flex-col flex-1">
+              <h3 className="text-sm font-black text-white leading-snug mb-2 line-clamp-2 group-hover:text-[var(--ig-pink)] transition-colors">
+                {p.title}
+              </h3>
+              {p.excerpt && (
+                <p className="text-xs text-white/55 leading-relaxed line-clamp-2 mb-3">
+                  {p.excerpt}
+                </p>
+              )}
+              <time className="mt-auto text-[10px] text-white/40">{p.date}</time>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }

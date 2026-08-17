@@ -6,6 +6,12 @@ import { BlogAnimatedHero } from "../_components/BlogAnimatedHero";
 import { BlogCategorySection, type CategoryPostItem } from "../_components/BlogCategorySection";
 import { SectionBackdrop } from "../_components/backgrounds/SectionBackdrop";
 import { BLOG_CATEGORY_SLUGS, sortBlogCategories } from "./categories";
+import {
+  getAllPostsForList,
+  getAllCategories,
+  type WPPostSummary,
+  type WPCategory,
+} from "../../lib/wordpress";
 
 export const metadata: Metadata = {
   title: "Grit View 블로그",
@@ -20,42 +26,16 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
 };
 
-const WP_BASE = process.env.WP_BASE ?? "";
-
-/* ─── 타입 ─────────────────────────────────────────── */
-type WPPost = {
-  id: number;
-  slug: string;
-  title: { rendered: string };
-  excerpt: { rendered: string };
-  date: string;
-  categories: number[];
-  _embedded?: {
-    "wp:featuredmedia"?: Array<{ source_url: string; alt_text: string }>;
-    "wp:term"?: Array<Array<{ id: number; name: string; slug: string }>>;
-  };
-};
-
-type WPCategory = {
-  id: number;
-  name: string;
-  slug: string;
-  count: number;
-};
-
 /* ─── 데이터 패칭 ───────────────────────────────────── */
-async function fetchAll(): Promise<{ posts: WPPost[]; categories: WPCategory[] }> {
-  const [postsRes, catsRes] = await Promise.all([
-    fetch(`${WP_BASE}/posts?_embed&per_page=100&orderby=date`, { next: { revalidate: 60 } }),
-    fetch(`${WP_BASE}/categories?per_page=20&hide_empty=true`, { next: { revalidate: 60 } }),
+async function fetchAll(): Promise<{ posts: WPPostSummary[]; categories: WPCategory[] }> {
+  const [posts, categories] = await Promise.all([
+    getAllPostsForList(100),
+    getAllCategories(),
   ]);
-
-  const posts: WPPost[] = postsRes.ok ? await postsRes.json() : [];
-  const categories: WPCategory[] = catsRes.ok ? await catsRes.json() : [];
 
   return {
     posts,
-    categories: sortBlogCategories(categories),
+    categories: sortBlogCategories(categories.filter((c) => c.count > 0)),
   };
 }
 
@@ -103,7 +83,7 @@ export default async function BlogPage() {
         posts: posts.filter((p) => p.categories.includes(cat.id)),
       };
     })
-    .filter((g): g is { category: WPCategory; posts: WPPost[] } => g !== null && g.posts.length > 0);
+    .filter((g): g is { category: WPCategory; posts: WPPostSummary[] } => g !== null && g.posts.length > 0);
 
   /* 카테고리별 포스트를 클라이언트 컴포넌트용으로 직렬화 */
   const categorySections = postsByCategory.map(({ category, posts: catPosts }) => ({

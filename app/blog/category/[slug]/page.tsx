@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -7,54 +8,14 @@ import { Footer } from "../../../_components/Footer";
 import { BlogSidebar } from "../../../_components/BlogSidebar";
 import { SectionBackdrop } from "../../../_components/backgrounds/SectionBackdrop";
 import { isBlogCategorySlug } from "../../categories";
+import {
+  getCategoryBySlug as fetchCategoryBySlug,
+  getPostsByCategory,
+} from "../../../../lib/wordpress";
 
-const WP_BASE = process.env.WP_BASE ?? "";
-
-type Category = {
-  id: number;
-  name: string;
-  slug: string;
-  count: number;
-  description: string;
-};
-
-type Post = {
-  id: number;
-  title: { rendered: string };
-  excerpt: { rendered: string };
-  date: string;
-  slug: string;
-  _embedded?: {
-    "wp:featuredmedia"?: Array<{ source_url: string; alt_text: string }>;
-    "wp:term"?: Array<Array<{ id: number; name: string; slug: string }>>;
-  };
-};
-
-async function getCategoryBySlug(slug: string): Promise<Category | null> {
+async function getCategoryBySlug(slug: string) {
   if (!isBlogCategorySlug(slug)) return null;
-  try {
-    const res = await fetch(`${WP_BASE}/categories?slug=${encodeURIComponent(slug)}`, {
-      next: { revalidate: 60 },
-    });
-    if (!res.ok) return null;
-    const cats: Category[] = await res.json();
-    return cats[0] ?? null;
-  } catch {
-    return null;
-  }
-}
-
-async function getPostsByCategory(categoryId: number): Promise<Post[]> {
-  try {
-    const res = await fetch(
-      `${WP_BASE}/posts?_embed&per_page=20&orderby=date&categories=${categoryId}`,
-      { next: { revalidate: 60 } }
-    );
-    if (!res.ok) return [];
-    return res.json();
-  } catch {
-    return [];
-  }
+  return fetchCategoryBySlug(slug);
 }
 
 function stripHTML(html: string) {
@@ -201,13 +162,23 @@ export default async function CategoryPage({
             )}
           </div>
 
-          {/* 우측: 사이드바 */}
-          <BlogSidebar activeCategorySlug={slug} />
+          {/* 우측: 사이드바 (독립 스트리밍 — 목록 렌더링을 막지 않음) */}
+          <Suspense fallback={<BlogSidebarFallback />}>
+            <BlogSidebar activeCategorySlug={slug} />
+          </Suspense>
         </div>
         </main>
       </section>
 
       <Footer />
     </div>
+  );
+}
+
+function BlogSidebarFallback() {
+  return (
+    <aside className="blog-sidebar w-full shrink-0 space-y-6">
+      <div className="ig-glass-card rounded-2xl h-64 animate-pulse bg-white/5" />
+    </aside>
   );
 }
