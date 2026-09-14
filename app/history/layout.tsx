@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     title: "회사연혁 | ADGRIT",
     description: "2014년부터 이어온 ADGRIT의 성장 역사. 도전과 성과의 발자취를 확인하세요.",
     type: "website",
+    images: [{ url: "https://www.adgritcore.com/image/000.png", width: 1672, height: 941 }],
   },
   alternates: { canonical: "/history" },
 };

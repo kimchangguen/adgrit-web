@@ -38,7 +38,7 @@ export function BlogFeaturedSlider({ posts }: { posts: SliderPost[] }) {
           <Image
             key={p.imageUrl}
             src={p.imageUrl}
-            alt=""
+            alt={p.title}
             fill
             className={`object-cover absolute inset-0 transition-opacity duration-700 ${
               i === current ? "opacity-100" : "opacity-0"

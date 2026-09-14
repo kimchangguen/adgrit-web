@@ -6,6 +6,7 @@ const BASE_URL = "https://www.adgritcore.com";
 const DEFAULT_TITLE = "ADGRIT | 성과로 증명하는 광고대행";
 const DEFAULT_DESC =
   "Google Ads, SEO & GEO, 워드프레스, 퍼포먼스 마케팅을 하나의 성장 엔진으로 설계합니다.";
+const DEFAULT_OG_IMAGE = `${BASE_URL}/image/000.png`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -35,11 +36,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ko_KR",
     url: BASE_URL,
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1672, height: 941, alt: DEFAULT_TITLE }],
   },
   twitter: {
     card: "summary_large_image",
     title: DEFAULT_TITLE,
     description: DEFAULT_DESC,
+    images: [DEFAULT_OG_IMAGE],
   },
   robots: {
     index: true,
@@ -51,6 +54,29 @@ export const metadata: Metadata = {
       "naver-site-verification": "6e99eaac1998825216f72843f96437bcd59d85fb",
     },
   },
+};
+
+const ORGANIZATION_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "ADGRIT",
+  alternateName: "애드그릿",
+  url: BASE_URL,
+  logo: `${BASE_URL}/adgrit-logo-v2.png`,
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+82-1661-0646",
+    contactType: "customer service",
+    areaServed: "KR",
+    availableLanguage: "Korean",
+  },
+};
+
+const WEBSITE_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "ADGRIT",
+  url: BASE_URL,
 };
 
 export default function RootLayout({
@@ -67,6 +93,14 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
           crossOrigin="anonymous"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSON_LD) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_JSON_LD) }}
         />
       </head>
       <body className="antialiased">

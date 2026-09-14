@@ -91,7 +91,7 @@ export function BlogCategorySection({ category, posts, index }: Props) {
                   {post.imageUrl ? (
                     <Image
                       src={post.imageUrl}
-                      alt=""
+                      alt={post.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 1280px) 15vw, 180px"
@@ -142,7 +142,7 @@ export function BlogCategorySection({ category, posts, index }: Props) {
                   {post.imageUrl ? (
                     <Image
                       src={post.imageUrl}
-                      alt=""
+                      alt={post.title}
                       fill
                       className="object-cover"
                       sizes="200px"

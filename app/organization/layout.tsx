@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     title: "조직도 | ADGRIT",
     description: "컨설팅·마케팅·개발·콘텐츠 전문 팀으로 구성된 ADGRIT 조직을 소개합니다.",
     type: "website",
+    images: [{ url: "https://www.adgritcore.com/image/000.png", width: 1672, height: 941 }],
   },
   alternates: { canonical: "/organization" },
 };

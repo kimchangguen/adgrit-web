@@ -93,11 +93,11 @@ function SiteChrome() {
                 </p>
               </AnimatedHeroItem>
               <AnimatedHeroItem>
-                <p className="mt-6 text-[clamp(1.65rem,4.2vw,4.5rem)] font-black leading-[1.18] tracking-[-0.04em] text-neutral">
+                <h1 className="mt-6 text-[clamp(1.65rem,4.2vw,4.5rem)] font-black leading-[1.18] tracking-[-0.04em] text-neutral">
                   <span className="sm:whitespace-nowrap">국내 인스타그램 솔루션을 <span className="ig-gradient-text">만드는</span> 회사</span>
                   <br />
                   <span className="sm:whitespace-nowrap">국내 인스타 솔루션 <span className="ig-gradient-text">70%</span>를 점유 한 회사</span>
-                </p>
+                </h1>
               </AnimatedHeroItem>
               <AnimatedHeroItem>
                 <p className="mt-8 text-[1.05rem] sm:text-[1.15rem] text-neutral/85 leading-relaxed">

@@ -13,6 +13,8 @@ import {
   getPostsByCategory,
 } from "../../../../lib/wordpress";
 
+const SITE_URL = "https://www.adgritcore.com";
+
 async function getCategoryBySlug(slug: string) {
   if (!isBlogCategorySlug(slug)) return null;
   return fetchCategoryBySlug(slug);
@@ -47,7 +49,11 @@ export async function generateMetadata({
     alternates: { canonical: `/blog/category/${slug}` },
     openGraph: {
       title: `${category.name} | ADGRIT 블로그`,
+      description:
+        category.description ||
+        `ADGRIT 블로그 ${category.name} 카테고리 — 총 ${category.count}개 글`,
       type: "website",
+      images: [{ url: `${SITE_URL}/image/000.png`, width: 1672, height: 941 }],
     },
   };
 }
@@ -64,8 +70,27 @@ export default async function CategoryPage({
 
   const posts = await getPostsByCategory(category.id);
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { name: "홈", url: SITE_URL },
+      { name: "블로그", url: `${SITE_URL}/blog` },
+      { name: category.name, url: `${SITE_URL}/blog/category/${slug}` },
+    ].map((crumb, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: crumb.name,
+      item: crumb.url,
+    })),
+  };
+
   return (
     <div className="min-h-screen text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <SiteHeader />
 
       {/* 히어로 */}

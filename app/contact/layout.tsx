@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     title: "오시는길 | ADGRIT",
     description: "서울 송파구 문정동 및 경기 성남 분당 두 지점으로 방문해 주세요. 대표번호: 1661-0646",
     type: "website",
+    images: [{ url: "https://www.adgritcore.com/image/000.png", width: 1672, height: 941 }],
   },
   alternates: { canonical: "/contact" },
 };

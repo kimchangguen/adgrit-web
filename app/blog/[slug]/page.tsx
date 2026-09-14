@@ -180,15 +180,15 @@ export async function generateMetadata({
       locale: "ko_KR",
       publishedTime: post.date,
       modifiedTime: post.modified ?? post.date,
-      ...(imageUrl
-        ? { images: [{ url: imageUrl, width: 1200, height: 630, alt: imageAlt }] }
-        : {}),
+      images: imageUrl
+        ? [{ url: imageUrl, width: 1200, height: 630, alt: imageAlt }]
+        : [{ url: `${SITE_URL}/image/000.png`, width: 1672, height: 941 }],
     },
     twitter: {
       card: "summary_large_image",
       title: seoTitle,
       description,
-      ...(imageUrl ? { images: [imageUrl] } : {}),
+      images: [imageUrl ?? `${SITE_URL}/image/000.png`],
     },
   };
 }
@@ -210,6 +210,26 @@ export default async function PostDetail({
   const firstCat = catTerms.find(({ slug }) => isBlogCategorySlug(slug));
 
   const postUrl = `${SITE_URL}/blog/${post.slug}`;
+
+  const breadcrumbItems = [
+    { name: "홈", url: SITE_URL },
+    { name: "블로그", url: `${SITE_URL}/blog` },
+    ...(firstCat
+      ? [{ name: firstCat.name, url: `${SITE_URL}/blog/category/${firstCat.slug}` }]
+      : []),
+    { name: stripHTML(post.title.rendered), url: postUrl },
+  ];
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbItems.map((crumb, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: crumb.name,
+      item: crumb.url,
+    })),
+  };
+
   const faqItems = parseFaqFromHtml(post.content.rendered);
   const faqJsonLd =
     faqItems.length > 0
@@ -253,6 +273,10 @@ export default async function PostDetail({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       {faqJsonLd && (
         <script

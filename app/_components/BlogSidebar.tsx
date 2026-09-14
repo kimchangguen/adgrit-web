@@ -102,7 +102,7 @@ export async function BlogSidebar({ activeCategorySlug }: { activeCategorySlug?:
                     {thumb ? (
                       <Image
                         src={thumb}
-                        alt=""
+                        alt={stripHTML(post.title.rendered)}
                         width={64}
                         height={64}
                         className="w-full h-full object-cover"
