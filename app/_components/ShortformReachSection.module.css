@@ -1,0 +1,229 @@
+/* Content only: the glass parent and its existing responsive height stay intact. */
+.content { height: 1283.24px; display: flex; flex-direction: column; align-items: center; isolation: isolate; min-width: 0; }
+.copy { width: 100%; text-align: center; position: relative; z-index: 10; flex-shrink: 0; }
+.badge {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 8px 16px; border: 1px solid #f0b3df35; border-radius: 100px;
+  background: #291e3080; color: #f5eaf4;
+  box-shadow: 0 0 20px #cd449b12, inset 0 1px 0 #ffffff08;
+  font-size: 12px; font-weight: 600; white-space: nowrap;
+  animation: enter 650ms ease-out both;
+}
+.badge > svg, .badge > span:last-child { color: #ffb1d5; }
+.badge i { width: 3px; height: 3px; background: #c3a4bd; border-radius: 50%; }
+.headline { margin: 23px 0 0; font-weight: 900; letter-spacing: -.055em; line-height: 1.18; color: #fff; animation: enter 700ms 80ms ease-out both; }
+.firstLine { display: block; font-size: clamp(34px, 5.1vw, 68px); background: linear-gradient(100deg, #ff609b 25%, #f344a4 55%, #dd5ee1); background-clip: text; -webkit-background-clip: text; color: transparent; }
+.secondLine { display: block; margin-top: 10px; font-size: clamp(24px, 3.5vw, 47px); word-break: keep-all; text-wrap: balance; }
+.explosion, .increase { background-clip: text; -webkit-background-clip: text; color: transparent; }
+.explosion { background-image: linear-gradient(100deg, #ffac70, #ff648a 75%, #ff5a9e); }
+.increase { background-image: linear-gradient(100deg, #f767b4, #dd71e2); }
+.subcopy { margin: 21px 0 0; font-size: 14px; line-height: 1.8; color: #ffffffb8; letter-spacing: -.025em; animation: enter 700ms 160ms ease-out both; }
+.subcopy strong { color: #ffffffd9; font-weight: 500; }
+.visual { position: relative; width: 100%; flex: 1; min-height: 0; margin: 0; overflow: clip; }
+.scene { position: absolute; width: 920px; height: 560px; left: 50%; top: 48%; transform: translate(-50%, -50%); transform-origin: center; }
+.ambient { position: absolute; inset: 80px 190px 30px; background: radial-gradient(ellipse, #b640aa16, #7b44ae0c 50%, transparent 75%); filter: blur(18px); pointer-events: none; }
+.floorGlow { position: absolute; left: 230px; top: 462px; width: 460px; height: 56px; border-radius: 50%; background: radial-gradient(ellipse, #f564bb36, #8d3cf31a 45%, transparent 70%); filter: blur(15px); }
+
+.phonePosition { position: absolute; width: 248px; height: 486px; left: 336px; top: 28px; z-index: 5; perspective: 1200px; }
+.phoneShell {
+  width: 100%; height: 100%; padding: 6px; position: relative;
+  transform: rotateX(3deg) rotateY(-5deg); transform-style: preserve-3d;
+  border-radius: 39px; border: 1px solid #afa3bd;
+  background: linear-gradient(110deg, #a09aa9, #24202b 5%, #0a090d 45%, #0f0d14 94%, #877a95);
+  box-shadow: inset 0 0 0 2px #17151d, inset 2px 0 1px #e4dbe16b, 3px 1px 0 #5c506b, 6px 3px 0 #19141f, 0 24px 46px #0009, -10px 0 30px #c55dad12, 12px 0 28px #8c5dd922;
+  animation: phoneEnter 900ms 230ms cubic-bezier(.2,.7,.2,1) both;
+}
+.phoneShell::before, .phoneShell::after { content: ""; position: absolute; width: 3px; background: linear-gradient(#777180, #24202a, #605568); border-radius: 2px; left: -3px; top: 94px; height: 26px; }
+.phoneShell::after { top: 133px; height: 44px; }
+.sideButton { position: absolute; right: -5px; top: 129px; height: 52px; width: 3px; border-radius: 2px; background: #685c73; }
+.phoneScreen { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 32px; background: #171417; border: 1px solid #000; }
+.phoneScreen::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; border: 1px solid #ffffff12; z-index: 8; box-shadow: inset 1px 1px 3px #fff2; }
+.media { position: absolute; inset: 0; overflow: hidden; background: #201b20; }
+.photo { object-fit: cover; object-position: center; z-index: 1; }
+.imageFallback { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 34% 10px 0; text-align: center; background: linear-gradient(155deg, #393034, #1e1b20 65%, #161419); color: #c7b8bf; }
+.imageFallback > span { font-size: 7px; letter-spacing: 1.8px; color: #d2bcc380; }
+.imageFallback strong { margin-top: 10px; font-size: 12px; font-weight: 500; letter-spacing: -.02em; }
+.imageFallback small { margin-top: 5px; font-size: 8px; color: #bbaab27a; }
+.screenShade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, #0007, transparent 26%, transparent 39%, #0008 67%, #000e); pointer-events: none; }
+.statusBar { position: absolute; top: 15px; left: 23px; right: 19px; z-index: 4; display: flex; align-items: center; justify-content: space-between; font-size: 9px; font-weight: 700; }
+.statusIcons { display: flex; align-items: center; gap: 4px; }
+.statusIcons i:first-child { width: 10px; height: 8px; background: linear-gradient(90deg, white 20%, transparent 20% 40%, white 40% 60%, transparent 60% 80%, white 80%); clip-path: polygon(0 70%, 25% 70%, 25% 45%, 60% 45%, 60% 0, 100% 0, 100% 100%, 0 100%); }
+.statusIcons i:nth-child(2) { width: 8px; height: 8px; border-top: 2px solid #fff; border-radius: 50%; }
+.statusIcons b { width: 14px; height: 7px; border: 1px solid #fff9; border-radius: 2px; background: linear-gradient(90deg, white 80%, transparent 80%); }
+.island { position: absolute; width: 72px; height: 20px; border-radius: 20px; background: #050507; top: 8px; left: 50%; transform: translateX(-50%); z-index: 5; box-shadow: 0 1px 1px #fff1; }
+.island i { position: absolute; right: 8px; top: 6px; width: 7px; height: 7px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #62748e, #142139 35%, #080b12 70%); border: 1px solid #242330; }
+.account { position: absolute; top: 45px; left: 14px; right: 14px; display: flex; align-items: center; gap: 6px; font-size: 9px; z-index: 3; letter-spacing: .02em; }
+.avatar { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(140deg, #ff9a71, #d849a5); font-weight: 900; font-size: 11px; }
+.follow { margin-left: auto; border: 1px solid #ffffff80; border-radius: 5px; padding: 3px 9px; font-size: 8px; background: #16121a30; }
+.screenCopy { position: absolute; bottom: 110px; left: 18px; z-index: 3; text-shadow: 0 2px 10px #0003; }
+.screenCopy > span { display: block; color: #fff9; font-size: 8px; letter-spacing: -.02em; }
+.screenCopy > strong { display: block; margin-top: 9px; font-size: 31px; line-height: 1.22; letter-spacing: -.065em; font-weight: 900; }
+.screenCopy em { color: #ffc3d8; font-style: normal; }
+.engagement { position: absolute; right: 12px; bottom: 110px; z-index: 4; display: flex; flex-direction: column; gap: 14px; }
+.engagement > span { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.engagement b { font-size: 7px; font-weight: 500; }
+.engagement small { font-size: 6px; color: #fffc; }
+.engagement > span:first-child svg { color: #ff79ac; }
+.screenFooter { position: absolute; z-index: 3; left: 17px; right: 17px; bottom: 40px; display: flex; flex-direction: column; gap: 6px; font-size: 8px; }
+.screenFooter > span { color: #f1e5e7c9; font-size: 7px; }
+.screenFooter > span:last-child { display: flex; align-items: center; gap: 4px; font-size: 6px; }
+.progress { position: absolute; left: 14px; right: 14px; bottom: 24px; height: 2px; background: #ffffff40; border-radius: 2px; z-index: 4; }
+.progress i { display: block; height: 100%; width: 63%; background: #fff; }
+.homeIndicator { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 76px; height: 3px; border-radius: 4px; background: #f8f6fa; z-index: 4; }
+
+.clipPosition { position: absolute; width: 164px; height: 294px; z-index: 2; perspective: 1000px; }
+.clip { position: relative; width: 100%; height: 100%; border: 1px solid #e4c7e443; border-radius: 17px; overflow: hidden; background: #1c1820; box-shadow: 0 20px 34px #0007, 0 0 22px #b154b812, inset 0 1px 0 #fff2; animation: cardEnter 1000ms 320ms cubic-bezier(.2,.7,.2,1) both; }
+.farLeft { left: 123px; top: 151px; transform: rotate(-18deg); --spread: 40px; }
+.nearLeft { left: 245px; top: 90px; transform: rotate(-9deg); z-index: 3; --spread: 22px; }
+.nearRight { right: 245px; top: 90px; transform: rotate(9deg); z-index: 3; --spread: -22px; }
+.farRight { right: 123px; top: 151px; transform: rotate(18deg); --spread: -40px; }
+.farLeft .clip, .farRight .clip { filter: brightness(.86); }
+.clipShade { position: absolute; inset: 0; z-index: 2; background: linear-gradient(#0005, transparent 24% 48%, #000b); }
+.clipCategory { position: absolute; z-index: 3; top: 14px; left: 12px; font-size: 6px; letter-spacing: 1.2px; color: #fffc; }
+.clipPlay { position: absolute; z-index: 3; top: 56%; left: calc(50% - 16px); width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid #ffffff50; border-radius: 50%; background: #0002; }
+.clipCaption { position: absolute; z-index: 3; left: 14px; right: 10px; bottom: 16px; display: flex; flex-direction: column; gap: 8px; }
+.clipCaption strong { font-size: 14px; letter-spacing: -.055em; }
+.clipCaption > span { display: flex; align-items: center; gap: 4px; color: #fffc; font-size: 8px; }
+.clip .imageFallback { padding-top: 46%; }
+.clip .imageFallback > span { font-size: 5px; letter-spacing: 1px; }
+.clip .imageFallback strong { font-size: 10px; }
+.clip .imageFallback small { font-size: 7px; }
+
+.platform { position: absolute; z-index: 7; display: flex; align-items: center; gap: 7px; border: 1px solid #ffffff25; border-radius: 11px; padding: 9px 12px; background: #211c2cd9; box-shadow: 0 10px 22px #08061055, inset 0 1px 0 #ffffff0c; backdrop-filter: blur(8px); font-size: 10px; font-weight: 500; animation: enter 650ms 650ms ease-out both; }
+.instagram { left: 211px; top: 38px; transform: rotate(-5deg); }
+.youtube { left: 65px; top: 294px; transform: rotate(-7deg); }
+.tiktok { left: 235px; top: 458px; transform: rotate(-5deg); }
+.tiktok > svg { filter: drop-shadow(1px 0 #ff547f) drop-shadow(-1px -1px #74e3ea); }
+.naver { right: 232px; top: 458px; transform: rotate(5deg); }
+.naver b { color: #55e499; font-size: 20px; font-weight: 900; line-height: 1; }
+.kakao { right: 67px; top: 294px; transform: rotate(7deg); }
+.kakao > svg { color: #f9d869; }
+.instagramIcon { width: 20px; height: 20px; border-radius: 6px; background: linear-gradient(30deg, #ffc65b, #f26382 45%, #bf51dd 80%); display: grid; place-items: center; }
+.instagramIcon i { position: relative; width: 13px; height: 13px; border: 1.5px solid white; border-radius: 4px; }
+.instagramIcon i::before { content: ""; position: absolute; inset: 3px; border: 1px solid white; border-radius: 50%; }
+.instagramIcon i::after { content: ""; position: absolute; right: 1px; top: 1px; width: 2px; height: 2px; background: white; border-radius: 50%; }
+.youtubeIcon { width: 24px; height: 17px; display: grid; place-items: center; border-radius: 5px; background: #ea4560; }
+.trailBack, .trailFront { position: absolute; pointer-events: none; width: 760px; height: 128px; left: 80px; top: 391px; border-radius: 50%; transform: rotate(-8deg); border: 1px solid #d678bd55; }
+.trailBack { border-bottom-color: transparent; border-left-color: #a784eb20; filter: blur(.4px); box-shadow: 0 -2px 9px #a566d511; }
+.trailFront { z-index: 6; clip-path: inset(48% 0 0); border-top-color: transparent; border-bottom-color: #fda29088; box-shadow: 0 3px 9px #ef73bf30; }
+.visualCaption { position: absolute; bottom: 2px; left: 0; right: 0; text-align: center; color: #b8aebf; font-size: 10px; letter-spacing: -.01em; }
+
+
+/* ccc.png composition: one foreground phone, editorial panels, low app cluster. */
+.scene { height: 570px; top: 48%; }
+.phonePosition { width: 256px; height: 482px; left: 357px; top: 22px; }
+.phoneShell { transform: rotate(7deg) rotateY(-5deg); border-color: #c9a2e5; box-shadow: inset 0 0 0 2px #17151d, inset 2px 0 1px #eadce999, 3px 1px 0 #8c609f, 6px 3px 0 #24182e, 0 23px 40px #0008, 4px -2px 22px #c65ef536; }
+.phoneScreen .photo { object-position: 50% 50%; }
+.screenShade { background: linear-gradient(180deg, #0008, transparent 22%, transparent 67%, #000b 86%, #000e); }
+.screenCopy { top: 93px; bottom: auto; left: 24px; right: 16px; transform: rotate(-6deg); text-align: center; }
+.screenCopy > strong { font-size: 27px; font-style: italic; line-height: 1.26; letter-spacing: -.035em; text-shadow: 0 2px 6px #000a; }
+.screenCopy em { color: white; }
+.screenCopy i { display: block; width: 102px; height: 2px; margin: 8px 10px 0 auto; background: #fff; transform: rotate(-8deg); box-shadow: 9px 4px 0 -0.6px #fffa; }
+.screenFooter { bottom: 42px; }
+.screenFooter > strong { font-size: 13px; line-height: 1.3; letter-spacing: -.04em; }
+.engagement { bottom: 106px; gap: 15px; }
+.engagement > span:first-child svg { color: #ff344f; }
+.clipPosition { width: 160px; height: 264px; }
+.clip { border-radius: 12px; border-color: #c598c75c; box-shadow: 0 15px 28px #0006, 0 0 15px #ce62c61c; }
+.farLeft { left: 150px; top: 175px; transform: rotate(-10deg); --spread: 35px; }
+.nearLeft { left: 232px; top: 72px; width: 180px; height: 296px; transform: rotate(-5deg); --spread: 18px; }
+.nearRight { right: 142px; top: 140px; width: 181px; height: 302px; transform: rotate(9deg); --spread: -24px; }
+.farLeft .clip { filter: brightness(.9); }
+.clipShade { background: linear-gradient(#0002, transparent 18% 72%, #0009); }
+.clipCategory { display: none; }
+.clipCaption { bottom: 13px; left: 12px; }
+.clipCaption strong { display: none; }
+.clipCaption > span { align-self: flex-start; gap: 5px; padding: 4px 7px; border-radius: 5px; font-size: 13px; font-weight: 700; background: #0c091d66; }
+.clipCaption svg { width: 12px; height: 12px; fill: none; stroke-width: 2; }
+.ambient { inset: 45px 160px 30px; background: radial-gradient(ellipse at 60% 48%, #d746be26, #7529d111 50%, transparent 75%); }
+.floorGlow { left: 200px; top: 457px; width: 540px; height: 68px; background: radial-gradient(ellipse, #f443af4a, #783ef528 50%, transparent 72%); }
+.lightTrails, .frontTrails { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.lightTrails { z-index: 1; }
+.frontTrails { z-index: 6; }
+.platform { width: 53px; height: 56px; padding: 6px; display: grid; place-items: center; border-radius: 12px; border: 1px solid #e9bcff70; background: linear-gradient(140deg, #55355ca6, #221c38d9); box-shadow: inset 0 1px 1px #ffffff4d, 2px 4px 0 #382343, 0 10px 17px #09031880, 0 0 13px #e458c72b; z-index: 8; }
+.youtube { left: 249px; top: 465px; transform: rotate(9deg); }
+.instagram { left: 308px; top: 479px; transform: rotate(5deg); }
+.tiktok { left: 368px; top: 486px; transform: rotate(7deg); }
+.naver { left: 429px; right: auto; top: 491px; transform: rotate(7deg); }
+.kakao { left: 490px; right: auto; top: 487px; transform: rotate(5deg); }
+.reels { left: 551px; top: 492px; transform: rotate(7deg); color: #fff; background: linear-gradient(135deg, #e63c64, #b00945); }
+.meta { left: 613px; top: 484px; transform: rotate(9deg); color: #fff; background: linear-gradient(130deg, #3d8cfd, #155bdd); }
+.instagramIcon { width: 38px; height: 39px; border-radius: 9px; }
+.instagramIcon i { width: 26px; height: 27px; border-width: 2px; border-radius: 7px; }
+.instagramIcon i::before { inset: 5px; border-width: 2px; }
+.instagramIcon i::after { right: 3px; top: 3px; width: 3px; height: 3px; }
+.youtubeIcon { width: 40px; height: 37px; border-radius: 9px; background: linear-gradient(130deg, #ff354c, #e60027); }
+.youtubeIcon svg { background: white; color: #f1223c; border-radius: 5px; width: 27px; height: 22px; padding: 4px; }
+.tiktokIcon { width: 38px; height: 39px; display: grid; place-items: center; border-radius: 9px; background: #080910; font-size: 35px; font-weight: 900; line-height: 1; text-shadow: 2px 1px #fa346c, -2px -1px #52e5e1; }
+.naver b { width: 38px; height: 39px; display: grid; place-items: center; border-radius: 9px; background: linear-gradient(140deg, #53ed80, #00b83e); color: white; font-size: 30px; font-weight: 900; }
+.kakaoIcon { position: relative; display: grid; place-items: center; width: 38px; height: 39px; background: #ffe046; border-radius: 9px; color: #271d23; }
+.kakaoIcon b { position: absolute; top: 13px; left: 7px; color: #ffe046; font-size: 9px; font-style: italic; font-weight: 900; }
+.imageFallback { background: linear-gradient(155deg, #b5693e, #794752 50%, #3a2739); color: #ffedda; }
+.imageFallback > span, .imageFallback small { color: #fff9; }
+
+/* One entrance only. The settled composition never drifts or rotates. */
+@keyframes enter { from { opacity: 0; translate: 0 9px; } to { opacity: 1; translate: 0 0; } }
+@keyframes phoneEnter { from { opacity: 0; scale: .97; translate: 0 12px; } to { opacity: 1; scale: 1; translate: 0 0; } }
+@keyframes cardEnter { from { opacity: 0; translate: var(--spread, 0) 15px; } to { opacity: 1; translate: 0 0; } }
+
+/* The existing content heights preserve the glass box and neighboring sections. */
+@media (min-width: 322px) { .content { height: 1257.24px; } }
+@media (min-width: 323px) { .content { height: 1249.24px; } }
+@media (min-width: 324px) { .content { height: 1201.24px; } }
+@media (min-width: 333px) { .content { height: 1181.24px; } }
+@media (min-width: 335px) { .content { height: 1173.24px; } }
+@media (min-width: 336px) { .content { height: 1169.24px; } }
+@media (min-width: 376px) { .content { height: 1141.24px; } }
+@media (min-width: 467px) { .content { height: 1110.15px; } }
+@media (min-width: 627px) { .content { height: 1082.15px; } }
+@media (min-width: 640px) { .content { height: 1203.32px; } .badge { font-size: 13px; } .subcopy { font-size: 16px; } }
+@media (min-width: 694px) { .content { height: 1157.52px; } }
+@media (min-width: 705px) { .content { height: 1129.52px; } }
+@media (min-width: 768px) { .content { height: 1001.52px; } }
+@media (min-width: 1024px) { .content { height: 848.83px; } }
+
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .scene { transform: translate(-50%, -50%) scale(.94); }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .scene { transform: translate(-50%, -50%) scale(.73); top: 46%; }
+}
+@media (max-width: 767px) {
+  .visual { width: calc(100% + 24px); }
+  .headline { margin-top: 25px; }
+  .secondLine { max-width: 380px; margin: 12px auto 0; font-size: clamp(24px, 5.6vw, 32px); line-height: 1.4; }
+  .subcopy { font-size: 12px; margin-top: 23px; }
+  .scene { width: 370px; height: 680px; top: 46%; transform: translate(-50%, -50%) scale(.83); }
+  .phonePosition { width: 236px; height: 455px; left: 77px; top: 97px; }
+  .phoneShell { transform: rotate(5deg) rotateY(-3deg); }
+  .farLeft { display: none; }
+  .nearLeft { width: 136px; height: 235px; left: 7px; top: 52px; transform: rotate(-7deg); }
+  .nearRight { width: 134px; height: 226px; right: 2px; top: 343px; transform: rotate(8deg); }
+  .screenCopy { top: 90px; left: 15px; }
+  .screenCopy > strong { font-size: 25px; }
+  .screenFooter > strong { font-size: 12px; }
+  .engagement { right: 10px; bottom: 106px; gap: 10px; }
+  .clipCaption > span { font-size: 11px; }
+  .ambient { inset: 60px 0 30px; }
+  .floorGlow { width: 330px; left: 20px; top: 560px; }
+  .lightTrails, .frontTrails { left: -115px; top: 130px; width: 600px; height: 570px; }
+  .platform { width: 49px; height: 52px; }
+  .youtube { left: 53px; top: 566px; transform: rotate(-8deg); }
+  .instagram { left: 108px; top: 581px; transform: rotate(5deg); }
+  .tiktok { left: 163px; top: 587px; transform: rotate(7deg); }
+  .naver { left: 218px; top: 580px; transform: rotate(8deg); }
+  .kakao { left: 271px; top: 570px; transform: rotate(12deg); }
+  .reels, .meta { display: none; }
+  .visualCaption { bottom: 25px; font-size: 9px; }
+}
+@media (min-width: 640px) and (max-width: 767px) {
+  .scene { transform: translate(-50%, -50%) scale(1.08); }
+}
+@media (max-width: 389px) {
+  .scene { transform: translate(-50%, -50%) scale(.66); }
+  .badge { font-size: 11px; gap: 8px; padding: 8px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .badge, .headline, .subcopy, .phoneShell, .clip, .platform { animation: none; }
+}

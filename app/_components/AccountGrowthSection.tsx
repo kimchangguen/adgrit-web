@@ -1,47 +1,13 @@
+import { AccountGrowthEffects } from "./AccountGrowthEffects";
+import { AccountGrowthProcess } from "./AccountGrowthProcess";
+import { AccountGrowthIntro } from "./AccountGrowthIntro";
 import {
-  ArrowDown,
-  ArrowRight,
-  BarChart3,
-  BookOpenCheck,
   Check,
   CircleUserRound,
-  ClipboardCheck,
-  Coins,
-  Eye,
   Handshake,
-  HeartHandshake,
   Megaphone,
   Paperclip,
-  Send,
-  Smartphone,
-  Store,
-  Target,
-  TrendingUp,
-  UserPlus,
-  Video,
 } from "lucide-react";
-
-const PRINCIPLES = [
-  { title: "콘텐츠 제작은 내부에서", description: "촬영부터 간단한 콘텐츠 제작까지 사장님이 직접 실행합니다.", note: "외부 대행사 제작 절대 불가", Icon: Smartphone },
-  { title: "가이드 & 전략 지원", description: "콘텐츠 제작 가이딩, 기획 방향, 운영 전략을 체계적으로 제공합니다.", note: "실무적인 가이드 제공", Icon: BookOpenCheck, guide: true },
-  { title: "배포 · 성장 · 매출 연결", description: "제작된 콘텐츠를 최적화하여 배포, 팔로워 증가와 고객 유입을 통해 실질적인 매출로 연결합니다.", note: "성과 중심의 계정육성", Icon: TrendingUp },
-] as const;
-
-const PROCESS = [
-  { title: "계정 진단 & 전략 수립", description: "계정 상태 분석 및 타겟 맞춤 전략 설계", Icon: Target },
-  { title: "콘텐츠 가이드 제공", description: "콘텐츠 주제, 구성, 촬영 팁, 편집 가이드 제공", Icon: ClipboardCheck },
-  { title: "사장님 직접 제작", description: "촬영 및 간단한 콘텐츠 제작을 내부에서 직접 실행", Icon: Video },
-  { title: "최적화 배포 & 확산", description: "알고리즘 최적화 배포로 노출 극대화 및 팔로워 성장", Icon: Send },
-  { title: "고객 유입 & 매출 연결", description: "매장 방문, 문의, 구매 등 실질적인 매출로 연결", Icon: BarChart3, coins: true },
-] as const;
-
-const EFFECTS = [
-  { title: "팔로워 상승", description: "꾸준한 콘텐츠 배포로 실제 팔로워 증가", Icon: UserPlus },
-  { title: "노출 & 인지도 향상", description: "최적화된 운영으로 도달률과 인지도 확대", Icon: Eye },
-  { title: "신뢰도 & 브랜드 구축", description: "디자인스러운 계정으로 브랜드 가치 상승", Icon: HeartHandshake },
-  { title: "고객 유입 증가", description: "프로필 방문 → 매장 방문, 실제 고객으로 전환", Icon: Store },
-  { title: "실질적 매출 성장", description: "유입된 고객이 매출로 연결, 지속적인 성장 구조 확립", Icon: TrendingUp },
-] as const;
 
 const SERVICES = [
   {
@@ -80,57 +46,14 @@ export function AccountGrowthSection() {
           WebkitBackdropFilter: "blur(20px) saturate(120%)",
         }}
       >
-        <header id="account-growth" className="mx-auto max-w-4xl scroll-mt-32 text-center lg:scroll-mt-36">
-          <span className="inline-flex rounded-full bg-[#6b4fe8] px-5 py-2 text-sm font-bold text-white shadow-[0_8px_20px_rgba(107,79,232,0.25)] sm:text-base">ADGRIT 계정육성 서비스</span>
-          <h2 className="mt-7 text-[2rem] font-black leading-[1.14] tracking-[-0.045em] text-white sm:text-[2.65rem] lg:text-5xl">팔로워를 고객으로,<br />계정을 <span className="bg-gradient-to-r from-orange-400 via-pink-500 to-violet-400 bg-clip-text text-transparent">매출로 연결</span>합니다.</h2>
-          <p className="mt-6 text-[15px] font-medium leading-7 text-white/75 sm:text-lg sm:leading-8">콘텐츠 제작은 사장님이, 전략과 성장은 저희가 함께합니다.<br className="hidden sm:block" />최적화된 계정으로 성장 <span className="font-bold text-violet-300">→</span> 고객 유입 <span className="font-bold text-violet-300">→</span> 실질적 매출 연결</p>
-        </header>
+        <AccountGrowthIntro />
 
-        <div className="middle-box mt-10 px-5 py-8 shadow-[0_14px_40px_rgba(0,0,0,0.08)] sm:px-8 sm:py-10 lg:mt-14 lg:px-10">
-          <SectionTitle>계정육성 핵심 원칙</SectionTitle>
-          <div className="mt-8 grid gap-5 md:grid-cols-3 lg:gap-7">
-            {PRINCIPLES.map(({ title, description, note, Icon, ...item }) => (
-              <article key={title} className="flex min-h-[300px] flex-col items-center rounded-[20px] border border-white bg-white/75 px-5 py-7 text-center shadow-[0_10px_30px_rgba(89,67,145,0.07)] sm:px-6">
-                <div className="relative flex h-20 w-20 items-center justify-center rounded-[22px] border border-violet-200 bg-gradient-to-br from-white to-violet-100 text-[#6b4fe8] shadow-[0_10px_25px_rgba(107,79,232,0.12)]"><Icon className="h-10 w-10" strokeWidth={1.7} aria-hidden />{"guide" in item && item.guide && <span className="absolute bottom-1.5 text-[7px] font-black tracking-widest">GUIDE</span>}</div>
-                <h4 className="mt-5 text-lg font-extrabold tracking-[-0.025em] text-slate-900">{title}</h4>
-                <p className="mt-3 flex-1 text-sm leading-6 text-slate-500">{description}</p>
-                <div className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#6b4fe8]"><span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#6b4fe8] text-white"><Check className="h-3.5 w-3.5" strokeWidth={3} aria-hidden /></span>{note}</div>
-              </article>
-            ))}
-          </div>
+        <div className="middle-box mt-8 px-5 py-9 shadow-[0_14px_40px_rgba(0,0,0,0.08)] sm:px-8 sm:py-11 lg:min-h-[500px] lg:px-10 lg:py-16">
+          <AccountGrowthProcess />
         </div>
 
-        <div className="middle-box mt-8 px-5 py-9 shadow-[0_14px_40px_rgba(0,0,0,0.08)] sm:px-8 sm:py-11 lg:px-10">
-          <SectionTitle>계정육성 프로세스</SectionTitle>
-          <div className="mt-10 flex flex-col items-stretch md:flex-row md:items-start md:justify-between">
-            {PROCESS.map(({ title, description, Icon, ...item }, index) => (
-              <div key={title} className="contents">
-                <article className="flex flex-1 flex-col items-center px-2 text-center">
-                  <div className="relative flex h-[72px] w-[72px] items-center justify-center rounded-full border border-violet-200 bg-violet-100 text-[#6b4fe8]">
-                    <span className="absolute -right-1 -top-2 flex h-7 min-w-7 items-center justify-center rounded-full bg-[#6b4fe8] px-1 text-[11px] font-extrabold text-white shadow-md">{String(index + 1).padStart(2, "0")}</span>
-                    <Icon className="h-9 w-9" strokeWidth={1.7} aria-hidden />
-                    {"coins" in item && item.coins && <Coins className="absolute bottom-2 right-2 h-4 w-4" strokeWidth={2} aria-hidden />}
-                  </div>
-                  <h4 className="mt-4 text-[15px] font-extrabold leading-5 text-white">{title}</h4>
-                  <p className="mt-2 max-w-[190px] text-[13px] leading-5 text-white/65">{description}</p>
-                </article>
-                {index < PROCESS.length - 1 && <div className="flex h-12 items-center justify-center text-violet-300 md:h-[72px] md:w-7"><ArrowDown className="h-5 w-5 md:hidden" aria-hidden /><ArrowRight className="hidden h-5 w-5 md:block" aria-hidden /></div>}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="middle-box mt-8 px-5 py-9 shadow-[0_14px_40px_rgba(0,0,0,0.08)] sm:px-8 sm:py-11 lg:px-10">
-          <SectionTitle>계정육성의 효과</SectionTitle>
-          <div className="mt-9 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-5 lg:gap-7">
-            {EFFECTS.map(({ title, description, Icon }) => (
-              <article key={title} className="flex flex-col items-center text-center last:col-span-2 md:last:col-span-1">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-violet-100 text-[#6b4fe8]"><Icon className="h-8 w-8" strokeWidth={1.65} aria-hidden /></div>
-                <h4 className="mt-4 text-[15px] font-extrabold text-white">{title}</h4>
-                <p className="mt-2 text-[13px] leading-5 text-white/65">{description}</p>
-              </article>
-            ))}
-          </div>
+        <div className="middle-box mt-8 px-5 py-9 shadow-[0_14px_40px_rgba(0,0,0,0.08)] sm:px-8 sm:py-11 lg:mt-[100px] lg:min-h-[800px] lg:px-10">
+          <AccountGrowthEffects />
         </div>
 
         <div className="middle-box mt-8 px-5 py-9 shadow-[0_14px_40px_rgba(0,0,0,0.08)] sm:px-8 sm:py-11 lg:px-10">
