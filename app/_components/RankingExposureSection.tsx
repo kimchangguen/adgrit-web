@@ -1,46 +1,28 @@
+﻿import Image from "next/image";
 import {
-  ArrowRight,
-  BarChart3,
-  Crown,
-  Handshake,
-  ImageIcon,
-  ListVideo,
-  Play,
-  Search,
-  TrendingUp,
-  UserPlus,
-  UserRound,
+  ArrowRight, BadgeCheck, BarChart3, Bookmark, Check, ChevronDown,
+  Clapperboard, Crown, Handshake, Hash, Heart, ImageIcon,
+  ListVideo, MessageCircle, MoreHorizontal, Play, Search, Send,
+  Signal, TrendingUp, UserPlus, UserRound, Wifi,
 } from "lucide-react";
+import styles from "./RankingExposureSection.module.css";
 
-const GRADIENT = "bg-gradient-to-r from-[#ff7a3d] via-[#ec4899] to-[#7c3aed]";
+function Instagram() {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4.3" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>;
+}
 
 const EXPOSURE_CARDS = [
   {
-    number: "01.",
-    title: "추천탭 노출",
-    suffix: "(콘텐츠 노출)",
-    description: "릴스, 이미지, 카드뉴스 등 콘텐츠가 추천탭에 노출되어 더 많은 사람에게 도달합니다.",
-    caption: "콘텐츠 노출 → 도달 → 관심 → 방문",
-    captionClass: "from-[#ff7a3d] to-[#ec4899]",
-    items: [
-      { label: "릴스", Icon: Play, tone: "from-orange-50 to-pink-100 text-[#ff7a3d]" },
-      { label: "이미지", Icon: ImageIcon, tone: "from-pink-50 to-rose-100 text-[#ec4899]" },
-      { label: "카드뉴스", Icon: ListVideo, tone: "from-orange-50 to-pink-100 text-[#ec4899]" },
-    ],
+    number: "01.", title: "추천탭 노출", suffix: "(콘텐츠 노출)",
+    description: "릴스, 이미지, 카드뉴스 등 콘텐츠가 추천탭에 노출되어 더 많은 사용자에게 도달합니다.",
+    caption: ["콘텐츠 노출", "도달", "관심", "방문"], tone: "warm",
+    items: [{ label: "Reels", Icon: Play }, { label: "Image", Icon: ImageIcon }, { label: "Card News", Icon: ListVideo }],
   },
   {
-    number: "02.",
-    title: "계정탭 노출",
-    suffix: "(계정 노출)",
-    description: "매장, 전문가, 서비스 등 비주얼 상품이 아닌 경우 계정탭 상위에 노출되어 선택받는 계정으로 만듭니다.",
-    caption: "계정 노출 → 방문 → 선택 → 매출",
-    captionClass: "from-[#ec4899] to-[#7c3aed]",
-    items: [
-      { label: "검색", Icon: Search, tone: "from-orange-50 to-pink-100 text-[#ff7a3d]" },
-      { label: "계정탭", Icon: UserRound, tone: "from-pink-50 to-rose-100 text-[#ec4899]" },
-      { label: "선택", Icon: Crown, tone: "from-pink-50 to-purple-100 text-[#ec4899]" },
-      { label: "매출", Icon: BarChart3, tone: "from-pink-50 to-purple-100 text-[#7c3aed]" },
-    ],
+    number: "02.", title: "계정탭 노출", suffix: "(계정 노출)",
+    description: "대표 해시태그, 서비스 등 타겟 검색어에 상위 노출되어 선택받는 계정으로 만들어집니다.",
+    caption: ["계정 노출", "방문", "선택", "매출"], tone: "cool",
+    items: [{ label: "검색", Icon: Search }, { label: "계정탭", Icon: UserRound }, { label: "선택", Icon: Crown }, { label: "매출", Icon: BarChart3 }],
   },
 ] as const;
 
@@ -50,73 +32,146 @@ const SERVICES = [
     title: "0부터 시작하는 파급력 있는 계정 만들기",
     description: "신규 계정도 최적화된 세팅과 체계적인 운영으로 영향력 있는 계정으로 빠르게 성장시킵니다.",
     tags: ["프로필 최적화", "콘텐츠 전략", "초기 세팅", "성장 운영", "성과 분석"],
-    Icon: UserPlus,
-    iconClass: "from-[#ff7a3d] to-[#ec4899]",
+    Icon: UserPlus, tone: "warm",
   },
   {
     badge: "02. 기존 계정 인수인계 육성",
     title: "이미 육성된 계정으로 빠르게 최적화 운영",
     description: "이미 육성된 계정을 인수인계하여 빠른 시간 안에 최적화된 운영이 가능합니다.",
     tags: ["계정 인수인계", "계정 진단", "최적화 개선", "운영 전략", "성과 극대화"],
-    Icon: Handshake,
-    iconClass: "from-[#ec4899] to-[#7c3aed]",
+    Icon: Handshake, tone: "cool",
   },
 ] as const;
 
-function SectionHeading({ children, onDark = false }: { children: React.ReactNode; onDark?: boolean }) {
-  return <div className="flex items-center justify-center gap-4 sm:gap-6"><span className="h-px w-8 bg-pink-200 sm:w-20" /><h3 className={`text-center text-xl font-extrabold tracking-[-0.025em] sm:text-2xl ${onDark ? "text-white" : "text-slate-900"}`}>{children}</h3><span className="h-px w-8 bg-pink-200 sm:w-20" /></div>;
+const FEED_IMAGES = ["card-02.webp", "main.webp", "card-04.webp", "card-01.webp", "card-02.webp", "main.webp"];
+
+function FeedGrid() {
+  return <div className={styles.feedGrid}>{FEED_IMAGES.map((file, index) => (
+    <div key={`${file}-${index}`}>
+      <Image src={`/images/shortform/${file}`} alt="" fill sizes="90px" />
+      <Clapperboard size={12} />
+      <span><Play size={8} fill="currentColor" />{["12.8만", "8.4만", "21.6만", "6.2만", "9.7만", "15.3만"][index]}</span>
+    </div>
+  ))}</div>;
+}
+
+function PhoneVisual() {
+  return (
+    <figure className={styles.visual} aria-label="인스타그램 콘텐츠, 노출 상승 화살표와 네온 링으로 구성한 상위노출 서비스 시각화. 화면과 반응 수치는 연출된 예시입니다.">
+      <div className={styles.scene} aria-hidden="true">
+        <div className={styles.ambient} />
+        <div className={styles.energyRing}><i /><i /><i /></div>
+        <div className={styles.growthBars}><i /><i /><i /><i /><i /></div>
+        <svg className={styles.growthArrow} viewBox="0 0 560 520" fill="none">
+          <defs>
+            <linearGradient id="ranking-arrow" x1="120" y1="420" x2="498" y2="85" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#763bff" /><stop offset=".45" stopColor="#ff2f92" /><stop offset="1" stopColor="#ff985d" />
+            </linearGradient>
+            <filter id="ranking-arrow-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="9" /></filter>
+          </defs>
+          <path d="M112 394C294 404 415 297 466 159L442 155 507 94 504 183 484 170C436 315 299 431 112 412Z" fill="url(#ranking-arrow)" filter="url(#ranking-arrow-glow)" opacity=".8" />
+          <path d="M112 394C294 404 415 297 466 159L442 155 507 94 504 183 484 170C436 315 299 431 112 412Z" fill="url(#ranking-arrow)" stroke="#ffbdde" strokeWidth="1.4" />
+        </svg>
+        <div className={styles.phonePosition}>
+          <div className={styles.phone}>
+            <span className={styles.sideButton} />
+            <div className={styles.phoneScreen}>
+              <div className={styles.status}><span>9:41</span><span><Signal /><Wifi /><i /></span></div>
+              <div className={styles.island}><i /></div>
+              <div className={styles.instagramHeader}><b>Instagram</b><ChevronDown /><Heart /><Send /></div>
+              <div className={styles.stories}>{["card-02.webp", "card-04.webp", "card-01.webp", "main.webp"].map((file, i) => <div key={file}><span><Image src={`/images/shortform/${file}`} width={36} height={36} alt="" /></span><small>{["adgrit", "daily.reels", "local.spot", "for.you"][i]}</small></div>)}</div>
+              <div className={styles.postAccount}><span className={styles.avatar}>a.</span><span><b>adgrit.marketing <BadgeCheck /></b><small>회원님을 위한 추천</small></span><MoreHorizontal /></div>
+              <div className={styles.reelPhoto}>
+                <Image src="/images/shortform/card-02.webp" alt="" fill sizes="250px" />
+                <span className={styles.reelBadge}><Clapperboard size={11} /> Reels</span>
+                <div className={styles.reelCopy}>발견의 순간,<br /><strong>취향이 되다.</strong></div>
+                <div className={styles.reelActions}><Heart fill="currentColor" /><small>10K</small><MessageCircle /><small>128</small><Send /></div>
+                <span className={styles.reelSound}>adgrit.marketing · Original audio</span>
+              </div>
+              <div className={styles.postActions}><Heart /><MessageCircle /><Send /><Bookmark /></div>
+              <div className={styles.postCaption}><b>좋아요 10,284개</b><span>adgrit.marketing <em>#오늘의발견 #추천</em></span></div>
+              <FeedGrid />
+              <div className={styles.phoneNav}><span><Clapperboard />추천</span><span><Search />검색</span><span><UserRound />계정</span></div>
+              <div className={styles.homeIndicator} />
+            </div>
+          </div>
+        </div>
+        <div className={`${styles.floatObject} ${styles.likeBubble}`}><Heart fill="currentColor" /><b>10K</b></div>
+        <div className={`${styles.floatObject} ${styles.hashBubble}`}><Hash /></div>
+        <div className={`${styles.floatObject} ${styles.profileBubble}`}><UserRound fill="currentColor" /></div>
+        <div className={`${styles.floatObject} ${styles.heartBubble}`}><Heart fill="currentColor" /></div>
+        <div className={`${styles.floatObject} ${styles.instagramObject}`}><Instagram /></div>
+        <div className={styles.notification}><span><BadgeCheck /></span><div><b>adgrit.marketing</b><small>회원님을 위한 추천</small></div></div>
+        <div className={styles.sparkles}><i /><i /><i /><i /><i /><i /></div>
+      </div>
+    </figure>
+  );
+}
+
+function ContentPanel({ search = false }: { search?: boolean }) {
+  return <div className={`${styles.contentPanel} ${search ? styles.searchPanel : styles.recommendPanel}`} aria-hidden="true">
+    <div className={styles.panelTop}><span>9:41</span><span>•••</span></div>
+    {search ? <>
+      <div className={styles.searchInput}><Search size={13} /><span>마케팅</span></div>
+      <div className={styles.searchTabs}><span>인기</span><b>계정</b><span>릴스</span></div>
+      <div className={styles.searchResult}><span className={styles.miniInstagram}><Instagram /></span><div><b>adgrit.marketing <BadgeCheck /></b><small>마케팅 전문 기업</small></div></div>
+      {[0, 1, 2].map(i => <div key={i} className={styles.placeholderResult}><i /><span><b /><b /></span></div>)}
+    </> : <>
+      <div className={styles.panelHeading}><b>Instagram</b><Search size={13} /></div>
+      <FeedGrid />
+      <div className={styles.panelBottom}><Heart /><MessageCircle /><Send /></div>
+    </>}
+  </div>;
+}
+
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return <div className={styles.sectionHeading}><span /><h3>{children}</h3><span /></div>;
 }
 
 export function RankingExposureSection() {
   return (
-    <section className="relative z-10 px-4 py-10 sm:px-6 sm:py-14 lg:py-20">
-      <div
-        className="shortform-section-container relative mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-white/[0.08] bg-[rgba(20,20,30,0.45)] px-5 py-12 text-white shadow-[0_24px_80px_rgba(10,8,24,0.28)] sm:px-8 sm:py-16 lg:px-12 lg:py-20"
-        style={{
-          backdropFilter: "blur(20px) saturate(120%)",
-          WebkitBackdropFilter: "blur(20px) saturate(120%)",
-        }}
-      >
-        <header id="ranking" className="mx-auto max-w-4xl scroll-mt-32 text-center lg:scroll-mt-36">
-          <div className="flex items-center justify-center gap-3 text-sm font-bold text-white/80 sm:text-base"><span className="h-px w-8 bg-pink-300" /><span>ADGRIT <span className="bg-gradient-to-r from-[#ff7a3d] via-[#ec4899] to-[#7c3aed] bg-clip-text text-transparent">상위노출</span> 서비스</span><span className="h-px w-8 bg-pink-300" /></div>
-          <h2 className="mt-7 text-[2rem] font-black leading-[1.14] tracking-[-0.045em] text-white sm:text-[2.75rem] lg:text-[3.25rem]">인스타그램 상위노출,<br /><span className="bg-gradient-to-r from-[#ff7a3d] via-[#ec4899] to-[#7c3aed] bg-clip-text text-transparent">최적화 계정</span>만이 노출됩니다.</h2>
-          <p className="mt-6 text-[15px] font-normal leading-7 text-white/75 sm:text-lg sm:leading-8">검색부터 추천탭, 계정탭까지 최적 위치에 노출되어<br className="hidden sm:block" />더 많은 고객이 찾아오고, 매출로 연결됩니다.</p>
+    <section className="relative z-10 px-4 py-10 sm:px-6 sm:py-14 lg:py-20" aria-labelledby="ranking-title">
+      <div className={`shortform-section-container relative mx-auto w-full max-w-7xl overflow-hidden rounded-[24px] border border-white/[0.08] bg-[rgba(20,20,30,0.45)] px-5 py-12 text-white shadow-[0_24px_80px_rgba(10,8,24,0.28)] sm:px-8 sm:py-16 lg:px-12 lg:py-20 ${styles.campaign}`}
+        style={{ backdropFilter: "blur(20px) saturate(120%)", WebkitBackdropFilter: "blur(20px) saturate(120%)" }}>
+        <header id="ranking" className={styles.hero}>
+          <div className={styles.heroCopy}>
+            <div className={styles.eyebrow}><i />ADGRIT <span>상위노출</span> 서비스</div>
+            <h2 id="ranking-title">인스타그램 상위노출,<br /><span>최적화 계정</span>만이<br className={styles.titleBreak} /> 노출됩니다.</h2>
+            <p>검색부터 추천탭, 계정탭까지 최적 위치에 노출되어<br className={styles.desktopBreak} /> 더 많은 고객이 찾아오고, 매출로 연결됩니다.</p>
+          </div>
+          <PhoneVisual />
         </header>
 
-        <div className="mt-12">
-          <SectionHeading onDark>상위노출은 어디에서 이루어질까요?</SectionHeading>
-          <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            {EXPOSURE_CARDS.map(({ number, title, suffix, description, caption, captionClass, items }) => (
-              <article key={title} className="flex min-h-[390px] flex-col overflow-hidden rounded-[22px] border border-pink-100 bg-white shadow-[0_14px_35px_rgba(167,72,121,0.09)]">
-                <div className="flex flex-1 flex-col px-5 py-8 sm:px-8">
-                  <h4 className="text-xl font-black tracking-[-0.025em] text-slate-900"><span className="mr-1.5 text-slate-400">{number}</span><span className="bg-gradient-to-r from-[#ff7a3d] to-[#ec4899] bg-clip-text text-transparent">{title}</span> <span className="text-base text-slate-700">{suffix}</span></h4>
-                  <p className="mt-4 max-w-xl text-sm leading-6 text-[#6b6b78]">{description}</p>
-                  <div className={`mt-8 grid flex-1 items-center gap-4 ${items.length === 3 ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"}`}>
-                    {items.map(({ label, Icon, tone }) => <div key={label} className="flex flex-col items-center text-center"><span className={`flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br ${tone}`}><Icon className="h-8 w-8" strokeWidth={1.7} /></span><span className="mt-3 text-sm font-bold text-slate-700">{label}</span></div>)}
-                  </div>
-                </div>
-                <div className={`bg-gradient-to-r ${captionClass} px-5 py-4 text-center text-sm font-extrabold text-white sm:text-base`}>{caption}</div>
+        <div className={styles.exposureSection}>
+          <SectionHeading>상위노출은 어디에서 이루어질까요?</SectionHeading>
+          <div className={styles.cardGrid}>
+            {EXPOSURE_CARDS.map(({ number, title, suffix, description, caption, tone, items }) => (
+              <article key={title} className={`${styles.exposureCard} ${styles[tone]}`}>
+                <div className={styles.cardCopy}><h4><span className={styles.number}>{number}</span><strong>{title}</strong><small>{suffix}</small></h4><p>{description}</p></div>
+                <ContentPanel search={tone === "cool"} />
+                {tone === "warm" && <div className={styles.contentOrbit} aria-hidden="true"><span><Clapperboard /></span><span><Heart fill="currentColor" /></span></div>}
+                <div className={styles.orbRow}>{items.map(({ label, Icon }) => <div className={styles.orbItem} key={label}><span className={styles.orb}><Icon aria-hidden="true" strokeWidth={1.9} /></span><b>{label}</b></div>)}</div>
+                <div className={styles.flowBar}><span>{caption.map((step, i) => <span key={step}>{i > 0 && <ArrowRight aria-hidden="true" />}{step}</span>)}</span><i><ArrowRight aria-hidden="true" /></i></div>
               </article>
             ))}
           </div>
         </div>
 
-        <div className="middle-box mt-12 px-5 py-9 sm:px-8 sm:py-11">
-          <SectionHeading onDark>두 가지 상위노출 서비스</SectionHeading>
-          <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            {SERVICES.map(({ badge, title, description, tags, Icon, iconClass }) => (
-              <article key={badge} className="rounded-[22px] border border-pink-100 bg-white p-6 shadow-[0_12px_30px_rgba(167,72,121,0.08)] sm:p-8">
-                <span className="inline-flex rounded-full bg-pink-50 px-4 py-2 text-xs font-extrabold text-[#ec4899] sm:text-sm">{badge}</span>
-                <div className="mt-6 flex flex-col gap-5 sm:flex-row sm:items-start"><span className={`flex h-20 w-20 flex-none items-center justify-center rounded-full bg-gradient-to-br ${iconClass} text-white shadow-lg`}><Icon className="h-10 w-10" strokeWidth={1.7} /></span><div><h4 className="text-xl font-black leading-7 tracking-[-0.03em] text-slate-900 sm:text-2xl">{title}</h4><p className="mt-3 text-sm leading-6 text-[#6b6b78]">{description}</p></div></div>
-                <div className="mt-7 flex flex-wrap items-center gap-x-2 gap-y-2 text-xs font-semibold text-slate-600 sm:text-sm">{tags.map((tag,index)=><span key={tag} className="inline-flex items-center gap-2">{index>0&&<ArrowRight className="h-3.5 w-3.5 text-[#ec4899]" />}{tag}</span>)}</div>
-              </article>
-            ))}
-          </div>
+        <div className={styles.servicesSection}>
+          <SectionHeading>두 가지 상위노출 서비스</SectionHeading>
+          <div className={styles.cardGrid}>{SERVICES.map(({ badge, title, description, tags, Icon, tone }) => (
+            <article key={badge} className={`${styles.serviceCard} ${styles[tone]}`}>
+              <span className={styles.serviceBadge}>{badge}</span>
+              <div className={styles.serviceBody}><span className={styles.serviceOrb}><Icon aria-hidden="true" strokeWidth={1.6} /></span><div><h4>{title}</h4><p>{description}</p></div></div>
+              <ul className={styles.tags}>{tags.map(tag => <li key={tag}><Check aria-hidden="true" />{tag}</li>)}</ul>
+            </article>
+          ))}</div>
         </div>
 
-        <div className={`mt-8 flex flex-col items-center gap-5 rounded-[24px] ${GRADIENT} px-6 py-9 text-center text-white shadow-[0_18px_40px_rgba(221,66,122,0.25)] sm:px-10 md:flex-row md:text-left`}>
-          <span className="flex h-16 w-16 flex-none items-center justify-center rounded-full bg-white text-[#ec4899] shadow-lg"><TrendingUp className="h-8 w-8" strokeWidth={1.8} /></span>
-          <div><h3 className="text-xl font-black leading-8 sm:text-2xl">상위노출은 전략이 다르면 결과도 다릅니다.</h3><p className="mt-2 text-sm leading-6 text-white/90">ADGRIT와 함께 검색되는 계정에서, 선택받는 계정으로 성장하세요.</p></div>
+        <div className={styles.cta}>
+          <span className={styles.ctaIcon}><TrendingUp aria-hidden="true" /></span>
+          <div><h3>상위노출은 전략이 다르면 결과도 다릅니다.</h3><p>ADGRIT가 함께 분석하는 &apos;계정에서 선택받는 계정&apos;으로 성장하세요.</p></div>
+          <a href="#contact">지금 상위노출 상담받기 <ArrowRight aria-hidden="true" /></a>
         </div>
       </div>
     </section>
